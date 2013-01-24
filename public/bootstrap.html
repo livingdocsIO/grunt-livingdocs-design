@@ -1,0 +1,32 @@
+<html>
+<head>
+  <title>Bootstrap Design for Livingdocs</title>
+  <link rel="shortcut icon" href="/favicon.png">
+  
+  <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+  <script src="js/vendor/underscore.js"></script>
+  <script src="js/vendor/jquery-1.9.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <link href="css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div id="main" class="container">
+    <div class="row">
+      <h2>Hero Element</h2>
+      <div class="span12 hero-template upfront-content"></div>
+    </div>
+    <div class="row">
+      <div class="span6 hero-template upfront-content"></div>
+      <div class="span3 hero-template upfront-content"></div>
+      <div class="span3 hero-template upfront-content"></div>
+    </div>
+
+  </div>
+</body>
+</html>
+
+<script>
+$(document).ready(function() {
+  $(".hero-template").html(livingdocs.bootstrap.templates.hero());
+});
+</script>
