@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>upfront</title>
+  <link rel="shortcut icon" href="/favicon.png">
+  <link href="http://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" type="text/css">
+  <link href="css/upfrontIO.css" media="all" rel="stylesheet" type="text/css" />
+  <script src="js/vendor/underscore.js"></script>
+  <script src="js/vendor/jquery-1.9.js"></script>
+  <script src="js/upfrontIO.js"></script>
+</head>
+<body>
+
+  <div class="container">
+  <!-- <div class="row">
+  <div class="span12">
+    
+    <div id="logo">
+      <a href="/">
+        <img src="http://www.upfront.io/assets/logo/logo-1.png" width="344" height="91" alt="upfront">
+      </a>
+      <div id="navigation">
+        <h3>from frontend-wizardry to big-data</h3>
+      </div>
+    </div>
+      
+  </div>
+</div> -->
+    <div class="row">
+      <div class="span6">
+        <div class="image"></div>
+      </div>
+    </div>
+  
+    <div class="row extra-space">
+      <div class="span12">
+        <div class="upfront-story-title"></div>  
+      </div> 
+      <div class="span6">
+        <div class="upfront-story-image"></div>  
+      </div>
+      <div class="span6">
+        <div class="upfront-story-highlight-text"></div>
+        <div class="upfront-story-text"></div>
+      </div>
+    </div>
+
+    <div class="row extra-space">
+      <div class="span6">
+        <div class="upfront-story-title"></div>
+        <div class="upfront-story-text"></div>
+        <div class="upfront-story-link"></div>
+      </div>
+      <div class="span6">
+        <div class="upfront-story-title"></div>
+        <div class="upfront-story-text"></div>
+        <div class="upfront-image-caption"></div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span12">
+        <div class="upfront-story-title"></div>
+        <div class="upfront-clients"></div>
+      </div>
+    </div>
+
+    <div class="upfront-footer"></div>
+
+  </div>
+</body>
+</html>
+
+<script>
+$(document).ready(function() {
+  $(".upfront-story-title").html(livingdocs.upfrontIO.templates.title());
+  $(".upfront-story-text").html(livingdocs.upfrontIO.templates.text());
+  $(".upfront-story-highlight-text").html(livingdocs.upfrontIO.templates.highlightedText());
+  $(".upfront-story-image").html(livingdocs.upfrontIO.templates.linkedImage());
+  $(".upfront-footer").html(livingdocs.upfrontIO.templates.footer());
+  $(".upfront-image-caption").html(livingdocs.upfrontIO.templates.imageWithCaption());
+  $(".upfront-clients").html(livingdocs.upfrontIO.templates.clientList());
+  $(".image").html(livingdocs.upfrontIO.templates.image());
+  $(".upfront-story-link").html(livingdocs.upfrontIO.templates.link());
+});
+</script>
