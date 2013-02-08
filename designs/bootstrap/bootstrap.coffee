@@ -20,7 +20,7 @@
 
   subtitle: _.template(
     """
-    <h2 data-upfront-field="title">Untertitel</h2>
+    <h2 data-upfront-field="title">Subtitle</h2>
     """
   )
 
