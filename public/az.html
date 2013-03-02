@@ -1,0 +1,78 @@
+<!Doctype html>
+<html>
+<head>
+  <title>AZ Medien Design</title>
+  <script src="js/vendor/underscore.js"></script>
+  <script src="js/vendor/jquery-1.9.js"></script>
+  <script src="js/az.js"></script>
+  <link href="css/az.css" media="all" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="container">
+    <header class="row">
+      <div class="span6 linked-image">
+        logo
+      </div>
+      <div class="span6">
+        modal
+      </div>
+    </header>
+    <nav>
+      <div class="row">
+        <div class="span12 topnavigation">
+          top navigation
+        </div>
+      </div>
+      <div class="row">
+        <div class="span12 subnavigation">
+          sub navigation
+        </div>
+      </div>
+    </nav>
+    <div class="row">
+      <article class="span8">
+        <div class="title"></div>
+        <div class="image"></div>
+        <div class="filet"></div>
+        <div class="social-media-box">
+          social media
+        </div>
+        <div class="article-content">
+          <div class="text"></div>
+          <div class="text"></div>
+          <div class="text"></div>
+          <div class="text"></div>
+        </div>
+      </article>
+      <aside class="span4">
+        <div class="similar-article recommendation"></div>
+        <div class="clearfix"></div>
+        <div class="similar-article recommendation"></div>
+        <div class="clearfix"></div>
+        <div class="similar-article recommendation"></div>
+        <div class="clearfix"></div>
+        <div class="similar-article recommendation"></div>
+      </aside>
+    </div>
+    <div class="row">
+      <footer class="span12 footer">
+        footer
+      </footer>
+    </div>
+  </div>
+</body>
+</html>
+
+<script>
+$(document).ready(function() {
+  $('.linked-image').html(livingdocs.az.templates.linkedImage());
+  $('.topnavigation').html(livingdocs.az.templates.navigation());
+  $('.subnavigation').html(livingdocs.az.templates.subnavigation());
+  $('.title').html(livingdocs.az.templates.title());
+  $('.image').html(livingdocs.az.templates.imageWithCaption());
+  $('.filet').html(livingdocs.az.templates.filet());
+  $('.text').html(livingdocs.az.templates.text());
+  $('.recommendation').html(livingdocs.az.templates.recommendation());
+  $('.footer').html(livingdocs.az.templates.footer());
+});
+</script>
