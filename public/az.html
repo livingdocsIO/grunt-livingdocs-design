@@ -1,4 +1,5 @@
 <!Doctype html>
+<!-- I am not a fan of HTML commenst so see the README.md file next to this file -->
 <html>
 <head>
   <title>AZ Medien Design</title>
@@ -8,13 +9,46 @@
   <link href="css/az.css" media="all" rel="stylesheet" type="text/css">
 </head>
 <body>
+  <!-- for the facebook like -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=337150526309241";
+  fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
   <div class="container">
     <header class="row">
       <div class="span6 linked-image">
         logo
       </div>
       <div class="span6">
-        modal
+        <div class="register-bar">
+          <a href="#">Link</a> | <a href="#">Link</a>
+        </div>
+        <div style="margin: 6px 0 0 0;">
+          <form style="float: left;">
+            <input type="search" placeholder="Search" />
+          </form>  
+          <div id="a-zLinks">
+            <a id="JobsADisp" title="Jobs" href="#">Button</a>  
+            <a id="ImmoADisp" title="Immobilien" href="#">Button</a>
+            <a id="EventsADisp" target="_blank" title="Events" href="#">Button</a>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <div style="margin: 8px 0 0 0;">
+          <ul id="metanavigation">
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+            <li><a href="#">Link</a></li>
+          </ul>
+        </div>
       </div>
     </header>
     <nav>
@@ -22,8 +56,7 @@
         <div class="span12 topnavigation">
           top navigation
         </div>
-      </div>
-      <div class="row">
+        <div class="clearfix"></div>
         <div class="span12 subnavigation">
           sub navigation
         </div>
@@ -35,7 +68,27 @@
         <div class="image"></div>
         <div class="filet"></div>
         <div class="social-media-box">
-          social media
+          <div id="facebook-box">
+            <div class="fb-like" data-href="http://www.aargauerzeitung.ch" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+          </div>
+          <div id="twitter-box">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.aargauerzeitung.ch" data-lang="de">Twittern</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+          </div>
+          <div id="googleplus-box">
+            <!-- Place this tag where you want the +1 button to render. -->
+            <div class="g-plusone" data-annotation="inline" data-width="150"></div>
+
+            <!-- Place this tag after the last +1 button tag. -->
+            <script type="text/javascript">
+              (function() {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+              })();
+            </script>
+          </div>
+
         </div>
         <div class="article-content">
           <div class="text"></div>
