@@ -2,7 +2,7 @@
 <head>
   <title>Bootstrap Design for Livingdocs</title>
   <link rel="shortcut icon" href="/favicon.png">
-  
+
   <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
   <script src="js/vendor/underscore.js"></script>
   <script src="js/vendor/jquery-1.9.js"></script>
@@ -10,23 +10,32 @@
   <link href="css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
 </head>
 <body>
-  <div id="main" class="container">
-    <div class="row">
-      <h2>Hero Element</h2>
-      <div class="span12 hero-template upfront-content"></div>
-    </div>
-    <div class="row">
-      <div class="span6 hero-template upfront-content"></div>
-      <div class="span3 hero-template upfront-content"></div>
-      <div class="span3 hero-template upfront-content"></div>
-    </div>
-
+  <div class="container-fluid">
+    <section class="doc-section">
+      <div class="column-container">
+      </div>
+      <div class="main-and-sidebar-container">
+      </div>
+    </section>
   </div>
 </body>
 </html>
 
 <script>
 $(document).ready(function() {
-  $(".hero-template").html(livingdocs.bootstrap.templates.hero());
+  columnContainer = $('.column-container');
+  columnContainer.html(livingdocs.bootstrap.templates.column());
+  columnContent = columnContainer.find('div').find('div');
+  columnContent.append(livingdocs.bootstrap.templates.hero());
+  columnContainer.append(livingdocs.bootstrap.templates.info());
+
+  mainAndSidebarContainer = $('.main-and-sidebar-container');
+  mainAndSidebarContainer.html(livingdocs.bootstrap.templates.mainAndSidebar());
+  mainContent = mainAndSidebarContainer.find('div').find('div:first-child');
+  sidebarContent = mainAndSidebarContainer.find('div').find('div:last-child');
+  mainContent.append(livingdocs.bootstrap.templates.title());
+  mainContent.append(livingdocs.bootstrap.templates.text());
+  sidebarContent.append(livingdocs.bootstrap.templates.subtitle());
+  sidebarContent.append(livingdocs.bootstrap.templates.button());
 });
 </script>
