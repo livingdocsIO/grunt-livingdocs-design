@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>watson</title>
+    <script src="js/vendor/underscore.js"></script>
+    <script src="js/vendor/jquery-1.9.js"></script>
+    <script src="js/watson.js"></script>
+    <link href="css/watson.css" media="all" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <div class="full-width-container">
+    </div>
+    <div class="story-container">
+    </div>
+  </body>
+  <script>
+    $(document).ready(function() {
+      headerContainer = $('.full-width-container');
+      headerContainer.html(livingdocs.watson.templates.fullWidthLayout());
+      headerContent = headerContainer.find('div[data-doc-container]');
+      headerContent.append(livingdocs.watson.templates.headerImage());
+
+
+      storyContainer = $('.story-container');
+      storyContainer.html(livingdocs.watson.templates.textLayout());
+      storyContent = storyContainer.find('div[data-doc-container]');
+      storyContent.append(livingdocs.watson.templates.date());
+      storyContent.append(livingdocs.watson.templates.socialMediaBox());
+      storyContent.append(livingdocs.watson.templates.title());
+      storyContent.append(livingdocs.watson.templates.lead());
+      storyContent.append(livingdocs.watson.templates.author());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.subtitle());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      insert = $(livingdocs.watson.templates.rightInsert());
+      storyContent.append(insert);
+      insert.append(livingdocs.watson.templates.image());
+      insert.append(livingdocs.watson.templates.caption());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.quote());
+      storyContent.append(livingdocs.watson.templates.source());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      imageBar = $(livingdocs.watson.templates.imageBar());
+      storyContent.append(imageBar);
+      imageBar.append(livingdocs.watson.templates.image());
+      imageBar.append(livingdocs.watson.templates.image());
+      imageBar.append(livingdocs.watson.templates.image());
+      imageBar.append(livingdocs.watson.templates.caption());
+      storyContent.append(livingdocs.watson.templates.subtitle());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      sideInsert = $(livingdocs.watson.templates.sideInsert());
+      storyContent.append(sideInsert);
+      sideInsert.append(livingdocs.watson.templates.infoBox());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+      storyContent.append(livingdocs.watson.templates.text());
+    });
+  </script>
+</html>
