@@ -1,0 +1,38 @@
+
+
+@media screen and (max-width: 1000px) {
+	body {
+		font-size:9px;
+	}
+	
+	.wrapper {
+		width:100%;
+	}
+	
+	.region.x_full_tablet { width:100%; }
+	.region.x_half_tablet { width:50%; }
+	
+	/* collection regions */
+	/* ============= */
+	.region.collection_main { border-bottom:0; }
+	.region.collection_context { height:302px; } /* .region.y_half */
+	.region.collection_context .region:nth-child(even) {
+		border-width:0 4px 4px 0;
+		border-color: #ffffff;
+		border-style:solid;
+	}
+	.region.collection_context .arrow {
+		left:22%; /* 25% - 3% */
+		top:-6%; /* 2 * 3% */
+		width:6%; /* 2 * 3% */
+		height:6%; /* 2 * 3% */
+		background-image:url(media/img/main/arrows/arrow_grey_top.png);
+		background-position:bottom;
+	}
+	
+	
+	
+	/* custom hide and display */
+	.hide_on_tablet { display:none; }
+	.show_on_tablet { display:block; }
+}

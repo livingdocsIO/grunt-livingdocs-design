@@ -1,0 +1,200 @@
+
+
+
+
+
+.region.full_story .text {
+	position:static;
+	margin-left:10%;
+	margin-bottom:60px;
+	width:85%;
+}
+
+.region.full_story p.date,
+.region.full_story p.author {
+	color:#666666;
+	font-size:1.4em /* 14px / 10px */
+}
+
+.region.full_story p.lead {
+	font-weight:bold;
+	font-style:italic;
+}
+
+.region.full_story p.half_title {
+	font-size:2em /* 20px / 10px */;
+	font-weight:bold;
+	margin-top:20px;
+}
+
+.region.full_story p,
+.region.full_story h3 {
+	width:60%;
+}
+
+.region.full_story h2 {
+	width:auto;
+}
+
+/* inserts */
+/* ======= */
+.region.full_story .insert p,
+.region.full_story .insert h4 {
+	width:90%;
+}
+
+.region.full_story .insert {
+	margin:0 2% 10px 2%;
+	padding:0;
+	width:56%;
+	float:right;
+}
+
+.region.full_story .insert img {
+	width:100%;
+}
+
+.region.full_story .insert p {
+	padding:0;
+	margin:0 0 10px 0;
+}
+
+/* full wid with margin */
+.region.full_story .insert.full {
+	width:97%;
+	margin:0 1.5% 10px 1.5%;
+}
+
+/* full width without margin */
+.region.full_story .insert.fat_full {
+	width:100%;
+	margin:0 0 10px 0;
+}
+
+/* right side only */
+.region.full_story .insert.side {
+	width:34%;
+	margin:0 2% 10px 2%;
+}
+
+/* left side only */
+.region.full_story .insert.maincol {
+	width:60%;
+	display:inline-block;
+	margin:0 0 10px 1.8%;
+	float:none;
+}
+
+.region.full_story .insert.commercial {
+	text-align:center;
+	background-color:#eeeeee;
+}
+
+.region.full_story .insert.commercial img {
+	width:90%;
+	margin:5%; /* 100% - 90% / 2 */
+}
+
+/* quotes */
+/* ====== */
+.region.full_story p.quote {
+	font-family:'Lustria', 'Times New Roman',Times,serif;
+	font-size:3.6em /* 36px / 10px */;
+	margin-top:20px;
+	line-height:1.3em;
+	font-style: italic;
+	color:#009ccc;
+}
+
+.region.full_story p.source,
+.region.full_story p.caption {
+	font-size:1.6em /* 16px / 10px */;
+	color:#aaaaaa;
+	width:50%;
+}
+
+.region.full_story .insert p.source,
+.region.full_story .insert p.caption {
+	width:100%;
+	padding:0 0 4px 0;
+}
+
+.region.full_story div.tags {
+	font-size:1.4em; /* 14px / 10px */
+	color:#666666;	
+	display:inline-block;
+	margin-top:3.571em; /* 50px / 14px */
+}
+
+.region.full_story div.tags ul {
+	margin:4px 0 0 0;
+}
+
+.region.full_story div.tags li {
+	display:inline-block;
+}
+
+.region.full_story div.tags li a {
+	display:inline-block;
+	color:#00c6ff;
+	background-color:#333333;
+	margin-right:0.25em; /* 4px / 16px */
+	margin-bottom:0.25em; /* 4px / 16px */
+	padding:0.625em; /* 10px / 16px */
+	font-weight:bold;
+	font-size:1.1428em; /* 16px / 14px */
+	line-height:1em; /* 16px / 16px */
+	text-transform:uppercase;
+}
+
+.region.full_story div.tags li.ressort a {
+	color:#a0f22c;
+}
+
+/* nur zum test */
+.region.full_story .imagebar img {
+	width:33%;
+	margin:0 0.16666% 4px 0.16666%;
+}
+
+.social_box {
+	width:321px;
+	float:right;
+	margin:0 2% 20px 20px;
+}
+
+.infobox {
+	background-color:#e8e8e8;
+	padding:10px 0;
+}
+
+.infobox p,
+.infobox h4 {
+	color:#666666;
+}
+
+.sportstable {
+	width:100%;
+}
+
+.sportstable td, .sportstable th {
+	padding:0.333em; /* 18px / 3 => 6px */
+	border-bottom:1px solid #aaaaaa;
+	text-align:left;
+	font-size:1.8em; /* 18px / 10px */
+}
+
+.sportstable tr.color_line_1 td { border-bottom:2px solid #84e100; }
+.sportstable tr.color_line_2 td { border-bottom:2px solid #84e100; }
+.sportstable tr.color_line_3 td { border-bottom:2px solid #ce0f89; }
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,150 @@
+
+
+/* navi */
+.naviblock {
+	position:fixed;
+	top:0;
+	right:0;
+	background-color:rgba(0,0,0,0.8);
+	width:6.6em; /* 66px / 10px */
+	height:6.6em; /* 66px / 10px */
+}
+
+.naviblock .navilink {
+	position:absolute;
+	top:0;
+	right:0;
+	display:block;
+	padding:1.8em; /* 18px / 10px */
+}
+
+.naviblock .navilink img {
+	width:2.4em; /* 24px / 10px */
+	margin:0.3em; /* 3px / 10px */
+}
+
+.naviblock .navilink:hover img {
+	-moz-transform:scale(1.1,1.1);
+	-webkit-transform:scale(1.1,1.1);
+	-o-transform:scale(1.1,1.1);
+	transform:scale(1.1,1.1);
+}
+
+.naviblock .expandable {
+	background-color:rgba(0,0,0,0.8);
+	position:fixed;
+	top:0;
+	right:-50em;
+	width:50em; /* 500px / 10px */
+	height:100%;
+}
+
+.naviblock .tagcloud {
+	padding:3em 2em 0 2em; /* 60px / 20px, 40px / 20px */
+	font-size:2em; /* 20px / 10px */
+	text-align:center;
+}
+
+.naviblock .tagcloud li {
+	display:inline;
+	margin:0 0.5em; /* 10px / 20px */
+	line-height:1.8em; /* 36px / 20px */
+}
+
+.naviblock .tagcloud li.size_1 a { font-size:1.2em; }
+.naviblock .tagcloud li.size_2 a { font-size:1.4em; }
+.naviblock .tagcloud li.size_3 a { font-size:1.6em; }
+.naviblock .tagcloud li.size_4 a { font-size:1.8em; }
+.naviblock .tagcloud li.ressort a { color:#94e028; }
+
+.naviblock .tagcloud li a:hover {
+	color:#ffffff;
+}
+
+.naviblock .segment {
+	padding: 1em 0; /* 10px / 10px */
+	width: 48em; /* 480px / 10px */
+	clear:both;
+	text-align:center;
+}
+
+.naviblock .alt_links {
+	display:block;
+	width:100%;
+	font-size: 1.4em; /* 14px / 10px */
+}
+
+.naviblock .alt_links li {
+	display:inline;
+	border-right:1px solid #888888;
+}
+
+.naviblock .alt_links li:last-child {
+	border:0;
+}
+
+.naviblock .alt_links a {
+	color:#888888;
+	padding: 0.5em; /* 7px / 14px */
+}
+
+.naviblock .alt_links a:hover {
+	color:#ffffff;
+}
+
+.naviblock form.search {
+	font-size:2em; /* 20px / 10px */
+	position:relative;
+}
+
+.naviblock ul.suggestions {
+	position:absolute;
+	background-color:#ffffff;
+	left:25%;
+	width:50%;
+	-webkit-border-radius:0.2em;
+	border-radius:0.2em;
+	display:none;
+	overflow:hidden;
+	width:50%;
+} 
+
+.naviblock ul.suggestions li {
+	border-bottom:1px solid #aaaaaa;
+	text-align:left;
+	padding:2%;
+	width:100%;
+	overflow:hidden;
+}
+
+.naviblock ul.suggestions li:last-child {
+	border:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
