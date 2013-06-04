@@ -11,7 +11,7 @@
       headerImage: _.template("<img class=\"illu\" src=\"https://www.fixxtest.ch/showcase/media/img/placeholderimg/bild_018.jpg\" />"),
       image: _.template("<img src=\"https://www.fixxtest.ch/showcase/media/img/placeholderimg/bild_019.jpg\" />"),
       caption: _.template("<p data-doc-editable=\"text\" class=\"caption\">Mobutu, König von Zaire 3: Das Ende der Herrschaft</p>"),
-      text: _.template("<p data-doc-editable=\"text\">\n  Nicht zum ersten Mal rückt im Osten der riesigen Demokratischen Republik Kongo ein Warlord mit seiner Rebellenarmee vor, nicht zum ersten Mal fliehen Tausende vor den Schrecken des Bürgerkriegs.\n</p>"),
+      text: _.template("<p data-doc-editable=\"text\">\n  <% if(text != \"\") { %>\n    <%= text %>\n  <% } else { %>\n    <%= \"Nicht zum ersten Mal rückt im Osten der riesigen Demokratischen Republik Kongo ein Warlord mit seiner Rebellenarmee vor, nicht zum ersten Mal fliehen Tausende vor den Schrecken des Bürgerkriegs.\" %>\n  <% } %>\n</p>"),
       lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\n  Bürgerkrieg, Invasionen, Völkermord: Im kranken Herzen Afrikas mischen sich ethnische Konflikte unheilvoll mit den Folgen einer skrupellosen Kolonialpolitik.\n</p>"),
       title: _.template("<h2 data-doc-editable=\"title\">Afrikas krankes Herz</h2>"),
       subtitle: _.template("<p data-doc-editable=\"title\" class=\"half_title\">Teile und hersche</p>"),

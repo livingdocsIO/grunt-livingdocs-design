@@ -60,7 +60,11 @@
   text: _.template(
     """
     <p data-doc-editable="text">
-      Nicht zum ersten Mal rückt im Osten der riesigen Demokratischen Republik Kongo ein Warlord mit seiner Rebellenarmee vor, nicht zum ersten Mal fliehen Tausende vor den Schrecken des Bürgerkriegs.
+      <% if(text != "") { %>
+        <%= text %>
+      <% } else { %>
+        <%= "Nicht zum ersten Mal rückt im Osten der riesigen Demokratischen Republik Kongo ein Warlord mit seiner Rebellenarmee vor, nicht zum ersten Mal fliehen Tausende vor den Schrecken des Bürgerkriegs." %>
+      <% } %>
     </p>
     """
   )
