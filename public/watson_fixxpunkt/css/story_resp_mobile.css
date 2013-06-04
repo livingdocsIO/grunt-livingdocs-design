@@ -28,7 +28,7 @@
 	}
 	
 	/* nur zum test */
-	.imagebar img {
+	.region.full_story .imagebar img {
 		width:100%;
 		margin: 0 0 2px 0;
 	}

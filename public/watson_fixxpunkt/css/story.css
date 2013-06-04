@@ -54,11 +54,6 @@
 	width:100%;
 }
 
-.region.full_story .insert p {
-	padding:0;
-	margin:0 0 10px 0;
-}
-
 /* full wid with margin */
 .region.full_story .insert.full {
 	width:97%;
@@ -83,6 +78,11 @@
 	display:inline-block;
 	margin:0 0 10px 1.8%;
 	float:none;
+}
+
+.region.full_story .insert.maincol p {
+	padding:0;
+	margin:0 0 10px 0;
 }
 
 .region.full_story .insert.commercial {
