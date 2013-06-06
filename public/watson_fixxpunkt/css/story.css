@@ -75,9 +75,12 @@
 /* left side only */
 .region.full_story .insert.maincol {
 	width:60%;
-	display:inline-block;
 	margin:0 0 10px 1.8%;
 	float:none;
+}
+
+.region.full_story .insert.maincol.block {
+	display:inline-block;
 }
 
 .region.full_story .insert.maincol p {

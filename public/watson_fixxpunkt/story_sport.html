@@ -4,7 +4,7 @@
 		<!-- upfront ==> -->
 		<script src="js/vendor/underscore.js"></script>
     	<script src="js/vendor/jquery-1.9.js"></script>
-    	<script src="js/story_afrika.js"></script>
+    	<script src="js/story_sport.js"></script>
 		<!-- <== -->
     
 		<title>watson</title>
@@ -155,6 +155,7 @@
       
       // titleblock
       storyContent.append(livingdocs.watson.templates.date());
+      storyContent.append(livingdocs.watson.templates.upperLine());
       storyContent.append(livingdocs.watson.templates.title());
       storyContent.append(livingdocs.watson.templates.socialMediaBox());
       storyContent.append(livingdocs.watson.templates.lead());
@@ -165,9 +166,7 @@
       
       insert = $(livingdocs.watson.templates.rightInsert());
       storyContent.append(insert);
-      insert.append(livingdocs.watson.templates.image());
-      insert.append(livingdocs.watson.templates.caption());
-      
+      insert.append(livingdocs.watson.templates.image_1());
       storyContent.append(livingdocs.watson.templates.text_2());
       
       maincolInsert_1 = $(livingdocs.watson.templates.maincolInsert());
@@ -175,33 +174,27 @@
       maincolInsert_1.append(livingdocs.watson.templates.quote_1());
       maincolInsert_1.append(livingdocs.watson.templates.source_1());
       
-      storyContent.append(livingdocs.watson.templates.text_3());
-      
-      sideInsert = $(livingdocs.watson.templates.sideInsert());
-      storyContent.append(sideInsert);
-      sideInsert.append(livingdocs.watson.templates.infoBox());
-      
-      storyContent.append(livingdocs.watson.templates.text_4());
-      
-      imageBar = $(livingdocs.watson.templates.imageBar());
-      storyContent.append(imageBar);
-      imageBar.append(livingdocs.watson.templates.image_1());
-      imageBar.append(livingdocs.watson.templates.image_2());
-      imageBar.append(livingdocs.watson.templates.image_3());
-      imageBar.append(livingdocs.watson.templates.caption_2());
-      
-      storyContent.append(livingdocs.watson.templates.text_5());
+	  storyContent.append(livingdocs.watson.templates.text_3());
       
       maincolInsert_2 = $(livingdocs.watson.templates.maincolInsert());
       storyContent.append(maincolInsert_2);
       maincolInsert_2.append(livingdocs.watson.templates.quote_2());
       maincolInsert_2.append(livingdocs.watson.templates.source_2());
       
-      storyContent.append(livingdocs.watson.templates.text_6());
+      sideInsertCommercial = $(livingdocs.watson.templates.sideInsertCommercial());
+      storyContent.append(sideInsertCommercial);
+      sideInsertCommercial.append(livingdocs.watson.templates.commercialRectangle());
+
+      maincolBlockInsert_1 = $(livingdocs.watson.templates.maincolBlockInsert());
+      storyContent.append(maincolBlockInsert_1);
+      maincolBlockInsert_1.append(livingdocs.watson.templates.sportsTable());
+      
+      storyContent.append(livingdocs.watson.templates.text_4());
       
       maincolInsert_3 = $(livingdocs.watson.templates.maincolInsert());
       storyContent.append(maincolInsert_3);
-      maincolInsert_3.append(livingdocs.watson.templates.tagList());
+      maincolInsert_3.append(livingdocs.watson.templates.tagList());      
+      
       
       
     });

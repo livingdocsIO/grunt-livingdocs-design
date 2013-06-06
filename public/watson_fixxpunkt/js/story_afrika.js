@@ -11,6 +11,7 @@
 			textLayout: _.template("<div data-doc-container>\n</div>"),
 			headerImage: _.template("<img style=\"width:100%;\" src=\"media/img/placeholderimg/bild_018.jpg\" />"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
+			upperLine: _.template("<h3>Kongo</h3>"),
 			title: _.template("<h2 data-doc-editable=\"title\">Afrikas krankes Herz</h2>"),
 			lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\n  Bürgerkrieg, Invasionen, Völkermord: Im kranken Herzen Afrikas mischen sich ethnische Konflikte unheilvoll mit den Folgen einer skrupellosen Kolonialpolitik.\n</p>"),
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\n  Daniel Huber\n</p>"),
