@@ -72,6 +72,7 @@ p.caption {
 /* ===================== */
 .region.full_story .full-width-container.insert.fat_full {
 	position:relative;
+	min-height:8em; /* 80px / 10px */
 }
 
 .region.full_story .full-width-container.insert.fat_full p.caption {
