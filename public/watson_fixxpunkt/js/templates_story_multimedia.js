@@ -18,6 +18,7 @@
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\nFranz Ermel\n</p>"),
 			
 			rightInsert: _.template("<div class=\"insert\">\n</div>"),
+			fiftyFiftyInsert: _.template("<div class=\"insert fifty_fifty\">\n</div>"),
 			sideInsert: _.template("<div class=\"insert side\">\n</div>"),
 			maincolInsert: _.template("<div class=\"insert maincol\">\n</div>"),
 			maincolBlockInsert: _.template("<div class=\"insert maincol block\">\n</div>"),

@@ -66,6 +66,12 @@
 	margin:0 0 10px 0;
 }
 
+/* fifty fifty */
+.region.full_story .insert.fifty_fifty {
+	width:46.4%;
+	margin:0 1.8% 10px 1.8%;
+}
+
 /* right side only */
 .region.full_story .insert.side {
 	width:34%;
