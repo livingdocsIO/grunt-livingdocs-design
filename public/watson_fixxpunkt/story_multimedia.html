@@ -137,8 +137,13 @@
 	
 	</body>
 	<script>
+	
+	function playvideo(element, video_id) {
+      element.html('<iframe src="http://www.youtube.com/embed/'+video_id+'?autoplay=1" frameborder="0" allowfullscreen></iframe>');
+    }
+	
     $(document).ready(function() {
-    
+    	
     
       // HEADER
       headerContainer = $('.full-width-container');
