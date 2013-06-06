@@ -14,13 +14,13 @@
 		display:block !important;
 	}
 	
-	.region.full_story .insert.maincol {
-		margin:0 15px 10px 15px;
+	.region.full_story .story-container .insert {
+		margin:0 15px 10px 15px !important;
 	}
 	
 	.region.full_story .insert.commercial {
 		width:100%;
-		margin:0 0 10px 0;
+		margin:0 0 10px 0 !important;
 	}
 	
 	.region.full_story p.quote {
@@ -29,7 +29,7 @@
 	
 	.region.full_story .full-width-container.insert.fat_full p.caption {
 		font-size:1.6em !important;
-		max-width:none;
+		max-width:none  !important;
 		padding:5px 15px;
 	}
 	

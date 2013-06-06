@@ -156,6 +156,7 @@
 
 
 /* fat_full header image */
+/* ===================== */
 .region.full_story .full-width-container.insert.fat_full {
 	position:relative;
 }
@@ -174,6 +175,31 @@
 	width:100%;
 }
 
+/* videos */
+/* ====== */
+.region.full_story .video {
+	width:100%;
+	height:0;
+	padding-bottom:56.25%; /* 100% / 16 * 9 */
+	overflow:hidden;
+	cursor:pointer;
+}
+
+/* maps */
+/* ==== */
+.region.full_story .map {
+	width:100%;
+	height:0;
+	padding-bottom:100%;
+	overflow:hidden;
+	position:relative;
+}
+
+.region.full_story .map iframe {
+	position:absolute;
+	width:100%;
+	height:100%;
+}
 
 
 /* nur zum test */
