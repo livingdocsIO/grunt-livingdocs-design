@@ -154,6 +154,28 @@
 	color:#a0f22c;
 }
 
+
+/* fat_full header image */
+.region.full_story .full-width-container.insert.fat_full {
+	position:relative;
+}
+
+.region.full_story .full-width-container.insert.fat_full p.caption {
+	position:absolute;
+	bottom:0;
+	background-color:rgba(255,255,255,0.8);
+	color:#222222;
+	padding:10px 15px;
+	max-width:58%; /* 60% - 2% */
+	width:auto;
+}
+
+.region.full_story .full-width-container.insert.fat_full img {
+	width:100%;
+}
+
+
+
 /* nur zum test */
 .region.full_story .imagebar img {
 	width:33%;
