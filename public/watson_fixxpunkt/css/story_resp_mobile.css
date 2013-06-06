@@ -22,24 +22,4 @@
 		width:100%;
 		margin:0 0 10px 0 !important;
 	}
-	
-	.region.full_story p.quote {
-		font-size:3.5714em !important; /* 25px / 7px */
-	}
-	
-	.region.full_story .full-width-container.insert.fat_full p.caption {
-		font-size:1.6em !important;
-		max-width:none  !important;
-		padding:5px 15px;
-	}
-	
-	/* nur zum test */
-	.region.full_story .imagebar img {
-		width:100%;
-		margin: 0 0 2px 0;
-	}
-	
-	.sportstable {
-		margin:0 0 10px 0;
-	}
 }
