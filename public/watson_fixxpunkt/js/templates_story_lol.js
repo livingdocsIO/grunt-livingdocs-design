@@ -50,7 +50,8 @@
 			image_commercial: _.template("<img src=\"media/img/placeholderwerbung/duennes_billboard.jpg\" />"),
 			
 			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
-			tagList: _.template("<div class='tags'>Artikel-Tags<ul><li class='ressort'><a href='#'>Kitsch</a></li><li><a href='#'>Funny</a></li><li><a href='#'>OMG</a></li><li><a href='#'>Rechtschreibung</a></li></ul></div>")
+			tagList: _.template("<div class='tags'>Artikel-Tags<ul><li class='ressort'><a href='#'>Kitsch</a></li><li><a href='#'>Funny</a></li><li><a href='#'>OMG</a></li><li><a href='#'>Rechtschreibung</a></li></ul></div>"),
+			badgeList: _.template("<div class='badges'>Ihre Reaktion?<ul><li><a href='#'><span class='name'>LOL</span><span class='number'><span class='arrow'></span>7</span></a></li><li><a href='#'><span class='name'>Cute</span><span class='number'><span class='arrow'></span>23</span></a></li><li><a href='#'><span class='name'>Love</span><span class='number'><span class='arrow'></span>2</span></a></li><li><a href='#'><span class='name'>Hot</span><span class='number'><span class='arrow'></span>9</span></a></li><li class='top'><a href='#'><span class='name'>Kitsch</span><span class='number'><span class='arrow'></span>437</span></a></li></ul><ul class='negative'><li><a href='#'><span class='name'>Fail</span><span class='number'><span class='arrow'></span>34</span></a></li><li><a href='#'><span class='name'>WTF</span><span class='number'><span class='arrow'></span>1</span></a></li><li><a href='#'><span class='name'>OMG</span><span class='number'><span class='arrow'></span>3</span></a></li><li><a href='#'><span class='name'>Sad</span><span class='number'><span class='arrow'></span>21</span></a></li><li><a href='#'><span class='name'>Trash</span><span class='number'><span class='arrow'></span>11</span></a></li></ul></div>")
 		};
 	})();
 
