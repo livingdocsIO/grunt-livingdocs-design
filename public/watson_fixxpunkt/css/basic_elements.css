@@ -18,7 +18,8 @@ p.caption {
 	font-size:1.6em /* 16px / 10px */;
 	color:#aaaaaa;
 	width:100%;
-	padding:0 0 4px 0;
+	padding:0;
+	margin:0 !important;
 }
 
 p.source {
@@ -35,7 +36,6 @@ p.source {
 /* ========== */
 .badges {
 	font-size:1.6em; /* 16px / 10px */
-	color:#666666;	
 	display:inline-block;
 	margin-top:0.625em; /* 10px / 16px */
 }
@@ -75,11 +75,11 @@ p.source {
 }
 
 .badges .negative li a span.name {
-	background-color:#000000;
+	background-color:#333333;
 }
 
 .badges li a span.number {
-	color:#000000;
+	color:#333333;
 	background-color:#bababa;
 	width:2em; /* 32px / 16px */
 	margin-left:0.75em; /* 12px / 16px */
