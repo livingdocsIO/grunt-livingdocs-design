@@ -24,7 +24,5 @@
 	.naviblock .alt_links {
 		font-size: 1.6em; /* 16px / 10px */
 	}
-
-	/* custom hide and display */
-	.hide_on_mobile { display:none; }
+	
 }

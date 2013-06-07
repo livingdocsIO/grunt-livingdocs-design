@@ -31,10 +31,12 @@
 			image_1: _.template("<img src=\"media/img/placeholderimg/bild_040.jpg\" />"),
 			image_2: _.template("<img src=\"media/img/placeholderimg/bild_041.jpg\" />"),
 			
-			caption_1: _.template("<p class='caption'>In Guatemala-Stadt fiel an diesem Tag so viel Regen wie normalerweise in einem ganzen Monat: 10,8 Zentimeter.<br/>Quelle: Keystone/EPA/Luis Soto</p>"),
-			caption_2: _.template("<p class='caption'>Das Loch bildete sich im Stadtteil Ciudad Nueva. Ein dreistöckiges Haus verschwand darin.<br/>Quelle: Keystone/EPA/Ulises Rodriguez</p>"),
-			caption_3: _.template("<p class='caption'>How Scary Sinkholes Are Formed</p>"),
+			caption_1: _.template("<p class='caption' data-doc-editable=\"text\">In Guatemala-Stadt fiel an diesem Tag so viel Regen wie normalerweise in einem ganzen Monat: 10,8 Zentimeter.</p>"),
+			caption_2: _.template("<p class='caption' data-doc-editable=\"text\">Das Loch bildete sich im Stadtteil Ciudad Nueva. Ein dreistöckiges Haus verschwand darin.</p>"),
+			caption_3: _.template("<p class='caption' data-doc-editable=\"text\">How Scary Sinkholes Are Formed</p>"),
 			
+			source_1: _.template("<p class='source' data-doc-editable=\"text\">Quelle: Keystone/EPA/Luis Soto</p>"),
+			source_2: _.template("<p class='source' data-doc-editable=\"text\">Quelle: Keystone/EPA/Ulises Rodriguez</p>"),
 			
 			video_1: _.template("<div class='video' onclick='playvideo($(this),\"tQvv8YFCGsY\" );'><img src=\"media/img/placeholderimg/bild_042.jpg\" /><img class=\"arrow\" src=\"media/img/main/arrows/arrow_transp_grey_forw.png\" /></div>"),
 			

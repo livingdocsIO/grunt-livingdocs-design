@@ -14,6 +14,10 @@
 		display:block !important;
 	}
 	
+	.region.full_story .insert.hide_on_mobile {
+		display:none !important;
+	}
+	
 	.region.full_story .story-container .insert {
 		margin:0 15px 10px 15px !important;
 	}

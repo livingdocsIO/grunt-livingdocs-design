@@ -53,7 +53,7 @@
 	.region.collection_context .region:nth-child(even) { border-width:0 0px 4px 0; }
 	
 	/* custom hide and display */
-	.hide_on_mobile { display:none; }
+	.hide_on_mobile { display:none !important; }
 	.show_on_mobile { display:block; }
 }
 

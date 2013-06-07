@@ -11,17 +11,18 @@ p.quote {
 	color:#009ccc;
 }
 
+/* sourca nd captions */
+/* ================== */
 p.source,
 p.caption {
 	font-size:1.6em /* 16px / 10px */;
 	color:#aaaaaa;
-	width:50%;
-}
-
-p.source,
-p.caption {
 	width:100%;
 	padding:0 0 4px 0;
+}
+
+p.source {
+	font-style: italic;
 }
 
 
@@ -83,6 +84,7 @@ p.caption {
 	padding:10px 15px;
 	max-width:58%; /* 60% - 2% */
 	width:auto;
+	margin:0;
 }
 
 .region.full_story .full-width-container.insert.fat_full img {
@@ -154,7 +156,7 @@ p.caption {
 /* ======= */
 .infobox {
 	background-color:#e8e8e8;
-	padding:10px 0;
+	padding:10px 15px;
 }
 
 .infobox p,

@@ -33,6 +33,6 @@
 	
 	
 	/* custom hide and display */
-	.hide_on_tablet { display:none; }
+	.hide_on_tablet { display:none !important; }
 	.show_on_tablet { display:block; }
 }

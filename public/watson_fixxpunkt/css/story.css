@@ -41,6 +41,8 @@
 .region.full_story .insert p,
 .region.full_story .insert h4 {
 	width:90%;
+	padding:0;
+	margin:0 0 10px 0;
 }
 
 /* default insert (hanging to the right) */
@@ -90,11 +92,6 @@
 	display:inline-block;
 }
 
-.region.full_story .insert.maincol p {
-	padding:0;
-	margin:0 0 10px 0;
-}
-
 .region.full_story .insert.commercial {
 	text-align:center;
 	background-color:#eeeeee;
@@ -102,7 +99,7 @@
 
 .region.full_story .insert.commercial img {
 	width:90%;
-	margin:5%; /* 100% - 90% / 2 */
+	margin:1.5em 0;
 }
 
 

@@ -454,7 +454,7 @@ a.button:hover {
 
 
 /* custom hide and display */
-.hide_on_desktop { display:none; }
+.hide_on_desktop { display:none !important; }
 .show_on_desktop { display:block; }
 
 
