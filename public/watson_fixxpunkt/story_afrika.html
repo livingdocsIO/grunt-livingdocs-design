@@ -141,6 +141,12 @@
 	
 	</body>
 	<script>
+	
+	function playvideo(element, video_id) {
+      element.html('<iframe src="http://www.youtube.com/embed/'+video_id+'?autoplay=1" frameborder="0" allowfullscreen></iframe>');
+    }
+
+
     $(document).ready(function() {
     
     
@@ -168,12 +174,12 @@
       
       insert = $(livingdocs.watson.templates.rightInsert());
       storyContent.append(insert);
-      insert.append(livingdocs.watson.templates.image());
+      insert.append(livingdocs.watson.templates.video_1());
       insert.append(livingdocs.watson.templates.caption());
       
       storyContent.append(livingdocs.watson.templates.text_2());
       
-      maincolInsert_1 = $(livingdocs.watson.templates.maincolInsert());
+      maincolInsert_1 = $(livingdocs.watson.templates.rightInsert());
       storyContent.append(maincolInsert_1);
       maincolInsert_1.append(livingdocs.watson.templates.quote_1());
       maincolInsert_1.append(livingdocs.watson.templates.source_1());
@@ -195,7 +201,7 @@
       
       storyContent.append(livingdocs.watson.templates.text_5());
       
-      maincolInsert_2 = $(livingdocs.watson.templates.maincolInsert());
+      maincolInsert_2 = $(livingdocs.watson.templates.sideInsert());
       storyContent.append(maincolInsert_2);
       maincolInsert_2.append(livingdocs.watson.templates.quote_2());
       maincolInsert_2.append(livingdocs.watson.templates.source_2());
