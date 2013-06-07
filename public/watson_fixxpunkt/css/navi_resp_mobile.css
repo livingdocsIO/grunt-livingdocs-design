@@ -9,7 +9,7 @@
 	}
 	
 	.naviblock .tagcloud {
-		padding:5em 1em 0 1em; /* 50px / 14px, 14px / 14px */
+		padding:0 1em 0 1em; /* 16px / 16px */
 		font-size:1.6em; /* 16px / 10px */
 	}
 	
@@ -25,4 +25,7 @@
 		font-size: 1.6em; /* 16px / 10px */
 	}
 	
+	.naviblock form.search {
+		margin-top:3.5em; /* 35px / 10px */
+	}
 }

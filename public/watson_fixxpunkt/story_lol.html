@@ -68,8 +68,20 @@
 		
 		
 		
-		<div class="naviblock" onmouseleave="navi.hide_navi();">
-			<div class="expandable" >
+		<div class="naviblock">
+			<div class="expandable">
+				<div class="segment">
+					<form class="search">
+						<input class="field lightback lightfont" type="text" value="suchen" /><input class="button" type="submit" value="go" />
+						<ul class="suggestions">
+							<li><a href="#">Fukushima</a></li>
+							<li><a href="#">Fundraising</a></li>
+							<li><a href="#">Furrer</a></li>
+							<li><a href="#">Fundamentalismus</a></li>
+							<li><a href="#">mehr...</a></li>
+						</ul>
+					</form>
+				</div>
 				<ul class="tagcloud">
 					<li class="size_3 ressort"><a href="#">Sport</a></li>
 					<li class="size_4 ressort"><a href="#">Ausland</a></li>
@@ -104,18 +116,6 @@
 					<li class="size_3 ressort"><a href="#">Videos</a></li>
 				</ul>
 				<div class="segment">
-					<form class="search" onmouseleave="$('.search .suggestions').slideUp(250);">
-						<input class="field lightback lightfont"  onfocus="$(this).val('');" onclick="$('.search .suggestions').slideDown(250);" type="text" value="suchen" /><input class="button" type="submit" value="go" />
-						<ul class="suggestions">
-							<li><a href="#">Fukushima</a></li>
-							<li><a href="#">Fundraising</a></li>
-							<li><a href="#">Furrer</a></li>
-							<li><a href="#">Fundamentalismus</a></li>
-							<li><a href="#">mehr...</a></li>
-						</ul>
-					</form>
-				</div>
-				<div class="segment">
 					<ul class="alt_links">
 						<li><a href="#">Login</a></li>
 						<li><a href="#">Apps</a></li>
@@ -123,7 +123,7 @@
 					</ul>
 				</div>
 			</div>
-			<a class="navilink" onclick="navi.toggle_navi();"><img src="media/img/main/icons/icon_navi.png" /></a>
+			<a class="navilink"><img src="media/img/main/icons/icon_navi.png" /></a>
 		</div>
 
 		

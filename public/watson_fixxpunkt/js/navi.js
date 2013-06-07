@@ -29,5 +29,28 @@ var navi = (function(){
 
 
 
+$(document).ready(function() {
+	$(".naviblock .navilink").click(function(){
+		navi.toggle_navi();
+	});
+	
+	$(".naviblock .field").focus(function(){
+		$(this).val('');
+	});
+	
+	$(".naviblock .field").click(function(){
+		$('.search .suggestions').slideDown(250);
+	});
+	
+	$(".naviblock .search").mouseleave(function(){
+		$(".naviblock .search .suggestions").slideUp(250);
+	});
+	
+	$(".naviblock").mouseleave(function(){
+		navi.hide_navi();
+	});
+	
+});
+
 
 

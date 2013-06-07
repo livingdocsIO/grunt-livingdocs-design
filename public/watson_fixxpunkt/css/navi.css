@@ -40,7 +40,7 @@
 }
 
 .naviblock .tagcloud {
-	padding:3em 2em 0 2em; /* 60px / 20px, 40px / 20px */
+	padding:0 2em 0 2em; /* 60px / 20px, 40px / 20px */
 	font-size:2em; /* 20px / 10px */
 	text-align:center;
 }
@@ -62,7 +62,7 @@
 }
 
 .naviblock .segment {
-	padding: 1em 0; /* 10px / 10px */
+	padding: 2em 0; /* 20px / 10px */
 	width: 48em; /* 480px / 10px */
 	clear:both;
 	text-align:center;
@@ -95,6 +95,7 @@
 .naviblock form.search {
 	font-size:2em; /* 20px / 10px */
 	position:relative;
+	margin-top:1em;  /* 10px / 10px */
 }
 
 .naviblock ul.suggestions {
