@@ -54,7 +54,7 @@
 	
 	/* custom hide and display */
 	.hide_on_mobile { display:none !important; }
-	.show_on_mobile { display:block; }
+	.show_on_mobile { display:block !important;; }
 }
 
 

@@ -383,7 +383,7 @@ strong {
 	height:5%;
 	left:-5%;
 	top:10%;
-	background-image:url(media/img/main/arrows/arrow_grey_left.png);
+	background-image:url(../media/img/main/arrows/arrow_grey_left.png);
 	background-size:contain;
 	background-position:right;
 	background-repeat:no-repeat;
@@ -455,7 +455,7 @@ a.button:hover {
 
 /* custom hide and display */
 .hide_on_desktop { display:none !important; }
-.show_on_desktop { display:block; }
+.show_on_desktop { display:block !important;; }
 
 
 

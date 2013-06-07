@@ -34,10 +34,10 @@ p.source {
 /* badge list */
 /* ========== */
 .badges {
-	font-size:1.4em; /* 14px / 10px */
+	font-size:1.6em; /* 16px / 10px */
 	color:#666666;	
 	display:inline-block;
-	margin-top:0.714em; /* 10px / 14px */
+	margin-top:0.625em; /* 10px / 16px */
 }
 
 .badges ul {
@@ -51,7 +51,7 @@ p.source {
 .badges li {
 	display:inline-block;
 	margin-right:0.75em; /* 12px / 16px */
-	margin-bottom:0.25em; /* 4px / 16px */
+	margin-bottom:0.75em; /* 12px / 16px */
 }
 
 .badges li a:hover {
@@ -63,7 +63,6 @@ p.source {
 	display:inline-block;
 	padding:0.625em 0; /* 10px / 16px */
 	font-weight:bold;
-	font-size:1.1428em; /* 16px / 14px */
 	line-height:1em; /* 16px / 16px */
 	text-transform:uppercase;
 	text-align:center;
@@ -115,10 +114,10 @@ p.source {
 /* tag list */
 /* ======== */
 .tags {
-	font-size:1.4em; /* 14px / 10px */
+	font-size:1.6em; /* 16px / 10px */
 	color:#666666;	
 	display:inline-block;
-	margin-top:3.571em; /* 50px / 14px */
+	margin-top:3.125em; /* 50px / 16px */
 }
 
 .tags ul {
@@ -134,10 +133,9 @@ p.source {
 	color:#00c6ff;
 	background-color:#333333;
 	margin-right:0.75em; /* 12px / 16px */
-	margin-bottom:0.25em; /* 4px / 16px */
+	margin-bottom:0.75em; /* 12px / 16px */
 	padding:0.625em; /* 10px / 16px */
 	font-weight:bold;
-	font-size:1.1428em; /* 16px / 14px */
 	line-height:1em; /* 16px / 16px */
 	text-transform:uppercase;
 }
@@ -159,7 +157,7 @@ p.source {
 /* ===================== */
 .region.full_story .full-width-container.insert.fat_full {
 	position:relative;
-	min-height:8em; /* 80px / 10px */
+	min-height:7em; /* 70px / 10px */
 }
 
 .region.full_story .full-width-container.insert.fat_full p.caption {
