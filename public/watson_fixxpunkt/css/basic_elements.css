@@ -29,6 +29,13 @@ p.source {
 
 
 
+/* interview */
+/* ========= */
+p.statement {
+	border-left:0.2em solid #bababa;
+	padding-left:0.5em !important;
+}
+
 
 
 

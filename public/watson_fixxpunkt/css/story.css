@@ -94,6 +94,10 @@
 	display:inline-block;
 }
 
+.region.full_story .insert.maincol.shift {
+	padding-left:10%;
+}
+
 .region.full_story .insert.commercial {
 	text-align:center;
 	background-color:#eeeeee;
