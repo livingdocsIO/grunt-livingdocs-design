@@ -72,30 +72,6 @@
 	color:#ffffff;
 }
 
-.naviblock .tagcloud li .fav {
-	position:absolute;
-	top:0;
-	right:0;
-	display:none;
-	background-color:red;
-}
-
-.naviblock .tagcloud li .fav img {
-	width:24px;
-	left:-5px;
-	top:10px;
-	opacity:0.6;
-	position:absolute;
-}
-
-.naviblock .tagcloud li .fav:hover img {
-	opacity:1;
-}
-
-.naviblock .tagcloud li a:hover .fav {
-	display:block;
-}
-
 /* alternative links */
 /* ================= */
 .naviblock .alt_links {

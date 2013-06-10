@@ -26,10 +26,16 @@ var navi = (function(){
 		},
 		
 		init:function() {
+			/* toggling the navigation */
 			$(".naviblock .navilink").click(function(){
 				navi.toggle_navi();
 			});
-	
+			
+			$(".naviblock").mouseleave(function(){
+				navi.hide_navi();
+			});
+			
+			/* search and favorites */
 			$(".naviblock .field").focus(function(){
 				$(this).val('');
 			});
@@ -44,14 +50,21 @@ var navi = (function(){
 				$(".naviblock .search ul.favs").slideUp(250);
 			});
 			
-			$(".naviblock .search a.fav").click(function(){;
+			$(".naviblock .search a.fav").click(function(){
 				$('.naviblock .search ul.favs').slideDown(250);
 				$(".naviblock .search .suggestions").slideUp(250);
 			});
 			
-			$(".naviblock").mouseleave(function(){
-				navi.hide_navi();
+			$('.naviblock .search ul.favs .delete').click(function(){
+				$(this).parents("li").remove();
 			});
+			
+			$('.naviblock .search .suggestions .fav').click(function(){
+				$(this).find("img").attr("src", "media/img/main/icons/icon_fav_active.png");
+				$('.naviblock .search ul.favs').append('<li><a href="#">'+$(this).parents("li").text()+'</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>');
+			});
+			
+			
 		}
 	}
 })();
