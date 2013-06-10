@@ -35,10 +35,17 @@ var navi = (function(){
 			});
 			
 			$(".naviblock .field").click(function(){
-				$('.search .suggestions').slideDown(250);
+				$('.naviblock .search .suggestions').slideDown(250);
+				$('.naviblock .search ul.favs').slideUp(250);
 			});
 			
 			$(".naviblock .search").mouseleave(function(){
+				$(".naviblock .search .suggestions").slideUp(250);
+				$(".naviblock .search ul.favs").slideUp(250);
+			});
+			
+			$(".naviblock .search a.fav").click(function(){;
+				$('.naviblock .search ul.favs').slideDown(250);
 				$(".naviblock .search .suggestions").slideUp(250);
 			});
 			

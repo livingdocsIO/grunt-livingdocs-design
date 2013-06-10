@@ -39,6 +39,15 @@
 	height:100%;
 }
 
+.naviblock .segment {
+	padding: 2em 0; /* 20px / 10px */
+	width: 48em; /* 480px / 10px */
+	clear:both;
+	text-align:center;
+}
+
+/* tagcloud */
+/* ======== */
 .naviblock .tagcloud {
 	padding:0 2em 0 2em; /* 60px / 20px, 40px / 20px */
 	font-size:2em; /* 20px / 10px */
@@ -87,13 +96,8 @@
 	display:block;
 }
 
-.naviblock .segment {
-	padding: 2em 0; /* 20px / 10px */
-	width: 48em; /* 480px / 10px */
-	clear:both;
-	text-align:center;
-}
-
+/* alternative links */
+/* ================= */
 .naviblock .alt_links {
 	display:block;
 	width:100%;
@@ -118,25 +122,29 @@
 	color:#ffffff;
 }
 
+/* search and favorites */
+/* ==================== */
 .naviblock form.search {
 	font-size:2em; /* 20px / 10px */
 	position:relative;
-	margin:1em;  /* 10px / 10px */
+	margin-top:1em;  /* 10px / 10px */
 }
 
-.naviblock ul.suggestions {
+.naviblock ul.suggestions,
+.naviblock ul.favs {
 	position:absolute;
 	z-index:2;
 	background-color:#ffffff;
-	left:25%;
-	width:50%;
+	left:20%;
+	width:60%;
 	-webkit-border-radius:0.2em;
 	border-radius:0.2em;
 	display:none;
 	overflow:hidden;
 } 
 
-.naviblock ul.suggestions li {
+.naviblock ul.suggestions li,
+.naviblock ul.favs li {
 	border-bottom:1px solid #aaaaaa;
 	text-align:left;
 	padding:2%;
@@ -145,18 +153,29 @@
 	position:relative
 }
 
-.naviblock ul.suggestions li:last-child {
+.naviblock ul.suggestions li:last-child,
+.naviblock ul.favs li:last-child {
 	border:none;
 }
 
-.naviblock ul.suggestions li .fav {
+.naviblock ul.suggestions li .fav,
+.naviblock ul.favs li .delete {
 	position:absolute;
-	right:0.7em;
+	right:0.9em;
 	opacity:0.6;
 	cursor:pointer;
 }
 
-.naviblock ul.suggestions li .fav:hover {
+.naviblock ul.favs li .delete {
+	display:none;
+}
+
+.naviblock ul.favs li:hover .delete {
+	display:inline;
+}
+
+.naviblock ul.suggestions li .fav:hover,
+.naviblock ul.favs li .delete:hover {
 	opacity:1;
 }
 
@@ -164,6 +183,19 @@
 	height:1em;
 }
 
+.naviblock ul.favs li .delete img {
+	height:0.6em;
+}
+
+.naviblock form.search a.fav img {
+	width:1.2em;
+	vertical-align:text-top;
+	opacity:0.6;
+}
+
+.naviblock form.search a.fav:hover img {
+	opacity:1;
+}
 
 
 
