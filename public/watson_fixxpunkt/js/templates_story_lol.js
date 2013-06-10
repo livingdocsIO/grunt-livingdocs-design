@@ -10,7 +10,7 @@
 			textLayout: _.template("<div data-doc-container>\n</div>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
 			upperLine: _.template("<h3>This is to(o) funny</h3>"),
-			title: _.template("<h2 data-doc-editable=\"title\">6 mal fast richtig oder nur ein bisschen falsch</h2>"),
+			title: _.template("<h2 data-doc-editable=\"title\" class=\"dont_hyphenate\">6 mal fast richtig oder nur ein bisschen falsch</h2>"),
 			lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.\n</p>"),
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\nLina Selmani\n</p>"),
 			

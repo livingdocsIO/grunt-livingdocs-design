@@ -13,7 +13,7 @@
 			headerCaption: _.template("<p class='caption'>Unter der Kreuzung muss sich ein gewaltiger Hohlraum befunden haben. Das einsickernde Wasser bewirkte dann einen Erdrutsch.<br/>Quelle: Keystone/EPA/Luis Soto</p>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
 			upperLine: _.template("<h3>Grube in Guatemala</h3>"),
-			title: _.template("<h2 data-doc-editable=\"title\">«Agatha» reisst ein Loch in die Stadt</h2>"),
+			title: _.template("<h2 data-doc-editable=\"title\" class=\"dont_hyphenate\">«Agatha» reisst ein Loch in die Stadt</h2>"),
 			lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\nNaturphänomen in Guatemala Stadt: In der Stadt klafft nach einem Sturm ein riesiges Loch. Die Bilder.\n</p>"),
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\nFranz Ermel\n</p>"),
 			

@@ -36,6 +36,10 @@ p.statement {
 	padding-left:0.5em !important;
 }
 
+p.statement.pro { border-left:0.2em solid #adf038; }
+p.statement.contra { border-left:0.2em solid #f936a7; }
+p.statement.neutral { border-left:0.2em solid #00c2f7; }
+
 
 
 

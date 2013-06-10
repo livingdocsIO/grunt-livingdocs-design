@@ -152,7 +152,6 @@ strong {
 	display:block;
 	width:7em; /* 70px / 10px */
 	height:7em; /* 70px / 10px */
-	color:#bbbbbb;
 	line-height:7em; /* 70px / 10px */
 	text-align:center;
 }
@@ -163,12 +162,9 @@ strong {
 	top:0;
 	font-size:1.6em; /* 16px / 10px */
 	font-weight:bold;
+	color:#ffffff;
 	text-transform:uppercase;
 }
-
-.region .text .badge.color_1 {color: #97f600;}
-.region .text .badge.color_2 {color:#00b1f8;}
-.region .text .badge.color_3 {color:#fb0099;}
 
 /* media icons */
 .region .text .media_icons {
@@ -455,10 +451,15 @@ a.button:hover {
 
 /* custom hide and display */
 .hide_on_desktop { display:none !important; }
-.show_on_desktop { display:block !important;; }
+.show_on_desktop { display:block !important; }
 
-
-
+/* custom hyphenation */
+.dont_hyphenate {
+	-moz-hyphens: manual !important;
+	-webkit-hyphens: manual !important;
+	-ms-hyphens: manual !important;
+	-o-hyphens: manual !important;
+}
 
 
 

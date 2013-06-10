@@ -13,7 +13,7 @@
 			headerCaption: _.template("<p class='caption'>Thuns Marco Schneuwly, nicht im Bild, trifft zum 1:0<br/>Quelle: Keystone</p>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
 			upperLine: _.template("<h3>Super League</h3>"),
-			title: _.template("<h2 data-doc-editable=\"title\">Thuner lassen dem FC&nbsp;St.&nbsp;Gallen keine Chance</h2>"),
+			title: _.template("<h2 data-doc-editable=\"title\" class=\"dont_hyphenate\">Thuner lassen dem FC&nbsp;St.&nbsp;Gallen keine Chance</h2>"),
 			lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\nDer FC Thun schlägt den FC St. Gallen in der 33. Runde der Super Leage am Ende verdient mit 3:0. Für die Ostschweizer ist es ein Rückschlag im Kampf um Platz 2.\n</p>"),
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\nReto Fehr\n</p>"),
 			

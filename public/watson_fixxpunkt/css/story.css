@@ -75,6 +75,7 @@
 .region.full_story .insert.fifty_fifty {
 	width:46.4%;
 	margin:0 1.8% 10px 1.8%;
+	float:left;
 }
 
 /* right side only */

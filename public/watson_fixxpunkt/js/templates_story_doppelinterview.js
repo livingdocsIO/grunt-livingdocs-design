@@ -13,7 +13,7 @@
 			headerCaption: _.template("<p class='caption'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.<br/>Quelle: Keystone/EPA/Luis Soto</p>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
 			upperLine: _.template("<h3>Mauch vs. Morin</h3>"),
-			title: _.template("<h2 data-doc-editable=\"title\">«Es braucht endlich einen Ständeratssitz für die Städte»</h2>"),
+			title: _.template("<h2 data-doc-editable=\"title\" class=\"dont_hyphenate\">«Es braucht endlich einen Ständeratssitz für die Städte»</h2>"),
 			lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\nHochhausquartiere, Kantonsfusionen, Ständeratssitze für die grossen Städte: Die Präsidenten von Zürich und Basel - Corine Mauch und Guy Morin, entwerfen im Doppelinterview die Schweiz von morgen.\n</p>"),
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\nFranz Ermel\n</p>"),
 			
