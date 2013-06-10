@@ -38,7 +38,7 @@
 			source_1: _.template("<p class='source' data-doc-editable=\"text\">Quelle: Keystone/EPA/Luis Soto</p>"),
 			source_2: _.template("<p class='source' data-doc-editable=\"text\">Quelle: Keystone/EPA/Ulises Rodriguez</p>"),
 			
-			video_1: _.template("<div class='video' onclick='playvideo($(this),\"tQvv8YFCGsY\" );'><img src=\"media/img/placeholderimg/bild_042.jpg\" /><img class=\"arrow\" src=\"media/img/main/arrows/arrow_transp_grey_forw.png\" /></div>"),
+			video_1: _.template("<div class='video' onclick='playvideo($(this),\"tQvv8YFCGsY\" );'><img src=\"media/img/placeholderimg/bild_042.jpg\" /><img class=\"arrow\" src=\"media/img/main/arrows/arrow_transp_grey_play.png\" /></div>"),
 			
 			map_1: _.template("<div class='map'><iframe frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.google.com/maps?f=q&amp;source=s_q&amp;hl=de&amp;geocode=&amp;q=guatemala+ciudad+nueva&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=57.292148,69.873047&amp;ie=UTF8&amp;hq=&amp;hnear=Ciudad+Nueva,+Mazatenango,+Suchitep%C3%A9quez,+Guatemala&amp;ll=14.535734,-91.48366&amp;spn=0.034687,0.034118&amp;t=m&amp;z=14&amp;output=embed'></iframe><br /><small><a href='https://www.google.com/maps?f=q&amp;source=embed&amp;hl=de&amp;geocode=&amp;q=guatemala+ciudad+nueva&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=57.292148,69.873047&amp;ie=UTF8&amp;hq=&amp;hnear=Ciudad+Nueva,+Mazatenango,+Suchitep%C3%A9quez,+Guatemala&amp;ll=14.535734,-91.48366&amp;spn=0.034687,0.034118&amp;t=m&amp;z=14' style='color:#0000FF;text-align:left'>Größere Kartenansicht</a></small></div>"),
 			
