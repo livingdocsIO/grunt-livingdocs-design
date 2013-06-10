@@ -49,6 +49,8 @@
 	display:inline;
 	margin:0 0.5em; /* 10px / 20px */
 	line-height:1.8em; /* 36px / 20px */
+	position:relative;
+	z-index:1;
 }
 
 .naviblock .tagcloud li.size_1 a { font-size:1.2em; }
@@ -59,6 +61,30 @@
 
 .naviblock .tagcloud li a:hover {
 	color:#ffffff;
+}
+
+.naviblock .tagcloud li .fav {
+	position:absolute;
+	top:0;
+	right:0;
+	display:none;
+	background-color:red;
+}
+
+.naviblock .tagcloud li .fav img {
+	width:24px;
+	left:-5px;
+	top:10px;
+	opacity:0.6;
+	position:absolute;
+}
+
+.naviblock .tagcloud li .fav:hover img {
+	opacity:1;
+}
+
+.naviblock .tagcloud li a:hover .fav {
+	display:block;
 }
 
 .naviblock .segment {
@@ -95,11 +121,12 @@
 .naviblock form.search {
 	font-size:2em; /* 20px / 10px */
 	position:relative;
-	margin-top:1em;  /* 10px / 10px */
+	margin:1em;  /* 10px / 10px */
 }
 
 .naviblock ul.suggestions {
 	position:absolute;
+	z-index:2;
 	background-color:#ffffff;
 	left:25%;
 	width:50%;
@@ -107,7 +134,6 @@
 	border-radius:0.2em;
 	display:none;
 	overflow:hidden;
-	width:50%;
 } 
 
 .naviblock ul.suggestions li {
@@ -116,11 +142,32 @@
 	padding:2%;
 	width:100%;
 	overflow:hidden;
+	position:relative
 }
 
 .naviblock ul.suggestions li:last-child {
 	border:none;
 }
+
+.naviblock ul.suggestions li .fav {
+	position:absolute;
+	right:0.7em;
+	opacity:0.6;
+	cursor:pointer;
+}
+
+.naviblock ul.suggestions li .fav:hover {
+	opacity:1;
+}
+
+.naviblock ul.suggestions li .fav img {
+	height:1em;
+}
+
+
+
+
+
 
 
 
