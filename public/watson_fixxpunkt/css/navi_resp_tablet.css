@@ -2,7 +2,8 @@
 
 @media screen and (max-width: 1000px) {
 		
-		
-	
+	.naviblock .expandable {
+		overflow:auto;
+	}	
 	
 }

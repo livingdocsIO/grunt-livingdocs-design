@@ -40,7 +40,7 @@
 }
 
 .naviblock .segment {
-	padding: 2em 0; /* 20px / 10px */
+	padding: 2em 0 1em 0; /* 20px / 10px */
 	width: 48em; /* 480px / 10px */
 	clear:both;
 	text-align:center;
@@ -173,8 +173,34 @@
 	opacity:1;
 }
 
+/* current */
+/* ======= */
+.naviblock .current {
+	font-size:2em;
+}
 
+.naviblock .current .page {
+	font-size:1.5em;
+	color:#ffffff;
+	margin-left:0.1em;
+}
 
+.naviblock .current .page img.back{
+	height:0.5em;
+	margin-top:-0.2em;
+	vertical-align:middle;
+}
+
+.naviblock .current a.fav img {
+	width:1.2em;
+	vertical-align:text-top;
+	opacity:0.6;
+	margin-top:-0.1em;
+}
+
+.naviblock .current a.fav:hover img {
+	opacity:1;
+}
 
 
 
