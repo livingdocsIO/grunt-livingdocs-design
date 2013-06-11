@@ -9,7 +9,7 @@
 		
 			fullWidthLayout: _.template("<div data-doc-container>\n</div>"),
 			textLayout: _.template("<div data-doc-container>\n</div>"),
-			headerImage: _.template("<img src=\"media/img/placeholderimg/bild_049.jpg\" />"),
+			headerImage: _.template("<img class='hide_on_mobile' src=\"media/img/placeholderimg/bild_049.jpg\" /><img class='hide_on_desktop show_on_mobile' src=\"media/img/placeholderimg/bild_057.jpg\" />"),
 			headerCaption: _.template("<p class='caption'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.<br/>Quelle: Keystone/EPA/Luis Soto</p>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
 			upperLine: _.template("<h3>Mauch vs. Morin</h3>"),
