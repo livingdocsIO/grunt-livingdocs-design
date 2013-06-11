@@ -28,4 +28,24 @@
 	.naviblock form.search {
 		margin-top:3.5em; /* 35px / 10px */
 	}
+	
+	.naviblock form.search input.field {
+		width:70%;
+	}
+	
+	.naviblock form.search a.fav img {
+		width:2em;
+		margin-top:-0.3em;
+	}
+	
+	.naviblock ul.suggestions,
+	.naviblock ul.favs {
+		left:5%;
+		width:90%;
+		font-size:1.2em;
+	}
+	
+	.naviblock ul.favs li .delete {
+		display:inline;
+	}
 }
