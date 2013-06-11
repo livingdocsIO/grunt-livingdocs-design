@@ -9,7 +9,7 @@
 		
 			fullWidthLayout: _.template("<div data-doc-container>\n</div>"),
 			textLayout: _.template("<div data-doc-container>\n</div>"),
-			headerImage: _.template("<img src=\"media/img/placeholderimg/bild_036.jpg\" />"),
+			headerImage: _.template("<img  class='hide_on_mobile'  src=\"media/img/placeholderimg/bild_036.jpg\" /><img class='hide_on_desktop show_on_mobile' src=\"media/img/placeholderimg/bild_054.jpg\" />"),
 			headerCaption: _.template("<p class='caption'>Thuns Marco Schneuwly, nicht im Bild, trifft zum 1:0<br/>Quelle: Keystone</p>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
 			upperLine: _.template("<h3>Super League</h3>"),
