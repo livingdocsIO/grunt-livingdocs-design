@@ -31,23 +31,17 @@ var navi = (function(){
 				navi.toggle_navi();
 			});
 			
-			/*$(".naviblock").mouseleave(function(){
-				navi.hide_navi();
-			});*/
-			
 			/* search and favorites */
 			var _search_term = "suchen";
 			$(".naviblock .field").focus(function(){
 				if ($(this).val()==_search_term) $(this).val('');
+				$('.naviblock .search .suggestions').slideDown(250);
+				$('.naviblock .search ul.favs').slideUp(250);
+				$('.naviblock .expandable').css("overflow", "hidden");
 			});
 			
 			$(".naviblock .field").blur(function(){
 				if ($(this).val()=="") $(this).val(_search_term);
-			});
-			
-			$(".naviblock .field").click(function(){
-				$('.naviblock .search .suggestions').slideDown(250);
-				$('.naviblock .search ul.favs').slideUp(250);
 			});
 			
 			$(".naviblock .search").mouseleave(function(){
@@ -68,8 +62,6 @@ var navi = (function(){
 				$(this).find("img").attr("src", "media/img/main/icons/icon_fav_active.png");
 				$('.naviblock .search ul.favs').append('<li><a href="#">'+$(this).parents("li").text()+'</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>');
 			});
-			
-			
 		}
 	}
 })();

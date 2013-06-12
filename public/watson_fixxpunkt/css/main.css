@@ -52,6 +52,7 @@ strong {
 	background-color:rgba(0,0,0,0.8);
 	display:block;
 	padding:1.2em; /* 12px / 10px */
+	height:4.2em; /* 42px / 10px */
 }
 
 .logoblock .logo img {
@@ -370,7 +371,7 @@ strong {
 }
 
 /* collection regions */
-/* ============= */
+/* ================== */
 .region.collection_main {
 	border-right:0;	
 }
@@ -424,6 +425,7 @@ strong {
 
 
 /* form elements */
+/* ============= */
 input {
 	font-family:'Gudea', helvetica, arial, sans-serif;
 	font-size:1em;
@@ -432,6 +434,8 @@ input {
 	margin: 0 0.2em 0.2em 0;
 	-webkit-border-radius:0.2em;
 	border-radius:0.2em; 
+	-webkit-appearance: none;
+	appearance: none;
 }
 
 input.darkback {
