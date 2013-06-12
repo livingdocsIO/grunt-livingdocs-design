@@ -292,6 +292,12 @@ strong {
 	line-height:1.3em;
 }
 
+.region p.lead .author {
+	font-weight:bold;
+	border-bottom:2px solid #f9349e;
+	text-transform: lowercase;
+}
+
 
 /* klein */
 .region.font_s h2 { font-size:2em; } /* 20px / 10px */
