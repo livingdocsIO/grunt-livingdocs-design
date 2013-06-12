@@ -250,15 +250,8 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* infobox */
 /* ======= */
 .infobox {
-	background-color:#e8e8e8;
 	padding:10px 15px;
 }
-
-.infobox p,
-.infobox h4 {
-	color:#666666;
-}
-
 
 
 

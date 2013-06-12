@@ -342,16 +342,16 @@ strong {
 /* color combos */
 /* ============ */
 .color_combo_1 { background-color:#0fb4f4; }
-.color_combo_1 h2, .color_combo_1 p, .color_combo_1 h3 { color:#ffffff !important; }
+.color_combo_1 h2, .color_combo_1 p, .color_combo_1 h3, .color_combo_1 h4 { color:#ffffff !important; }
 
 .color_combo_2 { background-color:#5b5b5b; }
-.color_combo_2 h2, .color_combo_2 p, .color_combo_2 h3 { color:#A0F22C !important; }
+.color_combo_2 h2, .color_combo_2 p, .color_combo_2 h3, .color_combo_2 h4 { color:#A0F22C !important; }
 
 .color_combo_3 { background-color:#666666; }
-.color_combo_3 h2, .color_combo_3 p, .color_combo_3 h3 { color:#E8E8E8 !important; }
+.color_combo_3 h2, .color_combo_3 p, .color_combo_3 h3, .color_combo_3 h4 { color:#E8E8E8 !important; }
 
 .color_combo_4 { background-color:#e8e8e8; }
-.color_combo_4 h2, .color_combo_4 p, .color_combo_4 h3 { color:#666666 !important; }
+.color_combo_4 h2, .color_combo_4 p, .color_combo_4 h3, .color_combo_4 h4 { color:#666666 !important; }
 
 
 
