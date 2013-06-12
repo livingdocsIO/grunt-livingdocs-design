@@ -298,6 +298,10 @@ strong {
 	text-transform: lowercase;
 }
 
+.region p.lead .author.external {
+	border:none;
+}
+
 
 /* klein */
 .region.font_s h2 { font-size:2em; } /* 20px / 10px */
