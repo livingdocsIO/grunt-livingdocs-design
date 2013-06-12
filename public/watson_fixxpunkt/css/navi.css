@@ -59,7 +59,6 @@
 	margin:0 0.5em; /* 10px / 20px */
 	line-height:1.8em; /* 36px / 20px */
 	position:relative;
-	z-index:1;
 }
 
 .naviblock .tagcloud li.size_1 a { font-size:1.2em; }
