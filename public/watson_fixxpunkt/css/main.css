@@ -154,6 +154,11 @@ strong {
 	height:7em; /* 70px / 10px */
 	line-height:7em; /* 70px / 10px */
 	text-align:center;
+	overflow:hidden;
+}
+
+.region .text .badge.hot {
+	top:-4.5em; /* 45px / 10px */
 }
 
 .region .text .badge img, .region .text .badge span {
@@ -164,6 +169,14 @@ strong {
 	font-weight:bold;
 	color:#ffffff;
 	text-transform:uppercase;
+}
+
+.region .text .badge.hot span {
+	text-transform:lowercase;
+	font-size:1.4em; /* 14px / 10px */
+	line-height: 0.857em; /* 12px / 14px */
+	padding:43% 18% 0 22%; /* a little bit to the right, out of optical reasons */
+	width:60%;
 }
 
 /* media icons */
@@ -400,13 +413,6 @@ strong {
 
 
 
-/* general handyness */
-.stretch_to_fit {
-	width:100%;
-	height:100%;
-}
-
-
 
 /* form elements */
 input {
@@ -448,7 +454,11 @@ a.button:hover {
 }
 
 
-
+/* general handyness */
+.stretch_to_fit {
+	width:100%;
+	height:100%;
+}
 /* custom hide and display */
 .hide_on_desktop { display:none !important; }
 .show_on_desktop { display:block !important; }
