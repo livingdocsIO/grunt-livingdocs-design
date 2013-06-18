@@ -29,6 +29,7 @@ var navi = (function(){
 			var height_logo = $(".logoblock").height();
 			if ($(window).scrollTop() > height_logo + 4 ) $(".currentblock").addClass("sticky");
 			else $(".currentblock").removeClass("sticky");
+			if ( $(".currentblock").is(':hidden') ) $(".currentblock").fadeIn(250);
 		},
 		
 		init:function() {
@@ -78,9 +79,7 @@ $(document).ready( navi.init );
 $(window).scroll( navi.check_for_current_tag_sticky );
 $(window).resize( navi.check_for_current_tag_sticky );
 
-
-
-
+document.addEventListener('touchmove', function(){$(".currentblock").hide();}, false);
 
 
 
