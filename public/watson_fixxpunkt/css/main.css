@@ -41,28 +41,6 @@ strong {
 	top:-2px;
 }
 
-/* logo */
-.logoblock {
-	position:fixed;
-	top:0;
-	left:0;
-}
-
-.logoblock .logo {
-	background-color:rgba(0,0,0,0.8);
-	display:block;
-	padding:1.2em; /* 12px / 10px */
-	height:4.2em; /* 42px / 10px */
-}
-
-.logoblock .logo img {
-	width:15em; /* 150px / 10px */
-}
-
-
-
-
-
 
 /* regions */
 .region {

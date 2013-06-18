@@ -1,5 +1,53 @@
 
 
+/* logo */
+.logoblock {
+	position:absolute;
+	top:0;
+	left:0;
+}
+
+.logoblock .logo {
+	background-color:rgba(0,0,0,0.8);
+	display:block;
+	padding:1.2em; /* 12px / 10px */
+	height:4.2em; /* 42px / 10px */
+}
+
+.logoblock .logo img {
+	width:15em; /* 150px / 10px */
+}
+
+
+
+
+/* current tag */
+.currentblock {
+	position:absolute;
+	top:6.6em; /* 66px / 10px */
+	left:0;
+	padding-top:4px;
+}
+
+.currentblock.sticky {
+	position:fixed;
+	top:0;
+	padding-top:0;
+}
+
+.currentblock a {
+	display:block;
+	background-color:rgba(0,0,0,0.4);
+	font-size:1.4em; /* 14px / 10px */
+	text-transform:uppercase;
+	font-weight:bold;
+	padding:0.714em; /* 10px / 14px */
+	color:#ffffff;
+}
+
+
+
+
 /* navi */
 .naviblock {
 	position:fixed;

@@ -25,6 +25,12 @@ var navi = (function(){
 			$(".naviblock .expandable").animate({right: -navi_width}, 500, function(){$(this).hide()});
 		},
 		
+		check_for_current_tag_sticky:function() {
+			var height_logo = $(".logoblock").height();
+			if ($(window).scrollTop() > height_logo + 4 ) $(".currentblock").addClass("sticky");
+			else $(".currentblock").removeClass("sticky");
+		},
+		
 		init:function() {
 			/* toggling the navigation */
 			$(".naviblock .navilink").click(function(){
@@ -68,9 +74,30 @@ var navi = (function(){
 
 
 
-$(document).ready(function() {
-	navi.init();
-});
+$(document).ready( navi.init );
+$(window).scroll( navi.check_for_current_tag_sticky );
+$(window).resize( navi.check_for_current_tag_sticky );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
