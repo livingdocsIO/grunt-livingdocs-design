@@ -320,17 +320,86 @@ strong {
 
 /* color combos */
 /* ============ */
-.color_combo_1 { background-color:#0fb4f4; }
-.color_combo_1 h2, .color_combo_1 p, .color_combo_1 h3, .color_combo_1 h4 { color:#ffffff !important; }
 
-.color_combo_2 { background-color:#5b5b5b; }
-.color_combo_2 h2, .color_combo_2 p, .color_combo_2 h3, .color_combo_2 h4 { color:#A0F22C !important; }
+/* Smokey Robinson */
+.color_combo_1 { background-color:#dddddd; }
+.color_combo_1 h2, .color_combo_1 p, .color_combo_1 h3, .color_combo_1 h4 { color:#666666 !important; }
 
-.color_combo_3 { background-color:#666666; }
-.color_combo_3 h2, .color_combo_3 p, .color_combo_3 h3, .color_combo_3 h4 { color:#E8E8E8 !important; }
+/* Classic Green */
+.color_combo_2 { background-color:#dddddd; }
+.color_combo_2 h2, .color_combo_2 p, .color_combo_2 h3, .color_combo_2 h4 { color:#63a800 !important; }
 
-.color_combo_4 { background-color:#e8e8e8; }
-.color_combo_4 h2, .color_combo_4 p, .color_combo_4 h3, .color_combo_4 h4 { color:#666666 !important; }
+/* Classic Blue */
+.color_combo_3 { background-color:#dddddd; }
+.color_combo_3 h2, .color_combo_3 p, .color_combo_3 h3, .color_combo_3 h4 { color:#009ccc !important; }
+
+/* Classic Magenta */
+.color_combo_4 { background-color:#dddddd; }
+.color_combo_4 h2, .color_combo_4 p, .color_combo_4 h3, .color_combo_4 h4 { color:#ce0f89 !important; }
+
+/* Black Matter */
+.color_combo_5 { background-color:#333333; }
+.color_combo_5 h2, .color_combo_5 p, .color_combo_5 h3, .color_combo_5 h4 { color:#eeeeee !important; }
+
+/* Snowy Tundra */
+.color_combo_6 { background-color:#deebf3; }
+.color_combo_6 h2, .color_combo_6 p, .color_combo_6 h3, .color_combo_6 h4 { color:#387095 !important; }
+
+/* Cherry Blossom */
+.color_combo_7 { background-color:#ffe2e2; }
+.color_combo_7 h2, .color_combo_7 p, .color_combo_7 h3, .color_combo_7 h4 { color:#ff76aa !important; }
+
+/* Hello Pinky */
+.color_combo_8 { background-color:#f4afdf; }
+.color_combo_8 h2, .color_combo_8 p, .color_combo_8 h3, .color_combo_8 h4 { color:#7d0953 !important; }
+
+/* Tokyo Flash */
+.color_combo_9 { background-color:#ff00ba; }
+.color_combo_9 h2, .color_combo_9 p, .color_combo_9 h3, .color_combo_9 h4 { color:#fffc05 !important; }
+
+/* Pink Moon */
+.color_combo_10 { background-color:#500635; }
+.color_combo_10 h2, .color_combo_10 p, .color_combo_10 h3, .color_combo_10 h4 { color:#f45ec6 !important; }
+
+/* Lazy Sunday */
+.color_combo_11 { background-color:#ede4b2; }
+.color_combo_11 h2, .color_combo_11 p, .color_combo_11 h3, .color_combo_11 h4 { color:#ff9000 !important; }
+
+/* Indian Summer */
+.color_combo_12 { background-color:#fb8e00; }
+.color_combo_12 h2, .color_combo_12 p, .color_combo_12 h3, .color_combo_12 h4 { color:#faee8b !important; }
+
+/* Autumn Leaves */
+.color_combo_13 { background-color:#7c7e46; }
+.color_combo_13 h2, .color_combo_13 p, .color_combo_13 h3, .color_combo_13 h4 { color:#ff9c00 !important; }
+
+/* Muddy Water */
+.color_combo_14 { background-color:#8d6b56; }
+.color_combo_14 h2, .color_combo_14 p, .color_combo_14 h3, .color_combo_14 h4 { color:#88f8ff !important; }
+
+/* From Dusk Till Dawn */
+.color_combo_15 { background-color:#444444; }
+.color_combo_15 h2, .color_combo_15 p, .color_combo_15 h3, .color_combo_15 h4 { color:#ff855b !important; }
+
+/* Irish Spring */
+.color_combo_16 { background-color:#a4ed84; }
+.color_combo_16 h2, .color_combo_16 p, .color_combo_16 h3, .color_combo_16 h4 { color:#19872e !important; }
+
+/* Forest Fire */
+.color_combo_17 { background-color:#02ff14; }
+.color_combo_17 h2, .color_combo_17 p, .color_combo_17 h3, .color_combo_17 h4 { color:#ff4c4c !important; }
+
+/* Norwegian Woods */
+.color_combo_18 { background-color:#19872e; }
+.color_combo_18 h2, .color_combo_18 p, .color_combo_18 h3, .color_combo_18 h4 { color:#f8ffcc !important; }
+
+/* Green River */
+.color_combo_19 { background-color:#387284; }
+.color_combo_19 h2, .color_combo_19 p, .color_combo_19 h3, .color_combo_19 h4 { color:#98d93b !important; }
+
+/* Silent Night */
+.color_combo_20 { background-color:#27303a; }
+.color_combo_20 h2, .color_combo_20 p, .color_combo_20 h3, .color_combo_20 h4 { color:#18bbed !important; }
 
 
 
