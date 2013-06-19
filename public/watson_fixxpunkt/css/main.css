@@ -278,6 +278,8 @@ strong {
 
 .region p.lead .author .internal {
 	border-bottom:2px solid #f9349e;
+	height:1.1em;
+	float:left;
 }
 
 
