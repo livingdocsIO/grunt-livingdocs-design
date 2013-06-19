@@ -21,16 +21,6 @@
 		border-color: #ffffff;
 		border-style:solid;
 	}
-	.region.collection_context .arrow {
-		left:22%; /* 25% - 3% */
-		top:-6%; /* 2 * 3% */
-		width:6%; /* 2 * 3% */
-		height:6%; /* 2 * 3% */
-		background-image:url(../media/img/main/arrows/arrow_grey_top.png);
-		background-position:bottom;
-	}
-	
-	
 	
 	/* custom hide and display */
 	.hide_on_tablet { display:none !important; }
