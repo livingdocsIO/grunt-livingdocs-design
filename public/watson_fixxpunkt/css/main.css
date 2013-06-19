@@ -273,12 +273,11 @@ strong {
 
 .region p.lead .author {
 	font-weight:bold;
-	border-bottom:2px solid #f9349e;
 	text-transform: lowercase;
 }
 
-.region p.lead .author.external {
-	border:none;
+.region p.lead .author .internal {
+	border-bottom:2px solid #f9349e;
 }
 
 

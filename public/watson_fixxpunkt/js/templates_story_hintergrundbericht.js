@@ -13,7 +13,7 @@
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
 			upperLine: _.template("<h3>Kongo</h3>"),
 			title: _.template("<h2 data-doc-editable=\"title\" class=\"dont_hyphenate\">Afrikas krankes Herz</h2>"),
-			leadWithAuthor: _.template("<p class=\"lead\" data-doc-editable=\"text\">\n<span class='author'>Daniel Huber</span> – Bürgerkrieg, Invasionen, Völkermord: Im kranken Herzen Afrikas mischen sich ethnische Konflikte unheilvoll mit den Folgen einer skrupellosen Kolonialpolitik.\n</p>"),
+			leadWithAuthor: _.template("<p class=\"lead\" data-doc-editable=\"text\">\n<span class='author'><span class='internal'>Daniel Huber</span>, Kinshasa</span> – Bürgerkrieg, Invasionen, Völkermord: Im kranken Herzen Afrikas mischen sich ethnische Konflikte unheilvoll mit den Folgen einer skrupellosen Kolonialpolitik.\n</p>"),
 			text: _.template("<p data-doc-editable=\"text\">\nLorem ipsum dolor.\n</p>"),
 			
 			image: _.template("<img src=\"media/img/placeholderimg/bild_019.jpg\" />"),
