@@ -8,14 +8,6 @@
 	/* ====== */
 	.region.full_story p.quote { font-size:3.5714em !important; } /* 25px / 7px */
 	
-	/* badge list */
-	/* ========== */
-	.badges { font-size:2em !important; } /* 20px / 10px */
-	
-	/* tags list */
-	/* ========= */
-	.tags { font-size:2em !important; } /* 20px / 10px */
-	
 	/* fat_full header image */
 	/* ===================== */
 	.region.full_story .full-width-container.insert.fat_full { min-height:6em; } /* 42px / 7px */
