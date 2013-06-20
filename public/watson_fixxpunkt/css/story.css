@@ -111,6 +111,32 @@
 
 
 
+/* nested regions in inserts */
+/* ========================= */
+.region.full_story .insert .region.y_full .text,
+.region.full_story .insert .region.y_half .text,
+.region.full_story .insert .region.y_quarter .text {
+	position:absolute;
+}
+
+.region.full_story .insert .region .text {
+	margin-left:0;
+	margin-bottom:0;
+	width:100%;
+}
+
+.region.full_story .insert .region p,
+.region.full_story .insert .region h4 {
+	padding:0 15px 10px 15px;
+	width:auto;
+}
+
+.region.full_story .insert .region p.lead {
+	font-weight:inherit;
+	font-style:inherit;
+}
+
+
 
 
 

@@ -196,6 +196,12 @@
       
       storyContent.append(livingdocs.watson.templates.text_3());
       
+      sideInsert_poll = $(livingdocs.watson.templates.sideInsert());
+      storyContent.append(sideInsert_poll);
+      sideInsert_poll.append(livingdocs.watson.templates.poll());
+      
+      storyContent.append(livingdocs.watson.templates.text_3_5());
+      
       sideInsert = $(livingdocs.watson.templates.sideInsert());
       storyContent.append(sideInsert);
       sideInsert.append(livingdocs.watson.templates.infoBox());
@@ -217,6 +223,12 @@
       maincolInsert_2.append(livingdocs.watson.templates.source_2());
       
       storyContent.append(livingdocs.watson.templates.text_6());
+      
+      insert_story_teaser = $(livingdocs.watson.templates.rightInsert());
+      storyContent.append(insert_story_teaser);
+      insert_story_teaser.append(livingdocs.watson.templates.story_teaser());
+      
+      storyContent.append(livingdocs.watson.templates.text_6_5());
       
       maincolInsert_3 = $(livingdocs.watson.templates.maincolInsert());
       storyContent.append(maincolInsert_3);
