@@ -488,6 +488,12 @@ a.button:hover {
 	background-color:#0fb4f4;
 }
 
+input.radio, input.checkbox {
+	width:1em;
+	height:1em;
+	background-color:#ffffff;
+	vertical-align:middle;
+}	
 
 /* general handyness */
 .stretch_to_fit {
