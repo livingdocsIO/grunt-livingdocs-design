@@ -188,6 +188,10 @@
       maincolInsert_1.append(livingdocs.watson.templates.quote_1());
       maincolInsert_1.append(livingdocs.watson.templates.source_1());
       
+      panorama_insert = $(livingdocs.watson.templates.fat_fullInsert());
+      storyContent.append(panorama_insert);
+      panorama_insert.append(livingdocs.watson.templates.panorama());
+      
 	  storyContent.append(livingdocs.watson.templates.text_3());
       
       maincolInsert_2 = $(livingdocs.watson.templates.maincolInsert());
@@ -210,6 +214,16 @@
       maincolInsert_3.append(livingdocs.watson.templates.tagList());      
       
       
+      $(document).scroll(function() {
+      	var top_pos = $(window).scrollTop();
+      	var bottom_pos = top_pos+$(window).height()-$('.panorama').height();
+      	var pano_pos = $('.panorama').offset().top;
+      	
+      	if (bottom_pos > pano_pos && top_pos < pano_pos) {
+      		//$(".panorama img").css("border", "10px solid red");
+	  		$(".panorama img").css("left", - ($('.panorama img').width() - $('.panorama').width()) / ($(window).height()-$('.panorama').height()) * (bottom_pos - pano_pos) );
+      	}
+	  });
       
     });
   </script>

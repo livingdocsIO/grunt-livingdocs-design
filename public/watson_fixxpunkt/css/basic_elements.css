@@ -311,6 +311,21 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 }
 
 
+/* panorama */
+/* ======== */
+.panorama {
+	height:20em;
+	position:relative;
+	overflow:hidden;
+}
+
+.panorama img {
+	height:100%;
+	width:auto;
+	position:absolute;
+	left:0;
+	top:0;
+}
 
 
 /* nur zum test */

@@ -21,6 +21,7 @@
 			maincolInsert: _.template("<div class=\"insert maincol\">\n</div>"),
 			maincolBlockInsert: _.template("<div class=\"insert maincol block\">\n</div>"),
 			sideInsertCommercial: _.template("<div class=\"insert side commercial\"></div>"),
+			fat_fullInsert: _.template("<div class=\"insert fat_full\">\n</div>"),
 			commercialRectangle: _.template("<img src=\"media/img/placeholderwerbung/rectangle_story.jpg\" />"),
 			
 			image_1: _.template("<img style='width:100%;' src='media/img/placeholderimg/bild_037.jpg' />"),
@@ -37,6 +38,8 @@
 			
 			source_1: _.template("<p class='source' data-doc-editable=\"text\">Thuns Trainer Urs Fischer</p>"),
 			source_2: _.template("<p class='source' data-doc-editable=\"text\">St. Gallens Trainer Jeff Saibene</p>"),
+			
+			panorama: _.template("<p class='panorama'><img src='media/img/placeholderimg/bild_066.jpg' /></p>"),
 			
 			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
 			tagList: _.template("<div class='tags'>Artikel-Tags<ul><li class='ressort'><a href='#'>Fussball</a></li><li><a href='#'>FC Thun</a></li><li><a href='#'>FC St. Gallen</a></li><li><a href='#'>Super League</a></li></ul></div>")
