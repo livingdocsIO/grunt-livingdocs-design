@@ -224,6 +224,7 @@ strong {
 .region h2,
 .region p.lead,
 .region p,
+.region li,
 .region h3,
 .region h4,
 .region h2 a,
@@ -266,7 +267,7 @@ strong {
 	font-weight:normal;
 }
 
-.region p {
+.region p, .region ul {
 	font-size:1.8em /* 18px / 10px */;
 	line-height:1.3em;
 }
@@ -447,7 +448,7 @@ strong {
 
 /* form elements */
 /* ============= */
-input {
+input, a.button {
 	font-family:'Gudea', helvetica, arial, sans-serif;
 	font-size:1em;
 	border:0;
@@ -459,19 +460,19 @@ input {
 	appearance: none;
 }
 
-input.darkback {
+input.darkback, a.button.darkback {
 	background-color:rgba(0,0,0,0.5);
 }
 
-input.lightback {
+input.lightback, a.button.lightback {
 	background-color:rgba(255,255,255,0.5);
 }
 
-input.darkfont {
+input.darkfont, a.button.darkfont {
 	color:#222222;
 }
 
-input.lightfont {
+input.lightfont, a.button.lightfont {
 	color:#ffffff;
 }
 

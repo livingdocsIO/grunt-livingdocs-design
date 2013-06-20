@@ -257,6 +257,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 
 
+
 /* sportstable */
 /* =========== */
 .sportstable {
@@ -277,6 +278,28 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 
 
+
+/* polls */
+/* ===== */
+.region.poll ul {
+	margin-bottom:10px;
+}
+
+.region.poll li {
+	text-indent:-1.5em; /* 18px / 18px */
+	margin-left:1.5em; /* 18px / 18px */
+}
+
+.region.poll li input {
+	margin-right:0.5em; /* 9px / 18px */
+	width:1em;
+	height:1em;
+}
+
+.region.poll li a.button {
+	background-color:#ffffff;;
+	color:inherit;
+}
 
 
 
