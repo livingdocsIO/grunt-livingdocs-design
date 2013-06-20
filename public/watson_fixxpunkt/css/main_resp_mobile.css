@@ -44,7 +44,7 @@
 	.region.collection_main.font_l h2 { font-size:6.4285em !important; } /* 45px / 7px */
 	.region.collection_main.font_xl h2 {font-size:10em !important; } /* 70px / 7px */
 	.region.collection_main.font_xxl h2 { font-size:12.8571em !important; } /* 90px / 7px */
-	.region.collection_context .region:nth-child(even) { border-width:0 0px 4px 0; }
+	.region.collection_context .region:nth-child(odd) { border-width:0 0px 4px 0; }
 	
 	/* custom hide and display */
 	.hide_on_mobile { display:none !important; }

@@ -16,7 +16,7 @@
 	/* ============= */
 	.region.collection_main { border-bottom:0; }
 	.region.collection_context { height:302px; } /* .region.y_half */
-	.region.collection_context .region:nth-child(even) {
+	.region.collection_context .region:nth-child(odd) {
 		border-width:0 4px 4px 0;
 		border-color: #ffffff;
 		border-style:solid;
