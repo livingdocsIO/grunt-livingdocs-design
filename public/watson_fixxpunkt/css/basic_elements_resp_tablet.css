@@ -10,6 +10,14 @@
 		max-width:78% !important; /* 80% - 2% */
 	}
 	
+	/* peephole */
+	/* ======== */
+	.peephole {
+		background-attachment:scroll;
+		background-size:cover;
+	}
+
+	
 	/* nur zum test */
 	/* ============ */
 	.region.full_story .imagebar img {
