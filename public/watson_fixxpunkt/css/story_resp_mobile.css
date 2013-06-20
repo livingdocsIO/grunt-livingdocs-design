@@ -22,6 +22,10 @@
 		margin:0 15px 10px 15px !important;
 	}
 	
+	.region.full_story .story-container .insert.fat_full {
+		margin:0 0 10px 0 !important;
+	}
+	
 	.region.full_story .insert.commercial {
 		width:100%;
 		margin:0 0 10px 0 !important;
