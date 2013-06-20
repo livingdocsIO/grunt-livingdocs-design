@@ -307,6 +307,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	background-attachment:fixed;
 	background-position:center center;
 	background-size:auto 100%;
+	background-repeat:no-repeat;
 }
 
 
