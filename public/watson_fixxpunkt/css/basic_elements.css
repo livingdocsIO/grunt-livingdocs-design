@@ -125,7 +125,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* tag list */
 /* ======== */
 .tags {
-	font-size:1.6em; /* 16px / 10px */
+	font-size:0.8888em; /* 16px / 18px */
 	color:#666666;	
 	display:inline-block;
 	margin-top:3.125em; /* 50px / 16px */
@@ -137,6 +137,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 .tags li {
 	display:inline-block;
+	padding:0;
 }
 
 .tags li a {
