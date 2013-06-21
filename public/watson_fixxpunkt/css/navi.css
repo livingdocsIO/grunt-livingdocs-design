@@ -11,7 +11,7 @@
 	background-color:rgba(0,0,0,0.8);
 	display:block;
 	padding:1.2em; /* 12px / 10px */
-	height:3.6em; /* 36px / 10px */
+	height:3.5em; /* 35px / 10px */
 }
 
 .logoblock .logo img {
@@ -24,7 +24,7 @@
 /* current tag */
 .currentblock {
 	position:absolute;
-	top:6.0em; /* 60px / 10px */
+	top:5.9em; /* 59px / 10px */
 	left:0;
 	padding-top:4px;
 }
@@ -38,10 +38,10 @@
 .currentblock a {
 	display:block;
 	background-color:rgba(0,0,0,0.4);
-	font-size:1.4em; /* 14px / 10px */
+	font-size:1.6em; /* 16px / 10px */
 	text-transform:uppercase;
 	font-weight:bold;
-	padding:0.714em; /* 10px / 14px */
+	padding:0.625em; /* 10px / 16px */
 	color:#ffffff;
 }
 
@@ -54,8 +54,8 @@
 	top:0;
 	right:0;
 	background-color:rgba(0,0,0,0.8);
-	width:6em; /* 60px / 10px */
-	height:6em; /* 60px / 10px */
+	width:5.9em; /* 59px / 10px */
+	height:5.9em; /* 59px / 10px */
 }
 
 .naviblock .navilink {
@@ -63,7 +63,7 @@
 	top:0;
 	right:0;
 	display:block;
-	padding:1.6em; /* 16px / 10px */
+	padding:1.5em; /* 15px / 10px */
 }
 
 .naviblock .navilink img {
