@@ -37,6 +37,10 @@
 	.region.non_story_teaser h2 { font-size:5em !important; } /* 35px / 7px */
 	.region.non_story_teaser h3 { font-size:3.571em !important; } /* 25px / 7px */
 	.region.non_story_teaser p.label { font-size:2em !important; } /* 14px / 7px */
+	
+	/* topical teaser */
+	/* ============== */
+	.region.topical_teaser .text .media_icons {	left:8em; bottom:1.1em; }
 
 	/* collection regions */
 	/* ============= */

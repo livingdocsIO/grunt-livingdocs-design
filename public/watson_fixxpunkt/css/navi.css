@@ -11,11 +11,11 @@
 	background-color:rgba(0,0,0,0.8);
 	display:block;
 	padding:1.2em; /* 12px / 10px */
-	height:4.2em; /* 42px / 10px */
+	height:3.6em; /* 36px / 10px */
 }
 
 .logoblock .logo img {
-	width:15em; /* 150px / 10px */
+	width:14em; /* 140px / 10px */
 }
 
 
@@ -24,7 +24,7 @@
 /* current tag */
 .currentblock {
 	position:absolute;
-	top:6.6em; /* 66px / 10px */
+	top:6.0em; /* 60px / 10px */
 	left:0;
 	padding-top:4px;
 }
@@ -54,8 +54,8 @@
 	top:0;
 	right:0;
 	background-color:rgba(0,0,0,0.8);
-	width:6.6em; /* 66px / 10px */
-	height:6.6em; /* 66px / 10px */
+	width:6em; /* 60px / 10px */
+	height:6em; /* 60px / 10px */
 }
 
 .naviblock .navilink {
@@ -63,11 +63,11 @@
 	top:0;
 	right:0;
 	display:block;
-	padding:1.8em; /* 18px / 10px */
+	padding:1.6em; /* 16px / 10px */
 }
 
 .naviblock .navilink img {
-	width:2.4em; /* 24px / 10px */
+	width:2em; /* 20px / 10px */
 	margin:0.3em; /* 3px / 10px */
 }
 
