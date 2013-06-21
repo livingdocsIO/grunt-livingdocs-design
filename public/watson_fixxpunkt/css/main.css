@@ -471,7 +471,7 @@ input, a.button {
 	font-family:'Gudea', helvetica, arial, sans-serif;
 	font-size:1em;
 	border:0;
-	padding:0.2em;
+	padding:0.2em 0.4em;
 	margin: 0 0.2em 0.2em 0;
 	-webkit-border-radius:0.2em;
 	border-radius:0.2em; 
