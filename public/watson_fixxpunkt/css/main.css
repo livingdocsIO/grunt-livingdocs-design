@@ -257,6 +257,11 @@ strong {
 	font-size:3em; /* 30px / 10px */
 	font-weight:bold;
 	line-height:1em;
+	-moz-hyphens: manual;
+	-webkit-hyphens: manual;
+	-ms-hyphens: manual;
+	-o-hyphens: manual;
+	hyphens: manual;
 }
 
 .region h3 {

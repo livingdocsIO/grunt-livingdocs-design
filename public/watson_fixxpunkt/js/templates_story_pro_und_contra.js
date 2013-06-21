@@ -10,7 +10,7 @@
 			textLayout: _.template("<div data-doc-container>\n</div>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
 			upperLine: _.template("<h3>Pro und Contra</h3>"),
-			title: _.template("<h2 data-doc-editable=\"title\" class=\"dont_hyphenate\">«Es ist wie bei Kindern»</h2>"),
+			title: _.template("<h2 data-doc-editable=\"title\">«Es ist wie bei Kindern»</h2>"),
 			lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\n«Weltwoche»-Chef Roger Köppel und Hans Leyendecker, Journalist der «Süddeutschen Zeitung», sind für pointierte Meinungen bekannt. Für Tagesanzeiger.ch/Newsnet liefern sie sich ein Duell zum Steuerstreit zwischen der Schweiz und Deutschland.\n</p>"),
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\nFranz Ermel\n</p>"),
 			
