@@ -40,7 +40,7 @@
 	
 	/* topical teaser */
 	/* ============== */
-	.region.topical_teaser .text .media_icons {	left:8.6em; bottom:1.15em; }
+	.region.topical_teaser.y_quarter {	height:141px; }
 
 	/* collection regions */
 	/* ============= */
