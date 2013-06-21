@@ -40,7 +40,7 @@
 	
 	/* topical teaser */
 	/* ============== */
-	.region.topical_teaser .text .media_icons {	left:8em; bottom:1.1em; }
+	.region.topical_teaser .text .media_icons {	left:8.6em; bottom:1.15em; }
 
 	/* collection regions */
 	/* ============= */
@@ -57,8 +57,8 @@
 
 
 
-@media screen and (max-width: 200px) {
+@media screen and (max-width: 320px) {
 	.wrapper {
-		width:200px;
+		width:320px;
 	}
 }
