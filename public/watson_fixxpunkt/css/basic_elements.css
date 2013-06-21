@@ -17,7 +17,7 @@ p.source,
 p.caption {
 	font-size:1.6em /* 16px / 10px */;
 	color:#aaaaaa;
-	width:100%;
+	width:auto !important;
 	padding:0;
 	margin:0 !important;
 }
@@ -26,6 +26,10 @@ p.source {
 	font-style: italic;
 }
 
+.insert.fat_full p.source,
+.insert.fat_full p.caption {
+	padding-left:15px;
+}
 
 
 
@@ -46,9 +50,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* badge list */
 /* ========== */
 .badges {
-	font-size:0.8888em; /* 16px / 18px */
+	color:#666666;	
+	font-size:1.333em; /* 24px / 18px */
 	display:inline-block;
-	margin-top:0.625em; /* 10px / 16px */
+	margin-top:0.4166em; /* 10px / 24px */
 }
 
 .badges ul {
@@ -60,6 +65,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 }
 
 .badges li {
+	font-size:0.6666em; /* 16px / 24px */
 	display:inline-block;
 	margin-right:0.75em; /* 12px / 16px */
 	margin-bottom:0.75em; /* 12px / 16px */
@@ -126,10 +132,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* tag list */
 /* ======== */
 .tags {
-	font-size:0.8888em; /* 16px / 18px */
+	font-size:1.333em; /* 24px / 18px */
 	color:#666666;	
 	display:inline-block;
-	margin-top:3.125em; /* 50px / 16px */
+	margin-top:2.083em; /* 50px / 24px */
 }
 
 .tags ul {
@@ -142,6 +148,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 }
 
 .tags li a {
+	font-size:0.6666em; /* 16px / 24px */
 	display:inline-block;
 	color:#00c6ff;
 	background-color:#333333;
