@@ -60,7 +60,7 @@
 			
 			poll: _.template("<div class='region text_only font_m font_cursive color_combo_4 poll'><div class='arrow left y_upper show_on_desktop hide_on_tablet hide_on_mobile'></div><div class='arrow left y_middle hide_on_desktop show_on_tablet hide_on_mobile'></div><div class='arrow top x_middle hide_on_desktop hide_on_tablet show_on_mobile'></div><div class='text'><form action=''><h3>Umfrage</h3><h2>Hätte der Genozid in Ruanda durch ein rechtzeitiges Eingreifen der internationalen Gemeinschaft verhindert werden können?</h2><ul><li><input type='radio' class='radio' name='poll_1' id='poll_1_1' value='1' /><label for='poll_1_1'>Ja, das Abwarten war unverzeihlich</label></li><li><input type='radio' class='radio' name='poll_1' id='poll_1_2' value='2' /><label for='poll_1_2'>Vielleicht, aber das ist schwierig zu sagen.</label></li><li><input type='radio' class='radio' name='poll_1' id='poll_1_3' value='3' /><label for='poll_1_3'>Nein, die Gräben waren zu tief</label></li><li><a href='javascript:;' class='button'>vote</a></li></ul></form></div></div>"),
 			
-			peephole: _.template("<div class='peephole' style='background-image:url(media/img/placeholderimg/bild_064.jpg);'></div>"),
+			peephole: _.template("<div class='peephole color_combo_11' style='background-image:url(media/img/placeholderimg/bild_064.jpg);'><p>- Unruhiger Kongo -</p></div>"),
 			caption_3: _.template("<p data-doc-editable=\"text\" class=\"caption\">Karte des Kongo, Lorem ipsum dolor.</p>"),
 			source_3: _.template("<p data-doc-editable=\"text\" class=\"source\">Quelle: Keystone</p>")
 			

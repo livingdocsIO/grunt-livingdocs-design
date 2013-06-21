@@ -39,8 +39,8 @@
 			source_1: _.template("<p class='source' data-doc-editable=\"text\">Thuns Trainer Urs Fischer</p>"),
 			source_2: _.template("<p class='source' data-doc-editable=\"text\">St. Gallens Trainer Jeff Saibene</p>"),
 			
-			panorama: _.template("<p class='panorama'><img src='media/img/placeholderimg/bild_066.jpg' /></p>"),
-			caption_1: _.template("<p data-doc-editable=\"text\" class=\"caption\">Die Arena in Thun</p>"),
+			panorama: _.template("<div class='panorama color_combo_17'><img src='media/img/placeholderimg/bild_066.jpg' /><p>- Das Panorama im Panorama -</p></div>"),
+			caption_1: _.template("<p data-doc-editable=\"text\" class=\"caption\">Das panorama center in Thun</p>"),
 			source_3: _.template("<p class='source' data-doc-editable=\"text\">Quelle: Keystone</p>"),
 			
 			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),

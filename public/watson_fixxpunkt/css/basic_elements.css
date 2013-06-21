@@ -11,7 +11,7 @@ p.quote {
 	color:#009ccc;
 }
 
-/* sourca nd captions */
+/* sources and captions */
 /* ================== */
 p.source,
 p.caption {
@@ -288,6 +288,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 
 
+
 /* polls */
 /* ===== */
 .region.poll li {
@@ -307,21 +308,22 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 
 
-/* peephole */
-/* ======== */
+
+
+
+/* peephole & panorama */
+/* =================== */
 .peephole {
 	height:40em;
+	position:relative;
 	background-attachment:fixed;
 	background-position:center center;
 	background-size:auto 100%;
 	background-repeat:no-repeat;
 }
 
-
-/* panorama */
-/* ======== */
 .panorama {
-	height:20em;
+	height:40em;
 	position:relative;
 	overflow:hidden;
 }
@@ -333,6 +335,26 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	left:0;
 	top:0;
 }
+
+.region.full_story .panorama p,
+.region.full_story .peephole p {
+	margin:0;
+	padding:0;
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:96%;
+	padding:2%;
+	font-family:'Lustria', 'Times New Roman',Times,serif;
+	font-size:3.6em /* 36px / 10px */;
+	text-align:center;
+	line-height:1em;
+	font-style: italic;
+	color:#333333;
+	background-color:rgba(255,255,255,0.8);
+}
+
+
 
 
 /* nur zum test */
