@@ -313,7 +313,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* peephole & panorama */
 /* =================== */
-.peephole {
+.region.full_story .peephole {
 	height:40em;
 	position:relative;
 	background-attachment:fixed;
@@ -322,13 +322,13 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	background-repeat:no-repeat;
 }
 
-.panorama {
+.region.full_story .panorama {
 	height:40em;
 	position:relative;
 	overflow:hidden;
 }
 
-.panorama img {
+.region.full_story .panorama img {
 	height:100%;
 	width:auto;
 	position:absolute;
@@ -353,8 +353,8 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	color:#333333;
 }
 
-.panorama p .background,
-.peephole p .background {
+.region.full_story .panorama p .background,
+.region.full_story .peephole p .background {
 	width:100%;
 	height:100%;
 	position:absolute;
@@ -363,8 +363,8 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	opacity:0.4;
 }
 
-.panorama p .foreground,
-.peephole p .foreground {
+.region.full_story .panorama p .foreground,
+.region.full_story .peephole p .foreground {
 	position:relative;
 }
 
