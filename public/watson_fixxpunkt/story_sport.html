@@ -50,6 +50,7 @@
 		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements_resp_tablet.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements_resp_mobile.css" />
+		<script src="js/basic_elements.js" type="text/javascript"></script>
 		
 		<link href='http://fonts.googleapis.com/css?family=Lustria' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
@@ -215,26 +216,6 @@
       storyContent.append(maincolInsert_3);
       maincolInsert_3.append(livingdocs.watson.templates.tagList());      
       
-      
-      
-      
-      function position_panorama() {
-      	var buffer = 200;
-      
-      	var top_pos = $(window).scrollTop();
-      	var bottom_pos = top_pos+$(window).height()-$('.panorama').height();
-      	var pano_pos = $('.panorama').offset().top;
-      	
-      	if (bottom_pos > pano_pos - buffer && top_pos < pano_pos + buffer) {
-      		var new_position = ( $('.panorama').width() - $('.panorama img').width() ) / ($(window).height()-$('.panorama').height()) * (bottom_pos - pano_pos);
-	  		if (new_position>0) new_position = 0;
-	  		else if (new_position < ($('.panorama').width() - $('.panorama img').width()) ) new_position = -($('.panorama img').width()-$('.panorama').width());
-	  		$(".panorama img").stop(true, false).animate({"left": new_position},500 );
-      	}
-      }
-      
-      $(window).scroll(position_panorama);
-
   });
   </script>
   
