@@ -193,6 +193,7 @@ strong {
 	width:2.4em; /* 24px / 10px */
 	height:1.6em; /* 16px / 10px */
 	margin-bottom:4px;
+	padding:0;
 }
 
 .region .text .media_icons .tag {
@@ -200,11 +201,13 @@ strong {
 	background-color:rgba(0,0,0,0.8);
 	margin-bottom:4px;
 	margin-left:-9px;
+	margin-right:18px;
 	padding:0.625em; /* 10px / 16px */
 	font-weight:bold;
 	font-size:1.6em; /* 16px / 10px => ignores .font_l etc. */
 	line-height:1em; /* 16px / 16px */
 	text-transform:uppercase;
+	float:left;
 }
 
 .region .text .media_icons .tag.ressort {
@@ -344,6 +347,14 @@ strong {
 	color:#ffffff;
 	font-size:3em; /* 30px / 10px => ignores .font_l etc. */
 }
+
+
+/* topical teaser */
+/* ============== */
+.region.topical_teaser .text {	padding:0; }
+
+.region.topical_teaser .tag.ressort { font-size:3em;} /* 30px / 10px */
+
 
 /* collection regions */
 /* ================== */

@@ -12,7 +12,7 @@
 	
 	/* peephole */
 	/* ======== */
-	.peephole {
+	.region.full_story .peephole {
 		background-attachment:scroll;
 		background-size:cover;
 	}
