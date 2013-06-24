@@ -50,7 +50,7 @@ $(document).ready(function() {
 		
 			show_result:function() {
 				var current_poll = $(this).parents(".region.poll");
-				var current_results = [48,33,19];
+				var current_results = [64,30,6];
 				current_poll.find("div.answers").slideUp(500, 'swing', function(){
 					current_poll.find("div.result").slideDown(200, 'linear', function() {
 						poll.calculate_bubbles(current_poll, current_results);
@@ -60,9 +60,12 @@ $(document).ready(function() {
 			
 			calculate_bubbles:function(current_poll, current_results) {
 				for (var counter=0; counter<current_results.length; counter++) {
-					var bubble_width_pixels = current_results[counter]*2;
+				
+					var max_area = 80 * 80; /* in pixels */
+					var current_area = current_results[counter] * max_area / current_results[0];
+					var bubble_width_pixels = Math.sqrt(current_area);
 					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * bubble_width_pixels; /* 30px = 2 * margin 15px */
-					current_poll.find("div.result .bubble").eq(counter).animate({
+					current_poll.find("div.result .bubble").eq(counter).text(current_results[counter]+"%").animate({
 						'width': bubble_width_percentage+'%',
 						'height': bubble_width_pixels+'px',
 						'line-height': bubble_width_pixels+'px'
