@@ -198,6 +198,9 @@ strong {
 
 .region .text .media_icons .tag {
 	color:#00c6ff;
+	-webkit-transition:color 0.5s ease;
+	-moz-transition:color 0.5s ease;
+	transition:color 0.5s ease;
 	background-color:rgba(0,0,0,0.8);
 	margin-bottom:4px;
 	margin-left:-9px;
@@ -213,6 +216,10 @@ strong {
 .region .text .media_icons .tag.ressort {
 	color:#a0f22c;
 }
+
+.region .text .media_icons .tag:hover {
+	color:#ffffff;
+}	
 
 /* linked_teaser */
 .region.linked_teaser {

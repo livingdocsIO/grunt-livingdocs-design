@@ -50,7 +50,7 @@ $(document).ready(function() {
 			calculate_bubbles:function(current_poll, current_results) {
 				for (var counter=0; counter<current_results.length; counter++) {
 					var bubble_width_pixels = current_results[counter]*2;
-					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * bubble_width_pixels; 
+					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * bubble_width_pixels; /* 30px = 2 * margin 15px */
 					current_poll.find("div.result .bubble").eq(counter).animate({
 						'width': bubble_width_percentage+'%',
 						'height': bubble_width_pixels+'px',
@@ -63,7 +63,7 @@ $(document).ready(function() {
 			calculate_answer_position:function(current_poll, current_results) {
 				for (var counter=0; counter<current_results.length; counter++) {
 					var bubble_width = bubble_height = current_poll.find("div.result .bubble").eq(counter).height();
-					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * bubble_width; 
+					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * ( bubble_width+10 ); /* 30px = 2 * margin 15px /// 10px = bubble margin */ 
 					var buffer_percentage = 10;
 					current_poll.find("div.result .answertext").eq(counter).css("width", (100 - bubble_width_percentage - buffer_percentage) + "%");
 					var text_height = current_poll.find("div.result .answertext").eq(counter).height();

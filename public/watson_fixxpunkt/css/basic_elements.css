@@ -72,10 +72,6 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	padding:0;
 }
 
-.badges li a:hover {
-	opacity:0.85;
-}
-
 .badges li a span.name,
 .badges li a span.number {
 	display:inline-block;
@@ -90,10 +86,17 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	color:#ffffff;
 	background-color:#156376;
 	width:3.75em; /* 70px / 16px */
+	-webkit-transition:color 0.5s ease;
+	-moz-transition:color 0.5s ease;
+	transition:color 0.5s ease;
 }
 
 .badges .negative li a span.name {
 	background-color:#333333;
+}
+
+.badges li a span.name:hover {
+	color:#27bbf5;
 }
 
 .badges li a span.number {
@@ -158,6 +161,9 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	font-weight:bold;
 	line-height:1em; /* 16px / 16px */
 	text-transform:uppercase;
+	-webkit-transition:color 0.5s ease;
+	-moz-transition:color 0.5s ease;
+	transition:color 0.5s ease;
 }
 
 .tags li.ressort a {
@@ -165,7 +171,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 }
 
 .tags li a:hover {
-	opacity:0.85;
+	color:#ffffff;
 }
 
 
@@ -325,7 +331,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	height:0;
 	line-height:0;
 	overflow:hidden;
-	margin-right:1em;
+	margin-right:10px;
 	margin-bottom:10px;
 	text-align:center;
 	-webkit-border-radius:50%;
