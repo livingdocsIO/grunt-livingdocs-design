@@ -515,17 +515,15 @@ a.button:hover {
 input.radio, input.checkbox {
 	width:1em;
 	height:1em;
-	background-color:rgba(255,255,255,0.5);
+	background-color:#ffffff;
 	vertical-align:middle;
-	border:0.25em;
 }	
 
 input.radio:checked, input.checkbox:checked {
-	background-color:#ffffff;
-}
-
-input.radio:checked + label, input.checkbox:checked + label {
-	font-weight:bold;
+	background-image:url(../media/img/main/icons/icon_checkbox.png);
+	background-size: 0.75em;
+	background-position: center center;
+	background-repeat: no-repeat;
 }
 
 /* general handyness */
