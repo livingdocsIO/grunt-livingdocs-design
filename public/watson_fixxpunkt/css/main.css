@@ -515,9 +515,18 @@ a.button:hover {
 input.radio, input.checkbox {
 	width:1em;
 	height:1em;
-	background-color:#ffffff;
+	background-color:rgba(255,255,255,0.5);
 	vertical-align:middle;
+	border:0.25em;
 }	
+
+input.radio:checked, input.checkbox:checked {
+	background-color:#ffffff;
+}
+
+input.radio:checked + label, input.checkbox:checked + label {
+	font-weight:bold;
+}
 
 /* general handyness */
 .stretch_to_fit {
