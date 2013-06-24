@@ -291,7 +291,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* polls */
 /* ===== */
-.region.poll li {
+.region.poll .answers li {
 	text-indent:-1.5em; /* 18px / 18px */
 	margin-left:1.5em; /* 18px / 18px */
 }
@@ -302,16 +302,48 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 .region.poll li a.button {
 	background-color:#ffffff;
-	color:#666666;
+	color:#333333;
 	left:1.5em; /* 18px / 18px */
 	position:relative;
 }
 
+.region.poll div.result {
+	display:none;
+}
 
+.region.poll div.result li {
+	clear:both;
+	border-top:4px solid #ffffff;
+	padding-top:10px;
+}
 
+.region.poll div.result .bubble {
+	background-color:#ffffff;
+	display:block;
+	float:left;
+	width:0;
+	height:0;
+	line-height:0;
+	overflow:hidden;
+	margin-right:1em;
+	margin-bottom:10px;
+	text-align:center;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	color:#333333;
+}
 
+.region.poll div.result .bubble:hover {
+	-webkit-border-radius:50% 33% 50% 33%;
+	border-radius:50% 33% 50% 33%;
+	-webkit-transition: -webkit-border-radius 0.5s ease;
+	transition: border-radius 0.5s ease;
+}
 
-
+.region.poll div.result .answertext {
+	display:none;
+	float:left;
+}
 
 /* peephole & panorama */
 /* =================== */
