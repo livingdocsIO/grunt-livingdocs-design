@@ -41,7 +41,7 @@ $(document).ready(function() {
 				var current_poll = $(this).parents(".region.poll");
 				var current_results = [48,33,19];
 				current_poll.find("div.answers").slideUp(500, 'swing', function(){
-					current_poll.find("div.result").slideDown(200, 'swing', function() {
+					current_poll.find("div.result").slideDown(200, 'linear', function() {
 						poll.calculate_bubbles(current_poll, current_results);
 					});
 				});
