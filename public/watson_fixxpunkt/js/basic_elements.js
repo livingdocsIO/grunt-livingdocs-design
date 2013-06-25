@@ -45,7 +45,6 @@ $(document).ready(function() {
 			show_result:function() {
 				var current_poll = $(this).parents(".region.poll");
 				var current_results = [64,30,6];
-				current_poll.find(".arrow").css("visibility", "hidden");
 				current_poll.find("div.answers").slideUp(500, 'swing', function(){
 					current_poll.find("div.result").slideDown(200, 'linear', function() {
 						poll.calculate_bubbles(current_poll, current_results);
@@ -54,7 +53,8 @@ $(document).ready(function() {
 			},
 			
 			calculate_bubbles:function(current_poll, current_results) {
-				var max_diameter = current_poll.width() / 2;
+				var max_diameter = current_poll.width() / 2.5;
+				if ( max_diameter > current_poll.height() / current_results.length && !current_poll.parents(".insert").length ) max_diameter = current_poll.height() / current_results.length;
 				var max_area = max_diameter * max_diameter; /* in pixels */
 				var max_bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * max_diameter;
 				for (var counter=0; counter<current_results.length; counter++) {
@@ -80,13 +80,12 @@ $(document).ready(function() {
 					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * ( bubble_width+10 ); /* 30px = 2 * margin 15px /// 10px = bubble margin */ 
 					var bubble_margin = parseInt ( current_poll.find("div.result .bubble").eq(counter).css("marginLeft") );
 					var bubble_margin_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * ( bubble_margin+10 ); 
-					var buffer_percentage = 5;
+					var buffer_percentage = 0;
 					current_poll.find("div.result .answertext").eq(counter).css("width", (100 - bubble_width_percentage - buffer_percentage - bubble_margin_percentage) + "%");
 					var text_height = current_poll.find("div.result .answertext").eq(counter).height();
 					current_poll.find("div.result .answertext").eq(counter).css("marginTop", ((bubble_height-text_height)/2)+"px");
 				}	
-				current_poll.find("div.result .answertext").fadeIn(500);
-				current_poll.find(".arrow").css("visibility", "visible");		
+				current_poll.find("div.result .answertext").fadeIn(500);		
 			}
 		}
 	})();

@@ -297,6 +297,15 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* polls */
 /* ===== */
+.region.poll {
+	min-height:20em; /* 200px / 20px */
+}
+
+.region.poll .answers ul {
+	border-top:dotted 2px;
+	padding-top:10px;
+}
+
 .region.poll .answers li {
 	text-indent:-1.5em; /* 18px / 18px */
 	margin-left:1.5em; /* 18px / 18px */
@@ -321,7 +330,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 .region.poll div.result li {
 	clear:both;
-	border-top:4px solid;
+	border-top:2px dotted;
 	padding-top:10px;
 }
 
