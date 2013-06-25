@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+    	<script src="js/vendor/jquery-1.9.js"></script>
+    
+		<title>watson</title>
+		
+		<!-- Mobile viewport optimization -->
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-touch-fullscreen" content="yes" />
+		<meta names="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="robots" content="index,follow" />
+		
+		<link rel="shortcut icon" href="media/img/main/icons/favicon.ico" type="image/x-icon" />
+		<!-- Home screen icon -->
+		<!-- For iPhone 4 with high-resolution Retina display: -->
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="media/img/main/icons/apple_touch_icon_114.png">
+		<!-- For first-generation iPad: -->
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="media/img/main/icons/apple_touch_icon_72.png">
+		<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+		<link rel="apple-touch-icon-precomposed" href="media/img/main/icons/apple_touch_icon_57.png">
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" />
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/color_combos.css" />
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/main_resp_tablet.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/main_resp_mobile.css" />	
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/navi.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/navi_resp_tablet.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/navi_resp_mobile.css" />	
+		<script src="js/navi.js" type="text/javascript"></script>
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/story.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/story_resp_tablet.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/story_resp_mobile.css" />	
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements_resp_tablet.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements_resp_mobile.css" />	
+		<script src="js/basic_elements.js" type="text/javascript"></script>
+		
+		<link href='https://fonts.googleapis.com/css?family=Lustria' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
+		
+	</head>
+	<body>
+	
+	<style type="text/css">
+		.tag_cloud {
+			background-color:#000000;
+			height:1000em; /* 10000px / 10px */
+			position:relative
+		}
+		
+		.tag_cloud .layer {
+			font-size:3em; /* 30px / 10px */
+			position:absolute;
+			top:0;
+			left:0;
+		}
+		
+		.tag_cloud .particle {
+			position:absolute;
+		}
+		
+		.tag_cloud a.particle {
+			padding:0.5em;
+		}
+		
+		.tag_cloud a.particle.ressort {
+			color:#a0f22c;
+		}
+		
+		.tag_cloud a.particle:hover {
+			color:#ffffff;
+		}
+		
+		.tag_cloud .layer:nth-child(1) .particle {
+			background-color:#111111;
+		}
+		
+		.tag_cloud .layer:nth-child(2) .particle {
+			-moz-transform:scale(1.2,1.2);
+			-webkit-transform:scale(1.2,1.2);
+			-o-transform:scale(1.2,1.2);
+			transform:scale(1.2,1.2);
+			background-color:#181818;
+		}
+		
+		.tag_cloud .layer:nth-child(3) .particle {
+			-moz-transform:scale(1.4,1.4);
+			-webkit-transform:scale(1.4,1.4);
+			-o-transform:scale(1.4,1.4);
+			transform:scale(1.4,1.4);
+			background-color:#222222;
+		}
+		
+		.tag_cloud .layer:nth-child(4) .particle {
+			-moz-transform:scale(1.6,1.6);
+			-webkit-transform:scale(1.6,1.6);
+			-o-transform:scale(1.6,1.6);
+			transform:scale(1.6,1.6);
+			background-color:#282828;
+		}
+		
+		.tag_cloud .layer:nth-child(5) .particle {
+			-moz-transform:scale(1.8,1.8);
+			-webkit-transform:scale(1.8,1.8);
+			-o-transform:scale(1.8,1.8);
+			transform:scale(1.8,1.8);
+			background-color:#333333;
+		}
+	</style>
+	
+	
+	<div class="wrapper"><div class="fat_wrapper">
+	
+		<div class="region full_story x_full_desktop x_full_tablet font_xl">
+			
+			<div class="story-container"> <!-- **story-container/data-doc-container** upfront -->
+			
+			
+				<div class="insert fat_full">
+					
+					<div class="tag_cloud">
+						
+						<div class="layer">
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle ressort" href="#">es</a>
+							<a class="particle" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle ressort" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle ressort" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle" href="#">es</a>
+							<a class="particle" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle ressort" href="#">zu</a>
+							<a class="particle" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+						</div>
+						
+						<div class="layer">
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle" href="#">immer</a>
+							<a class="particle ressort" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle" href="#">es</a>
+							<a class="particle" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle ressort" href="#">so</a>
+							<a class="particle" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle ressort" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle ressort" href="#">es</a>
+							<a class="particle" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+						</div>
+						
+						<div class="layer">
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle ressort" href="#">schön</a>
+							<a class="particle" href="#">es</a>
+							<a class="particle ressort" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle ressort" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle" href="#">es</a>
+							<a class="particle" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle ressort" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+						</div>
+						
+						<div class="layer">
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle ressort" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle ressort" href="#">es</a>
+							<a class="particle" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+							<a class="particle ressort" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle" href="#">es</a>
+							<a class="particle" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle ressort" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+						</div>
+						
+						<div class="layer">
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle" href="#">tag!</a>
+							<a class="particle" href="#">salü</a>
+							<a class="particle ressort" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle" href="#">es</a>
+							<a class="particle ressort" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+							<a class="particle" href="#">hallo</a>
+							<a class="particle" href="#">hi</a>
+							<a class="particle" href="#">tag!</a>
+							<a class="particle ressort" href="#">salü</a>
+							<a class="particle" href="#">immer</a>
+							<a class="particle" href="#">wieder</a>
+							<a class="particle" href="#">schön</a>
+							<a class="particle ressort" href="#">es</a>
+							<a class="particle" href="#">ist</a>
+							<a class="particle" href="#">gut</a>
+							<a class="particle" href="#">zu</a>
+							<a class="particle" href="#">wissen</a>
+							<a class="particle" href="#">was</a>
+							<a class="particle" href="#">so</a>
+							<a class="particle" href="#">geht</a>
+							<a class="particle" href="#">yes!</a>
+						</div>
+						
+					</div>
+					
+				</div>
+			
+			
+			</div>
+			
+		</div>
+        
+	</div></div>
+	
+	<div class="naviblock">
+		<div class="expandable">
+			<div class="segment">
+				<form class="search">
+					<a class="fav"><img src="media/img/main/icons/icon_fav_active.png" /></a>
+					<input class="field lightback lightfont" type="text" value="suchen" /><input class="button" type="submit" value="go" />
+					<ul class="suggestions">
+						<li><a class="particle" href="#">Fukushima</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a class="particle" href="#">Fundraising</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a class="particle" href="#">Furrer</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a class="particle" href="#">Fundamentalismus</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a class="particle" href="#">mehr...</a></li>
+					</ul>
+					<ul class="favs">
+						<li><a class="particle" href="#">Ausland</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a class="particle" href="#">Sport</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a class="particle" href="#">FCZ</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a class="particle" href="#">RPG</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a class="particle" href="#">Game of Thrones</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a class="particle" href="#">LOL</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a class="particle" href="#">Musik</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a class="particle" href="#">Wetter</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+					</ul>
+				</form>
+			</div>
+			<ul class="tagcloud">
+				<li class="size_3 ressort"><a class="particle" href="#">Sport</a></li>
+				<li class="size_4 ressort"><a class="particle" href="#">Ausland</a></li>
+				<li class="size_3 ressort"><a class="particle" href="#">Inland</a></li>
+				<li class="size_4 ressort"><a class="particle" href="#">Musik</a></li>
+				<li class="size_2"><a class="particle" href="#">Events</a></li>
+				<li class="size_3"><a class="particle" href="#">Tour de France</a></li>
+				<li><a class="particle" href="#">FCZ</a></li>
+				<li><a class="particle" href="#">Kampusch</a></li>
+				<li class="size_1 ressort"><a class="particle" href="#">Wissen</a></li>
+				<li class="size_4 ressort"><a class="particle" href="#">Schweiz</a></li>
+				<li><a class="particle" href="#">Natur</a></li>
+				<li class="size_1"><a class="particle" href="#">Essen</a></li>
+				<li class="size_2 ressort"><a class="particle" href="#">Zürich</a></li>
+				<li class="size_4 ressort"><a class="particle" href="#">TV</a></li>
+				<li class="size_2"><a class="particle" href="#">Roger Federer</a></li>
+				<li><a class="particle" href="#">Toggi</a></li>
+				<li class="size_1"><a class="particle" href="#">Bundesrat</a></li>
+				<li class="ressort"><a class="particle" href="#">Digital</a></li>
+				<li class="size_3 ressort"><a class="particle" href="#">Games</a></li>
+				<li class="size_2"><a class="particle" href="#">LOL</a></li>
+				<li class="size_1"><a class="particle" href="#">FC Thun</a></li>
+				<li class="ressort"><a class="particle" href="#">Reisen</a></li>
+				<li class="size_2 ressort"><a class="particle" href="#">Unterhaltung</a></li>
+				<li class="size_4"><a class="particle" href="#">WTF</a></li>
+				<li><a class="particle" href="#">Ueli Maurer</a></li>
+				<li class="size_1"><a class="particle" href="#">Hochwasser</a></li>
+				<li><a class="particle" href="#">Dollarkurs</a></li>
+				<li class="size_2 ressort"><a class="particle" href="#">Wirtschaft</a></li>
+				<li class="size_2"><a class="particle" href="#">Katie</a></li>
+				<li class="ressort"><a class="particle" href="#">Infografiken</a></li>
+				<li class="size_3 ressort"><a class="particle" href="#">Videos</a></li>
+			</ul>
+			<div class="segment">
+				<ul class="alt_links">
+					<li><a class="particle" href="#">Login</a></li>
+					<li><a class="particle" href="#">Apps</a></li>
+					<li><a class="particle" href="#">Impressum</a></li>
+				</ul>
+			</div>
+		</div>
+		<a class="navilink"><img src="media/img/main/icons/icon_navi.png" /></a>
+	</div>
+
+	<div class="logoblock">
+		<a class="logo" href="front.html"><img src="media/img/main/logos/logo_watson.png" /></a>
+	</div>
+
+	<div class="currentblock">
+		<a href="front.html">Tagbrause</a>
+	</div>
+	
+	
+	
+	<script>
+		var max_width = $(".tag_cloud").width();
+		var max_height = $(".tag_cloud").height();
+		for ( var counter=0; counter<$(".tag_cloud .particle").length; counter++) {
+			var x_pos = Math.random() * max_width;
+			if (x_pos+$(".tag_cloud .particle").eq(counter).width()>$(".tag_cloud").width()) x_pos = $(".tag_cloud").width()-$(".tag_cloud .particle").eq(counter).width();
+			var y_pos = Math.random() * max_height;
+			$(".tag_cloud .particle").eq(counter).css("left", x_pos+"px");
+			$(".tag_cloud .particle").eq(counter).css("top", y_pos+"px");
+		}
+		
+		var last_y = 0;
+		$(window).scroll(function(){
+			var current_y = $(window).scrollTop()
+			for ( var counter=0; counter<$(".tag_cloud .layer").length; counter++) {
+				var new_top = ((last_y-current_y)*counter) + parseInt($(".tag_cloud .layer").eq(counter).css("top"));
+				$(".tag_cloud .layer").eq(counter).css("top", new_top+"px");
+			}
+			last_y = current_y;
+		});
+	</script>
+	
+	
+		
+	
+	
+	</body>
+	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
