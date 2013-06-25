@@ -421,6 +421,9 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 .region.full_story .imagebar img {
 	width:33%;
 	margin:0 0.16666% 4px 0.16666%;
+	-webkit-transition:-webkit-transform 0.5s ease;
+	-moz-transition:-moz-transform 0.5s ease;
+	transition:transform 0.5s ease;
 }
 
 .social_box {
