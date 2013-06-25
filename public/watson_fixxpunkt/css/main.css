@@ -10,6 +10,7 @@ height => px
 body {
 	font-family:'Gudea', helvetica, arial, sans-serif;
 	background-color:#ffffff;
+	color:#333333;
 	font-size:10px; /* set em-size for whole page. 1em = 10px */
 }
 
@@ -242,7 +243,6 @@ strong {
 .region h3 a {
 	padding:0 15px 10px 15px;
 	margin:0;
-	color:#222222;
 }
 
 .region.linked_teaser:hover a {
@@ -380,7 +380,7 @@ strong {
 
 .region.collection_main h2 { 
 	color:#ffffff;
-	border-bottom:0.2em solid #0FB4F4; /* 10px / 50px */
+	border-bottom:0.2em solid; /* 10px / 50px */
 	display:inline-block;
 	padding-bottom:0;
 }
@@ -404,30 +404,30 @@ strong {
 
 .region.text_only .arrow.left {
 	left:-4em;
-	border-left-color: transparent;
-	border-top-color: transparent;
-	border-bottom-color: transparent;
+	border-left-color: transparent !important;
+	border-top-color: transparent !important;
+	border-bottom-color: transparent !important;
 }
 
 .region.text_only .arrow.right {
 	right:-4em;
-	border-right-color: transparent;
-	border-top-color: transparent;
-	border-bottom-color: transparent;
+	border-right-color: transparent !important;
+	border-top-color: transparent !important;
+	border-bottom-color: transparent !important;
 }
 
 .region.text_only .arrow.top {
 	top:-4em;
-	border-top-color: transparent;
-	border-left-color: transparent;
-	border-right-color: transparent;
+	border-top-color: transparent !important;
+	border-left-color: transparent !important;
+	border-right-color: transparent !important;
 }
 
 .region.text_only .arrow.bottom {
 	bottom:-4em;
-	border-bottom-color: transparent;
-	border-left-color: transparent;
-	border-right-color: transparent;
+	border-bottom-color: transparent !important;
+	border-left-color: transparent !important;
+	border-right-color: transparent !important;
 }
 
 .region.text_only .arrow.x_middle {
