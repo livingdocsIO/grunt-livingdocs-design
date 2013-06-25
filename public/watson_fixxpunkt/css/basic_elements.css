@@ -311,6 +311,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	position:relative;
 }
 
+.region.poll li a.button:hover {
+	opacity:0.9;
+}
+
 .region.poll div.result {
 	display:none;
 }

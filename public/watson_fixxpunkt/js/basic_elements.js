@@ -38,19 +38,14 @@ $(document).ready(function() {
 	var poll = (function(){
 		return {
 			highlight_vote_button:function() {
-				$(".region.poll a.button").animate({
-					'font-size': '1.75em',
-					'left': '0.75em'
-				}, 500, 'swing' );
-				$(".region.poll a.button").parents('li').animate({
-					'margin-top': '0.75em',
-					'margin-bottom': '0.75em'
-				}, 500, 'swing' );
+				$(".region.poll a.button").animate({'font-size': '1.75em', 'left': '0.75em'}, 500, 'swing' );
+				$(".region.poll a.button").parents('li').animate({'margin-top': '0.75em', 'margin-bottom': '0.75em'}, 500, 'swing' );
 			},
 		
 			show_result:function() {
 				var current_poll = $(this).parents(".region.poll");
 				var current_results = [64,30,6];
+				current_poll.find(".arrow").css("visibility", "hidden");
 				current_poll.find("div.answers").slideUp(500, 'swing', function(){
 					current_poll.find("div.result").slideDown(200, 'linear', function() {
 						poll.calculate_bubbles(current_poll, current_results);
@@ -59,16 +54,21 @@ $(document).ready(function() {
 			},
 			
 			calculate_bubbles:function(current_poll, current_results) {
+				var max_diameter = current_poll.width() / 2;
+				var max_area = max_diameter * max_diameter; /* in pixels */
+				var max_bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * max_diameter;
 				for (var counter=0; counter<current_results.length; counter++) {
-				
-					var max_area = 80 * 80; /* in pixels */
 					var current_area = current_results[counter] * max_area / current_results[0];
 					var bubble_width_pixels = Math.sqrt(current_area);
 					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * bubble_width_pixels; /* 30px = 2 * margin 15px */
+					var bubble_margin = (max_bubble_width_percentage - bubble_width_percentage) / 2;
+					var bubble_opacity = 1 - (counter * (1 / current_results.length) );
 					current_poll.find("div.result .bubble").eq(counter).text(current_results[counter]+"%").animate({
 						'width': bubble_width_percentage+'%',
 						'height': bubble_width_pixels+'px',
-						'line-height': bubble_width_pixels+'px'
+						'marginLeft': bubble_margin+'%',
+						'line-height': bubble_width_pixels+'px',
+						'opacity': bubble_opacity
 					}, 500, 'swing' );
 				}
 				setTimeout(function(){poll.calculate_answer_position(current_poll, current_results)}, 1000);	
@@ -78,12 +78,15 @@ $(document).ready(function() {
 				for (var counter=0; counter<current_results.length; counter++) {
 					var bubble_width = bubble_height = current_poll.find("div.result .bubble").eq(counter).height();
 					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * ( bubble_width+10 ); /* 30px = 2 * margin 15px /// 10px = bubble margin */ 
-					var buffer_percentage = 10;
-					current_poll.find("div.result .answertext").eq(counter).css("width", (100 - bubble_width_percentage - buffer_percentage) + "%");
+					var bubble_margin = parseInt ( current_poll.find("div.result .bubble").eq(counter).css("marginLeft") );
+					var bubble_margin_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * ( bubble_margin+10 ); 
+					var buffer_percentage = 5;
+					current_poll.find("div.result .answertext").eq(counter).css("width", (100 - bubble_width_percentage - buffer_percentage - bubble_margin_percentage) + "%");
 					var text_height = current_poll.find("div.result .answertext").eq(counter).height();
 					current_poll.find("div.result .answertext").eq(counter).css("marginTop", ((bubble_height-text_height)/2)+"px");
 				}	
-				current_poll.find("div.result .answertext").fadeIn(500);			
+				current_poll.find("div.result .answertext").fadeIn(500);
+				current_poll.find(".arrow").css("visibility", "visible");		
 			}
 		}
 	})();
