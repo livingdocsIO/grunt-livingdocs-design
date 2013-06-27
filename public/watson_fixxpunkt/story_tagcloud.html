@@ -60,6 +60,7 @@
 			height:1000em; /* 10000px / 10px */
 			position:relative;
 			overflow:hidden;
+			border-top:11em solid #000000; /* 110px / 10px */
 		}
 		
 		.tag_cloud .layer {
@@ -86,11 +87,11 @@
 			color:#ffffff;
 		}
 		
-		.tag_cloud .layer:nth-child(1) .particle {
+		.tag_cloud .layer:nth-child(2) .particle {
 			background-color:#111111;
 		}
 		
-		.tag_cloud .layer:nth-child(2) .particle {
+		.tag_cloud .layer:nth-child(3) .particle {
 			-moz-transform:scale(1.2,1.2);
 			-webkit-transform:scale(1.2,1.2);
 			-o-transform:scale(1.2,1.2);
@@ -98,7 +99,7 @@
 			background-color:#181818;
 		}
 		
-		.tag_cloud .layer:nth-child(3) .particle {
+		.tag_cloud .layer:nth-child(4) .particle {
 			-moz-transform:scale(1.4,1.4);
 			-webkit-transform:scale(1.4,1.4);
 			-o-transform:scale(1.4,1.4);
@@ -106,7 +107,7 @@
 			background-color:#222222;
 		}
 		
-		.tag_cloud .layer:nth-child(4) .particle {
+		.tag_cloud .layer:nth-child(5) .particle {
 			-moz-transform:scale(1.6,1.6);
 			-webkit-transform:scale(1.6,1.6);
 			-o-transform:scale(1.6,1.6);
@@ -114,12 +115,36 @@
 			background-color:#282828;
 		}
 		
-		.tag_cloud .layer:nth-child(5) .particle {
+		.tag_cloud .layer:nth-child(6) .particle {
 			-moz-transform:scale(1.8,1.8);
 			-webkit-transform:scale(1.8,1.8);
 			-o-transform:scale(1.8,1.8);
 			transform:scale(1.8,1.8);
 			background-color:#333333;
+		}
+		
+		.tag_cloud .date {
+			font-size:5em; /* 50px / 10px */
+			width:100%;
+			text-align:center;
+			color:#ffffff;
+			position:fixed;
+			top:0.8em; /* 40px / 50px */
+			left:0;
+		}
+		
+		@media screen and (max-width: 600px) {
+			.tag_cloud {
+				font-size:0.8em;
+			}
+			
+			.tag_cloud .date {
+				top:1.8em; /* 110px / 50px */
+			}
+			
+			.tag_cloud {
+				border-top:16em solid #000000; /* 160px / 10px */
+			}
 		}
 	</style>
 	
@@ -134,6 +159,8 @@
 				<div class="insert fat_full">
 					
 					<div class="tag_cloud">
+						
+						<div class="date">Nov. 2013</div>
 						
 						<div class="layer">
 							<a class="particle" href="#">Felix Valloton</a>
@@ -448,7 +475,7 @@
 						$(".tag_cloud .layer").eq(counter).stop(true, false).animate({"top": new_top+"px"},500 );
 					}
 					last_y = current_y;
-			    }, 250));
+			    }, 100));
 			});
 		}
 	</script>
