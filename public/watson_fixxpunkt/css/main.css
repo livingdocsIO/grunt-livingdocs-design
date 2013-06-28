@@ -124,6 +124,35 @@ strong {
 	margin:0 auto 1em auto; /* 10px / 10px */
 }
 
+/* bubbler */
+.region .bubbler {
+	position:absolute;
+	top:1.071em; /* 15px / 14px */
+	right:1.071em; /* 15px / 14px */
+	width:7.142em; /* 100px / 14px */
+	background-color:rgba(255,255,255,1);
+	font-size:1.4em; /* 14px / 10px */
+	padding:0.5em;
+}
+
+.region .bubbler img {
+	width:100%;
+}
+
+.region .bubbler .arrow {
+	display:block;
+	position:absolute;
+	bottom:-20px;
+	left:50%;
+	width:0;
+	height:0;
+	border-top: 10px solid rgba(255,255,255,1);
+	border-right: 10px solid transparent !important;
+	border-bottom: 10px solid transparent !important;
+	border-left: 10px solid transparent !important;
+	margin-left:-10px;
+}
+
 /* badges */
 .region .text .badge {
 	position:absolute;

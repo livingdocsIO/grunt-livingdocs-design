@@ -169,6 +169,16 @@
 
 
 
+/* Plain Old <== usually this combo shouldn't be available to the user */
+.color_combo_99 .combo_bg, .color_combo_99.combo_bg { background-color:#ffffff !important; }
+.color_combo_99 .combo_bg_inv, .color_combo_99.combo_bg_inv { background-color:#333333 !important; }
+.color_combo_99 .combo_bd, .color_combo_99.combo_bd { border-color: #ffffff !important; }
+.color_combo_99 .combo_bd_inv, .color_combo_99.combo_bd_inv { border-color: #333333 !important; }
+.color_combo_99 .combo_fg, .color_combo_99.combo_fg { color:#333333 !important; }
+.color_combo_99 .combo_fg_inv, .color_combo_99.combo_fg_inv { color:#ffffff !important; }
+
+
+
 
 
 
