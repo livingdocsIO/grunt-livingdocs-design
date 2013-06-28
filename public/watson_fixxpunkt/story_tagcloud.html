@@ -57,7 +57,7 @@
 	<style type="text/css">
 		.tag_cloud {
 			background-color:#000000;
-			height:1000em; /* 10000px / 10px */
+			height:500em; /* 5000px / 10px */
 			position:relative;
 			overflow:hidden;
 		}
@@ -66,7 +66,7 @@
 			font-size:2em; /* 20px / 10px */
 			position:absolute;
 			top:0;
-			left:0;
+			left:0;width:100%;
 		}
 		
 		.tag_cloud .particle {
@@ -130,16 +130,23 @@
 			width:98%;
 			padding:1%;
 			text-align:center;
-			color:#ffffff;
+			color:#333333;
 			position:fixed;
 			bottom:0;
 			left:0;
-			background-color:rgba(255,255,255,0.2);
+			background-color:#ffffff;
 		}
 		
 		.tag_cloud .date .next,
 		.tag_cloud .date .previous {
 			font-size:0.5em;
+		}
+		
+		.tag_cloud .date .next img,
+		.tag_cloud .date .previous img {
+			height:1em;
+			width:auto;
+			vertical-align:top;
 		}
 		
 		.tag_cloud .date .previous {
@@ -148,7 +155,7 @@
 		
 		.tag_cloud .date .next a:hover,
 		.tag_cloud .date .previous a:hover {
-			color:#ffffff;
+			color:#333333;
 		}
 		
 		@media screen and (max-width: 600px) {
@@ -348,8 +355,8 @@
 						
 						<div class="date">
 							<div class="current">November 2013</div>
-							<div class="next"><a href="#">> Dezember 2013</a></div>
-							<div class="previous"><a href="#">< Oktober 2013</a></div>
+							<div class="next"><a href="#">Dezember 2013 <img src="media/img/main/arrows/arrow_transp_grey_forw.png" /></a></div>
+							<div class="previous"><a href="#"><img src="media/img/main/arrows/arrow_transp_grey_back.png" /> Oktober 2013</a></div>
 						</div>
 						
 					</div>
@@ -437,7 +444,7 @@
 	</div>
 
 	<div class="currentblock">
-		<a href="front.html">Tagcloud</a>
+		<a href="front.html">Cloud of the Month</a>
 	</div>
 	
 	
@@ -458,13 +465,15 @@
 		var scrollquotient = 3;
 		var particle_scale_per_layer = 0.2;
 		for (var counter_layer=0; counter_layer<$(".tag_cloud .layer").length; counter_layer++) {
-			for ( var counter_particle=0; counter_particle<$(".tag_cloud .layer:eq("+counter_layer+") .particle").length; counter_particle++) {
+			var current_layer = $(".tag_cloud .layer").eq(counter_layer);
+			var num_particles = current_layer.find(".particle").length;
+			for ( var counter_particle=0; counter_particle<num_particles; counter_particle++) {
 				var current_particle = $(".tag_cloud .layer:eq("+counter_layer+") .particle").eq(counter_particle);
 				var particle_width = (1+(counter_layer * particle_scale_per_layer)) * current_particle.outerWidth();
-				
 				var x_pos = (counter_layer * particle_scale_per_layer * current_particle.outerWidth() / 2) + ( Math.random() * (max_width-particle_width) );
-				var y_pos = Math.random() * max_height * (1+(counter_layer / scrollquotient));/* / iphone_scrollquotient */
-				current_particle.css("left", x_pos+"px");
+				var x_pos_percentage = 100 / max_width * x_pos;
+				var y_pos = 0.85 * (counter_particle+1) * max_height /  num_particles * (1+(counter_layer / scrollquotient));/* / iphone_scrollquotient */
+				current_particle.css("left", x_pos_percentage+"%");
 				current_particle.css("top", y_pos+"px");
 			}
 		}
@@ -473,15 +482,17 @@
 		if (!isiPhone()) {
 			$(window).scroll(function(){
 				var current_y = $(window).scrollTop();
-				for ( var counter=1; counter<$(".tag_cloud .layer").length; counter++) {
-					var new_top = ((last_y-current_y)*counter/scrollquotient) + parseInt($(".tag_cloud .layer").eq(counter).css("top"));
-					$(".tag_cloud .layer").eq(counter).css("top", new_top+"px");
+				var num_layers = $(".tag_cloud .layer").length;
+				for ( var counter=1; counter<num_layers; counter++) {
+					var current_layer = $(".tag_cloud .layer").eq(counter);
+					var new_top = ((last_y-current_y)*counter/scrollquotient) + parseInt(current_layer.css("top"));
+					current_layer.css("top", new_top+"px");
 				}
 				last_y = current_y;
 				
 				var scroll_from_bottom = $("body").height() - $(window).scrollTop() - $(window).height();
-				if (scroll_from_bottom<6000) $(".tag_cloud .date .current").css("opacity", scroll_from_bottom/6000);
-				if (scroll_from_bottom<2000) {
+				if (scroll_from_bottom<3000) $(".tag_cloud .date .current").css("opacity", scroll_from_bottom/3000).css("transform", "scale("+scroll_from_bottom/3000+")");
+				if (scroll_from_bottom<1000) {
 					$(".tag_cloud .date .previous").slideDown(500);
 					$(".tag_cloud .date .current").slideUp(500);
 				}
@@ -489,7 +500,7 @@
 					$(".tag_cloud .date .previous").slideUp(500);
 					$(".tag_cloud .date .current").slideDown(500);
 				}
-				if ($(window).scrollTop()<2000) $(".tag_cloud .date .next").slideDown(500);
+				if ($(window).scrollTop()<1000) $(".tag_cloud .date .next").slideDown(500);
 				else $(".tag_cloud .date .next").slideUp(500);
 			});
 		}
@@ -498,9 +509,11 @@
 				clearTimeout($.data(this, "scrollTimer"));
 			    $.data(this, "scrollTimer", setTimeout(function() {
 			        var current_y = $(window).scrollTop();
-					for ( var counter=1; counter<$(".tag_cloud .layer").length; counter++) {
-						var new_top = ((last_y-current_y)*counter/iphone_scrollquotient) + parseInt($(".tag_cloud .layer").eq(counter).css("top"));
-						$(".tag_cloud .layer").eq(counter).stop(true, false).animate({"top": new_top+"px"},500 );
+			        var num_layers = $(".tag_cloud .layer").length;
+					for ( var counter=1; counter<num_layers; counter++) {
+						var current_layer = $(".tag_cloud .layer").eq(counter);
+						var new_top = ((last_y-current_y)*counter/iphone_scrollquotient) + parseInt(current_layer.css("top"));
+						current_layer.stop(true, false).animate({"top": new_top+"px"},500 );
 					}
 					last_y = current_y;
 			    }, 100));
