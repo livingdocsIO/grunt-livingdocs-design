@@ -49,7 +49,7 @@
 			
 			image_commercial: _.template("<img src=\"media/img/placeholderwerbung/duennes_billboard.jpg\" />"),
 			
-			peephole: _.template("<div class='peephole' style='background-image:url(media/img/placeholderimg/bild_065.jpg);'></div>"),
+			peephole: _.template("<div class='peephole' style='background-image:url(media/img/placeholderwerbung/h_und_m.jpg);'></div>"),
 			
 			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
 			tagList: _.template("<div class='tags'>Artikel-Tags<ul><li class='ressort'><a href='#'>Kitsch</a></li><li><a href='#'>Funny</a></li><li><a href='#'>OMG</a></li><li><a href='#'>Rechtschreibung</a></li></ul></div>"),

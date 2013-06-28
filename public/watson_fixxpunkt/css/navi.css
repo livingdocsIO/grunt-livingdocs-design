@@ -5,6 +5,7 @@
 	position:absolute;
 	top:0;
 	left:0;
+	z-index:100;
 }
 
 .logoblock .logo {
@@ -27,6 +28,7 @@
 	top:5.9em; /* 59px / 10px */
 	left:0;
 	padding-top:4px;
+	z-index:100;
 }
 
 .currentblock.sticky {
@@ -56,6 +58,7 @@
 	background-color:rgba(0,0,0,0.8);
 	width:5.9em; /* 59px / 10px */
 	height:5.9em; /* 59px / 10px */
+	z-index:100;
 }
 
 .naviblock .navilink {

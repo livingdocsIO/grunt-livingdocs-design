@@ -60,7 +60,6 @@
 			height:1000em; /* 10000px / 10px */
 			position:relative;
 			overflow:hidden;
-			border-top:11em solid #000000; /* 110px / 10px */
 		}
 		
 		.tag_cloud .layer {
@@ -77,6 +76,9 @@
 		
 		.tag_cloud a.particle {
 			padding:0.5em;
+			transition:color 0.5s ease;
+			-moz-transition:color 0.5s ease;
+			-webkit-transition:color 0.5s ease;
 		}
 		
 		.tag_cloud a.particle.ressort {
@@ -87,11 +89,11 @@
 			color:#ffffff;
 		}
 		
-		.tag_cloud .layer:nth-child(2) .particle {
+		.tag_cloud .layer:nth-child(1) .particle {
 			background-color:#111111;
 		}
 		
-		.tag_cloud .layer:nth-child(3) .particle {
+		.tag_cloud .layer:nth-child(2) .particle {
 			-moz-transform:scale(1.2,1.2);
 			-webkit-transform:scale(1.2,1.2);
 			-o-transform:scale(1.2,1.2);
@@ -99,7 +101,7 @@
 			background-color:#181818;
 		}
 		
-		.tag_cloud .layer:nth-child(4) .particle {
+		.tag_cloud .layer:nth-child(3) .particle {
 			-moz-transform:scale(1.4,1.4);
 			-webkit-transform:scale(1.4,1.4);
 			-o-transform:scale(1.4,1.4);
@@ -107,7 +109,7 @@
 			background-color:#222222;
 		}
 		
-		.tag_cloud .layer:nth-child(5) .particle {
+		.tag_cloud .layer:nth-child(4) .particle {
 			-moz-transform:scale(1.6,1.6);
 			-webkit-transform:scale(1.6,1.6);
 			-o-transform:scale(1.6,1.6);
@@ -115,7 +117,7 @@
 			background-color:#282828;
 		}
 		
-		.tag_cloud .layer:nth-child(6) .particle {
+		.tag_cloud .layer:nth-child(5) .particle {
 			-moz-transform:scale(1.8,1.8);
 			-webkit-transform:scale(1.8,1.8);
 			-o-transform:scale(1.8,1.8);
@@ -124,26 +126,35 @@
 		}
 		
 		.tag_cloud .date {
-			font-size:5em; /* 50px / 10px */
-			width:100%;
+			font-size:4em; /* 40px / 10px */
+			width:98%;
+			padding:1%;
 			text-align:center;
 			color:#ffffff;
 			position:fixed;
-			top:0.8em; /* 40px / 50px */
+			bottom:0;
 			left:0;
+			background-color:rgba(255,255,255,0.2);
+		}
+		
+		.tag_cloud .date .next,
+		.tag_cloud .date .previous {
+			font-size:0.5em;
+		}
+		
+		.tag_cloud .date .previous {
+			display:none;
+		}
+		
+		.tag_cloud .date .next a:hover,
+		.tag_cloud .date .previous a:hover {
+			color:#ffffff;
 		}
 		
 		@media screen and (max-width: 600px) {
-			.tag_cloud {
+			.tag_cloud .date .next,
+			.tag_cloud .date .previous {
 				font-size:0.8em;
-			}
-			
-			.tag_cloud .date {
-				top:1.8em; /* 110px / 50px */
-			}
-			
-			.tag_cloud {
-				border-top:16em solid #000000; /* 160px / 10px */
 			}
 		}
 	</style>
@@ -159,8 +170,6 @@
 				<div class="insert fat_full">
 					
 					<div class="tag_cloud">
-						
-						<div class="date">Nov. 2013</div>
 						
 						<div class="layer">
 							<a class="particle" href="#">Felix Valloton</a>
@@ -337,6 +346,12 @@
 							<a class="particle" href="#">Film</a>
 						</div>
 						
+						<div class="date">
+							<div class="current">November 2013</div>
+							<div class="next"><a href="#">> Dezember 2013</a></div>
+							<div class="previous"><a href="#">< Oktober 2013</a></div>
+						</div>
+						
 					</div>
 					
 				</div>
@@ -374,37 +389,37 @@
 				</form>
 			</div>
 			<ul class="tagcloud">
-				<li class="size_3"><a class="particle" href="#">Sport</a></li>
-				<li class="size_4"><a class="particle" href="#">Ausland</a></li>
-				<li class="size_3"><a class="particle" href="#">Inland</a></li>
-				<li class="size_4"><a class="particle" href="#">Musik</a></li>
-				<li class="size_2"><a class="particle" href="#">Events</a></li>
-				<li class="size_3"><a class="particle" href="#">Tour de France</a></li>
-				<li><a class="particle" href="#">FCZ</a></li>
-				<li><a class="particle" href="#">Kampusch</a></li>
-				<li class="size_1"><a class="particle" href="#">Wissen</a></li>
-				<li class="size_4"><a class="particle" href="#">Schweiz</a></li>
-				<li><a class="particle" href="#">Natur</a></li>
-				<li class="size_1"><a class="particle" href="#">Essen</a></li>
-				<li class="size_2"><a class="particle" href="#">Zürich</a></li>
-				<li class="size_4"><a class="particle" href="#">TV</a></li>
-				<li class="size_2"><a class="particle" href="#">Roger Federer</a></li>
-				<li><a class="particle" href="#">Toggi</a></li>
-				<li class="size_1"><a class="particle" href="#">Bundesrat</a></li>
-				<li class="ressort"><a class="particle" href="#">Digital</a></li>
-				<li class="size_3"><a class="particle" href="#">Games</a></li>
-				<li class="size_2"><a class="particle" href="#">LOL</a></li>
-				<li class="size_1"><a class="particle" href="#">FC Thun</a></li>
-				<li class="ressort"><a class="particle" href="#">Reisen</a></li>
-				<li class="size_2"><a class="particle" href="#">Unterhaltung</a></li>
-				<li class="size_4"><a class="particle" href="#">WTF</a></li>
-				<li><a class="particle" href="#">Ueli Maurer</a></li>
-				<li class="size_1"><a class="particle" href="#">Hochwasser</a></li>
-				<li><a class="particle" href="#">Dollarkurs</a></li>
-				<li class="size_2"><a class="particle" href="#">Wirtschaft</a></li>
-				<li class="size_2"><a class="particle" href="#">Katie</a></li>
-				<li class="ressort"><a class="particle" href="#">Infografiken</a></li>
-				<li class="size_3"><a class="particle" href="#">Videos</a></li>
+				<li class="size_3 ressort"><a href="#">Sport</a></li>
+				<li class="size_4 ressort"><a href="#">Ausland</a></li>
+				<li class="size_3 ressort"><a href="#">Inland</a></li>
+				<li class="size_4 ressort"><a href="#">Musik</a></li>
+				<li class="size_2"><a href="#">Events</a></li>
+				<li class="size_3"><a href="#">Tour de France</a></li>
+				<li><a href="#">FCZ</a></li>
+				<li><a href="#">Kampusch</a></li>
+				<li class="size_1 ressort"><a href="#">Wissen</a></li>
+				<li class="size_4 ressort"><a href="#">Schweiz</a></li>
+				<li><a href="#">Natur</a></li>
+				<li class="size_1"><a href="#">Essen</a></li>
+				<li class="size_2 ressort"><a href="#">Zürich</a></li>
+				<li class="size_4 ressort"><a href="#">TV</a></li>
+				<li class="size_2"><a href="#">Roger Federer</a></li>
+				<li><a href="#">Toggi</a></li>
+				<li class="size_1"><a href="#">Bundesrat</a></li>
+				<li class="ressort"><a href="#">Digital</a></li>
+				<li class="size_3 ressort"><a href="#">Games</a></li>
+				<li class="size_2"><a href="#">LOL</a></li>
+				<li class="size_1"><a href="#">FC Thun</a></li>
+				<li class="ressort"><a href="#">Reisen</a></li>
+				<li class="size_2 ressort"><a href="#">Unterhaltung</a></li>
+				<li class="size_4"><a href="#">WTF</a></li>
+				<li><a href="#">Ueli Maurer</a></li>
+				<li class="size_1"><a href="#">Hochwasser</a></li>
+				<li><a href="#">Dollarkurs</a></li>
+				<li class="size_2 ressort"><a href="#">Wirtschaft</a></li>
+				<li class="size_2"><a href="#">Katie</a></li>
+				<li class="ressort"><a href="#">Infografiken</a></li>
+				<li class="size_3 ressort"><a href="#">Videos</a></li>
 			</ul>
 			<div class="segment">
 				<ul class="alt_links">
@@ -422,7 +437,7 @@
 	</div>
 
 	<div class="currentblock">
-		<a href="front.html">Tagbrause</a>
+		<a href="front.html">Tagcloud</a>
 	</div>
 	
 	
@@ -448,7 +463,7 @@
 				var particle_width = (1+(counter_layer * particle_scale_per_layer)) * current_particle.outerWidth();
 				
 				var x_pos = (counter_layer * particle_scale_per_layer * current_particle.outerWidth() / 2) + ( Math.random() * (max_width-particle_width) );
-				var y_pos = Math.random() * max_height;
+				var y_pos = Math.random() * max_height * (1+(counter_layer / scrollquotient));/* / iphone_scrollquotient */
 				current_particle.css("left", x_pos+"px");
 				current_particle.css("top", y_pos+"px");
 			}
@@ -457,19 +472,32 @@
 		var last_y = 0;
 		if (!isiPhone()) {
 			$(window).scroll(function(){
-				var current_y = $(window).scrollTop()
+				var current_y = $(window).scrollTop();
 				for ( var counter=1; counter<$(".tag_cloud .layer").length; counter++) {
 					var new_top = ((last_y-current_y)*counter/scrollquotient) + parseInt($(".tag_cloud .layer").eq(counter).css("top"));
 					$(".tag_cloud .layer").eq(counter).css("top", new_top+"px");
 				}
 				last_y = current_y;
+				
+				var scroll_from_bottom = $("body").height() - $(window).scrollTop() - $(window).height();
+				if (scroll_from_bottom<6000) $(".tag_cloud .date .current").css("opacity", scroll_from_bottom/6000);
+				if (scroll_from_bottom<2000) {
+					$(".tag_cloud .date .previous").slideDown(500);
+					$(".tag_cloud .date .current").slideUp(500);
+				}
+				else {
+					$(".tag_cloud .date .previous").slideUp(500);
+					$(".tag_cloud .date .current").slideDown(500);
+				}
+				if ($(window).scrollTop()<2000) $(".tag_cloud .date .next").slideDown(500);
+				else $(".tag_cloud .date .next").slideUp(500);
 			});
 		}
 		else {
 			$(window).scroll(function(){
 				clearTimeout($.data(this, "scrollTimer"));
 			    $.data(this, "scrollTimer", setTimeout(function() {
-			        var current_y = $(window).scrollTop()
+			        var current_y = $(window).scrollTop();
 					for ( var counter=1; counter<$(".tag_cloud .layer").length; counter++) {
 						var new_top = ((last_y-current_y)*counter/iphone_scrollquotient) + parseInt($(".tag_cloud .layer").eq(counter).css("top"));
 						$(".tag_cloud .layer").eq(counter).stop(true, false).animate({"top": new_top+"px"},500 );
