@@ -58,6 +58,7 @@
 	</head>
 	<body>
 	
+	
 	<div class="wrapper"><div class="fat_wrapper">
 	
 		<div class="region full_story x_full_desktop x_full_tablet font_xl">
@@ -148,8 +149,7 @@
 	
 	
 	
-		
-	
+
 	
 	</body>
 	<script>
@@ -206,6 +206,10 @@
       storyContent.append(insert_3);
       insert_3.append(livingdocs.watson.templates.text_4());
       
+      insert_tweet = $(livingdocs.watson.templates.sideInsert());
+      storyContent.append(insert_tweet);
+      insert_tweet.append(livingdocs.watson.templates.tweetbox());
+            
       insert_4 = $(livingdocs.watson.templates.maincolInsert());
       storyContent.append(insert_4);
       insert_4.append(livingdocs.watson.templates.half_title_3());
