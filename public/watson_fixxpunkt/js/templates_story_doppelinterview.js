@@ -85,7 +85,7 @@
 			source_3: _.template("<p class='source' data-doc-editable=\"text\">Corinne Mauch</p>"),
 			source_4: _.template("<p class='source' data-doc-editable=\"text\">Guy Morin</p>"),
 			
-			tweetbox: _.template("<blockquote class='twitter-tweet'><p>Venezuelas Präsident Maduro soll nach Medienberichten bei seinem Russland-Besuch auch über Asyl für <a href='https://twitter.com/search?q=%23Snowden&amp;src=hash'>#Snowden</a> sprechen <a href='http://t.co/Rzt9i1EG9W'>http://t.co/Rzt9i1EG9W</a></p>&mdash; ZEIT ONLINE (@zeitonline) <a href='https://twitter.com/zeitonline/statuses/351679476251369474'>July 1, 2013</a></blockquote><script async src='http://platform.twitter.com/widgets.js' charset='utf-8'></script>"),
+			tweetbox: _.template("<blockquote class='twitter-tweet'><p>Stadt, Land - die gespaltene Schweiz: Den Städten geht es gut. Die Spannungen zwischen Agglomeration und... <a href='http://t.co/2dlCErc2SV'>http://t.co/2dlCErc2SV</a></p>&mdash; Guy Morin (@moringuy) <a href='https://twitter.com/moringuy/statuses/328567185268174849'>April 28, 2013</a></blockquote><script async src='http://platform.twitter.com/widgets.js' charset='utf-8'></script>"),
 			
 			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
 			tagList: _.template("<div class='tags'>Artikel-Tags<ul><li class='ressort'><a href='#'>Zürich</a></li><li><a href='#'>Corinne Mauch</a></li><li><a href='#'>Stadtentwicklung</a></li><li><a href='#'>Zersiedelung</a></li><li><a href='#'>Interview</a></li></ul></div>"),
