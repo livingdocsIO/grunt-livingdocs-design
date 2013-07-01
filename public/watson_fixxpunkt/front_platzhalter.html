@@ -97,6 +97,7 @@
 			</ul>
 		</div>
 		
+		
 		<div class="region x_third_desktop x_half_tablet y_full color_combo_3 combo_bg">
 			<a class="bubbler color_combo_99 combo_bg combo_fg" href="http://www.tagi.ch" target="_blank">Jetzt auf<img src="media/img/platzhalterseite/logo_tagi_sw.png" /><span class="arrow combo_bd"></span></a>
 			<ul class="article_list">
@@ -303,7 +304,38 @@
 		<a href="#">the Web</a>
 	</div>
 	
+	
+	
+	<script type="text/javascript">
+		var feeds = [
+			"http://www.nzz.ch/aktuell/startseite.rss"
+		];
 		
+		for (var counter=0; counter<feeds.length; counter++) {
+			$.ajax({
+				url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(feeds[counter]),
+				dataType : 'json',
+				success  : function (data) {
+					if (data.responseData.feed && data.responseData.feed.entries) {
+						var entry_counter = 0;
+						$.each(data.responseData.feed.entries, function (i, e) {
+							/*alert(JSON.stringify(e));
+							console.log("------------------------");
+							console.log("title      : " + e.title);
+							console.log("publishedDate     : " + e.publishedDate);
+							console.log("description: " + e.categories[0]);*/
+							if (entry_counter<6) {
+								$(".region.x_third_desktop").eq(counter).find("li").eq(entry_counter).html(e.title);
+							}
+							entry_counter++;
+						});
+					}
+				}
+			});
+		}
+	</script>
+	
+	
 	
 	</body>
 </html>
