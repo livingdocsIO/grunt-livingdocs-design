@@ -55,45 +55,45 @@
 	<body>
 	
 	<style type="text/css">
-		.tag_cloud {
+		.particle_cloud {
 			background-color:#000000;
 			height:50em; /* 5000px / 10px */
 			position:relative;
 			overflow:hidden;
 		}
 		
-		.tag_cloud .layer {
+		.particle_cloud .layer {
 			font-size:2em; /* 20px / 10px */
 			position:absolute;
 			top:0;
 			left:0;width:100%;
 		}
 		
-		.tag_cloud .particle {
+		.particle_cloud .particle {
 			position:absolute;
 			white-space:nowrap;
 		}
 		
-		.tag_cloud a.particle {
+		.particle_cloud a.particle {
 			padding:0.5em;
 			transition:color 0.5s ease;
 			-moz-transition:color 0.5s ease;
 			-webkit-transition:color 0.5s ease;
 		}
 		
-		.tag_cloud a.particle.ressort {
+		.particle_cloud a.particle.ressort {
 			color:#a0f22c;
 		}
 		
-		.tag_cloud a.particle:hover {
+		.particle_cloud a.particle:hover {
 			color:#ffffff;
 		}
 		
-		.tag_cloud .layer:nth-child(1) .particle {
+		.particle_cloud .layer:nth-child(1) .particle {
 			background-color:#111111;
 		}
 		
-		.tag_cloud .layer:nth-child(2) .particle {
+		.particle_cloud .layer:nth-child(2) .particle {
 			-moz-transform:scale(1.2,1.2);
 			-webkit-transform:scale(1.2,1.2);
 			-o-transform:scale(1.2,1.2);
@@ -101,7 +101,7 @@
 			background-color:#181818;
 		}
 		
-		.tag_cloud .layer:nth-child(3) .particle {
+		.particle_cloud .layer:nth-child(3) .particle {
 			-moz-transform:scale(1.4,1.4);
 			-webkit-transform:scale(1.4,1.4);
 			-o-transform:scale(1.4,1.4);
@@ -109,7 +109,7 @@
 			background-color:#222222;
 		}
 		
-		.tag_cloud .layer:nth-child(4) .particle {
+		.particle_cloud .layer:nth-child(4) .particle {
 			-moz-transform:scale(1.6,1.6);
 			-webkit-transform:scale(1.6,1.6);
 			-o-transform:scale(1.6,1.6);
@@ -117,7 +117,7 @@
 			background-color:#282828;
 		}
 		
-		.tag_cloud .layer:nth-child(5) .particle {
+		.particle_cloud .layer:nth-child(5) .particle {
 			-moz-transform:scale(1.8,1.8);
 			-webkit-transform:scale(1.8,1.8);
 			-o-transform:scale(1.8,1.8);
@@ -158,13 +158,13 @@
 			
 				<div class="insert xxx">
 					
-					<div class="tag_cloud">
+					<div class="particle_cloud">
 						
 						<div class="layer">
-							<a class="particle" href="#">Felix Valloton</a>
+							<!--<a class="particle" href="#">Felix Valloton</a>
 							<a class="particle" href="#">Arbeitslosenquote</a>
 							<a class="particle ressort" href="#">Google</a>
-							<a class="particle" href="#">Gewerbeverband</a>
+							<a class="particle" href="#">Gewerbeverband</a>-->
 						</div>
 						
 						<div class="layer">
@@ -239,21 +239,21 @@
 					<a class="fav"><img src="media/img/main/icons/icon_fav_active.png" /></a>
 					<input class="field lightback lightfont" type="text" value="suchen" /><input class="button" type="submit" value="go" />
 					<ul class="suggestions">
-						<li><a class="particle" href="#">Fukushima</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
-						<li><a class="particle" href="#">Fundraising</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
-						<li><a class="particle" href="#">Furrer</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
-						<li><a class="particle" href="#">Fundamentalismus</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
-						<li><a class="particle" href="#">mehr...</a></li>
+						<li><a href="#">Fukushima</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Fundraising</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Furrer</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Fundamentalismus</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">mehr...</a></li>
 					</ul>
 					<ul class="favs">
-						<li><a class="particle" href="#">Ausland</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
-						<li><a class="particle" href="#">Sport</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
-						<li><a class="particle" href="#">FCZ</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
-						<li><a class="particle" href="#">RPG</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
-						<li><a class="particle" href="#">Game of Thrones</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
-						<li><a class="particle" href="#">LOL</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
-						<li><a class="particle" href="#">Musik</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
-						<li><a class="particle" href="#">Wetter</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Ausland</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Sport</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">FCZ</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">RPG</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Game of Thrones</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">LOL</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Musik</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Wetter</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
 					</ul>
 				</form>
 			</div>
@@ -292,9 +292,9 @@
 			</ul>
 			<div class="segment">
 				<ul class="alt_links">
-					<li><a class="particle" href="#">Login</a></li>
-					<li><a class="particle" href="#">Apps</a></li>
-					<li><a class="particle" href="#">Impressum</a></li>
+					<li><a href="#">Login</a></li>
+					<li><a href="#">Apps</a></li>
+					<li><a href="#">Impressum</a></li>
 				</ul>
 			</div>
 		</div>
@@ -321,16 +321,16 @@
 		}
 	
 	
-		var max_width = $(".tag_cloud").width();
-		var max_height = $(".tag_cloud").height();
+		var max_width = $(".particle_cloud").width();
+		var max_height = $(".particle_cloud").height();
 		var iphone_scrollquotient = 10;
 		var scrollquotient = 3;
 		var particle_scale_per_layer = 0.2;
-		for (var counter_layer=0; counter_layer<$(".tag_cloud .layer").length; counter_layer++) {
-			var current_layer = $(".tag_cloud .layer").eq(counter_layer);
+		for (var counter_layer=0; counter_layer<$(".particle_cloud .layer").length; counter_layer++) {
+			var current_layer = $(".particle_cloud .layer").eq(counter_layer);
 			var num_particles = current_layer.find(".particle").length;
 			for ( var counter_particle=0; counter_particle<num_particles; counter_particle++) {
-				var current_particle = $(".tag_cloud .layer:eq("+counter_layer+") .particle").eq(counter_particle);
+				var current_particle = $(".particle_cloud .layer:eq("+counter_layer+") .particle").eq(counter_particle);
 				var particle_width = (1+(counter_layer * particle_scale_per_layer)) * current_particle.outerWidth();
 				var x_pos = (counter_layer * particle_scale_per_layer * current_particle.outerWidth() / 2) + ( Math.random() * (max_width-particle_width) );
 				var x_pos_percentage = 100 / max_width * x_pos;
@@ -343,10 +343,10 @@
 		var last_y = 0;
 		if (!isiPhone()) {
 			$(window).scroll(function(){
-				var current_y = $(window).scrollTop() + ($(window).height()/2) - $(".tag_cloud").offset().top;
-				var num_layers = $(".tag_cloud .layer").length;
+				var current_y = $(window).scrollTop() + ($(window).height()/2) - $(".particle_cloud").offset().top;
+				var num_layers = $(".particle_cloud .layer").length;
 				for ( var counter=1; counter<num_layers; counter++) {
-					var current_layer = $(".tag_cloud .layer").eq(counter);
+					var current_layer = $(".particle_cloud .layer").eq(counter);
 					var new_top = ((last_y-current_y)*counter/scrollquotient) + parseInt(current_layer.css("top"));
 					current_layer.css("top", new_top+"px");
 				}
@@ -358,9 +358,9 @@
 				clearTimeout($.data(this, "scrollTimer"));
 			    $.data(this, "scrollTimer", setTimeout(function() {
 			        var current_y = $(window).scrollTop();
-			        var num_layers = $(".tag_cloud .layer").length;
+			        var num_layers = $(".particle_cloud .layer").length;
 					for ( var counter=1; counter<num_layers; counter++) {
-						var current_layer = $(".tag_cloud .layer").eq(counter);
+						var current_layer = $(".particle_cloud .layer").eq(counter);
 						var new_top = ((last_y-current_y)*counter/iphone_scrollquotient) + parseInt(current_layer.css("top"));
 						current_layer.stop(true, false).animate({"top": new_top+"px"},500 );
 					}
