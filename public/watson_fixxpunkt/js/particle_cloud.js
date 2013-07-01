@@ -6,10 +6,10 @@
 
 
 function isiPhone(){
-    return (
+    /*return (
         (navigator.platform.indexOf("iPhone") != -1) ||
         (navigator.platform.indexOf("iPod") != -1)
-    );
+    );*/return true;
 }
 
 
@@ -46,7 +46,12 @@ $(document).ready(function(){
 	/* ============================ */
 	function handle_history_dates() {
 		var scroll_from_bottom = $("body").height() - $(window).scrollTop() - $(window).height();
-		if (scroll_from_bottom<3000) $(".particle_cloud .date .current").css("opacity", scroll_from_bottom/3000).css("transform", "scale("+scroll_from_bottom/3000+")");
+		if ( (scroll_from_bottom<3000) && !isiPhone() ) {
+			$(".particle_cloud .date .current").css("opacity", scroll_from_bottom/3000).css("transform", "scale("+scroll_from_bottom/3000+")");
+		}
+		else if (scroll_from_bottom<3000) {
+			$(".particle_cloud .date .current").animate({"opacity": scroll_from_bottom/3000, "transform": "scale("+scroll_from_bottom/3000+")"},500 );
+		}
 		if (scroll_from_bottom<1000) {
 			$(".particle_cloud .date .previous").slideDown(500);
 			$(".particle_cloud .date .current").slideUp(500);
