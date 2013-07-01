@@ -6,10 +6,10 @@
 
 
 function isiPhone(){
-    /*return (
+    return (
         (navigator.platform.indexOf("iPhone") != -1) ||
         (navigator.platform.indexOf("iPod") != -1)
-    );*/return true;
+    );
 }
 
 
