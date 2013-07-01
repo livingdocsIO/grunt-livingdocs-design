@@ -9,6 +9,10 @@
 		width:100%;
 	}
 	
+	.fat_wrapper {
+		width:100.5%;
+	}
+	
 	.region.x_full_tablet { width:100%; }
 	.region.x_half_tablet { width:50%; }
 	
