@@ -24,14 +24,12 @@
 	
 	/* article list */
 	/* ============ */
-	@media screen and (max-width: 600px) {
-		.region .article_list {
-			font-size:0.75em !important;
-		}
-		
-		.region .article_list li .date {
-			font-size:1.8em;
-		}
+	.region .article_list {
+		font-size:0.75em !important;
+	}
+	
+	.region .article_list li .date {
+		font-size:1.8em;
 	}
 	
 	/* nur zum test */
