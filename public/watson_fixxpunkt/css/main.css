@@ -311,9 +311,18 @@ strong {
 	font-weight:normal;
 }
 
-.region p, .region ul {
+.region p, .region ul, .region ol {
 	font-size:1.8em /* 18px / 10px */;
 	line-height:1.3em;
+}
+
+.region ol {
+	list-style-type:decimal;
+	margin: 20px 0 20px 50px;
+}
+
+.region ol li {
+	margin: 0 0 0 ; 
 }
 
 .region p.lead .author {
