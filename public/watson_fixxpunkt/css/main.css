@@ -88,6 +88,10 @@ strong {
 	height:302px;
 }
 
+.region.y_three_quarters {
+	height:453px;
+}
+
 .region.y_full {
 	height:604px;
 }
@@ -402,6 +406,28 @@ strong {
 /* topical teaser */
 /* ============== */
 .region.topical_teaser .text {	padding:0; }
+
+.region.topical_teaser .sponsor {
+	position:absolute;
+	bottom:0;
+	right:0;
+	height:3.7em; /* 37px / 10px */
+	padding:1em; /* 10px / 10px */
+	background-color:rgba(255,255,255,0.8);
+	color:#333333;
+}
+
+.region.topical_teaser .sponsor img {
+	height:100%;
+	float:right;
+}
+
+.region.topical_teaser .sponsor_text {
+	font-size:1.6em; /* 16px / 10px */
+	margin-top:0.3em; /* 3px / 10px */
+	float:right;
+	text-align:left;
+}
 
 
 /* collection regions */

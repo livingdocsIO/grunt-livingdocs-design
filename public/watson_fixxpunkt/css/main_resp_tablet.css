@@ -26,6 +26,11 @@
 		border-style:solid;
 	}
 	
+	/* topical teaser */
+	/* ============== */
+	.region.topical_teaser.y_quarter.sponsoring { height:198px; }
+	.region.topical_teaser.sponsoring .media_icons { bottom:50px; }
+	
 	/* custom hide and display */
 	.hide_on_tablet { display:none !important; }
 	.show_on_tablet { display:block !important;; }

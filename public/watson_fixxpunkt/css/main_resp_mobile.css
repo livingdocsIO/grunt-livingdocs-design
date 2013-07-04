@@ -41,6 +41,8 @@
 	/* topical teaser */
 	/* ============== */
 	.region.topical_teaser.y_quarter {	height:141px; }
+	.region.topical_teaser.y_quarter.sponsoring { height:182px; }
+	.region.topical_teaser.sponsoring .media_icons { bottom:40px; }
 
 	/* collection regions */
 	/* ============= */
