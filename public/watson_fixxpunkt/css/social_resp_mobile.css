@@ -1,0 +1,15 @@
+
+
+
+@media screen and (max-width: 600px) {	
+	
+	/* social */
+	/* ====== */
+	.socialblock .expandable {
+		width:100%;
+		right:-100%;
+	}
+	.socialblock .segment {
+		width:100%;
+	}
+}

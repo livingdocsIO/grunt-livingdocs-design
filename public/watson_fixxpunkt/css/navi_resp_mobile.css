@@ -56,14 +56,4 @@
 		display:inline;
 	}
 	
-	
-	/* social */
-	/* ====== */
-	.socialblock .expandable {
-		width:100%;
-		right:-100%;
-	}
-	.socialblock .segment {
-		width:100%;
-	}
 }
