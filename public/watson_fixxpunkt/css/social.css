@@ -61,7 +61,7 @@
 
 .socialblock .segment {
 	padding: 2em 0 1em 0; /* 20px / 10px */
-	width: 48em; /* 480px / 10px */
+	width: auto;
 	clear:both;
 	text-align:center;
 }
