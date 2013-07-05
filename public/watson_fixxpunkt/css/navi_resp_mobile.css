@@ -3,6 +3,8 @@
 
 @media screen and (max-width: 600px) {
 	
+	/* navi */
+	/* ==== */
 	.currentblock a {
 		font-size:1.5em; /* 15px / 10px */
 		padding:0.7em;
@@ -52,5 +54,16 @@
 	
 	.naviblock ul.favs li .delete {
 		display:inline;
+	}
+	
+	
+	/* social */
+	/* ====== */
+	.socialblock .expandable {
+		width:100%;
+		right:-100%;
+	}
+	.socialblock .segment {
+		width:100%;
 	}
 }
