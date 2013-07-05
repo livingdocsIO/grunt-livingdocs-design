@@ -411,22 +411,17 @@ strong {
 	position:absolute;
 	bottom:0;
 	right:0;
-	height:3.7em; /* 37px / 10px */
-	padding:1em; /* 10px / 10px */
+	font-size:1.333em;
+	height:3.525em; /* 47px / 13.333px */
+	padding:0.375em 0.75em; /* 5px / 13.333px */ /* 10px / 13.333px */
 	background-color:rgba(255,255,255,0.8);
 	color:#333333;
 }
 
 .region.topical_teaser .sponsor img {
-	height:100%;
+	margin-top:0.3em;
+	height:2.2em;
 	float:right;
-}
-
-.region.topical_teaser .sponsor_text {
-	font-size:1.6em; /* 16px / 10px */
-	margin-top:0.3em; /* 3px / 10px */
-	float:right;
-	text-align:left;
 }
 
 

@@ -40,9 +40,9 @@
 	
 	/* topical teaser */
 	/* ============== */
-	.region.topical_teaser.y_quarter {	height:141px; }
-	.region.topical_teaser.y_quarter.sponsoring { height:182px; }
-	.region.topical_teaser.sponsoring .media_icons { bottom:40px; }
+	.region.topical_teaser.y_quarter,
+	.region.topical_teaser.sponsoring.y_quarter {	height:141px; }
+	.region.topical_teaser.sponsoring .media_icons { width:66%; }
 
 	/* collection regions */
 	/* ============= */
