@@ -189,7 +189,9 @@
 					<p><a href="http://www.aargauerzeitung.ch" target="_blank">Weiterlesen auf aargauerzeitung.ch</a></p>
 					<p><a href="#">Spannenden Artikel gelesen? Lassen Sie es uns wissen.</a></p>
 				</div>
-			</div>
+			</div
+			
+		</div>
 		</div>
 		
 		<script>
@@ -212,8 +214,14 @@
 				top:0;
 				left:0;
 				backface-visibility: hidden;
-				transform: rotateX(0deg) rotateY(0deg);
-				transition: transform 1s ease-in-out 0s;
+				transform: rotateY(0deg);
+				transition: transform 0.5s ease-in-out 0s;
+				-webkit-backface-visibility: hidden;
+				-webkit-transform: rotateY(0deg);
+				-webkit-transition: -webkit-transform 0.5s ease-in-out 0s;
+				-moz-backface-visibility: hidden;
+				-moz-transform: rotateY(0deg);
+				-moz-transition: -moz-transform 0.5s ease-in-out 0s;
 				z-index: 1;
 			}
 		
@@ -223,14 +231,24 @@
 				left:0;
 				backface-visibility: hidden;
 				transform: rotateY(-180deg);
-				transition: transform 1s ease-in-out 0s;
+				transition: transform 0.5s ease-in-out 0s;
+				-webkit-backface-visibility: hidden;
+				-webkit-transform: rotateY(-180deg);
+				-webkit-transition: -webkit-transform 0.5s ease-in-out 0s;
+				-moz-backface-visibility: hidden;
+				-moz-transform: rotateY(-180deg);
+				-moz-transition: -moz-transform 0.5s ease-in-out 0s;
 				z-index: 0;
 			}
 			.abstract.showback .frontface {
 				transform: rotateY(180deg);
+				-webkit-transform: rotateY(180deg);
+				-moz-transform: rotateY(180deg);
 			}
 			.abstract.showback .backface {
 				transform: rotateY(0deg);
+				-webkit-transform: rotateY(0deg);
+				-moz-transform: rotateY(0deg);
 			}
 			 
 		</style>
