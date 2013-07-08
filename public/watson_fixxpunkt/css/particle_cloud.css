@@ -92,7 +92,7 @@
 	width:98%;
 	padding:1%;
 	text-align:center;
-	color:#333333;
+	color:#2222222;
 	position:fixed;
 	bottom:0;
 	left:0;
@@ -117,7 +117,7 @@
 
 .particle_cloud .date .next a:hover,
 .particle_cloud .date .previous a:hover {
-	color:#333333;
+	color:#222222;
 }
 
 @media screen and (max-width: 600px) {

@@ -39,12 +39,12 @@
 .color_combo_4 .combo_fg_inv, .color_combo_4.combo_fg_inv { color:#dddddd !important; }
 
 /* Black Matter */
-.color_combo_5 .combo_bg, .color_combo_5.combo_bg { background-color:#333333 !important; }
+.color_combo_5 .combo_bg, .color_combo_5.combo_bg { background-color:#222222 !important; }
 .color_combo_5 .combo_bg_inv, .color_combo_5.combo_bg_inv { background-color:#eeeeee !important; }
-.color_combo_5 .combo_bd, .color_combo_5.combo_bd { border-color: #333333 !important; }
+.color_combo_5 .combo_bd, .color_combo_5.combo_bd { border-color: #222222 !important; }
 .color_combo_5 .combo_bd_inv, .color_combo_5.combo_bd_inv { border-color: #eeeeee !important; }
 .color_combo_5 .combo_fg, .color_combo_5.combo_fg { color:#eeeeee !important; }
-.color_combo_5 .combo_fg_inv, .color_combo_5.combo_fg_inv { color:#333333 !important; }
+.color_combo_5 .combo_fg_inv, .color_combo_5.combo_fg_inv { color:#222222 !important; }
 
 /* Snowy Tundra */
 .color_combo_6 .combo_bg, .color_combo_6.combo_bg { background-color:#deebf3 !important; }
@@ -171,10 +171,10 @@
 
 /* Plain Old <== usually this combo shouldn't be available to the user */
 .color_combo_99 .combo_bg, .color_combo_99.combo_bg { background-color:#ffffff !important; }
-.color_combo_99 .combo_bg_inv, .color_combo_99.combo_bg_inv { background-color:#333333 !important; }
+.color_combo_99 .combo_bg_inv, .color_combo_99.combo_bg_inv { background-color:#222222 !important; }
 .color_combo_99 .combo_bd, .color_combo_99.combo_bd { border-color: #ffffff !important; }
-.color_combo_99 .combo_bd_inv, .color_combo_99.combo_bd_inv { border-color: #333333 !important; }
-.color_combo_99 .combo_fg, .color_combo_99.combo_fg { color:#333333 !important; }
+.color_combo_99 .combo_bd_inv, .color_combo_99.combo_bd_inv { border-color: #222222 !important; }
+.color_combo_99 .combo_fg, .color_combo_99.combo_fg { color:#222222 !important; }
 .color_combo_99 .combo_fg_inv, .color_combo_99.combo_fg_inv { color:#ffffff !important; }
 
 
