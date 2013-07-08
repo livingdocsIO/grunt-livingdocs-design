@@ -54,7 +54,7 @@
 			caption_2: _.template("<p data-doc-editable=\"text\" class=\"caption\">Flüchtlingslager Ruanda 1994</p>"),
 			
 			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
-			tagList: _.template("<div class='tags'>Artikel-Tags<ul><li class='ressort'><a href='#'>News</a></li><li class='ressort'><a href='#'>Geschichte</a></li><li><a href='#'>Afrika</a></li><li><a href='#'>Bürgerkrieg</a></li><li><a href='#'>Kolonialpolitik</a></li></ul></div>"),
+			tagList: _.template("<div class='tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>News</a></li><li class='ressort'><a href='#'>Geschichte</a></li><li><a href='#'>Afrika</a></li><li><a href='#'>Bürgerkrieg</a></li><li><a href='#'>Kolonialpolitik</a></li></ul></div>"),
 			
 			story_teaser: _.template("<div class='region x_full_desktop y_full font_m' style='background-image:url(media/img/placeholderimg/bild_006.jpg);'><div class='text'><h3>Ende für Lager?</h3><h2>Kuba will Guantánamo zurückhaben</h2><p class='lead'><span class='author'>Maja-Sibylle von Thurn und Taxis, dpa</span> – Unheilige Allianz Havanna-Washington: Kurz nachdem Barack Obama signalisiert hat, dass er Guantánamo schliessen will, schlägt das Castro-Regime in die gleiche Kerbe.</p></div></div>"),
 			

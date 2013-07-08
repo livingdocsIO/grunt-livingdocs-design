@@ -26,6 +26,7 @@
 			sideInsert: _.template("<div class=\"insert side\">\n</div>"),
 			rightInsert: _.template("<div class=\"insert\">\n</div>"),
 			maincolInsert: _.template("<div class=\"insert maincol\">\n</div>"),
+			fullInsert: _.template("<div class=\"insert full\"></div>"),
 			imageBar: _.template("<div class=\"insert full imagebar\">\n</div>"),
 			
 			video_1: _.template("<div class='video' onclick='playvideo($(this),\"VCJ1x_If8mw\" );'><img src=\"media/img/placeholderimg/bild_019.jpg\" /><img class=\"arrow\" src=\"media/img/main/arrows/arrow_transp_grey_play.png\" /></div>"),
@@ -51,7 +52,7 @@
 			map_1: _.template("<div class='map' style='padding-bottom:66%'><iframe frameborder='0' scrolling='no' marginheight='0' marginwidth='0' src='https://www.google.com/maps?f=q&amp;source=s_q&amp;hl=de&amp;geocode=&amp;q=Ost-Kongo&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=61.452931,77.519531&amp;ie=UTF8&amp;hq=&amp;hnear=Kongo,+Kamerun&amp;ll=3.2,13.85&amp;spn=19.597762,19.379883&amp;t=m&amp;z=6&amp;output=embed'></iframe><br /><small><a href='https://www.google.com/maps?f=q&amp;source=embed&amp;hl=de&amp;geocode=&amp;q=guatemala+ciudad+nueva&amp;aq=&amp;sll=37.0625,-95.677068&amp;sspn=57.292148,69.873047&amp;ie=UTF8&amp;hq=&amp;hnear=Ciudad+Nueva,+Mazatenango,+Suchitep%C3%A9quez,+Guatemala&amp;ll=14.535734,-91.48366&amp;spn=0.034687,0.034118&amp;t=m&amp;z=14' style='color:#0000FF;text-align:left'>Größere Kartenansicht</a></small></div><p class='caption'>Der Ost-Kongo im Wandel der Zeit</p>"),
 			
 			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
-			tagList: _.template("<div class='tags'>Artikel-Tags<ul><li class='ressort'><a href='#'>News</a></li><li class='ressort'><a href='#'>Geschichte</a></li><li><a href='#'>Afrika</a></li><li><a href='#'>Bürgerkrieg</a></li><li><a href='#'>Kolonialpolitik</a></li></ul></div>")
+			tagList: _.template("<div class='tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>News</a></li><li class='ressort'><a href='#'>Geschichte</a></li><li><a href='#'>Afrika</a></li><li><a href='#'>Bürgerkrieg</a></li><li><a href='#'>Kolonialpolitik</a></li></ul></div>")
 		
 		};
 	})();

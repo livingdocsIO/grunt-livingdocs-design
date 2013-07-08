@@ -21,6 +21,7 @@
 			maincolInsert: _.template("<div class=\"insert maincol\">\n</div>"),
 			maincolBlockInsert: _.template("<div class=\"insert maincol block\">\n</div>"),
 			sideInsertCommercial: _.template("<div class=\"insert side commercial\"></div>"),
+			fullInsert: _.template("<div class=\"insert full\"></div>"),
 			fat_fullInsert: _.template("<div class=\"insert fat_full\">\n</div>"),
 			commercialRectangle: _.template("<img src=\"media/img/placeholderwerbung/rectangle_story.jpg\" />"),
 			
@@ -44,7 +45,7 @@
 			source_3: _.template("<p class='source' data-doc-editable=\"text\">Quelle: Keystone</p>"),
 			
 			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
-			tagList: _.template("<div class='tags'>Artikel-Tags<ul><li class='ressort'><a href='#'>Fussball</a></li><li><a href='#'>FC Thun</a></li><li><a href='#'>FC St. Gallen</a></li><li><a href='#'>Super League</a></li></ul></div>")
+			tagList: _.template("<div class='tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>Fussball</a></li><li><a href='#'>FC Thun</a></li><li><a href='#'>FC St. Gallen</a></li><li><a href='#'>Super League</a></li></ul></div>")
 		};
 	})();
 

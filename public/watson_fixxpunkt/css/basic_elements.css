@@ -52,24 +52,28 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 .badges {
 	color:#666666;	
 	font-size:1.333em; /* 24px / 18px */
-	display:inline-block;
 	margin-top:0.4166em; /* 10px / 24px */
 }
 
 .badges ul {
-	margin:4px 0 0 0;
+	margin:4px 0.5em 0 0; /* 12px / 24px */
+	display:inline-block;
 }
 
-.badges .negative {
+.badges ul.negative {
 	margin-top:0;
 }
 
 .badges li {
-	font-size:0.6666em; /* 16px / 24px */
+	font-size:0.62em; /* 14.88px / 24px */
 	display:inline-block;
 	margin-right:0.75em; /* 12px / 16px */
 	margin-bottom:0.75em; /* 12px / 16px */
 	padding:0;
+}
+
+.badges li:last-child {
+	margin-right:0;
 }
 
 .badges li a span.name,
@@ -137,7 +141,6 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 .tags {
 	font-size:1.333em; /* 24px / 18px */
 	color:#666666;	
-	display:inline-block;
 	margin-top:2.083em; /* 50px / 24px */
 }
 
@@ -151,7 +154,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 }
 
 .tags li a {
-	font-size:0.6666em; /* 16px / 24px */
+	font-size:0.62em; /* 14.88px / 24px */
 	display:inline-block;
 	color:#00c6ff;
 	background-color:#222222;
