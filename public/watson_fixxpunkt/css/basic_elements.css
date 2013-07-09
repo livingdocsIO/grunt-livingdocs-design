@@ -374,6 +374,65 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	float:left;
 }
 
+
+
+
+
+
+/* flipper */
+/* ======= */
+.region.flipper {
+	cursor:pointer;
+}
+
+.region.flipper .region.frontface {
+	position:absolute;
+	top:0;
+	left:0;
+	backface-visibility: hidden;
+	transform: rotateY(0deg);
+	transition: transform 0.5s ease-in-out 0s;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: rotateY(0deg);
+	-webkit-transition: -webkit-transform 0.5s ease-in-out 0s;
+	-moz-backface-visibility: hidden;
+	-moz-transform: rotateY(0deg);
+	-moz-transition: -moz-transform 0.5s ease-in-out 0s;
+	z-index: 1;
+}
+
+.region.flipper .region.backface {
+	position:absolute;
+	top:0;
+	left:0;
+	backface-visibility: hidden;
+	transform: rotateY(-180deg);
+	transition: transform 0.5s ease-in-out 0s;
+	-webkit-backface-visibility: hidden;
+	-webkit-transform: rotateY(-180deg);
+	-webkit-transition: -webkit-transform 0.5s ease-in-out 0s;
+	-moz-backface-visibility: hidden;
+	-moz-transform: rotateY(-180deg);
+	-moz-transition: -moz-transform 0.5s ease-in-out 0s;
+	z-index: 0;
+}
+
+.region.flipper.showback .frontface {
+	transform: rotateY(180deg);
+	-webkit-transform: rotateY(180deg);
+	-moz-transform: rotateY(180deg);
+}
+
+.region.flipper.showback .backface {
+	transform: rotateY(0deg);
+	-webkit-transform: rotateY(0deg);
+	-moz-transform: rotateY(0deg);
+}
+			
+			
+			
+			
+
 /* peephole & panorama */
 /* =================== */
 .region.full_story .peephole {
