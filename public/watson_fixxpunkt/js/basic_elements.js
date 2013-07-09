@@ -31,6 +31,7 @@ $(document).ready(function() {
 	
 	
 	
+	
 	/* flipper */
 	/* ======= */
 	$(document).ready(function() {
@@ -38,6 +39,7 @@ $(document).ready(function() {
 			$(this).toggleClass("showback");
 		});
 	});
+
 
 	
 	
