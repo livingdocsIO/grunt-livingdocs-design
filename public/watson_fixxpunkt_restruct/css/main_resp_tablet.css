@@ -13,13 +13,18 @@
 		width:100.8%;
 	}
 	
-	.region.x_full_tablet { width:100%; }
+	.region.x_full_tablet { width:100.5%; }
 	.region.x_half_tablet { width:50%; }
 	.region.y_quarter_tablet { height:151px; }
 	.region.y_half_tablet { height:302px; }
 	.region.y_three_quarters_tablet { height:453px; }
 	.region.y_full_tablet { height:604px; }
 	
+	.region .region.x_half_tablet {
+		border:0;
+		border-right:4px solid #ffffff;
+	}
+
 	/* collection regions */
 	/* ============= */
 	.region.collection_main { border-bottom:0; }

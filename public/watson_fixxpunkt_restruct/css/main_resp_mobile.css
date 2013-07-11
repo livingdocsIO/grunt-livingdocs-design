@@ -12,6 +12,8 @@
 	
 	.region {
 		width:100% !important;
+		border:0 !important;
+		border-bottom:4px solid #ffffff !important;
 	}
 	.region.y_quarter_mobile { height:120px; }
 	.region.y_half_mobile { height:240px; }

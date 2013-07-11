@@ -58,8 +58,9 @@ strong {
 	background-size:cover;
 }
 
-.region .region {
-	width:100%;
+.region .region.y_half_desktop,
+.region .region.y_quarter_desktop,
+.region .region.y_three_quarter_desktop {
 	border:0;
 	border-bottom:4px solid #ffffff;
 }
