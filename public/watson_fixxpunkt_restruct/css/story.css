@@ -1,45 +1,109 @@
 
 
 
+.story h2 {
+	font-size:3em; /* 30px / 10px */
+	font-weight:bold;
+	line-height:1em;
+	-moz-hyphens: manual;
+	-webkit-hyphens: manual;
+	-ms-hyphens: manual;
+	-o-hyphens: manual;
+	hyphens: manual;
+}
+
+.story h3 {
+	font-size:1.6em; /* 16px / 10px */
+	font-weight:normal;
+	text-transform:uppercase;
+}
+
+.story h4 {
+	font-size:2em; /* 20px / 10px */
+	font-weight:normal;
+}
+
+.story p, .teaser ul, .teaser ol {
+	font-size:1.8em /* 18px / 10px */;
+	line-height:1.3em;
+}
+
+.story ol {
+	list-style-type:decimal;
+	margin: 20px 0 20px 50px;
+}
+
+.story ol li {
+	margin: 0 0 0 ; 
+}
+
+.story p.lead .author {
+	font-weight:bold;
+	text-transform: lowercase;
+}
+
+.story p.lead .author .internal {
+	border-bottom:2px solid #f9349e;
+	height:1.1em;
+	float:left;
+}
 
 
-.region.full_story .text {
+
+
+
+
+
+
+.story {
+	width:100%;
+}
+
+.story .story-container {
 	position:static;
 	margin-left:10%;
 	margin-bottom:60px;
 	width:85%;
 }
 
-.region.full_story p.date,
-.region.full_story p.author {
+.story p.date,
+.story p.author {
 	color:#666666;
 	font-size:1.4em /* 14px / 10px */
 }
 
-.region.full_story p.lead {
+.story p.lead {
 	font-weight:bold;
 	font-style:italic;
 }
 
-.region.full_story p.half_title {
+.story p.half_title {
 	font-size:2em /* 20px / 10px */;
 	font-weight:bold;
 	margin-top:20px;
 }
 
-.region.full_story p,
-.region.full_story h3 {
+.story p,
+.story h3 {
 	width:60%;
 }
 
-.region.full_story h2 {
+.story p {
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	-ms-hyphens: auto;
+	-o-hyphens: auto;
+	hyphens: auto;
+}
+
+.story h2 {
 	width:auto;
 }
 
 /* inserts */
 /* ======= */
-.region.full_story .insert p,
-.region.full_story .insert h4 {
+.story .insert p,
+.story .insert h4 {
 	width:100%;
 	padding:0;
 	margin-right:0;
@@ -48,7 +112,7 @@
 }
 
 /* default insert (hanging to the right) */
-.region.full_story .insert {
+.story .insert {
 	margin:0 2% 10px 2%;
 	padding:0;
 	width:56%;
@@ -60,51 +124,51 @@
 }
 
 /* full wid with margin */
-.region.full_story .insert.full {
+.story .insert.full {
 	width:97%;
 	margin:0 1.5% 10px 1.5%;
 }
 
 /* full width without margin */
-.region.full_story .insert.fat_full {
+.story .insert.fat_full {
 	width:100%;
 	margin:0 0 10px 0;
 }
 
 /* fifty fifty */
-.region.full_story .insert.fifty_fifty {
+.story .insert.fifty_fifty {
 	width:46.4%;
 	margin:0 1.8% 10px 1.8%;
 	float:left;
 }
 
 /* right side only */
-.region.full_story .insert.side {
+.story .insert.side {
 	width:34%;
 	margin:0 2% 10px 2%;
 }
 
 /* left side only */
-.region.full_story .insert.maincol {
+.story .insert.maincol {
 	width:60%;
 	margin:0 0 10px 1.8%;
 	float:none;
 }
 
-.region.full_story .insert.maincol.block {
+.story .insert.maincol.block {
 	display:inline-block;
 }
 
-.region.full_story .insert.maincol.shift {
+.story .insert.maincol.shift {
 	padding-left:10%;
 }
 
-.region.full_story .insert.commercial {
+.story .insert.commercial {
 	text-align:center;
 	background-color:#eeeeee;
 }
 
-.region.full_story .insert.commercial img {
+.story .insert.commercial img {
 	width:90%;
 	margin:1.5em 0;
 }
@@ -113,27 +177,55 @@
 
 /* nested regions in inserts */
 /* ========================= */
-.region.full_story .insert .region.y_full .text,
-.region.full_story .insert .region.y_half .text,
-.region.full_story .insert .region.y_quarter .text {
+/*.story .insert .region.y_full .text,
+.story .insert .region.y_half .text,
+.story .insert .region.y_quarter .text {
 	position:absolute;
 }
 
-.region.full_story .insert .region .text {
+.story .insert .region .text {
 	margin-left:0;
 	margin-bottom:0;
 	width:100%;
 }
 
-.region.full_story .insert .region p,
-.region.full_story .insert .region h4 {
+.story .insert .region p,
+.story .insert .region h4 {
 	padding:0 15px 10px 15px;
 	width:auto;
 }
 
-.region.full_story .insert .region p.lead {
+.story .insert .region p.lead {
 	font-weight:inherit;
 	font-style:inherit;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+	.story .text {
+		margin-left:0;
+		width:100%;
+	}
+	
+	.story p,
+	.story h3,
+	.story .insert.maincol {
+		width:80%;
+	}
+	
 }
 
 
@@ -143,5 +235,44 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 600px) {
+	.story p,
+	.story h2,
+	.story h3,
+	.story h4,
+	.story .insert {
+		width:auto !important;
+		clear:both !important;
+		float:none !important;
+		display:block !important;
+	}
+	
+	.story .insert.hide_on_mobile {
+		display:none !important;
+	}
+	
+	.story .story-container .insert {
+		margin:0 15px 10px 15px !important;
+	}
+	
+	.story .story-container .insert.fat_full {
+		margin:0 0 10px 0 !important;
+	}
+	
+	.story .insert.commercial {
+		width:100%;
+		margin:0 0 10px 0 !important;
+	}
+}
 
 

@@ -49,12 +49,12 @@ $(document).ready(function() {
 	var poll = (function(){
 		return {
 			highlight_vote_button:function() {
-				$(".region.poll a.button").animate({'font-size': '1.75em', 'left': '0.75em'}, 500, 'swing' );
-				$(".region.poll a.button").parents('li').animate({'margin-top': '0.75em', 'margin-bottom': '0.75em'}, 500, 'swing' );
+				$(".widget.poll a.button").animate({'font-size': '1.75em', 'left': '0.75em'}, 500, 'swing' );
+				$(".widget.poll a.button").parents('li').animate({'margin-top': '0.75em', 'margin-bottom': '0.75em'}, 500, 'swing' );
 			},
 		
 			show_result:function() {
-				var current_poll = $(this).parents(".region.poll");
+				var current_poll = $(this).parents(".widget.poll");
 				var current_results = [64,30,6];
 				current_poll.find("div.answers").slideUp(500, 'swing', function(){
 					current_poll.find("div.result").slideDown(200, 'linear', function() {
@@ -101,9 +101,9 @@ $(document).ready(function() {
 		}
 	})();
 	$(document).ready(function() {
-		if ( $('.region.poll').length ) {
-			$(".region.poll input").click(poll.highlight_vote_button);
-			$(".region.poll a.button").click(poll.show_result);
+		if ( $('.widget.poll').length ) {
+			$(".widget.poll input").click(poll.highlight_vote_button);
+			$(".widget.poll a.button").click(poll.show_result);
 		}
 	});
 	
