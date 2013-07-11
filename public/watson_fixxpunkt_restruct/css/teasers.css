@@ -1,9 +1,14 @@
 
 
-.insert .teaser,
 .region .teaser {
 	height:100%;
 	width:100%;	
+}
+
+.insert .teaser {
+	width:100%;
+	height:40em;
+	position:relative;
 }
 
 /* teaser items */
@@ -177,16 +182,6 @@
 .teaser h4 {
 	padding:0 15px 10px 15px;
 	margin:0;
-}
-
-.teaser.linked_teaser:hover a {
-	color:#000000;
-}
-
-.teaser.linked_teaser h2,
-.teaser.linked_teaser p,
-.teaser.linked_teaser h3 {
-	padding:0;
 }
 
 

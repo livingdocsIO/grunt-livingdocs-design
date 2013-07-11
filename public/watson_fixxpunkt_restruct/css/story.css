@@ -48,7 +48,15 @@
 	float:left;
 }
 
-
+.story h2,
+.story p.lead,
+.story p,
+.story li,
+.story h3,
+.story h4 {
+	padding:0 15px 10px 15px;
+	margin:0;
+}
 
 
 
@@ -104,7 +112,7 @@
 /* ======= */
 .story .insert p,
 .story .insert h4 {
-	width:100%;
+	width:auto;
 	padding:0;
 	margin-right:0;
 	margin-left:0;
