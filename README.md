@@ -13,7 +13,7 @@ It defines a setup for easily creating and testing a design.
   5. Run 'bundle install'
   
   
-In order to view a page run 'nodemon app.js' and navigate to the page (e.g. http://localhost:3000/public/bootstrap.html).  
+In order to view a page run 'nodemon app.js' and navigate to the page (e.g. http://localhost:3000/bootstrap.html).  
 In order run the automatic less and coffee compilers run 'bundle exec guard'.
 
 
@@ -28,8 +28,8 @@ Compiled designs are in the public/css folder. If you don't want to use less, yo
 **HTML Pages**  
 HTML Pages live in the folder public/  
 The pages are there to test a design. You can do a style guide page or just a regular HTML page using a certain design.  
-To view the pages, start node ('nodemon app.js') and navigate to your page (e.g. http://localhost:3000/public/bootstrap.html)  
-You can also use underscore templates to use snippets in your design in order to keep your HTML markup slim. For an example see the boostrap.html page.  
+To view the pages, start node ('nodemon app.js') and navigate to your page (e.g. http://localhost:3000/bootstrap.html)  
+You can also use underscore templates to use snippets in your design in order to keep your HTML markup slim. For an example see the bootstrap.html page.  
 
 **Snippets**  
 Snippets to be used in HTML pages can be defined in coffee script.  
