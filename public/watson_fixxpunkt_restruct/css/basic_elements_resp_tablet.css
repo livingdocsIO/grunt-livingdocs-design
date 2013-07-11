@@ -1,0 +1,27 @@
+
+
+
+
+@media screen and (max-width: 1000px) {
+		
+	/* fat_full header image */
+	/* ===================== */
+	.region.full_story .full-width-container.insert.fat_full p.caption {
+		max-width:78% !important; /* 80% - 2% */
+	}
+	
+	/* peephole */
+	/* ======== */
+	.region.full_story .peephole {
+		background-attachment:scroll;
+		background-size:cover;
+	}
+
+	
+	/* nur zum test */
+	/* ============ */
+	.region.full_story .imagebar img {
+		width:49.6%;
+		margin:0 0.2% 2px 0.2%;
+	}
+}
