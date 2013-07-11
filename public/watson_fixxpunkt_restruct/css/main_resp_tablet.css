@@ -44,3 +44,15 @@
 	.hide_on_tablet { display:none !important; }
 	.show_on_tablet { display:block !important;; }
 }
+
+
+/* ipad landscape */
+/* ============== */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+	.wrapper {
+		width:1024px;
+	}
+}
