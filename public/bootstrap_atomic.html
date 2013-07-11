@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link rel="stylesheet" href="/css/livingdocs-engine.css">
+    <link href="/css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
+    <link href="/css/bootstrap-adjust.css" media="all" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div class="container-fluid">
+      <section class="doc-section"></section>
+    </div>
+
+    <!-- jQuery: requirement for editableJS and livingdocs-engine -->
+    <script src="/js/vendor/jquery-1.9.js"></script>
+
+    <!-- dependencies of livingdocs-engine -->
+    <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+    <script src="/js/vendor/store/store.js"></script>
+    <script src="/js/vendor/editableJS/editable.js"></script>
+
+    <!-- snippet collections for manual testing -->
+    <script src="/js/bootstrap_atomic.js"></script>
+    <!-- livingdocs-engine. yeah! -->
+    <script src="/js/vendor/livingdocs_engine.js"></script>
+
+    <script>
+      doc.addSnippetCollection(snippetCollections.bootstrap_atomic.snippets, snippetCollections.bootstrap_atomic.config);
+
+      $(document).ready(function() {
+        var json = doc.stash.get();
+        doc.loadDocument({ json: json });
+
+        doc.ready(function() {
+
+          if (!json) {
+            var row = doc.add("bootstrap_atomic.main_and_sidebar");
+            row.append("main", doc.create("bootstrap_atomic.hero"));
+            row.append("main", doc.create("bootstrap_atomic.text"));
+            row.append("sidebar", doc.create("bootstrap_atomic.title"));
+            var single = doc.add("bootstrap_atomic.column");
+            single.append(doc.create("bootstrap_atomic.hero"));
+            
+            var column = doc.add("bootstrap_atomic.column");
+            column.append(doc.create("bootstrap_atomic.hero"));
+            column.append(doc.create("bootstrap_atomic.info"));
+            column.append(doc.create("bootstrap_atomic.button"));
+            
+          }
+        });
+
+      });
+    </script>
+
+  </body>
+</html>
