@@ -12,10 +12,14 @@ app.configure(function () {
   app.use(app.router);
   
   // views
-  app.use(express.static(path.join(application_root, "/")));
+  app.use(express.static(path.join(application_root, "/public")));
 });
 
 /* R O U T E S */
+app.get('/', function(req,res,next) {
+  res.redirect('bootstrap_atomic.html');
+});
+
 
 app.listen(serverPort);
 console.log("started server on port " + serverPort);
