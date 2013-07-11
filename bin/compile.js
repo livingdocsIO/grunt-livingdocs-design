@@ -7,9 +7,16 @@ var argv = require('optimist')
     .argv;
 
 
+/*
+* Node modules Requirements
+*/
 var fs = require('fs');
 var path = require('path');
+var cheerio = require('cheerio');
 
+
+
+// Check existence of desired design
 var designDirectory = path.join(__dirname, '../designs', argv.design);
 if (!fs.existsSync(designDirectory)) {
   console.log('The design "' + argv.design + '" does not exist');
@@ -23,9 +30,9 @@ if (!fs.existsSync(snippetsDirectory)) {
 }
 
 
-var cheerio = require('cheerio');
-
 var snippets = fs.readdirSync(snippetsDirectory);
+
+
 
 snippets.forEach(function(snippet) {
   fs.readFile(snippetsDirectory + '/' + snippet, {encoding: 'utf8'},function(err, data) {
@@ -38,7 +45,7 @@ snippets.forEach(function(snippet) {
     }
     
     // Data
-    $('#config').remove
+    $('#config').remove();
     console.log($.html());
     
     
