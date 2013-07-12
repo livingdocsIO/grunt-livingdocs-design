@@ -68,7 +68,7 @@ snippetFiles.forEach(function(snippet) {
     // Check if everything is compiled, close the templates file and save it;
     compiled = compiled + 1;
     if(snippetFiles.length == compiled) {
-      var fileData = templateBegin + JSON.stringify(design)  + templateEnd;
+      var fileData = templateBegin + JSON.stringify(design, null, 2)  + templateEnd;
       var output = argv.path || path.join(__dirname, '../public/js/', namespace + '.js');
       fs.writeFile(output, fileData, 'utf8', function(err) {
         if(err) throw(err);
