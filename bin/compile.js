@@ -61,7 +61,7 @@ snippetFiles.forEach(function(snippet) {
      * load config of a snippet into snippets object, load minified html into snippet
      */
     design.snippets[snippetName] = JSON.parse($("script[type=ld-conf]").html()) || {};
-    $('ld-conf').remove();
+    $('script[type=ld-conf]').remove();
     design.snippets[snippetName]["html"] = processHtml($.html());
 
 
