@@ -38,31 +38,40 @@ function processHtml(html) {
 var snippetFiles = fs.readdirSync(path.join(designDirectory, 'snippets'));
 
 var design = {};
-design.config = JSON.parse(fs.readFileSync(designDirectory + '/config.json', 'utf8'));
-if(!design.config.namespace) { console.log('config.json - namespace is required');}
-design.snippets = {};
+    design.snippets = {},
+    design.config = JSON.parse(fs.readFileSync(designDirectory + '/config.json', 'utf8'));
+    
 var namespace = design.config.namespace;
-var compiled = 0;
+if(!namespace) { console.log('config.json - namespace is required');}
 
 var templateBegin = "(function() { this.snippetCollections || (this.snippetCollections = {}); snippetCollections." + design.config.namespace + " = (function() { return ";
 var templateEnd = ";})();}).call(this);";
+
+var compiled = 0;
 
 // iterate through file array and process the snippets, store them in templates.js file
 snippetFiles.forEach(function(snippet) {
   fs.readFile(path.join(designDirectory, 'snippets',snippet), {encoding: 'utf8'},function(err, data) {
     if(err) throw err;
 
-    var snippetName = snippet.replace('.html', '');
-
     // load file in jQuery object to read json & html
     $ = cheerio.load(data);
 
-    /*
-     * load config of a snippet into snippets object, load minified html into snippet
-     */
-    design.snippets[snippetName] = JSON.parse($("script[type=ld-conf]").html()) || {};
-    $('script[type=ld-conf]').remove();
-    design.snippets[snippetName]["html"] = processHtml($.html());
+    // create snippet object using config
+    var snippetFile = snippet.replace('.html', '');
+    var snippetObject = JSON.parse($("script[type=ld-conf]").html()) || {};
+    var snippetNamespace = snippetObject.namespace || snippetFile;
+    
+    // Disallow "-" in snippetNamespace
+    if (snippetNamespace.indexOf('-') != -1) {
+      console.log('error: snippet', snippetNamespace + ':', 'the character "-" (minus / dash) is not allowed in a snippet namespace');
+      process.exit(0);
+    }
+    design.snippets[snippetNamespace] = snippetObject;
+    
+    // push snippet html into snippet object, remove config and minify the html
+    $("script[type=ld-conf]").remove();
+    design.snippets[snippetNamespace]["html"] = processHtml($.html());
 
 
     // Check if everything is compiled, close the templates file and save it;
