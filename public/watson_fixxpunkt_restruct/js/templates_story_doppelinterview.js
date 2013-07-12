@@ -9,11 +9,11 @@
 		
 			fullWidthLayout: _.template("<div data-doc-container>\n</div>"),
 			textLayout: _.template("<div data-doc-container>\n</div>"),
-			headerImage: _.template("<img class='hide_on_mobile' src=\"media/img/placeholderimg/bild_049.jpg\" /><img class='hide_on_desktop show_on_mobile' src=\"media/img/placeholderimg/bild_057.jpg\" />"),
+			headerImage: _.template("<img class='hide_on_mobile' src=\"media/img/placeholderimg/bild_023.jpg\" /><img class='hide_on_desktop show_on_mobile' src=\"media/img/placeholderimg/bild_026.jpg\" />"),
 			headerCaption: _.template("<p class='caption'>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.<br/>Quelle: Keystone/EPA/Luis Soto</p>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
-			upperLine: _.template("<h3>Mauch vs. Morin</h3>"),
-			title: _.template("<h2 data-doc-editable=\"title\">«Es braucht endlich einen Ständeratssitz für die Städte»</h2>"),
+			upperLine: _.template("<h3 class='uppertitle'>Mauch vs. Morin</h3>"),
+			title: _.template("<h2 data-doc-editable=\"title\" class='maintitle'>«Es braucht endlich einen Ständeratssitz für die Städte»</h2>"),
 			lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\nHochhausquartiere, Kantonsfusionen, Ständeratssitze für die grossen Städte: Die Präsidenten von Zürich und Basel - Corine Mauch und Guy Morin, entwerfen im Doppelinterview die Schweiz von morgen.\n</p>"),
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\nFranz Ermel\n</p>"),
 			
@@ -70,8 +70,8 @@
 			
 			text_20: _.template("<p data-doc-editable=\"text\">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum.</p>"),
 			
-			image_1: _.template("<img src=\"media/img/placeholderimg/bild_050.jpg\" />"),
-			image_2: _.template("<img src=\"media/img/placeholderimg/bild_051.jpg\" />"),
+			image_1: _.template("<img src=\"media/img/placeholderimg/bild_024.jpg\" class='stretch_to_fit' />"),
+			image_2: _.template("<img src=\"media/img/placeholderimg/bild_025.jpg\" class='stretch_to_fit' />"),
 			
 			caption_1: _.template("<p data-doc-editable=\"text\" class=\"caption\">\nLorem ipsum dolor\n</p>"),
 			caption_2: _.template("<p data-doc-editable=\"text\" class=\"caption\">\nLorem ipsum dolor\n</p>"),
@@ -87,9 +87,9 @@
 			
 			tweetbox: _.template("<blockquote class='twitter-tweet'><p>Stadt, Land - die gespaltene Schweiz: Den Städten geht es gut. Die Spannungen zwischen Agglomeration und... <a href='http://t.co/2dlCErc2SV'>http://t.co/2dlCErc2SV</a></p>&mdash; Guy Morin (@moringuy) <a href='https://twitter.com/moringuy/statuses/328567185268174849'>April 28, 2013</a></blockquote><script async src='http://platform.twitter.com/widgets.js' charset='utf-8'></script>"),
 			
-			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
-			tagList: _.template("<div class='tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>Zürich</a></li><li><a href='#'>Corinne Mauch</a></li><li><a href='#'>Stadtentwicklung</a></li><li><a href='#'>Zersiedelung</a></li><li><a href='#'>Interview</a></li></ul></div>"),
-			badgeList: _.template("<div class='badges'><div class='title'>Ihre Reaktion?</div><ul><li><a href='#'><span class='name'>LOL</span><span class='number'><span class='arrow'></span>7</span></a></li><li><a href='#'><span class='name'>Hot</span><span class='number'><span class='arrow'></span>9</span></a></li><li class='top'><a href='#'><span class='name'>Kitsch</span><span class='number'><span class='arrow'></span>437</span></a></li></ul><ul class='negative'><li><a href='#'><span class='name'>Fail</span><span class='number'><span class='arrow'></span>34</span></a></li><li><a href='#'><span class='name'>WTF</span><span class='number'><span class='arrow'></span>1</span></a></li><li><a href='#'><span class='name'>OMG</span><span class='number'><span class='arrow'></span>3</span></a></li></ul></div>")
+			socialMediaBox: _.template("<div class='widget social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_010.png' /></div>"),
+			tagList: _.template("<div class='widget tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>Zürich</a></li><li><a href='#'>Corinne Mauch</a></li><li><a href='#'>Stadtentwicklung</a></li><li><a href='#'>Zersiedelung</a></li><li><a href='#'>Interview</a></li></ul></div>"),
+			badgeList: _.template("<div class='widget badges'><div class='title'>Ihre Reaktion?</div><ul><li><a href='#'><span class='name'>LOL</span><span class='number'><span class='arrow'></span>7</span></a></li><li><a href='#'><span class='name'>Hot</span><span class='number'><span class='arrow'></span>9</span></a></li><li class='top'><a href='#'><span class='name'>Kitsch</span><span class='number'><span class='arrow'></span>437</span></a></li></ul><ul class='negative'><li><a href='#'><span class='name'>Fail</span><span class='number'><span class='arrow'></span>34</span></a></li><li><a href='#'><span class='name'>WTF</span><span class='number'><span class='arrow'></span>1</span></a></li><li><a href='#'><span class='name'>OMG</span><span class='number'><span class='arrow'></span>3</span></a></li></ul></div>")
 		};
 	})();
 

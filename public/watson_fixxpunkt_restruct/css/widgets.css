@@ -1,5 +1,9 @@
 
-.insert .widget,
+.insert .widget {
+	width:100%;	
+	position:relative;
+}
+
 .region .widget {
 	height:100%;
 	width:100%;	
@@ -11,7 +15,6 @@
 p.quote {
 	font-family:'Lustria', 'Times New Roman',Times,serif;
 	font-size:3.6em /* 36px / 10px */;
-	margin-top:20px;
 	line-height:1.3em;
 	font-style: italic;
 	color:#009ccc;
@@ -670,10 +673,6 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 @media screen and (max-width: 600px) {
 	
-	/* quotes */
-	/* ====== */
-	.region.full_story p.quote { font-size:3.5714em !important; } /* 25px / 7px */
-	
 	/* fat_full header image */
 	/* ===================== */
 	.full-width-container { min-height:6em; } /* 42px / 7px */
@@ -712,6 +711,9 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 		margin: 0 0 2px 0;
 	}
 	
+	/* quotes */
+	/* ====== */
+	p.quote { font-size:3.5714em !important; } /* 25px / 7px */
 
 }
 

@@ -4,10 +4,10 @@
 		<!-- upfront ==> -->
 		<script src="js/vendor/underscore.js"></script>
     	<script src="js/vendor/jquery-1.9.js"></script>
-    	<script src="js/templates_story_multimedia.js"></script>
+    	<script src="js/templates_story_sport.js"></script>
 		<!-- <== -->
     
-		<title>watson - «Agatha» reisst ein Loch in die Stadt</title>
+		<title>watson - Thuner lassen dem FC St. Gallen keine Chance</title>
 		
 		<!-- Mobile viewport optimization -->
 		<meta name="HandheldFriendly" content="True">
@@ -60,7 +60,6 @@
 		</div>
         
 	</div>
-
 	
 	<div class="naviblock">
 		<div class="expandable">
@@ -143,13 +142,8 @@
 	
 	</body>
 	<script>
-	
-	function playvideo(element, video_id) {
-      element.html('<iframe src="http://www.youtube.com/embed/'+video_id+'?autoplay=1" frameborder="0" allowfullscreen></iframe>');
-    }
-	
     $(document).ready(function() {
-    	
+    
     
       // HEADER
       headerContainer = $('.full-width-container');
@@ -174,37 +168,44 @@
       // maincontent
       storyContent.append(livingdocs.watson.templates.text_1());
       
-      insert = $(livingdocs.watson.templates.fiftyFiftyInsert());
+      insert = $(livingdocs.watson.templates.rightInsert());
       storyContent.append(insert);
-      insert.append(livingdocs.watson.templates.image_2());
-      insert.append(livingdocs.watson.templates.caption_2());
-      insert.append(livingdocs.watson.templates.source_2());
+      insert.append(livingdocs.watson.templates.image_1());
+      storyContent.append(livingdocs.watson.templates.text_2());
       
-      insert_2 = $(livingdocs.watson.templates.fiftyFiftyInsert());
-      storyContent.append(insert_2);
-      insert_2.append(livingdocs.watson.templates.image_1());
-      insert_2.append(livingdocs.watson.templates.caption_1());
-      insert_2.append(livingdocs.watson.templates.source_1());
+      storyContent.append(livingdocs.watson.templates.quote_1());
+      storyContent.append(livingdocs.watson.templates.source_1());
       
-      insert_3 = $(livingdocs.watson.templates.fullInsert());
-      storyContent.append(insert_3);
-      insert_3.append(livingdocs.watson.templates.video_1());
-      insert_3.append(livingdocs.watson.templates.caption_3());
+      panorama_insert = $(livingdocs.watson.templates.fat_fullInsert());
+      storyContent.append(panorama_insert);
+      panorama_insert.append(livingdocs.watson.templates.panorama());
+      panorama_insert.append(livingdocs.watson.templates.caption_1());
+      panorama_insert.append(livingdocs.watson.templates.source_3());
       
-      insert_4 = $(livingdocs.watson.templates.maincolBlockInsert());
-      storyContent.append(insert_4);
-      insert_4.append(livingdocs.watson.templates.map_1());
+	  storyContent.append(livingdocs.watson.templates.text_3());
+      
+      maincolInsert_2 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(maincolInsert_2);
+      maincolInsert_2.append(livingdocs.watson.templates.quote_2());
+      maincolInsert_2.append(livingdocs.watson.templates.source_2());
+      
+      sideInsertCommercial = $(livingdocs.watson.templates.sideInsertCommercial());
+      storyContent.append(sideInsertCommercial);
+      sideInsertCommercial.append(livingdocs.watson.templates.commercialRectangle());
+
+      maincolBlockInsert_1 = $(livingdocs.watson.templates.maincolBlockInsert());
+      storyContent.append(maincolBlockInsert_1);
+      maincolBlockInsert_1.append(livingdocs.watson.templates.sportsTable());
+      
+      storyContent.append(livingdocs.watson.templates.text_4());
       
       maincolInsert_3 = $(livingdocs.watson.templates.fullInsert());
       storyContent.append(maincolInsert_3);
-      maincolInsert_3.append(livingdocs.watson.templates.tagList());  
-      maincolInsert_3.append(livingdocs.watson.templates.badgeList());    
+      maincolInsert_3.append(livingdocs.watson.templates.tagList());      
       
-      
-      
-    });
+  });
   </script>
-
+  
 </html>
 
 

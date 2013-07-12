@@ -11,13 +11,14 @@
 	width:100%;
 }
 
+.story .full-width-container {
+	margin-bottom:15px;
+}
+
 .story .story-container {
 	position:static;
 	margin-left:10%;
-	margin-bottom:60px;
 	width:85%;
-	padding-top:15px;
-	padding-bottom:60px;
 }
 
 .story h2.maintitle {
@@ -40,27 +41,6 @@
 	margin-bottom:10px;
 }
 
-.story h4 {
-	font-size:2em; /* 20px / 10px */
-	font-weight:normal;
-	margin-bottom:10px;
-}
-
-.story p, .story ul, .story ol {
-	font-size:1.8em /* 18px / 10px */;
-	line-height:1.3em;
-	margin-bottom:10px;
-}
-
-.story ol {
-	list-style-type:decimal;
-	margin: 20px 0 20px 50px;
-}
-
-.story ol li {
-	margin: 0 0 0 ; 
-}
-
 .story p.date,
 .story p.author {
 	color:#666666;
@@ -70,10 +50,10 @@
 .story p.lead {
 	font-weight:bold;
 	font-style:italic;
+	font-size:2.2em;
 }
 
 .story p.lead .author {
-	font-weight:bold;
 	text-transform: lowercase;
 }
 
@@ -83,10 +63,31 @@
 	float:left;
 }
 
+.story h4 {
+	font-size:2em; /* 20px / 10px */
+	font-weight:normal;
+	margin-bottom:10px;
+}
+
+.story p, .story ul, .story ol {
+	font-size:1.8em /* 18px / 10px */;
+	line-height:1.3em;
+	margin-bottom:20px;
+}
+
+.story ol {
+	list-style-type:decimal;
+	margin: 20px 0 20px 35px;
+}
+
+.story ol li {
+	margin:0;
+	padding: 0 0 10px 15px; 
+}
+
 .story p.half_title {
-	font-size:2em /* 20px / 10px */;
+	font-size:2.2em /* 20px / 10px */;
 	font-weight:bold;
-	margin-top:20px;
 }
 
 .story p {
@@ -105,6 +106,7 @@
 /* inserts */
 /* ======= */
 /* default insert (hanging to the right) */
+/* reset insert values */
 .story .insert {
 	margin:0 0 10px 2%;
 	padding:0;
@@ -112,9 +114,9 @@
 	float:right;
 	font-size:inherit;
 	line-height:auto;
-	overflow:hidden;
 }
 
+/* reset insert values */
 .story .insert p,
 .story .insert h2,
 .story .insert h3,
@@ -131,15 +133,15 @@
 /* fat full width */
 .story .insert.fat_full {
 	position:relative;
-	width:117%;
+	width:118%;
 	left:6%;
-	margin:0 0% 10px 0%;
+	margin:20px 0% 20px 0%;
 }
 
 /* full width */
 .story .insert.full {
 	width:100%;
-	margin:0 0 10px 0;
+	margin:20px 0 20px 0;
 }
 
 /* fifty fifty */
@@ -158,7 +160,7 @@
 /* left side only */
 .story .insert.maincol {
 	width:60%;
-	margin:0 0 10px 1.8%;
+	margin:0 0 10px 0;
 	float:none;
 }
 
@@ -206,7 +208,10 @@
 		width:80%;
 	}
 	
-	
+	.story .insert.fat_full {
+		width:104% !important;
+		left:2% !important;
+	}
 
 }
 
@@ -255,13 +260,13 @@
 	}
 	
 	.story .insert.fat_full {
-		width:100%;
-		left:0;
+		width:111% !important;
+		left:-5.5% !important;
 	}
 	
 	.story .insert.fat_full .caption,
 	.story .insert.fat_full .source {
-		padding-left:0;
+		padding-left:5.5%;
 	}
 	
 	.story .insert.commercial {

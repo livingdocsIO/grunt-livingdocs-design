@@ -4,10 +4,10 @@
 		<!-- upfront ==> -->
 		<script src="js/vendor/underscore.js"></script>
     	<script src="js/vendor/jquery-1.9.js"></script>
-    	<script src="js/templates_story_multimedia.js"></script>
+    	<script src="js/templates_story_doppelinterview.js"></script>
 		<!-- <== -->
     
-		<title>watson - «Agatha» reisst ein Loch in die Stadt</title>
+		<title>watson - «Es braucht endlich einen Ständeratssitz für die Städte»</title>
 		
 		<!-- Mobile viewport optimization -->
 		<meta name="HandheldFriendly" content="True">
@@ -60,7 +60,6 @@
 		</div>
         
 	</div>
-
 	
 	<div class="naviblock">
 		<div class="expandable">
@@ -138,8 +137,7 @@
 	
 	
 	
-		
-	
+
 	
 	</body>
 	<script>
@@ -172,28 +170,119 @@
       storyContent.append(livingdocs.watson.templates.author());
       
       // maincontent
+      insert_image_1 = $(livingdocs.watson.templates.rightInsert());
+      storyContent.append(insert_image_1);
+      insert_image_1.append(livingdocs.watson.templates.image_1());
+      insert_image_1.append(livingdocs.watson.templates.caption_1());
+      insert_image_1.append(livingdocs.watson.templates.source_1());
+      
       storyContent.append(livingdocs.watson.templates.text_1());
       
-      insert = $(livingdocs.watson.templates.fiftyFiftyInsert());
-      storyContent.append(insert);
-      insert.append(livingdocs.watson.templates.image_2());
-      insert.append(livingdocs.watson.templates.caption_2());
-      insert.append(livingdocs.watson.templates.source_2());
+      storyContent.append(livingdocs.watson.templates.half_title_1());
       
-      insert_2 = $(livingdocs.watson.templates.fiftyFiftyInsert());
+      insert_1 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_1);
+      insert_1.append(livingdocs.watson.templates.text_2());
+      
+      storyContent.append(livingdocs.watson.templates.half_title_2());
+      
+      insert_2 = $(livingdocs.watson.templates.maincolInsert());
       storyContent.append(insert_2);
-      insert_2.append(livingdocs.watson.templates.image_1());
-      insert_2.append(livingdocs.watson.templates.caption_1());
-      insert_2.append(livingdocs.watson.templates.source_1());
+      insert_2.append(livingdocs.watson.templates.text_3());
       
-      insert_3 = $(livingdocs.watson.templates.fullInsert());
+      insert_3 = $(livingdocs.watson.templates.maincolShiftInsert());
       storyContent.append(insert_3);
-      insert_3.append(livingdocs.watson.templates.video_1());
-      insert_3.append(livingdocs.watson.templates.caption_3());
+      insert_3.append(livingdocs.watson.templates.text_4());
       
-      insert_4 = $(livingdocs.watson.templates.maincolBlockInsert());
+      insert_tweet = $(livingdocs.watson.templates.sideInsert());
+      storyContent.append(insert_tweet);
+      insert_tweet.append(livingdocs.watson.templates.tweetbox());
+            
+      insert_4 = $(livingdocs.watson.templates.maincolInsert());
       storyContent.append(insert_4);
-      insert_4.append(livingdocs.watson.templates.map_1());
+      insert_4.append(livingdocs.watson.templates.half_title_3());
+      insert_4.append(livingdocs.watson.templates.text_5());
+      
+      quote_insert_2 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(quote_insert_2);
+      quote_insert_2.append(livingdocs.watson.templates.quote_2());
+      quote_insert_2.append(livingdocs.watson.templates.source_4());
+      
+      insert_5 = $(livingdocs.watson.templates.maincolShiftInsert());
+      storyContent.append(insert_5);
+      insert_5.append(livingdocs.watson.templates.text_6());
+      
+      insert_6 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_6);
+      insert_6.append(livingdocs.watson.templates.half_title_4());
+      insert_6.append(livingdocs.watson.templates.text_7());
+      
+      insert_7 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_7);
+      insert_7.append(livingdocs.watson.templates.half_title_5());
+      insert_7.append(livingdocs.watson.templates.text_8());
+      
+      insert_image_2 = $(livingdocs.watson.templates.sideInsert());
+      storyContent.append(insert_image_2);
+      insert_image_2.append(livingdocs.watson.templates.image_2());
+      insert_image_2.append(livingdocs.watson.templates.caption_2());
+      insert_image_2.append(livingdocs.watson.templates.source_2());
+      
+      storyContent.append(livingdocs.watson.templates.text_9());
+      
+      insert_8 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_8);
+      insert_8.append(livingdocs.watson.templates.half_title_6());
+      insert_8.append(livingdocs.watson.templates.text_10());
+      
+      insert_9 = $(livingdocs.watson.templates.maincolShiftInsert());
+      storyContent.append(insert_9);
+      insert_9.append(livingdocs.watson.templates.text_11());
+      
+      insert_10 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_10);
+      insert_10.append(livingdocs.watson.templates.half_title_7());
+      insert_10.append(livingdocs.watson.templates.text_12());
+      
+      insert_11 = $(livingdocs.watson.templates.maincolShiftInsert());
+      storyContent.append(insert_11);
+      insert_11.append(livingdocs.watson.templates.text_13());
+      
+      quote_insert_1 = $(livingdocs.watson.templates.sideInsert());
+      storyContent.append(quote_insert_1);
+      quote_insert_1.append(livingdocs.watson.templates.quote_1());
+      quote_insert_1.append(livingdocs.watson.templates.source_3());
+      
+      insert_12 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_12);
+      insert_12.append(livingdocs.watson.templates.half_title_8());
+      insert_12.append(livingdocs.watson.templates.text_14());
+      
+      insert_13 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_13);
+      insert_13.append(livingdocs.watson.templates.half_title_9());
+      insert_13.append(livingdocs.watson.templates.text_15());
+      
+      insert_14 = $(livingdocs.watson.templates.maincolShiftInsert());
+      storyContent.append(insert_14);
+      insert_14.append(livingdocs.watson.templates.text_16());
+      
+      insert_15 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_15);
+      insert_15.append(livingdocs.watson.templates.half_title_10());
+      insert_15.append(livingdocs.watson.templates.text_17());
+      
+      insert_16 = $(livingdocs.watson.templates.maincolShiftInsert());
+      storyContent.append(insert_16);
+      insert_16.append(livingdocs.watson.templates.text_18());
+      
+      insert_17 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_17);
+      insert_17.append(livingdocs.watson.templates.text_19());
+      
+      insert_18 = $(livingdocs.watson.templates.maincolInsert());
+      storyContent.append(insert_18);
+      insert_18.append(livingdocs.watson.templates.text_20());
       
       maincolInsert_3 = $(livingdocs.watson.templates.fullInsert());
       storyContent.append(maincolInsert_3);

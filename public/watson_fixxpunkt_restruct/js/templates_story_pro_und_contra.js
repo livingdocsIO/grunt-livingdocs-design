@@ -9,8 +9,8 @@
 		
 			textLayout: _.template("<div data-doc-container>\n</div>"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
-			upperLine: _.template("<h3>Pro und Contra</h3>"),
-			title: _.template("<h2 data-doc-editable=\"title\">«Es ist wie bei Kindern»</h2>"),
+			upperLine: _.template("<h3 class='uppertitle'>Pro und Contra</h3>"),
+			title: _.template("<h2 data-doc-editable=\"title\" class='maintitle'>«Es ist wie bei Kindern»</h2>"),
 			lead: _.template("<p class=\"lead\" data-doc-editable=\"text\">\nOswald Grübel und Philipp Löpfe sind für pointierte Meinungen bekannt. Für wats<u>on</u> liefern sie sich ein Duell zum Steuerstreit zwischen der Schweiz und Deutschland. Lorem ipsum dolor. Sic amet ululat, Lucius ridet et clamat.\n</p>"),
 			author: _.template("<p data-doc-editable=\"text\" class=\"author\">\nFranz Ermel\n</p>"),
 			
@@ -63,8 +63,8 @@
 			text_19: _.template("<p data-doc-editable=\"text\" class=\"statement pro\"><strong>PL:</strong> Von aussen betrachtet findet in der Schweiz ein Machtkampf statt. Sie sollten von dem Nachbarn Liechtenstein lernen, wie man einen Neuanfang startet.</p>"),
 			
 				
-			image_1: _.template("<img src=\"media/img/placeholderimg/bild_117.jpg\" />"),
-			image_2: _.template("<img src=\"media/img/placeholderimg/bild_116.jpg\" />"),
+			image_1: _.template("<img src=\"media/img/placeholderimg/bild_028.jpg\" class='stretch_to_fit' />"),
+			image_2: _.template("<img src=\"media/img/placeholderimg/bild_027.jpg\" class='stretch_to_fit' />"),
 			
 			caption_1: _.template("<p data-doc-editable=\"text\" class=\"caption\">\nLorem ipsum dolor\n</p>"),
 			caption_2: _.template("<p data-doc-editable=\"text\" class=\"caption\">\nLorem ipsum dolor\n</p>"),
@@ -72,9 +72,9 @@
 			source_1: _.template("<p data-doc-editable=\"text\" class=\"source\">\nFoto: Keystone\n</p>"),
 			source_2: _.template("<p data-doc-editable=\"text\" class=\"source\">\nFoto: Keystone\n</p>"),
 			
-			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
-			tagList: _.template("<div class='tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>Wirtschaft</a></li><li><a href='#'>Steuerabkommen</a></li><li><a href='#'>Oswald Grübel</a></li><li><a href='#'>Philipp Löpfe</a></li><li><a href='#'>Pro und Contra</a></li></ul></div>"),
-			badgeList: _.template("<div class='badges'><div class='title'>Ihre Reaktion?</div><ul><li><a href='#'><span class='name'>LOL</span><span class='number'><span class='arrow'></span>7</span></a></li><li><a href='#'><span class='name'>Hot</span><span class='number'><span class='arrow'></span>9</span></a></li><li class='top'><a href='#'><span class='name'>Kitsch</span><span class='number'><span class='arrow'></span>437</span></a></li></ul><ul class='negative'><li><a href='#'><span class='name'>Fail</span><span class='number'><span class='arrow'></span>34</span></a></li><li><a href='#'><span class='name'>WTF</span><span class='number'><span class='arrow'></span>1</span></a></li><li><a href='#'><span class='name'>OMG</span><span class='number'><span class='arrow'></span>3</span></a></li></ul></div>")
+			socialMediaBox: _.template("<div class='widget social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_010.png' /></div>"),
+			tagList: _.template("<div class='widget tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>Wirtschaft</a></li><li><a href='#'>Steuerabkommen</a></li><li><a href='#'>Oswald Grübel</a></li><li><a href='#'>Philipp Löpfe</a></li><li><a href='#'>Pro und Contra</a></li></ul></div>"),
+			badgeList: _.template("<div class='widget badges'><div class='title'>Ihre Reaktion?</div><ul><li><a href='#'><span class='name'>LOL</span><span class='number'><span class='arrow'></span>7</span></a></li><li><a href='#'><span class='name'>Hot</span><span class='number'><span class='arrow'></span>9</span></a></li><li class='top'><a href='#'><span class='name'>Kitsch</span><span class='number'><span class='arrow'></span>437</span></a></li></ul><ul class='negative'><li><a href='#'><span class='name'>Fail</span><span class='number'><span class='arrow'></span>34</span></a></li><li><a href='#'><span class='name'>WTF</span><span class='number'><span class='arrow'></span>1</span></a></li><li><a href='#'><span class='name'>OMG</span><span class='number'><span class='arrow'></span>3</span></a></li></ul></div>")
 		};
 	})();
 
