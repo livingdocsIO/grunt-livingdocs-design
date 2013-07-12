@@ -9,10 +9,10 @@
 		
 			fullWidthLayout: _.template("<div data-doc-container>\n</div>"),
 			textLayout: _.template("<div data-doc-container>\n</div>"),
-			headerImage: _.template("<img class='hide_on_mobile' src=\"media/img/placeholderimg/bild_009.jpg\" /><img class='hide_on_desktop show_on_mobile' src=\"media/img/placeholderimg/bild_056.jpg\" />"),
+			headerImage: _.template("<img class='hide_on_mobile' src=\"media/img/placeholderimg/bild_009.jpg\" /><img class='hide_on_desktop show_on_mobile' src=\"media/img/placeholderimg/bild_014.jpg\" />"),
 			date: _.template("<p data-doc-editable=\"date\" class=\"date\">22. Mai 2013 15:45</p>"),
-			upperLine: _.template("<h3>Kongo</h3>"),
-			title: _.template("<h2 data-doc-editable=\"title\">Afrikas krankes Herz</h2>"),
+			upperLine: _.template("<h3 class=\"uppertitle\">Kongo</h3>"),
+			title: _.template("<h2 data-doc-editable=\"title\" class=\"maintitle\">Afrikas krankes Herz</h2>"),
 			leadWithAuthor: _.template("<p class=\"lead\" data-doc-editable=\"text\">\n<span class='author'><span class='internal'>Daniel Huber</span>, Kinshasa</span> – Bürgerkrieg, Invasionen, Völkermord: Im kranken Herzen Afrikas mischen sich ethnische Konflikte unheilvoll mit den Folgen einer skrupellosen Kolonialpolitik.\n</p>"),
 			text: _.template("<p data-doc-editable=\"text\">\nLorem ipsum dolor.\n</p>"),
 			
@@ -20,7 +20,7 @@
 			caption: _.template("<p data-doc-editable=\"text\" class=\"caption\">Mobutu, König von Zaire 3: Das Ende der Herrschaft</p>"),
 			subtitle: _.template("<p data-doc-editable=\"title\" class=\"half_title\">Teile und hersche</p>"),
 			quote: _.template("<p class=\"quote\" data-doc-editable=\"text\">\n«Es war eine Massenhysterie. Viele töteten aus Angst, selbst getötet zu werden. Die Menschen waren wie verwandelt.»\n</p>"),
-			infoBox: _.template("<div class=\"infobox color_combo_3 combo_bg combo_fg\">\n  <h4 data-doc-editable=\"title\">Völkermord in Ruanda</h4>\n  <p data-doc-editable=\"text\">\n  Als Völkermord in Ruanda werden umfangreiche Gewalttaten in Ruanda bezeichnet, die am 6. April 1994 begannen und bis Mitte Juli 1994 andauerten. Sie kosteten zirka 800.000 bis 1.000.000 Menschen das Leben, die niedrigsten Schätzungen gehen von mindestens 500.000 Toten aus. In annähernd 100 Tagen töteten Angehörige der Hutu-Mehrheit etwa 75 Prozent der in Ruanda lebenden Tutsi-Minderheit sowie moderate Hutu, die sich am Völkermord nicht beteiligten oder sich aktiv dagegen einsetzten.[1] Die Täter kamen aus den Reihen der ruandischen Armee, der Präsidentengarde, der Nationalpolizei (Gendarmerie) und der Verwaltung. Zudem spielten die Milizen der Impuzamugambi sowie vor allem der Interahamwe eine besonders aktive Rolle. Auch weite Teile der Hutu-Zivilbevölkerung beteiligten sich am Völkermord. Der Genozid ereignete sich im Kontext eines langjährigen Konflikts zwischen der damaligen ruandischen Regierung und der Rebellenbewegung Ruandische Patriotische Front (RPF).\n  </p>\n</div>"),
+			infoBox: _.template("<div class=\"widget infobox color_combo_3 combo_bg combo_fg\">\n  <h4 data-doc-editable=\"title\">Völkermord in Ruanda</h4>\n  <p data-doc-editable=\"text\">\n  Als Völkermord in Ruanda werden umfangreiche Gewalttaten in Ruanda bezeichnet, die am 6. April 1994 begannen und bis Mitte Juli 1994 andauerten. Sie kosteten zirka 800.000 bis 1.000.000 Menschen das Leben, die niedrigsten Schätzungen gehen von mindestens 500.000 Toten aus. In annähernd 100 Tagen töteten Angehörige der Hutu-Mehrheit etwa 75 Prozent der in Ruanda lebenden Tutsi-Minderheit sowie moderate Hutu, die sich am Völkermord nicht beteiligten oder sich aktiv dagegen einsetzten.[1] Die Täter kamen aus den Reihen der ruandischen Armee, der Präsidentengarde, der Nationalpolizei (Gendarmerie) und der Verwaltung. Zudem spielten die Milizen der Impuzamugambi sowie vor allem der Interahamwe eine besonders aktive Rolle. Auch weite Teile der Hutu-Zivilbevölkerung beteiligten sich am Völkermord. Der Genozid ereignete sich im Kontext eines langjährigen Konflikts zwischen der damaligen ruandischen Regierung und der Rebellenbewegung Ruandische Patriotische Front (RPF).\n  </p>\n</div>"),
 			source: _.template("<p data-doc-editable=\"text\" class=\"source\">Paul Rusesabagina, 1994 Direktor Hotel Des Mille Collines, Kigali,Ruanda</p>"),
 			
 			sideInsert: _.template("<div class=\"insert side\">\n</div>"),
@@ -28,9 +28,9 @@
 			maincolInsert: _.template("<div class=\"insert maincol\">\n</div>"),
 			fullInsert: _.template("<div class=\"insert full\">\n</div>"),
 			fat_fullInsert: _.template("<div class=\"insert fat_full\">\n</div>"),
-			imageBar: _.template("<div class=\"insert full imagebar\">\n</div>"),
+			imageBar: _.template("<div class='widget imagebar'>\n</div>"),
 			
-			video_1: _.template("<div class='video' onclick='playvideo($(this),\"VCJ1x_If8mw\" );'><img src=\"media/img/placeholderimg/bild_008.jpg\" /><img class=\"arrow\" src=\"media/img/main/arrows/arrow_transp_grey_play.png\" /></div>"),
+			video_1: _.template("<div class='widget video' onclick='playvideo($(this),\"VCJ1x_If8mw\" );'><img src=\"media/img/placeholderimg/bild_008.jpg\" /><img class=\"arrow\" src=\"media/img/main/arrows/arrow_transp_grey_play.png\" /></div>"),
 			
 			text_1: _.template("<p data-doc-editable=\"text\">Nicht zum ersten Mal rückt im Osten der riesigen Demokratischen Republik Kongo ein Warlord mit seiner Rebellenarmee vor, nicht zum ersten Mal fliehen Tausende vor den Schrecken des Bürgerkriegs.</p><p data-doc-editable=\"text\">Die Region der zentralafrikanischen Seen, wo die ostkongolesischen Provinzen Nord- und Süd-Kivu an Ruanda und Uganda grenzen, kommt nicht zur Ruhe. Hier, im kranken Herzen Afrikas, kam es immer wieder zu Konflikten, die schliesslich 1994 im Genozid in Ruanda gipfelten, dem in 100 Tagen 800 000 bis 1 000 000 Menschen zum Opfer fielen.</p>"),
 			text_2: _.template("<p class=\"half_title\" data-doc-editable=\"text\">Teile und herrsche</p><p data-doc-editable=\"text\"><a href='#'>Der Völkermord in dem kleinen ostafrikanischen Land</a>, dessen Folgen wiederum den benachbarten Riesenstaat Kongo destabilisierten, war ethnisch begründet: Hutu brachten Tutsi um.</p><p data-doc-editable=\"text\">Die Feindschaft zwischen diesen beiden Gruppen, schon früher von den Kolonialherren geschürt, ist eines der wichtigsten Hindernisse für einen dauerhaften Frieden in der Region.</p><p data-doc-editable=\"text\">Die heutigen Staaten Ruanda und Burundi wurden 1899 Teil des kurzlebigen deutschen Kolonialreiches. Als Ruanda und Urundi wurden sie der Kolonie Deutsch-Ostafrika zugeschlagen. Im Ersten Weltkrieg eroberten belgische Truppen aus dem Kongo – der Kongo war zunächst Privatbesitz des belgischen Königs Leopold II., dann belgische Kolonie – die beiden Kleinstaaten, die nach dem Krieg als Völkerbundsmandat in belgischem Besitz blieben.</p><p data-doc-editable=\"text\">Schon die Deutschen hatten die einheimische Bevölkerung in «bantuide» Ackerbauern (Hutu) und «hamitische» Viehzüchter (Tutsi) unterschieden, wobei sie – wie danach die Belgier – die Minderheit der Tutsi als «rassisch höherwertig» einstuften und bevorzugten (die Belgier nannten die Tutsi «nègres aristocratiques»). So entwickelten die Hutu im Laufe der Zeit einen Minderwertigkeitskomplex gegenüber den Tutsi, der sich später auf fatale Weise auswirken sollte. Aus heutiger Sicht scheint es sich jedoch eher um unterschiedliche soziale Gruppen zu handeln, die danach gleichsam «ethnisch aufgeladen» wurden.</p>"),
@@ -48,13 +48,13 @@
 			source_1: _.template("<p class='source' data-doc-editable=\"text\">Paul Rusesabagina, 1994 Direktor Hotel Des Mille Collines, Kigali,Ruanda</p>"),
 			source_2: _.template("<p class='source' data-doc-editable=\"text\">Mobutu Sese Seko, nach der Machtübernahme 1967</p>"),
 			
-			image_1: _.template("<img src=\"media/img/placeholderimg/bild_020.jpg\" />"),
-			image_2: _.template("<img src=\"media/img/placeholderimg/bild_021.jpg\" />"),
-			image_3: _.template("<img src=\"media/img/placeholderimg/bild_022.jpg\" />"),
+			image_1: _.template("<img src=\"media/img/placeholderimg/bild_011.jpg\" />"),
+			image_2: _.template("<img src=\"media/img/placeholderimg/bild_012.jpg\" />"),
+			image_3: _.template("<img src=\"media/img/placeholderimg/bild_013.jpg\" />"),
 			caption_2: _.template("<p data-doc-editable=\"text\" class=\"caption\">Flüchtlingslager Ruanda 1994</p>"),
 			
-			socialMediaBox: _.template("<div class='social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_023.png' /></div>"),
-			tagList: _.template("<div class='tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>News</a></li><li class='ressort'><a href='#'>Geschichte</a></li><li><a href='#'>Afrika</a></li><li><a href='#'>Bürgerkrieg</a></li><li><a href='#'>Kolonialpolitik</a></li></ul></div>"),
+			socialMediaBox: _.template("<div class='widget social_box hide_on_mobile'><img src='media/img/placeholderimg/bild_010.png' /></div>"),
+			tagList: _.template("<div class='widget tags'><div class='title'>Artikel-Tags</div><ul><li class='ressort'><a href='#'>News</a></li><li class='ressort'><a href='#'>Geschichte</a></li><li><a href='#'>Afrika</a></li><li><a href='#'>Bürgerkrieg</a></li><li><a href='#'>Kolonialpolitik</a></li></ul></div>"),
 			
 			story_teaser: _.template("<div class='teaser font_m' style='background-image:url(media/img/placeholderimg/bild_006.jpg);'><div class='text'><h3>Ende für Lager?</h3><h2>Kuba will Guantánamo zurückhaben</h2><p class='lead'><span class='author'>Maja-Sibylle von Thurn und Taxis, dpa</span> – Unheilige Allianz Havanna-Washington: Kurz nachdem Barack Obama signalisiert hat, dass er Guantánamo schliessen will, schlägt das Castro-Regime in die gleiche Kerbe.</p></div></div>"),
 			

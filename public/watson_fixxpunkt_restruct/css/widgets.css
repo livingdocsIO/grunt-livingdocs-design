@@ -32,11 +32,10 @@ p.source {
 	font-style: italic;
 }
 
-.insert.fat_full p.source,
+.insert.fat_full p.source, 
 .insert.fat_full p.caption {
-	padding-left:15px;
+	padding-left:9.2%;
 }
-
 
 
 /* interview */
@@ -55,22 +54,22 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* badge list */
 /* ========== */
-.badges {
+.widget.badges {
 	color:#666666;	
 	font-size:1.333em; /* 24px / 18px */
 	margin-top:0.4166em; /* 10px / 24px */
 }
 
-.badges ul {
+.widget.badges ul {
 	margin:4px 0.5em 0 0; /* 12px / 24px */
 	display:inline-block;
 }
 
-.badges ul.negative {
+.widget.badges ul.negative {
 	margin-top:0;
 }
 
-.badges li {
+.widget.badges li {
 	font-size:0.64em; /* 15.36px / 24px */
 	display:inline-block;
 	margin-right:0.75em; /* 12px / 16px */
@@ -78,12 +77,12 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	padding:0;
 }
 
-.badges li:last-child {
+.widget.badges li:last-child {
 	margin-right:0;
 }
 
-.badges li a span.name,
-.badges li a span.number {
+.widget.badges li a span.name,
+.widget.badges li a span.number {
 	display:inline-block;
 	padding:0.625em 0; /* 10px / 16px */
 	font-weight:bold;
@@ -92,7 +91,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	text-align:center;
 }
 
-.badges li a span.name {
+.widget.badges li a span.name {
 	color:#ffffff;
 	background-color:#156376;
 	width:3.75em; /* 70px / 16px */
@@ -101,15 +100,15 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	transition:color 0.5s ease;
 }
 
-.badges .negative li a span.name {
+.widget.badges .negative li a span.name {
 	background-color:#222222;
 }
 
-.badges li a span.name:hover {
+.widget.badges li a span.name:hover {
 	color:#27bbf5;
 }
 
-.badges li a span.number {
+.widget.badges li a span.number {
 	color:#222222;
 	background-color:#bababa;
 	width:2em; /* 32px / 16px */
@@ -117,7 +116,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	position:relative;
 }
 
-.badges li a span.arrow {
+.widget.badges li a span.arrow {
 	width:0; 
 	height:0; /* 14px / 14px */
 	display:block;
@@ -128,12 +127,12 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	border-bottom:0.5em solid transparent; /* 7px / 14px */
 }
 
-.badges li.top a span.number {
+.widget.badges li.top a span.number {
 	color:#ffffff;
 	background-color:#27bbf5;
 }
 
-.badges li.top a span.arrow {
+.widget.badges li.top a span.arrow {
 	border-right:0.714em solid #27bbf5; /* 10px / 14px */
 }
 
@@ -144,22 +143,22 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* tag list */
 /* ======== */
-.tags {
+.widget.tags {
 	font-size:1.333em; /* 24px / 18px */
 	color:#666666;	
 	margin-top:2.083em; /* 50px / 24px */
 }
 
-.tags ul {
+.widget.tags ul {
 	margin:4px 0 0 0;
 }
 
-.tags li {
+.widget.tags li {
 	display:inline-block;
 	padding:0;
 }
 
-.tags li a {
+.widget.tags li a {
 	font-size:0.64em; /* 15.36px / 24px */
 	display:inline-block;
 	color:#00c6ff;
@@ -175,11 +174,11 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	transition:color 0.5s ease;
 }
 
-.tags li.ressort a {
+.widget.tags li.ressort a {
 	color:#a0f22c;
 }
 
-.tags li a:hover {
+.widget.tags li a:hover {
 	color:#ffffff;
 }
 
@@ -190,12 +189,12 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* fat_full header image */
 /* ===================== */
-.full-width-container.insert.fat_full {
+.full-width-container {
 	position:relative;
 	min-height:7em; /* 70px / 10px */
 }
 
-.full-width-container.insert.fat_full p.caption {
+.full-width-container p.caption {
 	position:absolute;
 	bottom:0;
 	background-color:rgba(255,255,255,0.8);
@@ -206,7 +205,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	margin:0;
 }
 
-.full-width-container.insert.fat_full img {
+.full-width-container img {
 	width:100%;
 }
 
@@ -217,7 +216,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* videos */
 /* ====== */
-.video {
+.widget.video {
 	width:100%;
 	height:0;
 	padding-bottom:56.25%; /* 100% / 16 * 9 */
@@ -226,11 +225,15 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	position:relative;
 }
 
-.video:hover {
+.widget.video:hover {
 	opacity:0.95;
 }
 
-.video img.arrow {
+.widget.video img {
+	width:100%;	
+}
+
+.widget.video img.arrow {
 	position:absolute;
 	bottom:1em;;
 	left:1em;;
@@ -238,7 +241,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	height:5em;
 }
 
-.video iframe {
+.widget.video iframe {
 	position:absolute;
 	width:100%;
 	height:100%;
@@ -273,14 +276,15 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* infobox */
 /* ======= */
-.infobox {
+.widget.infobox {
 	padding:10px 15px;
+	width:auto;
 }
 
-.infobox img {
+.widget.infobox img {
 	margin: 0 0 20px 0;
+	width:100%;
 }
-
 
 
 
@@ -295,20 +299,20 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* sportstable */
 /* =========== */
-.sportstable {
+.widget.sportstable {
 	width:100%;
 }
 
-.sportstable td, .sportstable th {
+.widget.sportstable td, .sportstable th {
 	padding:0.333em; /* 18px / 3 => 6px */
 	border-bottom:1px solid #aaaaaa;
 	text-align:left;
 	font-size:1.8em; /* 18px / 10px */
 }
 
-.sportstable tr.color_line_1 td { border-bottom:2px solid #84e100; }
-.sportstable tr.color_line_2 td { border-bottom:2px solid #84e100; }
-.sportstable tr.color_line_3 td { border-bottom:2px solid #ce0f89; }
+.widget.sportstable tr.color_line_1 td { border-bottom:2px solid #84e100; }
+.widget.sportstable tr.color_line_2 td { border-bottom:2px solid #84e100; }
+.widget.sportstable tr.color_line_3 td { border-bottom:2px solid #ce0f89; }
 
 
 
@@ -319,6 +323,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* ===== */
 .widget.poll {
 	min-height:20em; /* 200px / 20px */
+	padding-bottom:0.1em;
 }
 
 .widget.poll h2,
@@ -390,7 +395,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 }
 
 .widget.poll div.result .bubble {
-	display:block;
+	display:inline-block;
 	float:left;
 	width:0;
 	height:0;
@@ -483,7 +488,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* peephole & panorama */
 /* =================== */
 .widget.peephole {
-	height:40em;
+	height:50em;
 	position:relative;
 	background-attachment:fixed;
 	background-position:center center;
@@ -536,6 +541,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	position:relative;
 }
 
+
+
+
+
 /* article list */
 /* ============ */
 .widget.article_list {
@@ -574,6 +583,21 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 
 
+/* imagebar */
+/* ======== */
+.widget.imagebar img {
+	width:33%;
+	margin:0 0.16666% 4px 0.16666%;
+}
+
+
+
+
+
+
+
+
+
 
 
 
@@ -582,11 +606,6 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* nur zum test */
 /* ============ */
-.widget.imagebar img {
-	width:33%;
-	margin:0 0.16666% 4px 0.16666%;
-}
-
 .widget.social_box {
 	width:321px;
 	float:right;
@@ -613,7 +632,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 		
 	/* fat_full header image */
 	/* ===================== */
-	.full-width-container.insert.fat_full p.caption {
+	.full-width-container p.caption {
 		max-width:78% !important; /* 80% - 2% */
 	}
 	
@@ -624,8 +643,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 		background-size:cover;
 	}
 
-	
-	/* nur zum test */
+	/* imagebar */
 	/* ============ */
 	.widget.imagebar img {
 		width:49.6%;
@@ -658,9 +676,9 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	
 	/* fat_full header image */
 	/* ===================== */
-	.full-width-container.insert.fat_full { min-height:6em; } /* 42px / 7px */
+	.full-width-container { min-height:6em; } /* 42px / 7px */
 	
-	.full-width-container.insert.fat_full p.caption {
+	.full-width-container p.caption {
 		font-size:1.8em !important;
 		max-width:none  !important;
 		padding:5px 15px;
@@ -668,14 +686,14 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	
 	/* badge list */
 	/* ========== */
-	.badges ul {
+	.widget.badges ul {
 		margin-right:0;
 		display:block;
 	}
 	
 	/* sportstable */
 	/* =========== */
-	.sportstable { margin:0 0 10px 0; }
+	.widget.sportstable { margin:0 0 10px 0; }
 	
 	/* article list */
 	/* ============ */
@@ -687,8 +705,8 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 		font-size:1.8em;
 	}
 	
-	/* nur zum test */
-	/* ============ */
+	/* imagebar */
+	/* ======== */
 	.widget.imagebar img {
 		width:100%;
 		margin: 0 0 2px 0;

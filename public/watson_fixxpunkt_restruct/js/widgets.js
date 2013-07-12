@@ -81,6 +81,9 @@ $(document).ready(function() {
 						'line-height': bubble_width_pixels+'px',
 						'opacity': bubble_opacity
 					}, 500, 'swing' );
+					current_poll.find("div.result li").eq(counter).animate({
+						'height': bubble_width_pixels+'px'
+					}, 500, 'swing' );
 				}
 				setTimeout(function(){poll.calculate_answer_position(current_poll, current_results)}, 1000);	
 			},

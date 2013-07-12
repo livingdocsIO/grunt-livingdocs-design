@@ -429,6 +429,19 @@
 
 
 
+/* inserted teaser in story */
+/* ======================== */
+.insert .teaser .text p.lead, 
+.insert .teaser .text h2, 
+.insert .teaser .text h3 {
+	margin:0 15px 10px 15px;
+}
+
+.insert .teaser p.lead {
+	font-weight:normal;
+	font-style: normal;
+}
+
 
 
 
