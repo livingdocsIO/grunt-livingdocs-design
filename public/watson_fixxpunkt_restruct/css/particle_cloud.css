@@ -120,6 +120,11 @@
 	color:#222222;
 }
 
+
+
+
+/* mobile */
+/* ====== */
 @media screen and (max-width: 600px) {
 	.particle_cloud .date .next,
 	.particle_cloud .date .previous {

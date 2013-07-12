@@ -12,20 +12,20 @@ $(document).ready(function() {
 			position_panorama:function() {
 				var buffer = 200;
 				var top_pos = $(window).scrollTop();
-				var bottom_pos = top_pos+$(window).height()-$('.panorama').height();
-				var pano_pos = $('.panorama').offset().top;
+				var bottom_pos = top_pos+$(window).height()-$('.widget.panorama').height();
+				var pano_pos = $('.widget.panorama').offset().top;
 				
 				if (bottom_pos > pano_pos - buffer && top_pos < pano_pos + buffer) {
-					var new_position = ( $('.panorama').width() - $('.panorama img').width() ) / ($(window).height()-$('.panorama').height()) * (bottom_pos - pano_pos);
+					var new_position = ( $('.widget.panorama').width() - $('.widget.panorama img').width() ) / ($(window).height()-$('.widget.panorama').height()) * (bottom_pos - pano_pos);
 					if (new_position>0) new_position = 0;
-					else if (new_position < ($('.panorama').width() - $('.panorama img').width()) ) new_position = -($('.panorama img').width()-$('.panorama').width());
-					$(".panorama img").stop(true, false).animate({"left": new_position},500 );
+					else if (new_position < ($('.widget.panorama').width() - $('.widget.panorama img').width()) ) new_position = -($('.widget.panorama img').width()-$('.widget.panorama').width());
+					$(".widget.panorama img").stop(true, false).animate({"left": new_position},500 );
 				}
 			}
 		}
 	})();
 	$(document).ready(function() {
-		if ( $('.panorama').length ) $(window).scroll(panorama.position_panorama);
+		if ( $('.widget.panorama').length ) $(window).scroll(panorama.position_panorama);
 	});
 	
 	
@@ -35,7 +35,7 @@ $(document).ready(function() {
 	/* flipper */
 	/* ======= */
 	$(document).ready(function() {
-		$(".flipper").click(function(){
+		$(".widget.flipper").click(function(){
 			$(this).toggleClass("showback");
 		});
 	});

@@ -2,7 +2,6 @@
 
 /* social block */
 /* ============ */
-/* navi */
 .socialblock {
 	position:fixed;
 	bottom:0;
@@ -119,35 +118,9 @@
 
 
 
-
-
-
-
-
-
-
-@media screen and (max-width: 1000px) {
-		
-	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* mobile */
+/* ====== */
 @media screen and (max-width: 600px) {	
-	
-	/* social */
-	/* ====== */
 	.socialblock .expandable {
 		width:100%;
 		left:-100%;

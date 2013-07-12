@@ -1,6 +1,7 @@
 
 
-/* regions */
+/* regions only used on front layouts */
+/* ================================== */
 .region {
 	float:left;
 	-moz-box-sizing: border-box;
@@ -15,6 +16,7 @@
 	background-size:cover;
 }
 
+/* nested regions */
 .region .region.y_half_desktop,
 .region .region.y_quarter_desktop,
 .region .region.y_three_quarter_desktop {
@@ -54,15 +56,14 @@
 	height:604px;
 }
 
-.region.y_half .teaser p.lead,
-.region.y_quarter .teaser p.lead { display:none; }
 
 
 
 
 
 
-
+/* tablet */
+/* ====== */
 @media screen and (max-width: 1000px) {
 
 	.region.x_full_tablet { width:100.5%; }
@@ -83,6 +84,8 @@
 
 
 
+/* mobile */
+/* ====== */
 @media screen and (max-width: 600px) {
 	
 	.region {

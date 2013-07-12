@@ -2,8 +2,8 @@
 
 
 
-/* general definitions */
-/* =================== */
+/* basic site definitions */
+/* ====================== */
 body {
 	font-family:'Gudea', helvetica, arial, sans-serif;
 	background-color:#ffffff;
@@ -18,14 +18,15 @@ a {
 }
 
 a:hover {
-	color:#000000;
+	color:#007da4;
 }
 
 strong {
 	font-weight:bold;
 }
 
-/* wrapper */
+/* wrappers */
+/* ======== */
 .wrapper {
 	width:1140px;
 	margin:0 auto;
@@ -33,6 +34,7 @@ strong {
 	top:-2px;
 }
 
+/* fat_wrapper is necessary only on front layouts */
 .fat_wrapper {
 	width:100.4%;
 	position:relative;
@@ -96,23 +98,33 @@ input.radio:checked, input.checkbox:checked {
 	background-repeat: no-repeat;
 }
 
+
 /* general handyness */
 /* ================= */
 .stretch_to_fit {
 	width:100%;
 	height:100%;
 }
+
 /* custom hide and display */
+/* ======================= */
 .hide_on_desktop { display:none !important; }
 .show_on_desktop { display:block !important; }
 
 /* custom hyphenation */
+/* ================== */
 .dont_hyphenate {
 	-moz-hyphens: manual !important;
 	-webkit-hyphens: manual !important;
 	-ms-hyphens: manual !important;
 	-o-hyphens: manual !important;
 }
+
+
+
+
+
+
 
 
 
@@ -135,6 +147,8 @@ input.radio:checked, input.checkbox:checked {
 	.hide_on_tablet { display:none !important; }
 	.show_on_tablet { display:block !important; }
 }
+
+
 
 
 /* ipad landscape */
@@ -168,6 +182,10 @@ and (orientation : landscape) {
 	.hide_on_mobile { display:none !important; }
 	.show_on_mobile { display:block !important; }
 }
+
+
+
+
 
 
 /* minwidth */

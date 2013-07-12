@@ -1,6 +1,7 @@
 
 
 /* logo */
+/* ==== */
 .logoblock {
 	position:absolute;
 	top:0;
@@ -23,6 +24,7 @@
 
 
 /* current tag */
+/* =========== */
 .currentblock {
 	position:absolute;
 	top:5.9em; /* 59px / 10px */
@@ -240,7 +242,8 @@
 
 
 
-
+/* tablet */
+/* ====== */
 @media screen and (max-width: 1000px) {
 		
 	.naviblock .expandable {
@@ -259,7 +262,8 @@
 
 
 
-
+/* mobile */
+/* ====== */
 @media screen and (max-width: 600px) {
 	
 	/* navi */

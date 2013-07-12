@@ -1,23 +1,34 @@
 
-
+/* teaser on front */
 .region .teaser {
 	height:100%;
 	width:100%;	
 }
 
+/* teaser on story */
 .insert .teaser {
 	width:100%;
 	height:40em;
 	position:relative;
 }
 
-/* teaser items */
 .teaser .titlepic {
 	position:absolute;
 	top:0;
 	min-height:100%;
 	min-width:100%;
 }
+
+/* semi appropriate sizing of teaser image -- default: landscape */
+.titlepic {
+	width:100%;
+}
+/* portrait (actually there are not many cases for portrait) */
+.region.x_third_desktop.y_full_desktop .teaser .titlepic {
+	height:100%;
+	width:auto;
+}
+
 
 .teaser .text {
 	width:100%;
@@ -39,7 +50,20 @@
 	color: inherit;
 }
 
+.teaser .text h2 a:hover,
+.teaser .text h3 a:hover,
+.teaser .text p.lead a:hover {
+	color:#000000;
+}
+
+/* special definitions for teasers in nested regions */
+.region.y_half .teaser p.lead,
+.region.y_quarter .teaser p.lead { display:none; }
+
+
+
 /* content provider logos */
+/* ====================== */
 .teaser .text .source_logo {
 	width:14em; /* 140px / 10px */
 	opacity:0.6;
@@ -47,7 +71,10 @@
 	margin:0 auto 1em auto; /* 10px / 10px */
 }
 
+
+
 /* bubbler */
+/* ======= */
 .teaser .bubbler {
 	position:absolute;
 	top:1.071em; /* 15px / 14px */
@@ -77,6 +104,7 @@
 }
 
 /* badges */
+/* ====== */
 .teaser .text .badge {
 	position:absolute;
 	top:-3.5em; /* 35px / 10px */
@@ -111,7 +139,10 @@
 	width:60%;
 }
 
+
+
 /* media icons */
+/* =========== */
 .teaser .text .media_icons {
 	position:absolute;
 	bottom:100%;
@@ -186,9 +217,9 @@
 
 
 
-
-
-/* standard */
+/* general teaser parts definitions */
+/* ================================ */
+/* teaser maintitle */
 .teaser h2 {
 	font-size:3em; /* 30px / 10px */
 	font-weight:bold;
@@ -200,17 +231,14 @@
 	hyphens: manual;
 }
 
+/* teaser uppertitle */
 .teaser h3 {
 	font-size:1.6em; /* 16px / 10px */
 	font-weight:normal;
 	text-transform:uppercase;
 }
 
-.teaser h4 {
-	font-size:2em; /* 20px / 10px */
-	font-weight:normal;
-}
-
+/* teaser paragraphs and lists */
 .teaser p, .teaser ul, .teaser ol {
 	font-size:1.8em /* 18px / 10px */;
 	line-height:1.3em;
@@ -222,7 +250,7 @@
 }
 
 .teaser ol li {
-	margin: 0 0 0 ; 
+	margin: 0; 
 }
 
 .teaser p.lead .author {
@@ -236,7 +264,7 @@
 	float:left;
 }
 
-/* text only regions */
+/* text only teasers */
 /* ================= */
 .teaser.text_only .text { background-color:transparent; }
 
@@ -278,7 +306,7 @@
 }
 
 
-/* collection regions */
+/* collection teasers */
 /* ================== */
 .teaser.collection_main {
 	border-right:0;	
@@ -304,7 +332,7 @@
 	overflow:visible;
 }
 
-/* region arrows */
+/* teaser arrows */
 /* ============= */
 .teaser.text_only .arrow {
 	position:absolute;
@@ -374,7 +402,7 @@
 
 
 
-/* commercial regions */
+/* commercial teasers */
 /* ================== */
 .teaser.commercial {
 	text-align:center;
@@ -451,9 +479,20 @@
 
 
 @media screen and (max-width: 1000px) {
-
-	/* collection regions */
-	/* ============= */
+	
+	/* semi appropriate sizing of teaser image -- default: landscape */
+	.titlepic {
+		width:100% !important;
+		height:auto !important;
+	}
+	/* portrait (actually there are not many cases for portrait) */
+	.region.x_half_tablet.y_full_tablet .teaser .titlepic {
+		height:100% !important;
+		width:auto !important;
+	}
+	
+	/* collection teasers */
+	/* ================== */
 	.teaser.collection_main { border-bottom:0; }
 	.teaser.collection_context { height:302px; } /* .region.y_half */
 	.teaser.collection_context .region:nth-child(odd) {
@@ -489,8 +528,19 @@
 	.teaser h3, .teaser p.label, .teaser p.date { font-size:1.7142em !important; } /* 12px / 7px */
 	.teaser h4, .teaser.full_story p.lead, .teaser p.half_title { font-size:2.571em !important; } /* 18px / 7px */
 	
+	/* semi appropriate sizing of teaser image -- default: portrait */
+	.titlepic {
+		height:100% !important;
+		width:auto !important;
+	}
+	/* portrait (actually there are not many cases for landscape) */
+	.region.y_half_mobile .teaser .titlepic,
+	.region.y_quarter_mobile .teaser .titlepic {
+		width:100% !important;
+		height:auto !important;
+	}
 	
-	/* text only regions */
+	/* text only teasers */
 	/* ================= */
 	.teaser.text_only.font_l h2 { font-size:6.4285em !important; } /* 45px / 7px */
 	.teaser.text_only.font_xl h2 {font-size:10em !important; } /* 70px / 7px */
@@ -506,8 +556,8 @@
 	/* ============== */
 	.teaser.topical_teaser.sponsoring .media_icons { width:66%; }
 
-	/* collection regions */
-	/* ============= */
+	/* collection teasers */
+	/* ================== */
 	.teaser.collection_main {height:600px;} /* .region.y_full + .region.y_quarter */
 	.teaser.collection_main.font_l h2 { font-size:6.4285em !important; } /* 45px / 7px */
 	.teaser.collection_main.font_xl h2 {font-size:10em !important; } /* 70px / 7px */
