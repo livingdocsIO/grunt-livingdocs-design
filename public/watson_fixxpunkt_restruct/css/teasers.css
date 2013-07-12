@@ -2,7 +2,7 @@
 /* teaser on front */
 .region .teaser {
 	height:100%;
-	width:100%;	
+	width:100%;
 }
 
 /* teaser on story */
@@ -10,6 +10,7 @@
 	width:100%;
 	height:40em;
 	position:relative;
+	overflow:hidden;
 }
 
 .teaser .titlepic {
