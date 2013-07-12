@@ -6,6 +6,7 @@
   },
   "devDependencies": {
     "optimist": "~0.6.0",
-    "cheerio": "~0.12.0"
+    "cheerio": "~0.12.0",
+    "html-minifier": "*"
   }
 }
