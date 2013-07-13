@@ -18,7 +18,7 @@ grunt.initConfig
     development:
       options:
         # html-minifier doesn't work on watsons text.html snippet, crashes silently in grunt
-        minify: false
+        minify: true
       files: [
         expand: true
         cwd: './'
@@ -28,7 +28,7 @@ grunt.initConfig
 
   lddesign:
     options:
-      minify: false
+      minify: true
       src: 'designs'
       dest: 'public/designs'
         
@@ -40,7 +40,16 @@ grunt.initConfig
         src:['designs/**/assets']
         dest: 'public/'
       ]
-    
+      
+  watch:
+    scripts:
+      files: ['designs/**/*', 'public/*.html']
+      tasks: ['default']
+      options:
+        nospawn: true
+        livereload: true
+        
+  
 
 
 # grunt-contrib-less uses a less.js in version 1.4.1 which has a bug. It's already fixed in v1.5 alpha
@@ -51,7 +60,10 @@ grunt.loadNpmTasks "grunt-recess"
 
 
 grunt.loadNpmTasks "grunt-contrib-copy"
+grunt.loadNpmTasks "grunt-contrib-watch"
 grunt.loadTasks "tasks"
 
 
 grunt.registerTask "default", ["lddesigns", "recess", "copy:assets"]
+grunt.registerTask "server", ["default", "watch"]
+

@@ -8,15 +8,12 @@
     <meta name="viewport" content="width=device-width">
 
     <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    
     <link rel="stylesheet" href="/css/livingdocs-engine.css">
-    <link href="/css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
-    <link href="/css/bootstrap-adjust.css" media="all" rel="stylesheet" type="text/css">
-  </head>
-  <body>
-    <div class="container-fluid">
-      <section class="doc-section"></section>
-    </div>
-
+    <link href="/designs/bootstrap-atomic/css/style.css" media="all" rel="stylesheet" type="text/css">
+    
+    <script src="http://localhost:35729/livereload.js"></script>
+    
     <!-- jQuery: requirement for editableJS and livingdocs-engine -->
     <script src="/js/vendor/jquery-1.9.js"></script>
 
@@ -25,10 +22,15 @@
     <script src="/js/vendor/store/store.js"></script>
     <script src="/js/vendor/editableJS/editable.js"></script>
 
-    <!-- snippet collections for manual testing -->
-    <script src="/js/bootstrap_atomic.js"></script>
-    <!-- livingdocs-engine. yeah! -->
+    <script src="/designs/bootstrap-atomic/design.js"></script>
     <script src="/js/vendor/livingdocs_engine.js"></script>
+    
+  </head>
+  <body>
+    <div class="container-fluid">
+      <section class="doc-section"></section>
+    </div>
+
 
     <script>
       doc.addSnippetCollection(snippetCollections.bootstrap_atomic.snippets, snippetCollections.bootstrap_atomic.config);
@@ -40,17 +42,14 @@
         doc.ready(function() {
 
           if (!json) {
-            var row = doc.add("bootstrap_atomic.main_and_sidebar");
+            var row = doc.add("bootstrap_atomic.mainAndSidebar");
             row.append("main", doc.create("bootstrap_atomic.hero"));
-            row.append("main", doc.create("bootstrap_atomic.text"));
             row.append("sidebar", doc.create("bootstrap_atomic.title"));
-            var single = doc.add("bootstrap_atomic.column");
-            single.append(doc.create("bootstrap_atomic.hero"));
+            row.append("sidebar", doc.create("bootstrap_atomic.text"));
             
-            var column = doc.add("bootstrap_atomic.column");
-            column.append(doc.create("bootstrap_atomic.hero"));
-            column.append(doc.create("bootstrap_atomic.info"));
-            column.append(doc.create("bootstrap_atomic.button"));
+            
+            row.append("main", doc.create("bootstrap_atomic.info"));
+            row.append("main", doc.create("bootstrap_atomic.button"));
             
           }
         });

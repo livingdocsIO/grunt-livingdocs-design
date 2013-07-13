@@ -27,10 +27,15 @@ htmlmin = require("html-minifier")
 
 module.exports = (grunt) ->
   
-  processHtml = (html, minify) ->
+  processHtml = (html, minify, info) ->
     if minify
-      htmlmin.minify html,
-        collapseWhitespace: true
+      try
+        htmlmin.minify html,
+          collapseWhitespace: true
+      catch err
+        grunt.log.writeln('\n>> Design "%s", snippet "%s": HTML minify error\n %s\n'.yellow, info.design, info.snippet, err)
+        return '<div class="error minify" style="color: red">Error while minifying</div>'
+        
     else
       html
       
@@ -43,7 +48,7 @@ module.exports = (grunt) ->
     grunt.file.write destination + "/design.js", fileData,
       encoding: "utf8"
 
-    grunt.log.writeln "Design \"" + destination + "\" compiled."
+    grunt.log.writeln 'Design "%s" compiled.', destination
   
   
   # process the config and snippets, create design object
@@ -67,7 +72,7 @@ module.exports = (grunt) ->
     
     requiredResources.forEach (resource) ->
       unless grunt.file.exists(src, resource.name)
-        grunt.fail.warn 'The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.'
+        grunt.fail.warn 'The %s "%s" does not exist.', resource.type, path.join(src, resource.name)
 
     
     # Read snippets from directory, and store them in string variable
@@ -82,11 +87,11 @@ module.exports = (grunt) ->
     )
 
     unless design.config.namespace
-      grunt.fail.warn 'Error: the design "' + designFolder + '" contains a config file which has no namespace.'
+      grunt.fail.warn 'Error: the design "%" contains a config file which has no namespace.', designFolder
     
     # warn if a design contains no snippets
     unless snippetFiles.length
-      grunt.log.warn 'Warning: the design "' + designFolder + '" has no snippets'
+      grunt.log.warn 'Warning: the design "%s" has no snippets', designFolder
       writeDesignConfig design, dest
     
     # iterate through file array and process the snippets, store them in templates.js file
@@ -106,14 +111,14 @@ module.exports = (grunt) ->
       
       # Disallow "-" in snippetNamespace
       unless snippetNamespace.indexOf("-") == -1
-        grunt.log.warn 'Warning: snippet "' + snippetNamespace + '" in the design "' + designFolder + '": the character "-" (minus/dash) is not allowed in a snippet namespace'
+        grunt.log.warn 'Warning: snippet "%s" in the design "%s": the character "-" (minus/dash) is not allowed in a snippet namespace', snippetNamespace, designFolder
       
       # store snippet config in design
       design.snippets[snippetNamespace] = snippetObject
       
       # push snippet html into snippet object, remove config and minify the html
       $("script[type=ld-conf]").remove()
-      design.snippets[snippetNamespace]["html"] = processHtml($.html(), options.minify)
+      design.snippets[snippetNamespace]["html"] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetNamespace })
       
       # Check if everything is compiled, close the templates file and save it;
       compiledSnippets = compiledSnippets + 1

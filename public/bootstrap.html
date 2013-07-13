@@ -4,10 +4,22 @@
   <link rel="shortcut icon" href="/favicon.png">
 
   <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
-  <script src="js/vendor/underscore.js"></script>
-  <script src="js/vendor/jquery-1.9.js"></script>
-  <script src="js/bootstrap.js"></script>
-  <link href="css/bootstrap.css" media="all" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/livingdocs-engine.css">
+  <link href="/designs/bootstrap/css/style.css" media="all" rel="stylesheet" type="text/css">
+  
+  <script src="http://localhost:35729/livereload.js"></script>
+  
+  <!-- jQuery: requirement for editableJS and livingdocs-engine -->
+  <script src="/js/vendor/jquery-1.9.js"></script>
+
+  <!-- dependencies of livingdocs-engine -->
+  <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+  <script src="/js/vendor/store/store.js"></script>
+  <script src="/js/vendor/editableJS/editable.js"></script>
+
+  <script src="/designs/bootstrap/design.js"></script>
+  <script src="/js/vendor/livingdocs_engine.js"></script>
 </head>
 <body>
   <div class="container-fluid">
@@ -21,21 +33,36 @@
 </body>
 </html>
 
-<script>
-$(document).ready(function() {
-  columnContainer = $('.column-container');
-  columnContainer.html(livingdocs.bootstrap.templates.column());
-  columnContent = columnContainer.find('div').find('div');
-  columnContent.append(livingdocs.bootstrap.templates.hero());
-  columnContainer.append(livingdocs.bootstrap.templates.info());
+<div class="container-fluid">
+  <section class="doc-section"></section>
+</div>
 
-  mainAndSidebarContainer = $('.main-and-sidebar-container');
-  mainAndSidebarContainer.html(livingdocs.bootstrap.templates.mainAndSidebar());
-  mainContent = mainAndSidebarContainer.find('div').find('div:first-child');
-  sidebarContent = mainAndSidebarContainer.find('div').find('div:last-child');
-  mainContent.append(livingdocs.bootstrap.templates.title());
-  mainContent.append(livingdocs.bootstrap.templates.text());
-  sidebarContent.append(livingdocs.bootstrap.templates.subtitle());
-  sidebarContent.append(livingdocs.bootstrap.templates.button());
-});
+
+<script>
+  doc.addSnippetCollection(snippetCollections.bootstrap.snippets, snippetCollections.bootstrap.config);
+
+  $(document).ready(function() {
+    var json = doc.stash.get();
+    doc.loadDocument({ json: json });
+
+    doc.ready(function() {
+
+      if (!json) {
+        var row = doc.add("bootstrap.mainAndSidebar");
+        row.append("main", doc.create("bootstrap.hero"));
+        row.append("sidebar", doc.create("bootstrap.title"));
+        row.append("sidebar", doc.create("bootstrap.text"));
+        
+        var single = doc.add("bootstrap.column");
+        single.append(doc.create("bootstrap.hero"));
+        
+        var column = doc.add("bootstrap.column");
+        column.append(doc.create("bootstrap.hero"));
+        column.append(doc.create("bootstrap.info"));
+        column.append(doc.create("bootstrap.button"));
+        
+      }
+    });
+
+  });
 </script>
