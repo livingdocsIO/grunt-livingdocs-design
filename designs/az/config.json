@@ -1,4 +1,5 @@
 {
   "namespace" : "az",
-  "name": "AZ"
+  "name": "AZ",
+  "css": ["/designs/az/css/style.css"]
 }

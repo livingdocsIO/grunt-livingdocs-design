@@ -1,4 +1,4 @@
 {
   "namespace": "medium",
-  "css": ["/test/manual/bootstrap/css/bootstrap.css", "/test/manual/css/bootstrap-adjust.css"]
+  "css": ["/designs/medium/css/style.css"]
 }

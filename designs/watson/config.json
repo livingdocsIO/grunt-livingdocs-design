@@ -1,3 +1,4 @@
 {
-  "namespace": "watson"
+  "namespace": "watson",
+  "css": ["/designs/watson/css/style.css"]
 }

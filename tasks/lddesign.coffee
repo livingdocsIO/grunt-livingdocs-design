@@ -34,7 +34,7 @@ module.exports = (grunt) ->
           collapseWhitespace: true
       catch err
         grunt.log.writeln('\n>> Design "%s", snippet "%s": HTML minify error\n %s\n'.yellow, info.design, info.snippet, err)
-        return '<div class="error minify" style="color: red">Error while minifying</div>'
+        return '<div class="error minify" style="color: red">Error while minifying: Design "' + info.design + '", Snippet "' + info.snippet + '"</div>'
         
     else
       html
@@ -42,7 +42,7 @@ module.exports = (grunt) ->
       
   # write the config and snippets to disk
   writeDesignConfig = (design, destination) ->
-    templateBegin = "(function() { this.snippetCollections || (this.snippetCollections = {}); snippetCollections." + design.config.namespace + " = (function() { return "
+    templateBegin = "(function() { this.design || (this.design = {}); design." + design.config.namespace + " = (function() { return "
     templateEnd = ";})();}).call(this);"
     fileData = templateBegin + JSON.stringify(design, null, 2) + templateEnd
     grunt.file.write destination + "/design.js", fileData,

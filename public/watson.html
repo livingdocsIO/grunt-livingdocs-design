@@ -3,10 +3,20 @@
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>watson</title>
-    <script src="js/vendor/underscore.js"></script>
-    <script src="js/vendor/jquery-1.9.js"></script>
-    <script src="js/watson.js"></script>
-    <link href="css/watson.css" media="all" rel="stylesheet" type="text/css" />
+    
+  <link rel="stylesheet" href="/css/livingdocs.css">
+  <link rel="stylesheet" href="/designs/watson/css/style.css">
+
+  <script src="http://localhost:35729/livereload.js"></script>
+  <script src="/js/vendor/jquery-1.9.js"></script>
+
+  <!-- dependencies of livingdocs-engine -->
+  <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+  <script src="/js/vendor/store/store.js"></script>
+  <script src="/js/vendor/editableJS/editable.js"></script>
+  <script src="/designs/watson/design.js"></script>
+  <script src="/js/livingdocs_engine.js"></script>
+
   </head>
   <body>
     <div class="full-width-container">
@@ -17,58 +27,58 @@
   <script>
     $(document).ready(function() {
       headerContainer = $('.full-width-container');
-      headerContainer.html(livingdocs.watson.templates.fullWidthLayout());
+      headerContainer.html(design.watson.snippets.fullWidthLayout.html);
       headerContent = headerContainer.find('div[data-doc-container]');
-      headerContent.append(livingdocs.watson.templates.headerImage());
+      headerContent.append(design.watson.snippets.headerImage.html);
 
 
       storyContainer = $('.story-container');
-      storyContainer.html(livingdocs.watson.templates.textLayout());
+      storyContainer.html(design.watson.snippets.textLayout.html);
       storyContent = storyContainer.find('div[data-doc-container]');
-      storyContent.append(livingdocs.watson.templates.date());
-      storyContent.append(livingdocs.watson.templates.socialMediaBox());
-      storyContent.append(livingdocs.watson.templates.title());
-      storyContent.append(livingdocs.watson.templates.lead());
-      storyContent.append(livingdocs.watson.templates.author());
-      storyContent.append(livingdocs.watson.templates.text({text: "Nicht zum ersten Mal rückt im Osten der riesigen Demokratischen Republik Kongo ein Warlord mit seiner Rebellenarmee vor, nicht zum ersten Mal fliehen Tausende vor den Schrecken des Bürgerkriegs."}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.subtitle());
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      insert = $(livingdocs.watson.templates.rightInsert());
+      storyContent.append(design.watson.snippets.date.html);
+      storyContent.append(design.watson.snippets.socialMediaBox.html);
+      storyContent.append(design.watson.snippets.title.html);
+      storyContent.append(design.watson.snippets.lead.html);
+      storyContent.append(design.watson.snippets.author.html);
+      storyContent.append(design.watson.snippets.text);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.subtitle.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      insert = $(design.watson.snippets.rightInsert.html);
       storyContent.append(insert);
-      insert.append(livingdocs.watson.templates.image());
-      insert.append(livingdocs.watson.templates.caption());
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.quote());
-      storyContent.append(livingdocs.watson.templates.source());
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      imageBar = $(livingdocs.watson.templates.imageBar());
+      insert.append(design.watson.snippets.image.html);
+      insert.append(design.watson.snippets.caption.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.quote.html);
+      storyContent.append(design.watson.snippets.source.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      imageBar = $(design.watson.snippets.imageBar.html);
       storyContent.append(imageBar);
-      imageBar.append(livingdocs.watson.templates.image());
-      imageBar.append(livingdocs.watson.templates.image());
-      imageBar.append(livingdocs.watson.templates.image());
-      imageBar.append(livingdocs.watson.templates.caption());
-      storyContent.append(livingdocs.watson.templates.subtitle());
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      sideInsert = $(livingdocs.watson.templates.sideInsert());
+      imageBar.append(design.watson.snippets.image.html);
+      imageBar.append(design.watson.snippets.image.html);
+      imageBar.append(design.watson.snippets.image.html);
+      imageBar.append(design.watson.snippets.caption.html);
+      storyContent.append(design.watson.snippets.subtitle.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      sideInsert = $(design.watson.snippets.sideInsert.html);
       storyContent.append(sideInsert);
-      sideInsert.append(livingdocs.watson.templates.infoBox());
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
-      storyContent.append(livingdocs.watson.templates.text({text: ""}));
+      sideInsert.append(design.watson.snippets.infoBox.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
+      storyContent.append(design.watson.snippets.text.html);
     });
   </script>
 </html>

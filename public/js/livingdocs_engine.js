@@ -1,6 +1,81 @@
 (function() {
-  var Design, DragDrop, History, HistoryAction, InterfaceInjector, LimitedLocalstore, Renderer, Snippet, SnippetArray, SnippetContainer, SnippetDrag, SnippetHtml, SnippetNodeIterator, SnippetSelection, SnippetTemplate, SnippetTemplateList, SnippetTree, chainable, config, docAttr, docClass, document, dom, editableController, focus, htmlCompare, key, loader, localstore, log, mixins, page, stash, value,
+  var Design, DragDrop, EditableController, Focus, History, HistoryAction, InterfaceInjector, LimitedLocalstore, Loader, Page, Renderer, Snippet, SnippetArray, SnippetContainer, SnippetDrag, SnippetElem, SnippetNode, SnippetNodeIterator, SnippetNodeList, SnippetSelection, SnippetTemplateList, SnippetTree, Template, chainable, config, docAttr, docClass, document, dom, guid, htmlCompare, key, localstore, log, mixins, n, name, pageReady, setupApi, stash, templateAttr, templateAttrLookup, v, value,
     __slice = [].slice;
+
+  config = {
+    wordSeparators: "./\\()\"':,.;<>~!#%^&*|+=[]{}`~?",
+    attributePrefix: 'data'
+  };
+
+  docClass = {
+    section: 'doc-section',
+    snippet: 'doc-snippet',
+    editable: 'doc-editable',
+    "interface": 'doc-ui',
+    snippetHighlight: 'doc-snippet-highlight',
+    containerHighlight: 'doc-container-highlight',
+    draggedPlaceholder: 'doc-dragged-placeholder',
+    dragged: 'doc-dragged',
+    beforeDrop: 'doc-before-drop',
+    afterDrop: 'doc-after-drop',
+    preventSelection: 'doc-no-selection',
+    maximizedContainer: 'doc-js-maximized-container'
+  };
+
+  templateAttr = {
+    editable: 'doc-editable',
+    container: 'doc-container',
+    image: 'doc-image',
+    defaultValues: {
+      editable: 'default',
+      container: 'default',
+      image: 'image'
+    }
+  };
+
+  templateAttrLookup = {};
+
+  for (n in templateAttr) {
+    v = templateAttr[n];
+    templateAttrLookup[v] = n;
+  }
+
+  docAttr = {
+    template: 'doc-template'
+  };
+
+  for (name in templateAttr) {
+    value = templateAttr[name];
+    docAttr[name] = value;
+  }
+
+  if (config.attributePrefix) {
+    for (key in docAttr) {
+      value = docAttr[key];
+      docAttr[key] = "" + config.attributePrefix + "-" + value;
+    }
+  }
+
+  guid = (function() {
+    var idCounter, lastId;
+    idCounter = lastId = void 0;
+    return {
+      next: function(user) {
+        var nextId;
+        if (user == null) {
+          user = 'doc';
+        }
+        nextId = Date.now().toString(32);
+        if (lastId === nextId) {
+          idCounter += 1;
+        } else {
+          idCounter = 0;
+          lastId = nextId;
+        }
+        return "" + user + "-" + nextId + idCounter;
+      }
+    };
+  })();
 
   htmlCompare = (function() {
     return {
@@ -136,7 +211,7 @@
         var current, next;
         current = next = root;
         return function() {
-          var child, n;
+          var child;
           n = current = next;
           child = next = void 0;
           if (current) {
@@ -209,7 +284,7 @@
     };
 
     LimitedLocalstore.prototype.pop = function() {
-      var index, reference, value;
+      var index, reference;
       index = this.getIndex();
       if (index && index.length) {
         reference = index.pop();
@@ -223,7 +298,7 @@
     };
 
     LimitedLocalstore.prototype.get = function(num) {
-      var index, reference, value;
+      var index, reference;
       index = this.getIndex();
       if (index && index.length) {
         num || (num = index.length - 1);
@@ -337,7 +412,7 @@
   })();
 
   mixins = function() {
-    var Mixed, method, mixin, mixins, name, _i;
+    var Mixed, method, mixin, mixins, _i;
     mixins = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
     Mixed = function() {};
     for (_i = mixins.length - 1; _i >= 0; _i += -1) {
@@ -362,7 +437,7 @@
     };
 
     SnippetNodeIterator.prototype.next = function() {
-      var child, n, next;
+      var child, next;
       n = this.current = this._next;
       child = next = void 0;
       if (this.current) {
@@ -430,39 +505,6 @@
     };
   })();
 
-  config = {
-    wordSeparators: "./\\()\"':,.;<>~!#%^&*|+=[]{}`~?",
-    defaultContainerName: 'default',
-    defaultEditableName: 'default'
-  };
-
-  docClass = {
-    section: 'doc-section',
-    snippet: 'doc-snippet',
-    editable: 'doc-editable',
-    "interface": 'doc-ui',
-    snippetHighlight: 'doc-snippet-highlight',
-    containerHighlight: 'doc-container-highlight',
-    draggedPlaceholder: 'doc-dragged-placeholder',
-    dragged: 'doc-dragged',
-    beforeDrop: 'doc-before-drop',
-    afterDrop: 'doc-after-drop',
-    preventSelection: 'doc-no-selection',
-    maximizedContainer: 'doc-js-maximized-container'
-  };
-
-  docAttr = {
-    template: 'doc-template',
-    editable: 'doc-editable',
-    container: 'doc-container',
-    list: 'doc-list'
-  };
-
-  for (key in docAttr) {
-    value = docAttr[key];
-    docAttr[key] = "data-" + value;
-  }
-
   Design = (function() {
     function Design(config) {
       this.namespace = (config != null ? config.namespace : void 0) || 'livingdocs-templates';
@@ -481,7 +523,7 @@
           this.add(name, template);
         }
       }
-      return this.templates[name] = new SnippetTemplate({
+      return this.templates[name] = new Template({
         namespace: this.namespace,
         name: name,
         html: template.html,
@@ -504,8 +546,8 @@
     };
 
     Design.prototype.checkNamespace = function(identifier, callback) {
-      var name, namespace, _ref;
-      _ref = SnippetTemplate.parseIdentifier(identifier), namespace = _ref.namespace, name = _ref.name;
+      var namespace, _ref;
+      _ref = Template.parseIdentifier(identifier), namespace = _ref.namespace, name = _ref.name;
       if (!namespace || this.namespace === namespace) {
         return callback(name);
       } else {
@@ -514,7 +556,7 @@
     };
 
     Design.prototype.each = function(callback) {
-      var name, template, _ref, _results;
+      var template, _ref, _results;
       _ref = this.template;
       _results = [];
       for (name in _ref) {
@@ -529,7 +571,7 @@
   })();
 
   document = (function() {
-    var defaultNamespace, doBeforeDocumentReady, documentReady, waitingCalls,
+    var doBeforeDocumentReady, documentReady, waitingCalls,
       _this = this;
     waitingCalls = 1;
     documentReady = function() {
@@ -542,71 +584,54 @@
       waitingCalls += 1;
       return documentReady;
     };
-    defaultNamespace = void 0;
     return {
       initialized: false,
-      designs: {},
       uniqueId: 0,
       ready: $.Callbacks('memory once'),
+      changed: $.Callbacks(),
       loadDocument: function(_arg) {
-        var $root, design, json;
-        json = (_arg != null ? _arg : {}).json;
+        var json, rootNode, _ref,
+          _this = this;
+        _ref = _arg != null ? _arg : {}, json = _ref.json, rootNode = _ref.rootNode;
         if (this.initialized) {
           log.error('document is already initialized');
         }
         this.initialized = true;
-        design = this.firstDesign();
-        this.snippetTree = json && design ? new SnippetTree({
+        this.snippetTree = json && this.design ? new SnippetTree({
           content: json,
-          design: design
+          design: this.design
         }) : new SnippetTree();
-        page.initializeListeners();
-        editableController.setup();
-        $root = page.getDocumentSection();
+        this.snippetTree.changed.add(function() {
+          return _this.changed.fire();
+        });
+        this.page = new Page();
+        if (this.design.css) {
+          this.page.loader.css(this.design.css, doBeforeDocumentReady());
+        }
+        rootNode || (rootNode = this.page.getDocumentSection()[0]);
         this.renderer = new Renderer({
           snippetTree: this.snippetTree,
-          rootNode: $root[0]
+          rootNode: rootNode,
+          page: this.page
         });
-        this.renderer.render();
+        this.ready.add(function() {
+          return _this.renderer.render();
+        });
         return documentReady();
       },
-      addSnippetCollection: function(snippetCollection, config) {
-        var design;
-        design = new Design(config);
-        design.add(snippetCollection);
-        this.designs[design.namespace] = design;
-        defaultNamespace = this.listDesignNamespaces().length === 0 ? namespace : void 0;
-        if (design.css) {
-          return loader.css(design.css, doBeforeDocumentReady());
-        }
+      addDesign: function(snippetCollection, config) {
+        this.design = new Design(config);
+        return this.design.add(snippetCollection);
       },
       eachContainer: function(callback) {
         return this.snippetTree.eachContainer(callback);
       },
-      listDesignNamespaces: function() {
-        var namespace, _results;
-        _results = [];
-        for (namespace in this.designs) {
-          _results.push(namespace);
-        }
-        return _results;
-      },
-      firstDesign: function() {
-        var namespace;
-        for (namespace in this.designs) {
-          return this.designs[namespace];
-        }
-      },
       listTemplates: function() {
-        var design, namespace, templates, _ref;
+        var templates;
         templates = [];
-        _ref = this.designs;
-        for (namespace in _ref) {
-          design = _ref[namespace];
-          design.each(function(template) {
-            return templates.push(template.identifier);
-          });
-        }
+        this.design.each(function(template) {
+          return templates.push(template.identifier);
+        });
         return templates;
       },
       add: function(input) {
@@ -664,7 +689,7 @@
         if (resetFirst) {
           this.reset();
         }
-        this.snippetTree.fromJson(contentJson, this.firstDesign());
+        this.snippetTree.fromJson(contentJson, this.design);
         return this.renderer.render();
       },
       reset: function() {
@@ -672,16 +697,12 @@
         return this.snippetTree.detach();
       },
       getTemplate: function(identifier) {
-        var name, namespace, snippetTemplate, _ref, _ref1;
-        _ref = SnippetTemplate.parseIdentifier(identifier), namespace = _ref.namespace, name = _ref.name;
-        if (defaultNamespace && !namespace) {
-          namespace = defaultNamespace;
-        }
-        snippetTemplate = (_ref1 = this.designs[namespace]) != null ? _ref1.get(name) : void 0;
-        if (!snippetTemplate) {
+        var template, _ref;
+        template = (_ref = this.design) != null ? _ref.get(identifier) : void 0;
+        if (!template) {
           log.error("could not find template " + identifier);
         }
-        return snippetTemplate;
+        return template;
       }
     };
   })();
@@ -691,31 +712,35 @@
     snippetRegex = new RegExp("(?: |^)" + docClass.snippet + "(?: |$)");
     sectionRegex = new RegExp("(?: |^)" + docClass.section + "(?: |$)");
     return {
-      parentSnippet: function(node) {
-        var snippet;
+      parentSnippetElem: function(node) {
+        var snippetElem;
         node = this.getElementNode(node);
         while (node && node.nodeType === 1) {
           if (snippetRegex.test(node.className)) {
-            snippet = this.getSnippet(node);
-            return snippet;
+            snippetElem = this.getSnippetElem(node);
+            return snippetElem;
           }
           node = node.parentNode;
         }
         return void 0;
       },
+      parentSnippet: function(node) {
+        var _ref;
+        return (_ref = this.parentSnippetElem(node)) != null ? _ref.snippet : void 0;
+      },
       parentContainer: function(node) {
-        var containerName, snippet;
+        var containerName, snippetElem;
         node = this.getElementNode(node);
         while (node && node.nodeType === 1) {
           if (node.hasAttribute(docAttr.container)) {
             containerName = node.getAttribute(docAttr.container);
             if (!sectionRegex.test(node.className)) {
-              snippet = this.parentSnippet(node);
+              snippetElem = this.parentSnippetElem(node);
             }
             return {
               node: node,
               containerName: containerName,
-              snippet: snippet
+              snippetElem: snippetElem
             };
           }
           node = node.parentNode;
@@ -723,7 +748,7 @@
         return {};
       },
       dropTarget: function(node, _arg) {
-        var containerName, coords, insertSnippet, left, pos, snippet, top;
+        var containerName, coords, insertSnippet, left, pos, snippetElem, top;
         top = _arg.top, left = _arg.left;
         node = this.getElementNode(node);
         while (node && node.nodeType === 1) {
@@ -737,15 +762,15 @@
               if (insertSnippet) {
                 coords = this.getInsertPosition(insertSnippet.$elem[0], insertSnippet.position);
                 return {
-                  snippet: insertSnippet.snippet,
+                  snippetElem: insertSnippet.snippetElem,
                   position: insertSnippet.position,
                   coords: coords
                 };
               } else {
-                snippet = this.parentSnippet(node);
+                snippetElem = this.parentSnippetElem(node);
                 return {
                   containerName: containerName,
-                  parent: snippet,
+                  parent: snippetElem,
                   node: node
                 };
               }
@@ -755,10 +780,10 @@
               top: top,
               left: left
             });
-            snippet = this.getSnippet(node);
+            snippetElem = this.getSnippetElem(node);
             coords = this.getInsertPosition(node, pos.position);
             return {
-              snippet: snippet,
+              snippetElem: snippetElem,
               position: pos.position,
               coords: coords
             };
@@ -832,7 +857,7 @@
             };
           }
           if (insertSnippet) {
-            return insertSnippet.snippet = _this.getSnippet(insertSnippet.$elem[0]);
+            return insertSnippet.snippetElem = _this.getSnippetElem(insertSnippet.$elem[0]);
           }
         });
         return insertSnippet;
@@ -844,23 +869,25 @@
           return b - a;
         }
       },
-      maximizeContainerHeight: function(snippet) {
-        var $elem, $parent, elem, name, outer, parentHeight, _ref, _results;
-        _ref = snippet.snippetHtml.containers;
-        _results = [];
-        for (name in _ref) {
-          elem = _ref[name];
-          $elem = $(elem);
-          if ($elem.hasClass(docClass.maximizedContainer)) {
-            continue;
+      maximizeContainerHeight: function(snippetElem) {
+        var $elem, $parent, elem, outer, parentHeight, _ref, _results;
+        if (snippetElem.template.containerCount > 1) {
+          _ref = snippetElem.containers;
+          _results = [];
+          for (name in _ref) {
+            elem = _ref[name];
+            $elem = $(elem);
+            if ($elem.hasClass(docClass.maximizedContainer)) {
+              continue;
+            }
+            $parent = $elem.parent();
+            parentHeight = $parent.height();
+            outer = $elem.outerHeight(true) - $elem.height();
+            $elem.height(parentHeight - outer);
+            _results.push($elem.addClass(docClass.maximizedContainer));
           }
-          $parent = $elem.parent();
-          parentHeight = $parent.height();
-          outer = $elem.outerHeight(true) - $elem.height();
-          $elem.height(parentHeight - outer);
-          _results.push($elem.addClass(docClass.maximizedContainer));
+          return _results;
         }
-        return _results;
       },
       restoreContainerHeight: function() {
         return $("." + docClass.maximizedContainer).css('height', '').removeClass(docClass.maximizedContainer);
@@ -874,7 +901,7 @@
           return node;
         }
       },
-      getSnippet: function(node) {
+      getSnippetElem: function(node) {
         return $(node).data('snippet');
       },
       getBoundingClientRect: function(node) {
@@ -934,9 +961,8 @@
     };
 
     DragDrop.prototype.start = function() {
-      var mouseLeft, mouseTop;
+      var mouseLeft, mouseTop, _ref;
       this.drag.started = true;
-      page.blurFocusedElement();
       mouseLeft = this.drag.startPoint.left;
       mouseTop = this.drag.startPoint.top;
       if (typeof this.options.onDragStart === 'function') {
@@ -957,7 +983,7 @@
       this.move(mouseLeft, mouseTop);
       if (!this.direct) {
         this.$dragged.appendTo(window.document.body).show();
-        return this.$origin.addClass(docClass.dragged);
+        return (_ref = this.$origin) != null ? _ref.addClass(docClass.dragged) : void 0;
       }
     };
 
@@ -1001,7 +1027,7 @@
         if (this.options.minDistance && this.distance({
           left: mouseLeft,
           top: mouseTop
-        }, this.drag.startPoint) > this.minDistance) {
+        }, this.drag.startPoint) > this.options.minDistance) {
           return this.start();
         }
       }
@@ -1018,7 +1044,7 @@
 
     DragDrop.prototype.dropTarget = function(mouseLeft, mouseTop, event) {
       var dragTarget, elem;
-      if (this.$origin && this.$dragged && event) {
+      if (this.$dragged && event) {
         elem = void 0;
         if (event.clientX && event.clientY) {
           this.$dragged.hide();
@@ -1106,7 +1132,7 @@
     return draggedCopy;
   };
 
-  DragDrop.placeholder = function(drag, $origin) {
+  DragDrop.placeholder = function(drag) {
     var $placeholder, numberOfDraggedElems, snippetWidth, template;
     snippetWidth = drag.width;
     numberOfDraggedElems = 1;
@@ -1128,103 +1154,104 @@
     });
   };
 
-  editableController = (function() {
-    var initialized;
-    initialized = false;
-    return {
-      selection: $.Callbacks(),
-      setup: function() {
-        var intialized,
-          _this = this;
-        if (initialized) {
-          return;
-        }
-        intialized = true;
-        Editable.init({
-          log: false
-        });
-        return Editable.focus(function(element) {
-          var snippet;
-          snippet = dom.parentSnippet(element);
-          return focus.editableFocused(element, snippet);
-        }).blur(function(element) {
-          var editableName, snippet;
-          snippet = dom.parentSnippet(element);
-          focus.editableBlurred(element, snippet);
-          editableName = element.getAttribute(docAttr.editable);
-          return snippet.set(editableName, element.innerHTML);
-        }).selection(function(element, selection) {
-          var snippet;
-          snippet = dom.parentSnippet(element);
-          return _this.selection.fire(snippet, element, selection);
-        });
-      }
+  EditableController = (function() {
+    function EditableController(page) {
+      this.page = page;
+      Editable.init({
+        log: false
+      });
+      this.selection = $.Callbacks();
+      Editable.focus($.proxy(this.focus, this)).blur($.proxy(this.blur, this)).selection($.proxy(this.selectionChanged, this));
+    }
+
+    EditableController.prototype.add = function(nodes) {
+      return Editable.add(nodes);
     };
+
+    EditableController.prototype.focus = function(element) {
+      var snippet;
+      snippet = dom.parentSnippet(element);
+      return this.page.focus.editableFocused(element, snippet);
+    };
+
+    EditableController.prototype.blur = function(element) {
+      var editableName, snippet;
+      snippet = dom.parentSnippet(element);
+      this.page.focus.editableBlurred(element, snippet);
+      editableName = element.getAttribute(docAttr.editable);
+      return snippet.set(editableName, element.innerHTML);
+    };
+
+    EditableController.prototype.selectionChanged = function(element, selection) {
+      var snippet;
+      snippet = dom.parentSnippet(element);
+      return this.selection.fire(snippet, element, selection);
+    };
+
+    return EditableController;
+
   })();
 
-  focus = (function() {
-    return {
-      editableNode: void 0,
-      snippet: void 0,
-      snippetFocus: $.Callbacks(),
-      snippetBlur: $.Callbacks(),
-      setFocus: function(snippet, editableNode) {
-        if (editableNode !== this.editableNode) {
-          this.blurEditable();
-          this.editableNode = editableNode;
-        }
-        if (snippet !== this.snippet) {
-          this.blurSnippet();
-          this.snippet = snippet;
-          this.highlightSnippet();
-          return this.snippetFocus.fire(this.snippet);
-        }
-      },
-      editableFocused: function(editableNode, snippet) {
-        if (this.editableNode !== editableNode) {
-          snippet || (snippet = dom.parentSnippet(editableNode));
-          return this.setFocus(snippet, editableNode);
-        }
-      },
-      editableBlurred: function(editableNode, snippet) {
-        if (this.editableNode === editableNode) {
-          return this.setFocus(this.snippet, void 0);
-        }
-      },
-      snippetFocused: function(snippet) {
-        if (this.snippet !== snippet) {
-          return this.setFocus(snippet, void 0);
-        }
-      },
-      blur: function() {
-        return this.setFocus(void 0, void 0);
-      },
-      highlightSnippet: function() {
-        var _ref;
-        if ((_ref = this.snippet) != null ? _ref.snippetHtml : void 0) {
-          return this.snippet.snippetHtml.$html.addClass(docClass.snippetHighlight);
-        }
-      },
-      removeHighlight: function(snippet) {
-        if (snippet != null ? snippet.snippetHtml : void 0) {
-          return snippet.snippetHtml.$html.removeClass(docClass.snippetHighlight);
-        }
-      },
-      blurEditable: function() {
-        if (this.editableNode) {
-          return this.editableNode = void 0;
-        }
-      },
-      blurSnippet: function() {
-        var previous;
-        if (this.snippet) {
-          this.removeHighlight(this.snippet);
-          previous = this.snippet;
-          this.snippet = void 0;
-          return this.snippetBlur.fire(previous);
-        }
+  Focus = (function() {
+    function Focus() {
+      this.editableNode = void 0;
+      this.snippet = void 0;
+      this.snippetFocus = $.Callbacks();
+      this.snippetBlur = $.Callbacks();
+    }
+
+    Focus.prototype.setFocus = function(snippet, editableNode) {
+      if (editableNode !== this.editableNode) {
+        this.blurEditable();
+        this.editableNode = editableNode;
+      }
+      if (snippet !== this.snippet) {
+        this.blurSnippet();
+        this.snippet = snippet;
+        return this.snippetFocus.fire(this.snippet);
       }
     };
+
+    Focus.prototype.editableFocused = function(editableNode, snippet) {
+      if (this.editableNode !== editableNode) {
+        snippet || (snippet = dom.parentSnippet(editableNode));
+        return this.setFocus(snippet, editableNode);
+      }
+    };
+
+    Focus.prototype.editableBlurred = function(editableNode, snippet) {
+      if (this.editableNode === editableNode) {
+        return this.setFocus(this.snippet, void 0);
+      }
+    };
+
+    Focus.prototype.snippetFocused = function(snippet) {
+      if (this.snippet !== snippet) {
+        return this.setFocus(snippet, void 0);
+      }
+    };
+
+    Focus.prototype.blur = function() {
+      return this.setFocus(void 0, void 0);
+    };
+
+    Focus.prototype.blurEditable = function() {
+      if (this.editableNode) {
+        return this.editableNode = void 0;
+      }
+    };
+
+    Focus.prototype.blurSnippet = function() {
+      var previous;
+      if (this.snippet) {
+        previous = this.snippet;
+        this.snippet = void 0;
+        return this.snippetBlur.fire(previous);
+      }
+    };
+
+    return Focus;
+
   })();
 
   History = (function() {
@@ -1257,11 +1284,11 @@
     function InterfaceInjector(_arg) {
       var _ref, _ref1, _ref2;
       this.snippet = _arg.snippet, this.snippetContainer = _arg.snippetContainer, this.renderer = _arg.renderer;
-      if (this.snippet && !((_ref = this.snippet.snippetHtml) != null ? _ref.attachedToDom : void 0)) {
+      if (this.snippet && !((_ref = this.snippet.snippetElem) != null ? _ref.attachedToDom : void 0)) {
         log.error('snippet is not attached to the DOM');
       }
       if (this.snippetContainer) {
-        if (!this.snippetContainer.isRoot && !((_ref1 = this.snippetContainer.parentSnippet) != null ? (_ref2 = _ref1.snippetHtml) != null ? _ref2.attachedToDom : void 0 : void 0)) {
+        if (!this.snippetContainer.isRoot && !((_ref1 = this.snippetContainer.parentSnippet) != null ? (_ref2 = _ref1.snippetElem) != null ? _ref2.attachedToDom : void 0 : void 0)) {
           log.error('snippetContainer is not attached to the DOM');
         }
       }
@@ -1270,7 +1297,7 @@
     InterfaceInjector.prototype.before = function($elem) {
       if (this.snippet) {
         this.beforeInjecting($elem);
-        return this.snippet.snippetHtml.$html.before($elem);
+        return this.snippet.snippetElem.$html.before($elem);
       } else {
         return log.error('cannot use before on a snippetContainer');
       }
@@ -1279,7 +1306,7 @@
     InterfaceInjector.prototype.after = function($elem) {
       if (this.snippet) {
         this.beforeInjecting($elem);
-        return this.snippet.snippetHtml.$html.after($elem);
+        return this.snippet.snippetElem.$html.after($elem);
       } else {
         return log.error('cannot use after on a snippetContainer');
       }
@@ -1314,140 +1341,175 @@
 
   })();
 
-  loader = (function() {
-    var loadedCssFiles;
-    loadedCssFiles = [];
-    return {
-      replaceCss: function(cssUrl, callback) {
-        this.removeCss();
-        return this.css(cssUrl, callback);
-      },
-      css: function(cssUrl, callback) {
-        var filesToLoad, url;
-        if (!$.isArray(cssUrl)) {
-          cssUrl = [cssUrl];
-        }
-        cssUrl = (function() {
-          var _i, _len, _results;
-          _results = [];
-          for (_i = 0, _len = cssUrl.length; _i < _len; _i++) {
-            url = cssUrl[_i];
-            loadedCssFiles.push(url);
-            _results.push(S.prefix('css!', url));
-          }
-          return _results;
-        })();
-        filesToLoad = cssUrl.length;
-        return yepnope({
-          load: cssUrl,
-          callback: function() {
-            filesToLoad -= 1;
-            if (callback && filesToLoad <= 0) {
-              return callback();
-            }
-          }
-        });
-      },
-      removeCss: function(cssUrl) {
-        var url, _i, _len;
-        if ((cssUrl != null) && !$.isArray(cssUrl)) {
-          cssUrl = [cssUrl];
-        }
-        cssUrl = cssUrl || loadedCssFiles;
+  Loader = (function() {
+    function Loader() {
+      this.loadedCssFiles = [];
+    }
+
+    Loader.prototype.replaceCss = function(cssUrl, callback) {
+      this.removeCss();
+      return this.css(cssUrl, callback);
+    };
+
+    Loader.prototype.css = function(cssUrl, callback) {
+      var filesToLoad, url;
+      if (!$.isArray(cssUrl)) {
+        cssUrl = [cssUrl];
+      }
+      cssUrl = (function() {
+        var _i, _len, _results;
+        _results = [];
         for (_i = 0, _len = cssUrl.length; _i < _len; _i++) {
           url = cssUrl[_i];
-          $("link[rel=stylesheet][href~='" + url + "']").remove();
+          this.loadedCssFiles.push(url);
+          _results.push(S.prefix('css!', url));
         }
-        return loadedCssFiles = [];
-      }
+        return _results;
+      }).call(this);
+      filesToLoad = cssUrl.length;
+      return yepnope({
+        load: cssUrl,
+        callback: function() {
+          filesToLoad -= 1;
+          if (callback && filesToLoad <= 0) {
+            return callback();
+          }
+        }
+      });
     };
+
+    Loader.prototype.removeCss = function(cssUrl) {
+      var url, _i, _len;
+      if ((cssUrl != null) && !$.isArray(cssUrl)) {
+        cssUrl = [cssUrl];
+      }
+      cssUrl = cssUrl || this.loadedCssFiles;
+      for (_i = 0, _len = cssUrl.length; _i < _len; _i++) {
+        url = cssUrl[_i];
+        $("link[rel=stylesheet][href~='" + url + "']").remove();
+      }
+      return this.loadedCssFiles = [];
+    };
+
+    return Loader;
+
   })();
 
-  page = (function() {
-    return {
-      $document: $(window.document),
-      $body: $(window.document.body),
-      getDocumentSection: function(_arg) {
-        var $root, rootNode;
-        rootNode = (_arg != null ? _arg : {}).rootNode;
-        if (!rootNode) {
-          $root = $("." + docClass.section).first();
-        } else {
-          $root = $(rootNode).addClass("." + docClass.section);
-        }
-        if (!$root.length) {
-          log.error('no rootNode found');
-        }
-        return $root;
-      },
-      initializeListeners: function() {
-        this.snippetDragDrop = new DragDrop({
-          longpressDelay: 400,
-          longpressDistanceLimit: 10,
-          preventDefault: false
+  Page = (function() {
+    function Page() {
+      this.$document = $(window.document);
+      this.$body = $(window.document.body);
+      this.loader = new Loader();
+      this.focus = new Focus();
+      this.editableController = new EditableController(this);
+      this.snippetDragDrop = new DragDrop({
+        longpressDelay: 400,
+        longpressDistanceLimit: 10,
+        preventDefault: false
+      });
+      this.$document.on('click.livingdocs', $.proxy(this.click, this)).on('mousedown.livingdocs', $.proxy(this.mousedown, this)).on('dragstart', $.proxy(this.browserDragStart, this));
+    }
+
+    Page.prototype.browserDragStart = function(event) {
+      event.preventDefault();
+      return event.stopPropagation();
+    };
+
+    Page.prototype.removeListeners = function() {
+      this.$document.off('.livingdocs');
+      return this.$document.off('.livingdocs-drag');
+    };
+
+    Page.prototype.getDocumentSection = function(_arg) {
+      var $root, rootNode;
+      rootNode = (_arg != null ? _arg : {}).rootNode;
+      if (!rootNode) {
+        $root = $("." + docClass.section).first();
+      } else {
+        $root = $(rootNode).addClass("." + docClass.section);
+      }
+      if (!$root.length) {
+        log.error('no rootNode found');
+      }
+      return $root;
+    };
+
+    Page.prototype.mousedown = function(event) {
+      var snippetElem;
+      if (event.which !== 1) {
+        return;
+      }
+      snippetElem = dom.parentSnippetElem(event.target);
+      if (snippetElem) {
+        return this.startDrag({
+          snippetElem: snippetElem,
+          dragDrop: this.snippetDragDrop
         });
-        return this.$document.on('click.livingdocs', $.proxy(this.click, this)).on('mousedown.livingdocs', $.proxy(this.mousedown, this));
-      },
-      removeListeners: function() {
-        this.$document.off('.livingdocs');
-        return this.$document.off('.livingdocs-drag');
-      },
-      mousedown: function(event) {
-        var $snippet, snippet, snippetDrag;
-        if (event.which !== 1) {
-          return;
-        }
-        snippet = dom.parentSnippet(event.target);
-        if (snippet) {
-          this.$document.on('mousemove.livingdocs-drag', $.proxy(this.snippetDragMove, this));
-          this.$document.on('mouseup.livingdocs-drag', $.proxy(this.snippetDragEnd, this));
-          $snippet = snippet.snippetHtml.$html;
-          snippetDrag = new SnippetDrag({
-            snippet: snippet
-          });
-          return this.snippetDragDrop.mousedown($snippet, event, {
-            onDragStart: snippetDrag.onStart,
-            onDrag: snippetDrag.onDrag,
-            onDrop: snippetDrag.onDrop
-          });
-        }
-      },
-      snippetDragMove: function(event) {
-        return this.snippetDragDrop.move(event.pageX, event.pageY, event);
-      },
-      snippetDragEnd: function(event) {
-        this.snippetDragDrop.drop();
-        return this.$document.off('.livingdocs-drag');
-      },
-      click: function(event) {
-        var snippet;
-        snippet = dom.parentSnippet(event.target);
-        if (snippet) {
-          return focus.snippetFocused(snippet);
-        } else {
-          return focus.blur();
-        }
-      },
-      getFocusedElement: function() {
-        return window.document.activeElement;
-      },
-      blurFocusedElement: function() {
-        var focusedElement;
-        focus.setFocus(void 0);
-        focusedElement = this.getFocusedElement();
-        if (focusedElement) {
-          return $(focusedElement).blur();
-        }
       }
     };
-  })();
 
-  this.page = page;
+    Page.prototype.startDrag = function(_arg) {
+      var $snippet, dragDrop, snippet, snippetDrag, snippetElem,
+        _this = this;
+      snippet = _arg.snippet, snippetElem = _arg.snippetElem, dragDrop = _arg.dragDrop;
+      if (!(snippet || snippetElem)) {
+        return;
+      }
+      if (snippetElem) {
+        snippet = snippetElem.snippet;
+      }
+      this.$document.on('mousemove.livingdocs-drag', function(event) {
+        return dragDrop.move(event.pageX, event.pageY, event);
+      });
+      this.$document.on('mouseup.livingdocs-drag', function() {
+        dragDrop.drop();
+        return _this.$document.off('.livingdocs-drag');
+      });
+      snippetDrag = new SnippetDrag({
+        snippet: snippet,
+        page: this
+      });
+      if (snippetElem) {
+        $snippet = snippetElem.$html;
+      }
+      return dragDrop.mousedown($snippet, event, {
+        onDragStart: snippetDrag.onStart,
+        onDrag: snippetDrag.onDrag,
+        onDrop: snippetDrag.onDrop
+      });
+    };
+
+    Page.prototype.click = function(event) {
+      var snippet;
+      snippet = dom.parentSnippet(event.target);
+      if (snippet) {
+        return this.focus.snippetFocused(snippet);
+      } else {
+        return this.focus.blur();
+      }
+    };
+
+    Page.prototype.getFocusedElement = function() {
+      return window.document.activeElement;
+    };
+
+    Page.prototype.blurFocusedElement = function() {
+      var focusedElement;
+      this.focus.setFocus(void 0);
+      focusedElement = this.getFocusedElement();
+      if (focusedElement) {
+        return $(focusedElement).blur();
+      }
+    };
+
+    return Page;
+
+  })();
 
   Renderer = (function() {
     function Renderer(_arg) {
       var rootNode;
-      this.snippetTree = _arg.snippetTree, rootNode = _arg.rootNode;
+      this.snippetTree = _arg.snippetTree, rootNode = _arg.rootNode, this.page = _arg.page;
       if (!this.snippetTree) {
         log.error('no snippet tree specified');
       }
@@ -1455,52 +1517,88 @@
         log.error('no root node specified');
       }
       this.$root = $(rootNode);
-      this.snippetTree.renderer = this;
+      this.setupPageListeners();
       this.setupSnippetTreeListeners();
+      this.snippets = {};
     }
+
+    Renderer.prototype.setupPageListeners = function() {
+      this.page.focus.snippetFocus.add($.proxy(this, 'highlightSnippet'));
+      return this.page.focus.snippetBlur.add($.proxy(this, 'removeSnippetHighlight'));
+    };
 
     Renderer.prototype.setupSnippetTreeListeners = function() {
       this.snippetTree.snippetAdded.add($.proxy(this, 'snippetAdded'));
       this.snippetTree.snippetRemoved.add($.proxy(this, 'snippetRemoved'));
-      return this.snippetTree.snippetMoved.add($.proxy(this, 'snippetMoved'));
+      this.snippetTree.snippetMoved.add($.proxy(this, 'snippetMoved'));
+      return this.snippetTree.snippetContentChanged.add($.proxy(this, 'snippetContentChanged'));
     };
 
     Renderer.prototype.snippetAdded = function(snippet) {
-      this.ensureSnippetHtml(snippet);
-      return this.updateDomPosition(snippet.snippetHtml);
+      var snippetElem;
+      snippetElem = this.ensureSnippetElem(snippet);
+      return this.updateDomPosition(snippetElem);
     };
 
     Renderer.prototype.snippetRemoved = function(snippet) {
-      var _ref;
-      if ((_ref = snippet.snippetHtml) != null ? _ref.attachedToDom : void 0) {
-        return this.detachFromDom(snippet.snippetHtml);
+      var snippetElem;
+      if (snippetElem = this.getSnippetElem(snippet)) {
+        if (snippetElem.attachedToDom) {
+          this.detachFromDom(snippetElem);
+          return delete this.snippets[snippet.id];
+        }
       }
     };
 
     Renderer.prototype.snippetMoved = function(snippet) {
-      this.ensureSnippetHtml(snippet);
-      return this.updateDomPosition(snippet.snippetHtml);
+      var snippetElem;
+      snippetElem = this.ensureSnippetElem(snippet);
+      return this.updateDomPosition(snippetElem);
     };
 
-    Renderer.prototype.ensureSnippetHtml = function(snippet) {
-      if (!snippet.snippetHtml) {
-        return snippet.createHtml();
+    Renderer.prototype.snippetContentChanged = function(snippet) {
+      var snippetElem;
+      snippetElem = this.ensureSnippetElem(snippet);
+      if (!snippetElem.attachedToDom) {
+        this.insertIntoDom(snippetElem);
       }
+      return snippetElem.updateContent();
+    };
+
+    Renderer.prototype.getSnippetElem = function(snippet) {
+      if (snippet) {
+        return this.snippets[snippet.id];
+      }
+    };
+
+    Renderer.prototype.ensureSnippetElem = function(snippet) {
+      if (!snippet) {
+        return;
+      }
+      return this.snippets[snippet.id] || this.createSnippetElem(snippet);
+    };
+
+    Renderer.prototype.createSnippetElem = function(snippet) {
+      var snippetElem;
+      snippetElem = snippet.template.createHtml(snippet);
+      return this.snippets[snippet.id] = snippetElem;
     };
 
     Renderer.prototype.render = function() {
       var _this = this;
       this.$root.empty();
       return this.snippetTree.each(function(snippet) {
-        _this.ensureSnippetHtml(snippet);
-        return _this.insertIntoDom(snippet.snippetHtml);
+        var snippetElem;
+        snippetElem = _this.ensureSnippetElem(snippet);
+        return _this.insertIntoDom(snippetElem);
       });
     };
 
     Renderer.prototype.clear = function() {
       this.snippetTree.each(function(snippet) {
-        var _ref;
-        return (_ref = snippet.snippetHtml) != null ? _ref.attachedToDom = false : void 0;
+        var snippetElem;
+        snippetElem = this.getSnippetElem(snippet);
+        return snippetElem != null ? snippetElem.attachedToDom = false : void 0;
       });
       return this.$root.empty();
     };
@@ -1510,55 +1608,54 @@
       return this.render();
     };
 
-    Renderer.prototype.updateDomPosition = function(snippetHtml) {
-      if (snippetHtml.attachedToDom) {
-        this.detachFromDom(snippetHtml);
+    Renderer.prototype.updateDomPosition = function(snippetElem) {
+      if (snippetElem.attachedToDom) {
+        this.detachFromDom(snippetElem);
       }
-      return this.insertIntoDom(snippetHtml);
+      return this.insertIntoDom(snippetElem);
     };
 
-    Renderer.prototype.insertIntoDom = function(snippetHtml) {
-      var $snippet, next, parentContainer, previous, snippet, _ref, _ref1;
-      snippet = snippetHtml.snippet;
-      previous = snippet.previous;
-      next = snippet.next;
-      parentContainer = snippet.parentContainer;
-      $snippet = snippetHtml.$html;
-      if (!snippetHtml.attachedToDom) {
-        if (previous != null ? (_ref = previous.snippetHtml) != null ? _ref.attachedToDom : void 0 : void 0) {
-          previous.snippetHtml.$html.after($snippet);
-          this.afterDomInsert(snippetHtml);
-        } else if (next != null ? (_ref1 = next.snippetHtml) != null ? _ref1.attachedToDom : void 0 : void 0) {
-          next.snippetHtml.$html.before($snippet);
-          this.afterDomInsert(snippetHtml);
-        } else if (parentContainer) {
-          this.appendToContainer(parentContainer, $snippet);
-          this.afterDomInsert(snippetHtml);
-        } else {
-          log.error('could not insert snippet into Dom');
+    Renderer.prototype.insertIntoDom = function(snippetElem) {
+      snippetElem.attach(this);
+      if (!snippetElem.attachedToDom) {
+        log.error('could not insert snippet into Dom');
+      }
+      this.afterDomInsert(snippetElem);
+      return this;
+    };
+
+    Renderer.prototype.afterDomInsert = function(snippetElem) {
+      var editableNodes, node;
+      editableNodes = (function() {
+        var _ref, _results;
+        _ref = snippetElem.editables;
+        _results = [];
+        for (name in _ref) {
+          node = _ref[name];
+          _results.push(node);
         }
-      }
+        return _results;
+      })();
+      return this.page.editableController.add(editableNodes);
+    };
+
+    Renderer.prototype.detachFromDom = function(snippetElem) {
+      snippetElem.detach();
       return this;
     };
 
-    Renderer.prototype.appendToContainer = function(container, $elem) {
-      if (container.isRoot) {
-        return this.$root.append($elem);
-      } else {
-        return container.parentSnippet.snippetHtml.append(container.name, $elem);
+    Renderer.prototype.highlightSnippet = function(snippet) {
+      var snippetElem;
+      if (snippetElem = this.getSnippetElem(snippet)) {
+        return snippetElem.$html.addClass(docClass.snippetHighlight);
       }
     };
 
-    Renderer.prototype.afterDomInsert = function(snippetHtml) {
-      var editableNodes;
-      snippetHtml.attachedToDom = true;
-      editableNodes = snippetHtml.$html.findIn("[" + docAttr.editable + "]");
-      return Editable.add(editableNodes);
-    };
-
-    Renderer.prototype.detachFromDom = function(snippetHtml) {
-      snippetHtml.detach();
-      return this;
+    Renderer.prototype.removeSnippetHighlight = function(snippet) {
+      var snippetElem;
+      if (snippetElem = this.getSnippetElem(snippet)) {
+        return snippetElem.$html.removeClass(docClass.snippetHighlight);
+      }
     };
 
     Renderer.prototype.createInterfaceInjector = function(snippetOrContainer) {
@@ -1593,12 +1690,15 @@
 
   Snippet = (function() {
     function Snippet(_arg) {
-      this.template = (_arg != null ? _arg : {}).template;
+      var id, _ref;
+      _ref = _arg != null ? _arg : {}, this.template = _ref.template, id = _ref.id;
       if (!this.template) {
         log.error('cannot instantiate snippet without template reference');
       }
       this.initializeContainers();
       this.initializeEditables();
+      this.initializeImages();
+      this.id = id || guid.next();
       this.identifier = this.template.identifier;
       this.next = void 0;
       this.previous = void 0;
@@ -1607,9 +1707,9 @@
 
     Snippet.prototype.initializeContainers = function() {
       var containerName, _results;
-      this.containerCount = this.template.containerCount;
+      this.containerCount = this.template.directives.count.container;
       _results = [];
-      for (containerName in this.template.containers) {
+      for (containerName in this.template.directives.container) {
         this.containers || (this.containers = {});
         _results.push(this.containers[containerName] = new SnippetContainer({
           name: containerName,
@@ -1621,13 +1721,28 @@
 
     Snippet.prototype.initializeEditables = function() {
       var editableName, _results;
-      this.editableCount = this.template.editableCount;
+      this.editableCount = this.template.directives.count.editable;
       _results = [];
-      for (editableName in this.template.editables) {
+      for (editableName in this.template.directives.editable) {
         this.editables || (this.editables = {});
         _results.push(this.editables[editableName] = void 0);
       }
       return _results;
+    };
+
+    Snippet.prototype.initializeImages = function() {
+      var imageName, _results;
+      this.imageCount = this.template.directives.count.image;
+      _results = [];
+      for (imageName in this.template.directives.image) {
+        this.images || (this.images = {});
+        _results.push(this.images[imageName] = void 0);
+      }
+      return _results;
+    };
+
+    Snippet.prototype.hasImages = function() {
+      return this.imageCount > 0;
     };
 
     Snippet.prototype.hasContainers = function() {
@@ -1655,7 +1770,7 @@
     Snippet.prototype.append = function(containerName, snippet) {
       if (arguments.length === 1) {
         snippet = containerName;
-        containerName = config.defaultContainerName;
+        containerName = templateAttr.defaultValues.container;
       }
       this.containers[containerName].append(snippet);
       return this;
@@ -1664,45 +1779,41 @@
     Snippet.prototype.prepend = function(containerName, snippet) {
       if (arguments.length === 1) {
         snippet = containerName;
-        containerName = config.defaultContainerName;
+        containerName = templateAttr.defaultValues.container;
       }
       this.containers[containerName].prepend(snippet);
       return this;
     };
 
-    Snippet.prototype.set = function(editable, value) {
-      var _ref;
-      if (arguments.length === 1) {
-        value = editable;
-        editable = config.defaultEditableName;
-      }
-      if ((_ref = this.editables) != null ? _ref.hasOwnProperty(editable) : void 0) {
-        if (this.editables[editable] !== value) {
-          this.editables[editable] = value;
+    Snippet.prototype.set = function(name, value) {
+      var _ref, _ref1;
+      if ((_ref = this.editables) != null ? _ref.hasOwnProperty(name) : void 0) {
+        if (this.editables[name] !== value) {
+          this.editables[name] = value;
+          if (this.snippetTree) {
+            return this.snippetTree.contentChanging(this);
+          }
+        }
+      } else if ((_ref1 = this.images) != null ? _ref1.hasOwnProperty(name) : void 0) {
+        if (this.images[name] !== value) {
+          this.images[name] = value;
           if (this.snippetTree) {
             return this.snippetTree.contentChanging(this);
           }
         }
       } else {
-        return log.error("set error: " + this.identifier + " has no editable named " + editable);
+        return log.error("set error: " + this.identifier + " has no content named " + name);
       }
     };
 
-    Snippet.prototype.get = function(editable) {
-      var _ref;
-      if (arguments.length === 0) {
-        editable = config.defaultFieldName;
-      }
-      if ((_ref = this.editables) != null ? _ref.hasOwnProperty(editable) : void 0) {
-        return this.editables[editable];
+    Snippet.prototype.get = function(name) {
+      var _ref, _ref1;
+      if ((_ref = this.editables) != null ? _ref.hasOwnProperty(name) : void 0) {
+        return this.editables[name];
+      } else if ((_ref1 = this.images) != null ? _ref1.hasOwnProperty(name) : void 0) {
+        return this.images[name];
       } else {
-        return log.error("get error: " + this.identifier + " has no editable named " + editable);
-      }
-    };
-
-    Snippet.prototype.createHtml = function() {
-      if (this.snippetHtml == null) {
-        return this.template.createHtml(this);
+        return log.error("get error: " + this.identifier + " has no name named " + name);
       }
     };
 
@@ -1753,7 +1864,7 @@
     };
 
     Snippet.prototype.children = function(callback) {
-      var name, snippet, snippetContainer, _ref, _results;
+      var snippet, snippetContainer, _ref, _results;
       _ref = this.containers;
       _results = [];
       for (name in _ref) {
@@ -1773,7 +1884,7 @@
     };
 
     Snippet.prototype.descendants = function(callback) {
-      var name, snippet, snippetContainer, _ref, _results;
+      var snippet, snippetContainer, _ref, _results;
       _ref = this.containers;
       _results = [];
       for (name in _ref) {
@@ -1800,7 +1911,7 @@
 
     Snippet.prototype.descendantContainers = function(callback) {
       return this.descendantsAndSelf(function(snippet) {
-        var name, snippetContainer, _ref, _results;
+        var snippetContainer, _ref, _results;
         _ref = snippet.containers;
         _results = [];
         for (name in _ref) {
@@ -1814,7 +1925,7 @@
     Snippet.prototype.allDescendants = function(callback) {
       var _this = this;
       return this.descendantsAndSelf(function(snippet) {
-        var name, snippetContainer, _ref, _results;
+        var snippetContainer, _ref, _results;
         if (snippet !== _this) {
           callback(snippet);
         }
@@ -1834,8 +1945,9 @@
     };
 
     Snippet.prototype.toJson = function() {
-      var json, name, _ref;
+      var json, _ref, _ref1;
       json = {
+        id: this.id,
         identifier: this.identifier
       };
       if (this.hasEditables()) {
@@ -1844,6 +1956,14 @@
         for (name in _ref) {
           value = _ref[name];
           json.editables[name] = value;
+        }
+      }
+      for (name in this.images) {
+        json.images || (json.images = {});
+        _ref1 = this.images;
+        for (name in _ref1) {
+          value = _ref1[name];
+          json.images[name] = value;
         }
       }
       for (name in this.containers) {
@@ -1858,13 +1978,14 @@
   })();
 
   Snippet.fromJson = function(json, design) {
-    var child, containerName, editableName, snippet, snippetArray, template, _i, _len, _ref, _ref1;
+    var child, containerName, editableName, imageName, snippet, snippetArray, template, _i, _len, _ref, _ref1, _ref2;
     template = design.get(json.identifier);
     if (template == null) {
       log.error("error while deserializing snippet: unknown template identifier '" + json.identifier + "'");
     }
     snippet = new Snippet({
-      template: template
+      template: template,
+      id: json.id
     });
     _ref = json.editables;
     for (editableName in _ref) {
@@ -1875,9 +1996,18 @@
         log.error("error while deserializing snippet: unknown editable " + editableName);
       }
     }
-    _ref1 = json.containers;
-    for (containerName in _ref1) {
-      snippetArray = _ref1[containerName];
+    _ref1 = json.images;
+    for (imageName in _ref1) {
+      value = _ref1[imageName];
+      if (snippet.images.hasOwnProperty(imageName)) {
+        snippet.images[imageName] = value;
+      } else {
+        log.error("error while deserializing snippet: unknown image " + imageName);
+      }
+    }
+    _ref2 = json.containers;
+    for (containerName in _ref2) {
+      snippetArray = _ref2[containerName];
       if (!snippet.containers.hasOwnProperty(containerName)) {
         log.error("error while deserializing snippet: unknown container " + containerName);
       }
@@ -1950,7 +2080,6 @@
       if (this.first) {
         this.insertBefore(this.first, snippet);
       } else {
-        this.first = this.last = snippet;
         this.attachSnippet(snippet);
       }
       return this;
@@ -1963,7 +2092,6 @@
       if (this.last) {
         this.insertAfter(this.last, snippet);
       } else {
-        this.first = this.last = snippet;
         this.attachSnippet(snippet);
       }
       return this;
@@ -1971,34 +2099,34 @@
 
     SnippetContainer.prototype.insertBefore = function(snippet, insertedSnippet) {
       var position;
+      if (snippet.previous === insertedSnippet) {
+        return;
+      }
       if (snippet === insertedSnippet) {
         log.error('cannot insert snippet before itself');
       }
       position = {
         previous: snippet.previous,
-        next: snippet
+        next: snippet,
+        parentContainer: snippet.parentContainer
       };
-      snippet.previous = insertedSnippet;
-      this.attachSnippet(insertedSnippet, position);
-      if (insertedSnippet.previous == null) {
-        return this.first = insertedSnippet;
-      }
+      return this.attachSnippet(insertedSnippet, position);
     };
 
     SnippetContainer.prototype.insertAfter = function(snippet, insertedSnippet) {
       var position;
+      if (snippet.next === insertedSnippet) {
+        return;
+      }
       if (snippet === insertedSnippet) {
         log.error('cannot insert snippet after itself');
       }
       position = {
         previous: snippet,
-        next: snippet.next
+        next: snippet.next,
+        parentContainer: snippet.parentContainer
       };
-      snippet.next = insertedSnippet;
-      this.attachSnippet(insertedSnippet, position);
-      if (insertedSnippet.next == null) {
-        return this.last = insertedSnippet;
-      }
+      return this.attachSnippet(insertedSnippet, position);
     };
 
     SnippetContainer.prototype.up = function(snippet) {
@@ -2018,18 +2146,6 @@
       return this.snippetTree || ((_ref = this.parentSnippet) != null ? _ref.snippetTree : void 0);
     };
 
-    SnippetContainer.prototype.$html = function() {
-      var elem, _ref;
-      if (this.parentSnippet != null) {
-        elem = (_ref = this.parentSnippet.snippetHtml) != null ? _ref.containers[this.name] : void 0;
-        return $(elem);
-      } else if (this.snippetTree != null) {
-        return this.snippetTree.renderer.$root;
-      } else {
-        return $();
-      }
-    };
-
     SnippetContainer.prototype.each = function(callback) {
       var snippet, _results;
       snippet = this.first;
@@ -2044,7 +2160,7 @@
     SnippetContainer.prototype.eachContainer = function(callback) {
       callback(this);
       return this.each(function(snippet) {
-        var name, snippetContainer, _ref, _results;
+        var snippetContainer, _ref, _results;
         _ref = snippet.containers;
         _results = [];
         for (name in _ref) {
@@ -2058,7 +2174,7 @@
     SnippetContainer.prototype.all = function(callback) {
       callback(this);
       return this.each(function(snippet) {
-        var name, snippetContainer, _ref, _results;
+        var snippetContainer, _ref, _results;
         callback(snippet);
         _ref = snippet.containers;
         _results = [];
@@ -2117,7 +2233,7 @@
       if (snippet.parentContainer) {
         this.unlink(snippet);
       }
-      position.parentContainer = this;
+      position.parentContainer || (position.parentContainer = this);
       return this.setSnippetPosition(snippet, position);
     };
 
@@ -2146,7 +2262,21 @@
       parentContainer = _arg.parentContainer, previous = _arg.previous, next = _arg.next;
       snippet.parentContainer = parentContainer;
       snippet.previous = previous;
-      return snippet.next = next;
+      snippet.next = next;
+      if (parentContainer) {
+        if (previous) {
+          previous.next = snippet;
+        }
+        if (next) {
+          next.previous = snippet;
+        }
+        if (snippet.previous == null) {
+          parentContainer.first = snippet;
+        }
+        if (snippet.next == null) {
+          return parentContainer.last = snippet;
+        }
+      }
     };
 
     return SnippetContainer;
@@ -2155,9 +2285,10 @@
 
   SnippetDrag = (function() {
     function SnippetDrag(_arg) {
-      var snippet;
-      snippet = _arg.snippet;
+      var page, snippet;
+      snippet = _arg.snippet, page = _arg.page;
       this.snippet = snippet;
+      this.page = page;
       this.$highlightedContainer = {};
       this.onStart = $.proxy(this.onStart, this);
       this.onDrag = $.proxy(this.onDrag, this);
@@ -2167,7 +2298,8 @@
 
     SnippetDrag.prototype.onStart = function() {
       this.$insertPreview = $("<div class='doc-drag-preview'>");
-      return page.$body.append(this.$insertPreview).css('cursor', 'pointer');
+      this.page.$body.append(this.$insertPreview).css('cursor', 'pointer');
+      return this.page.blurFocusedElement();
     };
 
     SnippetDrag.prototype.removeCssClasses = function() {
@@ -2180,17 +2312,29 @@
       return this.classAdded = [];
     };
 
+    SnippetDrag.prototype.isValidTarget = function(target) {
+      if (target.snippetElem && target.snippetElem.snippet !== this.snippet) {
+        return true;
+      } else if (target.containerName) {
+        return true;
+      }
+      return false;
+    };
+
     SnippetDrag.prototype.onDrag = function(target, drag, cursor) {
       var $container, coords, _base, _base1;
+      if (!this.isValidTarget(target)) {
+        $container = target = {};
+      }
       if (target.containerName) {
         dom.maximizeContainerHeight(target.parent);
         $container = $(target.node);
-      } else if (target.snippet) {
-        dom.maximizeContainerHeight(target.snippet);
-        $container = target.snippet.parentContainer.$html();
+      } else if (target.snippetElem) {
+        dom.maximizeContainerHeight(target.snippetElem);
+        $container = target.snippetElem.get$container();
         $container.addClass(docClass.containerHighlight);
       } else {
-        $container = {};
+        $container = target = {};
       }
       if ($container[0] !== this.$highlightedContainer[0]) {
         if (typeof (_base = this.$highlightedContainer).removeClass === "function") {
@@ -2214,23 +2358,23 @@
     };
 
     SnippetDrag.prototype.onDrop = function(drag) {
-      var target, _base;
-      page.$body.css('cursor', '');
+      var snippetElem, target, _base;
+      this.page.$body.css('cursor', '');
       this.$insertPreview.remove();
       if (typeof (_base = this.$highlightedContainer).removeClass === "function") {
         _base.removeClass(docClass.containerHighlight);
       }
       dom.restoreContainerHeight();
       target = drag.target;
-      if (target) {
-        if (target.snippet) {
+      if (target && this.isValidTarget(target)) {
+        if (snippetElem = target.snippetElem) {
           if (target.position === 'before') {
-            return target.snippet.before(this.snippet);
+            return snippetElem.snippet.before(this.snippet);
           } else {
-            return target.snippet.after(this.snippet);
+            return snippetElem.snippet.after(this.snippet);
           }
         } else if (target.containerName) {
-          return target.parent.append(target.containerName, this.snippet);
+          return target.parent.snippet.append(target.containerName, this.snippet);
         }
       } else {
 
@@ -2241,27 +2385,34 @@
 
   })();
 
-  SnippetHtml = (function() {
-    function SnippetHtml(_arg) {
-      this.snippet = _arg.snippet, this.$html = _arg.$html, this.editables = _arg.editables, this.containers = _arg.containers;
+  SnippetElem = (function() {
+    function SnippetElem(_arg) {
+      this.snippet = _arg.snippet, this.$html = _arg.$html, this.editables = _arg.editables, this.containers = _arg.containers, this.images = _arg.images;
       this.template = this.snippet.template;
       this.attachedToDom = false;
-      this.snippet.snippetHtml = this;
-      this.$html.data('snippet', this.snippet).addClass(docClass.snippet).attr(docAttr.template, this.template.identifier);
-      this.content(this.snippet.editables);
+      this.$html.data('snippet', this).addClass(docClass.snippet).attr(docAttr.template, this.template.identifier);
+      this.updateContent();
     }
 
-    SnippetHtml.prototype.content = function(content) {
+    SnippetElem.prototype.updateContent = function() {
+      return this.content(this.snippet.editables, this.snippet.images);
+    };
+
+    SnippetElem.prototype.content = function(content, images) {
       var field, _results;
-      _results = [];
       for (field in content) {
         value = content[field];
-        _results.push(this.set(field, value));
+        this.set(field, value);
+      }
+      _results = [];
+      for (field in images) {
+        value = images[field];
+        _results.push(this.setImage(field, value));
       }
       return _results;
     };
 
-    SnippetHtml.prototype.getEditable = function(name) {
+    SnippetElem.prototype.getEditable = function(name) {
       if (name != null) {
         return this.editables[name];
       } else {
@@ -2271,7 +2422,13 @@
       }
     };
 
-    SnippetHtml.prototype.set = function(editable, value) {
+    SnippetElem.prototype.setImage = function(name, value) {
+      var elem;
+      elem = this.images[name];
+      return $(elem).attr('src', value);
+    };
+
+    SnippetElem.prototype.set = function(editable, value) {
       var elem;
       if (arguments.length === 1) {
         value = editable;
@@ -2284,7 +2441,7 @@
       }
     };
 
-    SnippetHtml.prototype.get = function(editable) {
+    SnippetElem.prototype.get = function(editable) {
       var elem;
       if (elem = this.getEditable(editable)) {
         return $(elem).html();
@@ -2293,18 +2450,120 @@
       }
     };
 
-    SnippetHtml.prototype.append = function(containerName, $elem) {
+    SnippetElem.prototype.append = function(containerName, $elem) {
       var $container;
       $container = $(this.containers[containerName]);
       return $container.append($elem);
     };
 
-    SnippetHtml.prototype.detach = function() {
+    SnippetElem.prototype.attach = function(renderer) {
+      var next, nextHtml, parentContainer, previous, previousHtml;
+      if (this.attachedToDom) {
+        return;
+      }
+      previous = this.snippet.previous;
+      next = this.snippet.next;
+      parentContainer = this.snippet.parentContainer;
+      if ((previous != null) && (previousHtml = renderer.getSnippetElem(previous)) && previousHtml.attachedToDom) {
+        previousHtml.$html.after(this.$html);
+        this.attachedToDom = true;
+      } else if ((next != null) && (nextHtml = renderer.getSnippetElem(next)) && nextHtml.attachedToDom) {
+        nextHtml.$html.before(this.$html);
+        this.attachedToDom = true;
+      } else if (parentContainer) {
+        this.appendToContainer(parentContainer, renderer);
+        this.attachedToDom = true;
+      }
+      return this;
+    };
+
+    SnippetElem.prototype.appendToContainer = function(container, renderer) {
+      var snippetElem;
+      if (container.isRoot) {
+        return renderer.$root.append(this.$html);
+      } else {
+        snippetElem = renderer.getSnippetElem(container.parentSnippet);
+        return snippetElem.append(container.name, this.$html);
+      }
+    };
+
+    SnippetElem.prototype.detach = function() {
       this.attachedToDom = false;
       return this.$html.detach();
     };
 
-    return SnippetHtml;
+    SnippetElem.prototype.get$container = function() {
+      return $(dom.parentContainer(this.$html[0]).node);
+    };
+
+    return SnippetElem;
+
+  })();
+
+  SnippetNode = (function() {
+    var attributePrefix;
+
+    attributePrefix = /^(x-|data-)/;
+
+    function SnippetNode(htmlNode) {
+      this.htmlNode = htmlNode;
+      this.parseAttributes();
+    }
+
+    SnippetNode.prototype.parseAttributes = function() {
+      var attr, attributeName, normalizedName, type, _i, _len, _ref;
+      _ref = this.htmlNode.attributes;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        attr = _ref[_i];
+        attributeName = attr.name;
+        normalizedName = attributeName.replace(attributePrefix, '');
+        if (type = templateAttrLookup[normalizedName]) {
+          this.isDataNode = true;
+          this.type = type;
+          this.name = attr.value || templateAttr.defaultValues[this.type];
+          if (attributeName !== docAttr[this.type]) {
+            this.normalizeAttribute(attributeName);
+          } else if (!attr.value) {
+            this.normalizeAttribute();
+          }
+          return;
+        }
+      }
+    };
+
+    SnippetNode.prototype.normalizeAttribute = function(attr) {
+      if (attr) {
+        this.htmlNode.removeAttribute(attr);
+      }
+      return this.htmlNode.setAttribute(docAttr[this.type], this.name);
+    };
+
+    return SnippetNode;
+
+  })();
+
+  SnippetNodeList = (function() {
+    function SnippetNodeList(all) {
+      this.all = all != null ? all : {};
+      this.count = {};
+    }
+
+    SnippetNodeList.prototype.add = function(node) {
+      var _name;
+      this.assertNodeNameNotUsed(node.name);
+      this.all[node.name] = node;
+      this[_name = node.type] || (this[_name] = {});
+      this[node.type][node.name] = node.htmlNode;
+      return this.count[node.type] = this.count[node.type] ? this.count[node.type] + 1 : 1;
+    };
+
+    SnippetNodeList.prototype.assertNodeNameNotUsed = function(name) {
+      if (this.all[name]) {
+        return log.error("A node with the name \"" + name + "\" was already added.\nEach node in a snippet requires a unique name, regardless of type.");
+      }
+    };
+
+    return SnippetNodeList;
 
   })();
 
@@ -2317,191 +2576,13 @@
 
   })();
 
-  SnippetTemplate = (function() {
-    function SnippetTemplate(_arg) {
-      var html, identifier, title, version, _ref, _ref1;
-      _ref = _arg != null ? _arg : {}, html = _ref.html, this.namespace = _ref.namespace, this.name = _ref.name, identifier = _ref.identifier, title = _ref.title, version = _ref.version;
-      if (!html) {
-        log.error('SnippetTemplate: param html missing');
-      }
-      if (identifier) {
-        _ref1 = SnippetTemplate.parseIdentifier(identifier), this.namespace = _ref1.namespace, this.name = _ref1.name;
-      }
-      this.identifier = this.namespace && this.name ? "" + this.namespace + "." + this.name : void 0;
-      this.version = version || 1;
-      this.$template = $(this.pruneHtml(html)).wrap('<div>');
-      this.$wrap = this.$template.parent();
-      this.title = title || S.humanize(this.name);
-      this.editables = void 0;
-      this.editableCount = 0;
-      this.containers = void 0;
-      this.containerCount = 0;
-      this.defaults = {};
-      this.parseTemplate();
-      this.lists = this.createLists();
-    }
-
-    SnippetTemplate.prototype.createSnippet = function() {
-      return new Snippet({
-        template: this
-      });
-    };
-
-    SnippetTemplate.prototype.createHtml = function(snippet) {
-      var $html, containers, editables, snippetHtml, _ref;
-      if (snippet == null) {
-        snippet = this.createSnippet();
-      }
-      $html = this.$template.clone();
-      _ref = this.getNodeLinks($html[0]), editables = _ref.editables, containers = _ref.containers;
-      return snippetHtml = new SnippetHtml({
-        snippet: snippet,
-        $html: $html,
-        editables: editables,
-        containers: containers
-      });
-    };
-
-    SnippetTemplate.prototype.pruneHtml = function(html) {
-      return html;
-    };
-
-    SnippetTemplate.prototype.parseTemplate = function() {
-      var count, name, node, snippetNode, _ref, _ref1, _ref2;
-      snippetNode = this.$template[0];
-      _ref = this.getNodeLinks(snippetNode), this.editables = _ref.editables, this.containers = _ref.containers;
-      count = 0;
-      _ref1 = this.editables;
-      for (name in _ref1) {
-        node = _ref1[name];
-        count += 1;
-        this.formatEditable(name, node);
-      }
-      this.editableCount = count;
-      count = 0;
-      _ref2 = this.containers;
-      for (name in _ref2) {
-        node = _ref2[name];
-        count += 1;
-        this.formatContainer(name, node);
-      }
-      return this.containerCount = count;
-    };
-
-    SnippetTemplate.prototype.getNodeLinks = function(snippetNode) {
-      var containers, editables, iterator, name, node;
-      editables = containers = void 0;
-      iterator = new SnippetNodeIterator(snippetNode);
-      while (iterator.nextElement()) {
-        node = iterator.current;
-        if (node.hasAttribute(docAttr.editable)) {
-          name = node.getAttribute(docAttr.editable);
-          name || (name = config.defaultEditableName);
-          editables || (editables = {});
-          if (name && !editables.hasOwnProperty(name)) {
-            editables[name] = node;
-          } else {
-            log.error("editable name '" + name + "' already taken: " + this.identifier);
-          }
-        } else if (node.hasAttribute(docAttr.container)) {
-          name = node.getAttribute(docAttr.container);
-          name || (name = config.defaultContainerName);
-          containers || (containers = {});
-          if (name && !containers.hasOwnProperty(name)) {
-            containers[name] = node;
-          } else {
-            log.error("container name '" + name + "' already taken: " + this.identifier);
-          }
-        }
-      }
-      return {
-        editables: editables,
-        containers: containers
-      };
-    };
-
-    SnippetTemplate.prototype.formatEditable = function(name, elem) {
-      var $elem, defaultValue;
-      $elem = $(elem);
-      $elem.addClass(docClass.editable);
-      defaultValue = elem.innerHTML;
-      if (defaultValue) {
-        this.defaults[name] = defaultValue;
-      }
-      if (name === config.defaultEditableName) {
-        return $elem.attr(docAttr.editable, name);
-      }
-    };
-
-    SnippetTemplate.prototype.formatContainer = function(name, elem) {
-      elem.innerHTML = '';
-      if (name === config.defaultContainerName) {
-        return $(elem).attr(docAttr.container, name);
-      }
-    };
-
-    SnippetTemplate.prototype.createLists = function() {
-      var lists;
-      lists = {};
-      this.$wrap.find("[" + docAttr.list + "]").each(function() {
-        var $list, listName;
-        $list = $(this);
-        listName = $list.attr("" + docAttr.list);
-        return lists[listName] = new SnippetTemplateList(listName, $list);
-      });
-      return lists;
-    };
-
-    SnippetTemplate.prototype.list = function(listName) {
-      return this.lists[listName];
-    };
-
-    SnippetTemplate.prototype.printDoc = function() {
-      var doc;
-      doc = {
-        identifier: this.identifier,
-        editables: this.editables,
-        containers: this.containers
-      };
-      return S.readableJson(doc);
-    };
-
-    return SnippetTemplate;
-
-  })();
-
-  SnippetTemplate.parseIdentifier = function(identifier) {
-    var parts;
-    if (!identifier) {
-      return;
-    }
-    parts = identifier.split('.');
-    if (parts.length === 1) {
-      return {
-        namespace: void 0,
-        name: parts[0]
-      };
-    } else if (parts.length === 2) {
-      return {
-        namespace: parts[0],
-        name: parts[1]
-      };
-    } else {
-      log.error("could not parse snippet template identifier: " + identifier);
-      return {
-        namespace: void 0,
-        name: void 0
-      };
-    }
-  };
-
   SnippetTemplateList = (function() {
     function SnippetTemplateList(name, $list) {
       var $item;
       this.name = name;
       this.$list = $list;
       $item = this.$list.children().first().detach();
-      this._item = new SnippetTemplate({
+      this._item = new Template({
         name: "" + this.name + "-item",
         html: $item
       });
@@ -2648,7 +2729,7 @@
         return output += "" + (Array(indentation + 1).join(" ")) + text + "\n";
       };
       walker = function(snippet, indentation) {
-        var name, snippetContainer, template, _ref;
+        var snippetContainer, template, _ref;
         if (indentation == null) {
           indentation = 0;
         }
@@ -2727,7 +2808,7 @@
         return snippetJson;
       };
       walker = function(snippet, level, jsonObj) {
-        var containerArray, name, snippetContainer, snippetJson, _ref;
+        var containerArray, snippetContainer, snippetJson, _ref;
         snippetJson = snippetToJson(snippet, level, jsonObj);
         _ref = snippet.containers;
         for (name in _ref) {
@@ -2819,6 +2900,158 @@
     };
   })();
 
+  Template = (function() {
+    function Template(_arg) {
+      var html, identifier, title, version, _ref, _ref1;
+      _ref = _arg != null ? _arg : {}, html = _ref.html, this.namespace = _ref.namespace, this.name = _ref.name, identifier = _ref.identifier, title = _ref.title, version = _ref.version;
+      if (!html) {
+        log.error('Template: param html missing');
+      }
+      if (identifier) {
+        _ref1 = Template.parseIdentifier(identifier), this.namespace = _ref1.namespace, this.name = _ref1.name;
+      }
+      this.identifier = this.namespace && this.name ? "" + this.namespace + "." + this.name : void 0;
+      this.version = version || 1;
+      this.$template = $(this.pruneHtml(html)).wrap('<div>');
+      this.$wrap = this.$template.parent();
+      this.title = title || S.humanize(this.name);
+      this.editables = void 0;
+      this.editableCount = 0;
+      this.containers = void 0;
+      this.containerCount = 0;
+      this.defaults = {};
+      this.parseTemplate();
+      this.lists = this.createLists();
+    }
+
+    Template.prototype.createSnippet = function() {
+      return new Snippet({
+        template: this
+      });
+    };
+
+    Template.prototype.createHtml = function(snippet) {
+      var $html, list, snippetElem;
+      snippet || (snippet = this.createSnippet());
+      $html = this.$template.clone();
+      list = this.getNodeLinks($html[0]);
+      return snippetElem = new SnippetElem({
+        snippet: snippet,
+        $html: $html,
+        editables: list.editable,
+        containers: list.container,
+        images: list.image
+      });
+    };
+
+    Template.prototype.pruneHtml = function(html) {
+      return html;
+    };
+
+    Template.prototype.parseTemplate = function() {
+      var node, snippetNode, _ref, _ref1, _results;
+      snippetNode = this.$template[0];
+      this.directives = this.getNodeLinks(snippetNode);
+      this.editables = this.directives.editable;
+      this.containers = this.directives.container;
+      this.editableCount = this.directives.count.editable;
+      this.containerCount = this.directives.count.container;
+      _ref = this.editables;
+      for (name in _ref) {
+        node = _ref[name];
+        this.formatEditable(name, node);
+      }
+      _ref1 = this.containers;
+      _results = [];
+      for (name in _ref1) {
+        node = _ref1[name];
+        _results.push(this.formatContainer(name, node));
+      }
+      return _results;
+    };
+
+    Template.prototype.getNodeLinks = function(snippetNode) {
+      var element, iterator, list, node;
+      iterator = new SnippetNodeIterator(snippetNode);
+      list = new SnippetNodeList();
+      while (element = iterator.nextElement()) {
+        node = new SnippetNode(element);
+        if (node.isDataNode) {
+          list.add(node);
+        }
+      }
+      return list;
+    };
+
+    Template.prototype.formatEditable = function(name, elem) {
+      var $elem, defaultValue;
+      $elem = $(elem);
+      $elem.addClass(docClass.editable);
+      defaultValue = elem.innerHTML;
+      if (defaultValue) {
+        return this.defaults[name] = defaultValue;
+      }
+    };
+
+    Template.prototype.formatContainer = function(name, elem) {
+      return elem.innerHTML = '';
+    };
+
+    Template.prototype.createLists = function() {
+      var lists;
+      lists = {};
+      this.$wrap.find("[" + docAttr.list + "]").each(function() {
+        var $list, listName;
+        $list = $(this);
+        listName = $list.attr("" + docAttr.list);
+        return lists[listName] = new SnippetTemplateList(listName, $list);
+      });
+      return lists;
+    };
+
+    Template.prototype.list = function(listName) {
+      return this.lists[listName];
+    };
+
+    Template.prototype.printDoc = function() {
+      var doc;
+      doc = {
+        identifier: this.identifier,
+        editables: this.editables,
+        containers: this.containers
+      };
+      return S.readableJson(doc);
+    };
+
+    return Template;
+
+  })();
+
+  Template.parseIdentifier = function(identifier) {
+    var parts;
+    if (!identifier) {
+      return;
+    }
+    parts = identifier.split('.');
+    if (parts.length === 1) {
+      return {
+        namespace: void 0,
+        name: parts[0]
+      };
+    } else if (parts.length === 2) {
+      return {
+        namespace: parts[0],
+        name: parts[1]
+      };
+    } else {
+      log.error("could not parse snippet template identifier: " + identifier);
+      return {
+        namespace: void 0,
+        name: void 0
+      };
+    }
+  };
+
   this.doc = function(search) {
     return document.find(search);
   };
@@ -2838,14 +3071,26 @@
     return proxy;
   };
 
-  (function() {
+  setupApi = function() {
     this.loadDocument = chainable(document, 'loadDocument');
-    this.addSnippetCollection = chainable(document, 'addSnippetCollection');
+    this.ready = chainable(document.ready, 'add');
+    this.addDesign = chainable(document, 'addDesign');
+    this.getDesign = function() {
+      return document.design;
+    };
+    this.listTemplates = $.proxy(document, 'listTemplates');
     this.add = $.proxy(document, 'add');
     this.create = $.proxy(document, 'createSnippet');
     this.toJson = $.proxy(document, 'toJson');
-    this.restore = chainable(document, 'restore');
+    this.readableJson = function() {
+      return S.readableJson(document.toJson());
+    };
+    this.printTree = $.proxy(document, 'printTree');
     this.eachContainer = chainable(document, 'eachContainer');
+    this.document = document;
+    this.changed = chainable(document.changed, 'add');
+    this.DragDrop = DragDrop;
+    this.help = $.proxy(document, 'help');
     stash.init();
     this.stash = $.proxy(stash, 'stash');
     this.stash.snapshot = $.proxy(stash, 'snapshot');
@@ -2853,19 +3098,24 @@
     this.stash.restore = $.proxy(stash, 'restore');
     this.stash.get = $.proxy(stash, 'get');
     this.stash.list = $.proxy(stash, 'list');
-    this.ready = chainable(document.ready, 'add');
-    this.snippetFocused = chainable(focus.snippetFocus, 'add');
-    this.snippetBlurred = chainable(focus.snippetBlur, 'add');
-    this.textSelection = chainable(editableController.selection, 'add');
-    this.printTree = $.proxy(document, 'printTree');
-    this.listTemplates = $.proxy(document, 'listTemplates');
-    this.help = $.proxy(document, 'help');
-    this.fn = SnippetArray.prototype;
-    this.document = document;
-    return this.readableJson = function() {
-      return S.readableJson(document.toJson());
-    };
-  }).call(doc);
+    return this.fn = SnippetArray.prototype;
+  };
+
+  pageReady = function() {
+    var page;
+    page = document.page;
+    this.restore = chainable(document, 'restore');
+    this.snippetFocused = chainable(page.focus.snippetFocus, 'add');
+    this.snippetBlurred = chainable(page.focus.snippetBlur, 'add');
+    this.textSelection = chainable(page.editableController.selection, 'add');
+    return this.startDrag = $.proxy(page, 'startDrag');
+  };
+
+  setupApi.call(doc);
+
+  doc.ready(function() {
+    return pageReady.call(doc);
+  });
 
 }).call(this);
 

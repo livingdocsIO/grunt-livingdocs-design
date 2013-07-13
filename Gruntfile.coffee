@@ -9,9 +9,11 @@ grunt.initConfig
       files: [
         expand: true
         cwd: './'
-        src:['designs/**/style.less']
+        src:['designs/*/css/*']
         dest: 'public/'
         ext: '.css'
+        filter: (src) ->
+          return src.split('/').pop()[0] != '_' && (src.indexOf('.css') != -1 || src.indexOf('.less') != -1)
       ]
 
   lddesigns:
@@ -37,7 +39,7 @@ grunt.initConfig
       files: [
         expand: true
         cwd: './'
-        src:['designs/**/assets']
+        src:['designs/**/assets/**', 'designs/**/img/**', 'designs/**/images/**', 'designs/**/media/**']
         dest: 'public/'
       ]
       
@@ -66,4 +68,3 @@ grunt.loadTasks "tasks"
 
 grunt.registerTask "default", ["lddesigns", "recess", "copy:assets"]
 grunt.registerTask "server", ["default", "watch"]
-

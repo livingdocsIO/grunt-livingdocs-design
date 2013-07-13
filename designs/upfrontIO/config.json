@@ -1,4 +1,4 @@
 {
   "namespace": "upfrontIO",
-  "css": ["/test/manual/bootstrap/css/bootstrap.css", "/test/manual/css/bootstrap-adjust.css"]
+  "css": ["/designs/upfrontIO/css/style.css"]
 }

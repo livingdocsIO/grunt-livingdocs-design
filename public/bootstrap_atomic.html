@@ -8,22 +8,17 @@
     <meta name="viewport" content="width=device-width">
 
     <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
-    
-    <link rel="stylesheet" href="/css/livingdocs-engine.css">
-    <link href="/designs/bootstrap-atomic/css/style.css" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/css/livingdocs.css">
     
     <script src="http://localhost:35729/livereload.js"></script>
-    
-    <!-- jQuery: requirement for editableJS and livingdocs-engine -->
-    <script src="/js/vendor/jquery-1.9.js"></script>
+        <script src="/js/vendor/jquery-1.9.js"></script>
 
     <!-- dependencies of livingdocs-engine -->
     <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
     <script src="/js/vendor/store/store.js"></script>
     <script src="/js/vendor/editableJS/editable.js"></script>
-
     <script src="/designs/bootstrap-atomic/design.js"></script>
-    <script src="/js/vendor/livingdocs_engine.js"></script>
+    <script src="/js/livingdocs_engine.min.js"></script>
     
   </head>
   <body>
@@ -33,7 +28,7 @@
 
 
     <script>
-      doc.addSnippetCollection(snippetCollections.bootstrap_atomic.snippets, snippetCollections.bootstrap_atomic.config);
+      doc.addDesign(design.bootstrap_atomic.snippets, design.bootstrap_atomic.config);
 
       $(document).ready(function() {
         var json = doc.stash.get();

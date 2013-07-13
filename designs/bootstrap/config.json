@@ -1,4 +1,4 @@
 {
   "namespace": "bootstrap",
-  "css": ["/test/manual/bootstrap/css/bootstrap.css", "/test/manual/css/bootstrap-adjust.css"]
+  "css": ["/designs/bootstrap/css/style.css"]
 }
