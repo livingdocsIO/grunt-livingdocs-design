@@ -60,9 +60,6 @@ module.exports = (grunt) ->
       name: ""
       type: "design"
     ,
-      #  name: "css",
-      #  type: "directory"
-      #,
       name: "snippets"
       type: "directory"
     ,
