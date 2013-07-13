@@ -4,35 +4,66 @@ livingdocs-design
 This project contains the official designs for the project Livingdocs found under the following url: [https://github.com/upfrontIO/livingdocs](https://github.com/upfrontIO/livingdocs)  
 It defines a setup for easily creating and testing a design.  
 
-###Technical Setup  
+##Technical Setup  
 
   1. Install node.js and npm (http://nodejs.org/)
-  2. Install grunt using 'npm install -g grunt-cli'
-  3. From the root of the project run 'npm install'
-  4. Run 'grunt'
+  2. Install grunt using `npm install -g grunt-cli`
+  3. From the root of the project run `npm install`
+  4. Run `grunt server` to compile the designs. When a file changes, the files in **/public/designs/** are updated automatically
+  5. Run `node app.js` to start a webserver and watch the design preview files.
+  
+  
   
   
 In order to view a page run 'node app.js' and navigate to the page (e.g. [http://localhost:3000/bootstrap.html](http://localhost:3000/bootstrap.html)).
 
 
+
+##Design
+Designs are stored in the directory **designs/design-name**.  
+A design is made up by the following components:
+
+    design-name/config.json    // design configuration file,        required
+    design-name/snippets/      // snippets of a design,             required
+    design-name/css/           // stylesheets of a design,          optional
+    design-name/preview.html   // probably documentation of design, optional
+    
+
+
+Additionally you can create a html page to test and showcase your design.
+
+
+###config.json
+The config file is a JSON file.
+The design config must contain the **namespace** of a design.  
+The namespace can contain only alphanumeric characters like a-z,A-Z,0-9 and _  
+Dashes (-) are prohibited as namespace value.
+
+    {
+      "namespace": "design_name",
+      "css": ["/designs/design-name/css/style.css"]
+    }
+    
+
 ###css  
-A design can consist of multiple .less or .css files. All files must be stored inside the directory **css**.  
+A design can consist of multiple .less or .css files. All files must be stored inside the directory **design-name/css/**.  
 Each file inside the directory **css** will be compiled automatically.  
-All files in the subdirectories won't compile directly. You can include them in your less files.  
+All files in subdirectories won't compile directly. Nevertheless can you include them in your less files.  
 If you want to put a file directly in the **css** directory but you don't want to compile it,  
 you can add an underscore to the beginning of the filename.  
 e.g.
     
-    style.less               // will compile to style.css
-    anotherFile.less         // will compile to anotherFile.css
-    canBeCSS.css             // will copy to canBeCSS.css
-    _doNotCompile.less       // won't compile
-    directoriesWontCompile/  // all files in this directory won't compile
-    	fasdf.less           // won't compile
+    css/
+    ↳   style.less               // will compile to style.css
+        anotherFile.less         // will compile to anotherFile.css
+        canBeCSS.css             // will copy to canBeCSS.css
+        _doNotCompile.less       // won't compile
+        directoriesWontCompile/  // all files in this directory won't compile
+        ↳    fasdf.less          // won't compile
 
     
 Each file you want to use in a template has to be defined in the designs config.json file.  
-The file must be declared in an array of the **"css"** key.  
+The file must be declared in an array of the key **css**.  
 e.g.
 
     {
@@ -52,7 +83,18 @@ You can also use livingdocs templates to use snippets in your design in order to
 
 ###Snippets 
 Snippets to be used in HTML pages can be defined in html files.  
-Just put a snippet-name.html file in the snippets folder of a design if you want to use automatic compilation.  
-For an example of a html file, see designs/bootstrap-atomic/snippets/main_and_sidebar.html  
+Snippets are stored inside the directory **design-name/snippets/**.   
+Each snippet with the file extension **.html** will be compiled while running `grunt`. Other files are ignored.  
+Snippet files can contain a configuration.  The configuration is store as JSON inside a **script** tag.
+The script tag must have the attribute **type="ld-conf"** attribute to use it as configuration.
+
+    <script type="ld-conf">
+    {
+      "namespace": "mainAndSidebar",
+      "name": "Main and Sidebar Columns"
+    }
+    </script>
+
+For an example of an html file, see **designs/bootstrap-atomic/snippets/main_and_sidebar.html** 
 
 
