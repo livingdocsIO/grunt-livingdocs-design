@@ -4,13 +4,16 @@ var application_root = __dirname,
     path = require("path"),
     serverPort = 3000;
 
+
 // EXPRESS
 var app = module.exports = express();
+
 
 // Middlewares
 app.use(express.bodyParser());
 app.use(app.router);
-app.use(express.static(path.join(application_root, "/public")));
+app.use(express.static(path.join(application_root, '/public')));
+
 
 // Errorhandler
 app.use(function(err, req, res, next) {
@@ -36,4 +39,4 @@ app.get('/*', function(req, res, next) {
 
 // Start Server
 app.listen(serverPort);
-console.log("started server on port " + serverPort);
+console.log('started server on port %s', serverPort);

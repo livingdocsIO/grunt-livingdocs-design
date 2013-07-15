@@ -17,15 +17,14 @@
 #
 # grunt lddesign --design=designname
 
-
 "use strict"
 fs = require("fs")
 path = require("path")
 cheerio = require("cheerio")
 htmlmin = require("html-minifier")
 
-
 module.exports = (grunt) ->
+
   
   # does jsdoc work in coffeescript?
   # @param {string} html
@@ -46,88 +45,88 @@ module.exports = (grunt) ->
       
   # write the config and snippets to disk
   writeDesignConfig = (design, destination) ->
-    templateBegin = "(function() { this.design || (this.design = {}); design." + design.config.namespace + " = (function() { return "
-    templateEnd = ";})();}).call(this);"
+    templateBegin = '(function() { this.design || (this.design = {}); design.' + design.config.namespace + ' = (function() { return '
+    templateEnd = ';})();}).call(this);'
     fileData = templateBegin + JSON.stringify(design, null, 2) + templateEnd
-    grunt.file.write destination + "/design.js", fileData,
-      encoding: "utf8"
+    grunt.file.write destination + '/design.js', fileData,
+      encoding: 'utf8'
 
-    grunt.log.writeln 'Design "%s" compiled.', destination
+    grunt.log.writeln('Design "%s" compiled.', destination)
   
   
   # process the config and snippets, create design object
   compileDesign = (src, dest, options) ->
-    designFolder = src.split("/").pop()
+    designFolder = src.split('/').pop()
     
     # Check existence of all directories and files
     requiredResources = [
-      name: ""
-      type: "design"
+      name: ''
+      type: 'design'
     ,
       name: options.snippetsDirectory
-      type: "directory"
+      type: 'directory'
     ,
-      name: "config.json"
-      type: "file"
+      name: 'config.json'
+      type: 'file'
     ]
     
     requiredResources.forEach (resource) ->
       unless grunt.file.exists(src, resource.name)
-        grunt.fail.warn 'The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.'
+        grunt.fail.warn('The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.')
 
     
     # Read snippets from directory, and store them in string variable
     snippetFiles = fs.readdirSync(path.join(src, options.snippetsDirectory))
     snippetFiles = grunt.util._.filter(snippetFiles, (file) ->
-      file.indexOf(".html") != -1
+      file.indexOf('.html') != -1
     )
     design = {}
     design.snippets = {}
-    design.config = grunt.file.readJSON(path.join(src, "config.json"),
-      encoding: "utf8"
+    design.config = grunt.file.readJSON(path.join(src, 'config.json'),
+      encoding: 'utf8'
     )
 
     unless design.config.namespace
-      grunt.fail.warn 'Error: the design ' + designFolder + ' contains a config file which has no namespace.'
+      grunt.fail.warn('Error: the design ' + designFolder + ' contains a config file which has no namespace.')
     
     # warn if a design contains no snippets
     unless snippetFiles.length
-      grunt.fail.warn 'Warning: the design "' + designFolder + '" has no snippets'
-      writeDesignConfig design, dest
+      grunt.fail.warn('Warning: the design "' + designFolder + '" has no snippets')
+      writeDesignConfig(design, dest)
     
     # iterate through file array and process the snippets, store them in templates.js file
     compiledSnippets = 0
     snippetFiles.forEach (snippet) ->
       data = grunt.file.read(path.join(src, options.snippetsDirectory, snippet),
-        encoding: "utf8"
+        encoding: 'utf8'
       )
       
       # load file in jQuery object to read json & html
       $ = cheerio.load(data)
       
       # create snippet object using config
-      snippetFile = snippet.replace(".html", "")
+      snippetFile = snippet.replace('.html', '')
       snippetObject = JSON.parse($(options.configurationElement).html()) || {}
       
-      # Disallow "-" in snippetFile
-      unless snippetFile.indexOf("-") == -1
-        grunt.fail.warn 'Warning: snippet "' + snippetNamespace + '" in the design "' + designFolder + '": the character "-" (minus/dash) is not allowed in a snippet namespace'
+      # Disallow '-' in snippetFile
+      unless snippetFile.indexOf('-') == -1
+        grunt.fail.warn('Warning: snippet "' + snippetNamespace + '" in the design "' + designFolder + '": the character "-" (minus/dash) is not allowed in a snippet namespace')
       
       # store snippet config in design
       design.snippets[snippetFile] = snippetObject
       
       # push snippet html into snippet object, remove config and minify the html
       $(options.configurationElement).remove()
-      design.snippets[snippetFile]["html"] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetFile })
+      design.snippets[snippetFile]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetFile })
       
       # Check if everything is compiled, close the templates file and save it;
       compiledSnippets = compiledSnippets + 1
       if snippetFiles.length == compiledSnippets
-        writeDesignConfig design, dest
+        writeDesignConfig(design, dest)
 
 
   # grunt task to compile all snippets
-  grunt.registerMultiTask "lddesigns", "Compile snippets to livingdocs-engine template", ->
+  grunt.registerMultiTask 'lddesigns', 'Compile snippets to livingdocs-engine template', ->
     #var config = grunt.config(this.name);
     options = @options()
     designs = @files
@@ -136,37 +135,37 @@ module.exports = (grunt) ->
     designs.forEach (file, i) ->
       src = designs[i].src[0]
       dest = designs[i].dest
-      compileDesign src, dest, options
+      compileDesign(src, dest, options)
 
 
   # grunt task to compile specific design. executable only through console?
-  grunt.registerTask "lddesign", "Compile a single design", ->
-    design = grunt.option("design")
-    options = grunt.config("lddesign.options")
+  grunt.registerTask 'lddesign', 'Compile a single design', ->
+    design = grunt.option('design')
+    options = grunt.config('lddesign.options')
 
     if design and design != true
     
       # compile a single 
-      src = options.src + "/" + design
-      dest = options.dest + "/" + design
-      compileDesign src, dest, options
+      src = options.src + '/' + design
+      dest = options.dest + '/' + design
+      compileDesign(src, dest, options)
       
       # copy assets
-      grunt.config "copy.design.files", [
+      grunt.config 'copy.design.files', [
         expand: true
-        src: ["designs/" + design + "/assets/**"]
-        dest: "public/"
+        src: ['designs/' + design + '/assets/**']
+        dest: 'public/'
       ]
-      grunt.task.run "copy:design"
+      grunt.task.run('copy:design')
       
       # compile less
-      grunt.config "recess.design.options.compile", true
-      grunt.config "recess.design.files", [
+      grunt.config 'recess.design.options.compile', true
+      grunt.config 'recess.design.files', [
         expand: true
-        src: ["designs/" + design + "/css/style.less"]
-        dest: "public/"
+        src: ['designs/' + design + '/css/style.less']
+        dest: 'public/'
       ]
-      grunt.task.run "recess:design"
+      grunt.task.run('recess:design')
       
     else
-      grunt.fail.warn @name + " needs a designname as argument. e.g. grunt lddesign --design=watson\n"
+      grunt.fail.warn(@name + ' needs a designname as argument. e.g. grunt lddesign --design=watson\n')

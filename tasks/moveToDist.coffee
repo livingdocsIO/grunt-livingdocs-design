@@ -2,7 +2,8 @@
 
 module.exports = (grunt) ->
   
-  grunt.registerMultiTask "moveToDist", "Move files to subdirectory", ->
+
+  grunt.registerMultiTask 'moveToDist', 'Move files to subdirectory', ->
     #var config = grunt.config(this.name);
     options = @options()
     files = @files
@@ -26,6 +27,6 @@ module.exports = (grunt) ->
 
 
     grunt.log.writeln('Prepared ' + count.toString().cyan + ' files and directories to copy to dist directory')
-    grunt.config "copy.moveToDist.files", all
-    grunt.task.run "copy:moveToDist"
+    grunt.config('copy.moveToDist.files', all)
+    grunt.task.run('copy:moveToDist')
 

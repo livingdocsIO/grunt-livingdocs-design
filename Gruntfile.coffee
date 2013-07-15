@@ -1,11 +1,13 @@
 grunt = require('grunt')
 
+
 grunt.initConfig
+ 
+
   recess:
     development:
       options:
         compile: true
-
       files: [
         expand: true
         cwd: './'
@@ -16,14 +18,15 @@ grunt.initConfig
           return src.split('/').pop()[0] != '_' && (src.indexOf('.css') != -1 || src.indexOf('.less') != -1)
       ]
 
+
   lddesigns:
     development:
       options:
         # html-minifier doesn't work on watsons text.html snippet
         # snippets do not work unminified. Is there a bug in livingdocs-engine?
         minify: true
-        configurationElement: "script[type=ld-conf]"
-        snippetsDirectory: "snippets"
+        snippetsDirectory: 'snippets'
+        configurationElement: 'script[type=ld-conf]'
       files: [
         expand: true
         cwd: './'
@@ -31,14 +34,16 @@ grunt.initConfig
         dest: '.tmp/'
       ]
 
+
   lddesign:
     options:
       minify: true
       src: 'designs'
       dest: '.tmp/designs'
-      snippetsDirectory: "snippets"
-      configurationElement: "script[type=ld-conf]"
-        
+      snippetsDirectory: 'snippets'
+      configurationElement: 'script[type=ld-conf]'
+ 
+
   copy:
     assets:
       files: [
@@ -50,6 +55,8 @@ grunt.initConfig
         filter: (src) ->
           return src.split('/').pop().indexOf('.') != -1
       ]
+
+
     cssDirectories:
       files: [
         expand: true
@@ -61,6 +68,7 @@ grunt.initConfig
         filter: (src) ->
           return src.indexOf('.less') == -1 && src.split('/').pop().indexOf('.') != -1
       ]
+
       
   watch:
     scripts:
@@ -69,6 +77,7 @@ grunt.initConfig
       options:
         nospawn: true
         livereload: true
+
 
   moveToDist:
     designs:
@@ -79,9 +88,10 @@ grunt.initConfig
         dest: ''
       ]    
 
+
   clean:
-    preBuild: ["designs/*/dist", ".tmp/"]
-    postBuild: [".tmp/"]
+    preBuild: ['designs/*/dist', '.tmp/']
+    postBuild: ['.tmp/']
     
 
 
