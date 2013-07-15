@@ -98,6 +98,7 @@ table,td,div,p {font-family: Lucida Grande, Lucida Sans, Lucida Sans Unicode, Ar
     doc.ready(function() {
 
       if (!json) {
+        doc.add("suitart_newsletter.header");
         var row = doc.add("suitart_newsletter.row");
         row.append(doc.create("suitart_newsletter.logoRight"));
         row.append(doc.create("suitart_newsletter.title"));

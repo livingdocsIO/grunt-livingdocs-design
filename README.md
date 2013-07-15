@@ -71,7 +71,7 @@ e.g.
     }
  
 
-See designs/bootstrap-atomic for an example of how to setup a design with less.
+See designs/bootstrap for an example of how to setup a design with less.
   
 Compiled designs are in the public/designs/design-name/css folder. If you don't want to use less, you can also just work with a css file directly (or work with a css compiler of your choosing).  
 
@@ -94,7 +94,20 @@ The script tag must have the attribute **type="ld-conf"** attribute to use it as
       "name": "Main and Sidebar Columns"
     }
     </script>
+    
+    <!-- your html comes here -->
+    <div class="mainAndSidebar">
+        <div class="main" doc-container="main"></div>
+        <div class="sidebar" doc-container="sidebar"></div>
+    </div>
 
-For an example of an html file, see **designs/bootstrap-atomic/snippets/main_and_sidebar.html** 
+For an example of a snippet file, see **designs/bootstrap/snippets/main_and_sidebar.html**
+
+####editable Attributes
+There are different kinds of attributes you can use to tag the element as editable.
+
+- `doc-image`
+- `doc-editable`
+
 
 

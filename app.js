@@ -13,13 +13,14 @@ app.configure(function () {
   
   // views
   app.use(express.static(path.join(application_root, "/public")));
+  app.use(express.directory(__dirname + '/public', 
+    {
+      filter: function(file) {
+        return file.indexOf('.html') != -1 || file.indexOf('watson') != -1; 
+      }
+    }
+  ));
 });
-
-/* R O U T E S */
-app.get('/', function(req,res,next) {
-  res.redirect('bootstrap_atomic.html');
-});
-
 
 app.listen(serverPort);
 console.log("started server on port " + serverPort);

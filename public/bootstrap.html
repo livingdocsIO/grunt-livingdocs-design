@@ -1,50 +1,55 @@
-<html>
-<head>
-  <title>Bootstrap Design for Livingdocs</title>
-  <link rel="shortcut icon" href="/favicon.png">
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9"> <![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
 
-  <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
-  <link rel="stylesheet" href="/css/livingdocs.css">
-  
-  <script src="http://localhost:35729/livereload.js"></script>
-  <script src="/js/vendor/jquery-1.9.js"></script>
+    <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link rel="stylesheet" href="/css/livingdocs.css">
+    
+    <script src="http://localhost:35729/livereload.js"></script>
+        <script src="/js/vendor/jquery-1.9.js"></script>
 
-  <!-- dependencies of livingdocs-engine -->
-  <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
-  <script src="/js/vendor/store/store.js"></script>
-  <script src="/js/vendor/editableJS/editable.js"></script>
-  <script src="/designs/bootstrap/design.js"></script>
-  <script src="/js/livingdocs_engine.js"></script>
-</head>
-<body>
+    <!-- dependencies of livingdocs-engine -->
+    <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+    <script src="/js/vendor/store/store.js"></script>
+    <script src="/js/vendor/editableJS/editable.js"></script>
+    <script src="/designs/bootstrap/design.js"></script>
+    <script src="/js/livingdocs_engine.min.js"></script>
+    
+  </head>
+  <body>
+    <div class="container-fluid">
+      <section class="doc-section"></section>
+    </div>
 
-<div class="container-fluid">
-  <section class="doc-section"></section>
-</div>
 
+    <script>
+      doc.addDesign(design.bootstrap.snippets, design.bootstrap.config);
 
-<script>
-  doc.addDesign(design.bootstrap.snippets, design.bootstrap.config);
+      $(document).ready(function() {
+        var json = doc.stash.get();
+        doc.loadDocument({ json: json });
 
-  $(document).ready(function() {
-    var json = doc.stash.get();
-    doc.loadDocument({ json: json });
+        doc.ready(function() {
 
-    doc.ready(function() {
+          if (!json) {
+            var row = doc.add("bootstrap.mainAndSidebar");
+            row.append("main", doc.create("bootstrap.hero"));
+            row.append("sidebar", doc.create("bootstrap.title"));
+            row.append("sidebar", doc.create("bootstrap.text"));
+            
+            row.append("main", doc.create("bootstrap.info"));
+            row.append("main", doc.create("bootstrap.button"));
+            
+          }
+        });
 
-      if (!json) {
-        var row = doc.add("bootstrap.mainAndSidebar");
-        row.append("main", doc.create("bootstrap.hero"));
-        row.append("sidebar", doc.create("bootstrap.title"));
-        row.append("sidebar", doc.create("bootstrap.text"));
-        
-        
-        row.append("main", doc.create("bootstrap.info"));
-        row.append("main", doc.create("bootstrap.button"));
+      });
+    </script>
 
-        
-      }
-    });
-
-  });
-</script>
+  </body>
+</html>
