@@ -60,7 +60,7 @@ module.exports = (grunt) ->
       name: ""
       type: "design"
     ,
-      name: "snippets"
+      name: options.snippetsDirectory
       type: "directory"
     ,
       name: "config.json"
@@ -73,7 +73,7 @@ module.exports = (grunt) ->
 
     
     # Read snippets from directory, and store them in string variable
-    snippetFiles = fs.readdirSync(path.join(src, "snippets"))
+    snippetFiles = fs.readdirSync(path.join(src, options.snippetsDirectory))
     snippetFiles = grunt.util._.filter(snippetFiles, (file) ->
       file.indexOf(".html") != -1
     )
@@ -94,7 +94,7 @@ module.exports = (grunt) ->
     # iterate through file array and process the snippets, store them in templates.js file
     compiledSnippets = 0
     snippetFiles.forEach (snippet) ->
-      data = grunt.file.read(path.join(src, "snippets", snippet),
+      data = grunt.file.read(path.join(src, options.snippetsDirectory, snippet),
         encoding: "utf8"
       )
       
@@ -103,7 +103,7 @@ module.exports = (grunt) ->
       
       # create snippet object using config
       snippetFile = snippet.replace(".html", "")
-      snippetObject = JSON.parse($("script[type=ld-conf]").html()) || {}
+      snippetObject = JSON.parse($(options.configurationElement).html()) || {}
       snippetNamespace = snippetObject.namespace || snippetFile
       
       # Disallow "-" in snippetNamespace
@@ -114,7 +114,7 @@ module.exports = (grunt) ->
       design.snippets[snippetNamespace] = snippetObject
       
       # push snippet html into snippet object, remove config and minify the html
-      $("script[type=ld-conf]").remove()
+      $(options.configurationElement).remove()
       design.snippets[snippetNamespace]["html"] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetNamespace })
       
       # Check if everything is compiled, close the templates file and save it;
