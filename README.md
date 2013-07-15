@@ -94,7 +94,6 @@ The script tag must have the attribute **type="ld-conf"** attribute to use it as
 
     <script type="ld-conf">
     {
-      "namespace": "mainAndSidebar",
       "name": "Main and Sidebar Columns"
     }
     </script>

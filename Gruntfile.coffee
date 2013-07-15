@@ -46,7 +46,7 @@ grunt.initConfig
         cwd: './'
         src:['designs/**/assets/**', 'designs/**/img/**', 'designs/**/images/**', 'designs/**/media/**']
         dest: '.tmp/'
-        # leere verzeichnisse ausschliessen
+        # exclude empty directories
         filter: (src) ->
           return src.split('/').pop().indexOf('.') != -1
       ]
@@ -56,8 +56,8 @@ grunt.initConfig
         cwd: './'
         src:['designs/**/css/**']
         dest: '.tmp/'
-        # leere verzeichnisse ausschliessen
-        # css zu kopieren, schadet nicht. deshalb wird nur less und Verzeichnisse ausgeschlossen
+        # exclude empty directories
+        # to copy css doesn't matter. we exclude only .less files and empty directories
         filter: (src) ->
           return src.indexOf('.less') == -1 && src.split('/').pop().indexOf('.') != -1
       ]
