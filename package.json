@@ -1,7 +1,16 @@
 {
-  "name" : "livingdocs-design",
-  "version" : "0.0.1",
-  "dependencies" : {
+  "name": "livingdocs-design",
+  "version": "0.0.1",
+  "dependencies": {
     "express": "x"
+  },
+  "devDependencies": {
+    "cheerio": "~0.12.0",
+    "html-minifier": "*",
+    "grunt": "~0.4.1",
+    "grunt-recess": "~0.3.3",
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-clean": "~0.4.1"
   }
 }

@@ -1,0 +1,76 @@
+@navFont: 'Quicksand', sans-serif;
+
+.upfront-dev-page { padding:40px 0 60px; }
+
+body { background: url(http://www.upfront.io/assets/background/white.jpeg); }
+
+#logo { 
+  position: relative;
+  margin: 40px 0 30px 40px; 
+  
+  #navigation {
+    position: absolute;
+    left: 400px;
+    top: 44px;
+    
+    h3 { font-size: 22px; margin-bottom: 3px; font-family: @navFont; font-weight:400; }
+    
+    ul {
+      margin: 0;
+      list-style: none;
+      font-size: 16px;
+      font-family: @navFont;
+      
+      li {
+        float: left;
+        padding: 0 20px 0 0;
+      }
+    }
+  }
+}
+
+.page-header {
+  font-family: @navFont;
+  h1 { letter-spacing:-2px; font-weight:400; }
+  span, small { letter-spacing:0; }
+}
+
+.page-header-label {
+  font-size:14px; vertical-align:middle;  
+}
+
+.highlight {
+  font-family: @navFont;
+  font-size: 18px;
+  padding:10px 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.3)
+}
+
+.caption {
+  font-size:15px;
+  color: @gray;
+  line-height:1.1;
+}
+
+footer {
+  font-family: @navFont;
+  font-size:14px;
+  color: #999A9A;
+  border-top:1px solid lighten(#999A9A, 20%);
+  padding-top:20px;
+  margin:50px 0 50px 0px;
+/*  text-shadow: 0 1px 0 rgba(0,0,0,0.1);*/
+
+  .footer-address {
+    padding:0 0 0 760px;
+  }
+}
+
+.extra-space { margin-bottom: 40px; }
+
+ul.clients {
+  list-style: none;
+  li { display: inline; margin: 2px 10px 2px;}
+}
+
+p { font-size: 16px; max-width: 600px; line-height:1.4; }

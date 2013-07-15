@@ -5,12 +5,32 @@
   <title>upfront</title>
   <link rel="shortcut icon" href="/favicon.png">
   <link href="http://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" type="text/css">
-  <link href="css/upfrontIO.css" media="all" rel="stylesheet" type="text/css" />
-  <script src="js/vendor/underscore.js"></script>
-  <script src="js/vendor/jquery-1.9.js"></script>
-  <script src="js/upfrontIO.js"></script>
+  <link rel="stylesheet" href="/css/livingdocs.css">
+  <link rel="stylesheet" href="/designs/upfrontIO/css/style.css">
+
+  <script src="http://localhost:35729/livereload.js"></script>
+  <script src="/js/vendor/jquery-1.9.js"></script>
+
+  <!-- dependencies of livingdocs-engine -->
+  <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+  <script src="/js/vendor/store/store.js"></script>
+  <script src="/js/vendor/editableJS/editable.js"></script>
+  <script src="/designs/upfrontIO/design.js"></script>
+  <script src="/js/livingdocs_engine.js"></script>
+
 </head>
 <body>
+
+<!--
+<div class="row">
+  <div class="container">    
+     <section class="doc-section"></section>
+  </div>
+</div> 
+-->
+
+
+
 
   <div class="container">
   <!-- <div class="row">
@@ -69,19 +89,54 @@
     <div class="upfront-footer"></div>
 
   </div>
+
+
 </body>
 </html>
 
 <script>
-$(document).ready(function() {
-  $(".upfront-story-title").html(livingdocs.upfrontIO.templates.title());
-  $(".upfront-story-text").html(livingdocs.upfrontIO.templates.text());
-  $(".upfront-story-highlight-text").html(livingdocs.upfrontIO.templates.highlightedText());
-  $(".upfront-story-image").html(livingdocs.upfrontIO.templates.linkedImage());
-  $(".upfront-footer").html(livingdocs.upfrontIO.templates.footer());
-  $(".upfront-image-caption").html(livingdocs.upfrontIO.templates.imageWithCaption());
-  $(".upfront-clients").html(livingdocs.upfrontIO.templates.clientList());
-  $(".image").html(livingdocs.upfrontIO.templates.image());
-  $(".upfront-story-link").html(livingdocs.upfrontIO.templates.link());
-});
+
+  // design.upfrontIO
+  doc.addDesign(design.upfrontIO.snippets, design.upfrontIO.config);
+
+  $(document).ready(function() {
+
+    $(".upfront-story-title").html(design.upfrontIO.snippets.title.html);
+    $(".upfront-story-text").html(design.upfrontIO.snippets.text.html);
+    $(".upfront-story-highlight-text").html(design.upfrontIO.snippets.highlighted_text.html);
+    $(".upfront-story-image").html(design.upfrontIO.snippets.linked_image.html);
+    $(".upfront-footer").html(design.upfrontIO.snippets.footer.html);
+    $(".upfront-image-caption").html(design.upfrontIO.snippets.image_with_caption.html);
+    $(".upfront-clients").html(design.upfrontIO.snippets.client_list.html);
+    $(".image").html(design.upfrontIO.snippets.image.html);
+    $(".upfront-story-link").html(design.upfrontIO.snippets.link.html);
+
+    /*
+    var json = doc.stash.get();
+    doc.loadDocument({ json: json });
+
+    doc.ready(function() {
+
+        var row = doc.add("upfrontIO.column")
+          .append(doc.create('upfrontIO.title'))
+          .append(doc.create('upfrontIO.text'));
+
+          var twoColumns = doc.add("upfrontIO.twoColumns");
+          twoColumns.append(doc.create("upfrontIO.title"));
+          twoColumns.append(doc.create("upfrontIO.linkedImage"));
+
+
+          twoColumns.append(doc.create('upfrontIO.clientList'));
+          twoColumns.append(doc.create('upfrontIO.footer'));
+          twoColumns.append(doc.create('upfrontIO.imageWithCaption'));
+          twoColumns.append(doc.create('upfrontIO.image'));
+          twoColumns.append(doc.create('upfrontIO.link'));
+
+    });
+    */
+
+
+
+  });
 </script>
+

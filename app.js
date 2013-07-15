@@ -4,21 +4,39 @@ var application_root = __dirname,
     path = require("path"),
     serverPort = 3000;
 
+
 // EXPRESS
-var app = express();
-app.configure(function () {  
-  app.use(express.methodOverride());
-  app.use(express.bodyParser());
-  app.use(app.router);
-  
-  // views
-  app.use(express.static(path.join(application_root, "/")));
+var app = module.exports = express();
+
+
+// Middlewares
+app.use(express.bodyParser());
+app.use(app.router);
+app.use(express.static(path.join(application_root, '/public')));
+
+
+// Errorhandler
+app.use(function(err, req, res, next) {
+	res.sendfile('public/bootstrap.html');
+})
+
+
+// Routes
+app.get('/designs/:design', function(req, res, next) {
+	res.sendfile('public/' + req.params.design + '.html');
 });
 
-/* R O U T E S */
+app.get('/designs/:design/*', function(req, res, next) {
+	var path = req.params[0] ? 'designs/' + req.params.design + '/dist/' + req.params[0] : 'public/index.html';
+	res.sendfile(path);
+});
 
+app.get('/*', function(req, res, next) {
+	var path = req.params[0] ? 'public/' + req.params[0] : 'public/index.html';
+	res.sendfile(path);
+});
+
+
+// Start Server
 app.listen(serverPort);
-console.log("started server on port " + serverPort);
-
-// EXPORT
-module.exports = app;
+console.log('started server on port %s', serverPort);

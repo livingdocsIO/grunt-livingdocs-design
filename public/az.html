@@ -3,10 +3,20 @@
 <html>
 <head>
   <title>AZ Medien Design</title>
-  <script src="js/vendor/underscore.js"></script>
-  <script src="js/vendor/jquery-1.9.js"></script>
-  <script src="js/az.js"></script>
-  <link href="css/az.css" media="all" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/livingdocs.css">
+  <link rel="stylesheet" href="/designs/az/css/style.css">
+  
+  <script src="http://localhost:35729/livereload.js"></script>
+  <script src="/js/vendor/jquery-1.9.js"></script>
+
+  <!-- dependencies of livingdocs-engine -->
+  <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+  <script src="/js/vendor/store/store.js"></script>
+  <script src="/js/vendor/editableJS/editable.js"></script>
+  <script src="/designs/az/design.js"></script>
+  <script src="/js/livingdocs_engine.min.js"></script>
+  
+
 </head>
 <body>
   <!-- for the facebook like -->
@@ -116,16 +126,22 @@
 </body>
 </html>
 
+    <script>
+      doc.addDesign(design.az.snippets, design.az.config);
+
+      $(document).ready(function() {
+
+            $('.linked-image').html(design.az.snippets.linked_image.html);
+            $('.topnavigation').html(design.az.snippets.navigation.html);
+            $('.subnavigation').html(design.az.snippets.subnavigation.html);
+            $('.title').html(design.az.snippets.title.html);
+            $('.image').html(design.az.snippets.image_with_caption.html);
+            $('.filet').html(design.az.snippets.filet.html);
+            $('.text').html(design.az.snippets.text.html);
+            $('.recommendation').html(design.az.snippets.recommendation.html);
+            $('.footer').html(design.az.snippets.footer.html);
+
+      });
+    </script>
+
 <script>
-$(document).ready(function() {
-  $('.linked-image').html(livingdocs.az.templates.linkedImage());
-  $('.topnavigation').html(livingdocs.az.templates.navigation());
-  $('.subnavigation').html(livingdocs.az.templates.subnavigation());
-  $('.title').html(livingdocs.az.templates.title());
-  $('.image').html(livingdocs.az.templates.imageWithCaption());
-  $('.filet').html(livingdocs.az.templates.filet());
-  $('.text').html(livingdocs.az.templates.text());
-  $('.recommendation').html(livingdocs.az.templates.recommendation());
-  $('.footer').html(livingdocs.az.templates.footer());
-});
-</script>
