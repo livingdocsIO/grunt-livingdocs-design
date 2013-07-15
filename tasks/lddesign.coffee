@@ -27,6 +27,10 @@ htmlmin = require("html-minifier")
 
 module.exports = (grunt) ->
   
+  # does jsdoc work in coffeescript?
+  # @param {string} html
+  # @param {boolean} minify
+  # @param {object} info
   processHtml = (html, minify, info) ->
     if minify
       try
@@ -88,7 +92,7 @@ module.exports = (grunt) ->
     
     # warn if a design contains no snippets
     unless snippetFiles.length
-      grunt.log.warn 'Warning: the design "%s" has no snippets', designFolder
+      grunt.fail.warn 'Warning: the design "' + designFolder + '" has no snippets'
       writeDesignConfig design, dest
     
     # iterate through file array and process the snippets, store them in templates.js file
@@ -104,18 +108,17 @@ module.exports = (grunt) ->
       # create snippet object using config
       snippetFile = snippet.replace(".html", "")
       snippetObject = JSON.parse($(options.configurationElement).html()) || {}
-      snippetNamespace = snippetObject.namespace || snippetFile
       
-      # Disallow "-" in snippetNamespace
-      unless snippetNamespace.indexOf("-") == -1
-        grunt.log.warn 'Warning: snippet "%s" in the design "%s": the character "-" (minus/dash) is not allowed in a snippet namespace', snippetNamespace, designFolder
+      # Disallow "-" in snippetFile
+      unless snippetFile.indexOf("-") == -1
+        grunt.fail.warn 'Warning: snippet "' + snippetNamespace + '" in the design "' + designFolder + '": the character "-" (minus/dash) is not allowed in a snippet namespace'
       
       # store snippet config in design
-      design.snippets[snippetNamespace] = snippetObject
+      design.snippets[snippetFile] = snippetObject
       
       # push snippet html into snippet object, remove config and minify the html
       $(options.configurationElement).remove()
-      design.snippets[snippetNamespace]["html"] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetNamespace })
+      design.snippets[snippetFile]["html"] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetFile })
       
       # Check if everything is compiled, close the templates file and save it;
       compiledSnippets = compiledSnippets + 1

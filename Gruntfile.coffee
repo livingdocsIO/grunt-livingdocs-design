@@ -10,7 +10,7 @@ grunt.initConfig
         expand: true
         cwd: './'
         src:['designs/*/css/*']
-        dest: 'public/'
+        dest: '.tmp/'
         ext: '.css'
         filter: (src) ->
           return src.split('/').pop()[0] != '_' && (src.indexOf('.css') != -1 || src.indexOf('.less') != -1)
@@ -28,14 +28,16 @@ grunt.initConfig
         expand: true
         cwd: './'
         src: ['designs/*']
-        dest: 'public/'
+        dest: '.tmp/'
       ]
 
   lddesign:
     options:
       minify: true
       src: 'designs'
-      dest: 'public/designs'
+      dest: '.tmp/designs'
+      snippetsDirectory: "snippets"
+      configurationElement: "script[type=ld-conf]"
         
   copy:
     assets:
@@ -43,7 +45,21 @@ grunt.initConfig
         expand: true
         cwd: './'
         src:['designs/**/assets/**', 'designs/**/img/**', 'designs/**/images/**', 'designs/**/media/**']
-        dest: 'public/'
+        dest: '.tmp/'
+        # leere verzeichnisse ausschliessen
+        filter: (src) ->
+          return src.split('/').pop().indexOf('.') != -1
+      ]
+    cssDirectories:
+      files: [
+        expand: true
+        cwd: './'
+        src:['designs/**/css/**']
+        dest: '.tmp/'
+        # leere verzeichnisse ausschliessen
+        # css zu kopieren, schadet nicht. deshalb wird nur less und Verzeichnisse ausgeschlossen
+        filter: (src) ->
+          return src.indexOf('.less') == -1 && src.split('/').pop().indexOf('.') != -1
       ]
       
   watch:
@@ -53,8 +69,20 @@ grunt.initConfig
       options:
         nospawn: true
         livereload: true
-        
-  
+
+  moveToDist:
+    designs:
+      files: [
+        expand: true
+        cwd: '.tmp/'
+        src:['designs/**']
+        dest: ''
+      ]    
+
+  clean:
+    preBuild: ["designs/*/dist", ".tmp/"]
+    postBuild: [".tmp/"]
+    
 
 
 # grunt-contrib-less uses a less.js in version 1.4.1 which has a bug. It's already fixed in v1.5 alpha
@@ -66,8 +94,9 @@ grunt.loadNpmTasks "grunt-recess"
 
 grunt.loadNpmTasks "grunt-contrib-copy"
 grunt.loadNpmTasks "grunt-contrib-watch"
+grunt.loadNpmTasks "grunt-contrib-clean"
 grunt.loadTasks "tasks"
 
 
-grunt.registerTask "default", ["lddesigns", "recess", "copy:assets"]
+grunt.registerTask "default", ["clean:preBuild", "lddesigns", "recess", "copy:assets", "copy:cssDirectories", "moveToDist", "clean:postBuild"]
 grunt.registerTask "server", ["default", "watch"]

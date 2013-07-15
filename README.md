@@ -15,8 +15,10 @@ It defines a setup for easily creating and testing a design.
   
   
   
-In order to view a page run 'node app.js' and navigate to the page (e.g. [http://localhost:3000/bootstrap.html](http://localhost:3000/bootstrap.html)).
-
+In order to view a page run 'node app.js' and navigate to the page  
+(e.g. [http://localhost:3000/design/bootstrap](http://localhost:3000/design/bootstrap)
+or
+[http://localhost:3000/bootstrap.html](http://localhost:3000/bootstrap.html)).
 
 
 ##Design
@@ -40,7 +42,7 @@ The namespace can contain only alphanumeric characters like a-z,A-Z,0-9 and _
 Dashes (-) are prohibited as namespace value.
 
     {
-      "namespace": "yourDesign",
+      "namespace": "designName",
       "version": 1",
       "css": ["/designs/design-name/css/style.css"]
     }

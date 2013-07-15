@@ -1,0 +1,585 @@
+/* put virtual include files only here */
+
+#browser-warning {
+    display: none;
+    padding: 10px;
+    margin: 20px 0;
+    color: #990000;
+    font-size: 13px;
+    margin-bottom: 10px;
+    background-color: #fff9d4;
+    border: solid 1px #ccc;
+}
+
+.header {
+    background: url('/static/az/style/news/img/newsshades.png') 0 -200px repeat-x;
+    padding-top: 7px;
+    margin-bottom: 35px;
+}
+
+#header-logo {
+    margin-top: 15px;
+}
+
+#header-search {
+    /* border-bottom: dotted 1px #000; */
+  border-top: 1px dotted #000;
+}
+
+#header-search form {
+    float: left;
+    margin: 12px 0;
+}
+
+#header-search input.searchfield{
+    font-style: italic;
+    color: #000;
+    text-indent: 3px;
+    font-size: 12px;
+}
+
+#header-search input.searchfield.active{
+    font-style: normal;
+    color: #000;
+}
+#header-search a.azlogo-link {
+    float: right;
+    margin: 10px 0;
+}
+
+#header-metanavigation {
+   /*  padding-top: 10px; */
+    width: 460px;
+    float: left;
+}
+
+#header-metanavigation ul li {
+    float: left;
+    /* width: 127px; */
+  
+  width:78px;
+}
+
+#header-metanavigation ul li a {
+    font: 11px arial,verdana,serif;
+    font-weight: normal;
+    line-height: 120%;
+    text-transform: uppercase;
+}
+
+#header-metanavigation ul li.first {
+    /* width: 165px; */
+  
+  width:78px;
+}
+
+#header-metanavigation ul li.last {
+    /* width: 105px; */
+  
+    width: 55px;  
+  margin-left:15px;
+}
+
+#header-weather {
+    width: 60px;
+    float: right;
+    margin: 0;
+  font-family:arial, verdana;
+}
+
+#page-header {
+    overflow: hidden;
+}
+
+#page-header .input-border {
+    border-top: solid 1px #6e6f71;
+    border-left: solid 1px #cacbcd;
+    border-right: solid 1px #cacbcd;
+    border-bottom: solid 1px #d4d5d7;
+    height: 21px;
+    float: left;
+}
+#page-header input.searchfield {
+    height: 20px;
+    width: 145px;
+    line-height: 20px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    border-width: 0px;
+}
+#page-header #header-search input.searchfield {
+    width: 196px;
+}
+#page-header input.submitbutton {
+    width: 29px;
+    height: 22px;
+    border: none;
+    margin: 0px;
+}
+div#header-navbar1 {
+    background: url('/static/az/style/news/img/newsshades.png') 0 -522px repeat-x ;
+    /* margin-top: 18px; */
+  margin-top:10px;
+}
+
+div#header-navbar2 {
+    background-color: #f8f7f6;
+    border-bottom: solid 1px #cdcdcd;
+}
+
+ul#navbar1 li {
+    height: 36px;
+    float:left;
+    border-right: solid 1px #fff;
+}
+
+ul#navbar1 li a {
+    height: 36px;
+    padding: 0 18px;
+    display: block;
+    line-height: 36px;
+    font-family: Arial;
+    font-size: 13px;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+}
+
+ul#navbar1 li a:hover,
+ul#navbar1 li a.active,
+ul#navbar2 li a:hover,
+ul#navbar2 li a.active{
+    background: url('/static/az/style/news/img/newsshades.png') 0 -564px repeat-x;
+    color: #164f84;
+}
+
+ul#navbar2 li a:hover,
+ul#navbar2 li a.active{
+    margin-left: -1px;
+    padding-left: 11px;
+}
+
+ul#navbar2 li.first a:hover,
+ul#navbar2 li.first a.active{
+    padding-left: 19px;
+}
+
+ul#navbar3 li a:hover,
+ul#navbar3 li a.active{
+text-decoration: underline;}
+
+
+ul#navbar2 li,
+ul#navbar3 li {
+    float: left;
+/*    background: url('/static/az/style/news/img/newsshades.png') right -630px no-repeat;*/
+    background-image:  url('/static/az/style/news/img/newsshades.png');
+    background-repeat: no-repeat;
+}
+
+ul#navbar2 li {
+    height: 36px;
+    background-position: right -630px;
+}
+ul#navbar3 li {
+    height: 36px;
+    background-position: right -630px;
+}
+ul#navbar2 li a {
+    height: 36px;
+    padding: 0 10px;
+    display: block;
+    line-height: 36px;
+    font-family: Arial;
+    font-size: 13px;
+    color: #164f84;
+    text-decoration: none;
+}
+
+ul#navbar2 li.first a {
+    padding-left:18px;
+}
+
+ul#navbar3 li a {
+    height: 36px;
+    padding: 0 10px;
+    display: block;
+    line-height: 36px;
+    font-family: Arial;
+    font-size: 11px;
+    color: #164f84;
+    text-decoration: none;
+}
+
+ul#navbar3 li.first a {
+    padding-left:18px;
+}
+
+/* Neu */
+
+#a-zLinks { 
+  float:right; 
+  font-family:arial, verdana; 
+  font-size:14px; 
+  width:220px; 
+  margin-top:12px;
+}
+
+#ImmoADisp { 
+  border-radius: 3px 3px 3px 3px; 
+  background-color:#DD243E; 
+  line-height:24px; 
+  color:#fff; 
+  text-align:center; 
+  text-decoration:none; 
+  display:block; 
+  width:80px; 
+  height:25px;  
+  margin:0 4px 0 0; 
+  float:right;
+}
+
+#JobsADisp { 
+  border-radius: 3px 3px 3px 3px; 
+  background-color:#8DA3B0; 
+  line-height:24px; 
+  color:#fff; 
+  text-align:center; 
+  text-decoration:none; 
+  display:block; 
+  width:43px; 
+  height:25px; 
+  float:right;
+}
+
+#EventsADisp { 
+  border-radius: 3px 3px 3px 3px; 
+  background-color:#7345B5; 
+  line-height:24px; 
+  color:#fff; 
+  text-align:center; 
+  text-decoration:none; 
+  display:block; 
+  width:63px; 
+  height:25px;  
+  margin:0 4px 0 0; 
+  float:right;
+}
+
+#publisherLoginBox #login { 
+  font-family:arial, verdana; 
+  margin:6px 0 8px 0; 
+  font-size:11px;
+  height:25px;
+  line-height:25px;
+}
+
+#publisherLoginBox #login a { 
+  font-weight:bold; 
+  line-height:25px;
+}
+
+#publisherLoginBox #login span { 
+  font-weight:bold; 
+  line-height:25px;
+}
+
+#gemeindeBtnNeu{
+    position:relative;
+    left:55px;
+    top:-40px;
+  width: 45px;
+}
+
+#menuMehr li { width:113px; } 
+
+ul#navbar1 li#menuMehr { border:0; }
+ul#navbar1 li#menuMehr li { border:0; }
+
+/* Navigation */
+#menuMehr .nav, #menuMehr .nav ul { 
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#menuMehr .nav {
+  font-family: Arial, Helvetica, sans-serif;
+  z-index: 99; 
+  position: absolute;
+}
+
+#menuMehr .nav li {
+  float: left; 
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#nav-one li:hover a, 
+#nav-one li.sfHover a {
+  background: #164F84;
+  color: #fff;
+}
+
+#nav-one li:hover a.More, 
+#nav-one li.sfHover a.More {
+    border: 0 solid #000000;
+    background:url('/static/az/style/news/img/newsshades.png') repeat-x scroll 0 -564px transparent;
+    color: #164F84;
+}
+
+#nav-one li:hover ul a, 
+#nav-one li.sfHover ul a {
+  color: #164F84;
+}
+#nav-one li:hover ul a:hover, 
+#nav-one li.sfHover ul a:hover {
+  background: #d0dce6;
+  color: #164F84; 
+}
+
+.nav ul {
+  list-style: none;
+  margin: 0;
+  width: 100px;
+  position: absolute;
+  top: -999em; 
+}
+
+#menuMehr .nav li:hover ul,
+#menuMehr .nav li.sfHover ul {
+  top: 21px; 
+  left:-15px;
+}
+#menuMehr .nav ul li {
+  border: 0;
+  float: none;
+}
+#menuMehr .nav ul a {
+  width: 100px; 
+  white-space: nowrap;
+}
+
+#menuMehr ul.nav li a {  padding-top:0px;}
+#menuMehr div#navigation_level1 ul.nav   { margin:0;}
+#menuMehr ul.nav li ul { padding:15px 0 0 0; }
+#menuMehr ul.nav li ul li a { color:#fff; }
+#menuMehr ul.nav li:hover a.More { color:#164F84; }
+#menuMehr ul.nav li:hover a.More .PfeilWhite  { display:none; height:8px; width:9px; margin:0 5px 0 5px;  }
+#menuMehr ul.nav li:hover a.More .blauPfeil { display:inline-block; height:8px; width:9px; margin:0 6px 0 5px; }
+
+.PfeilWhite { display:inline-block; height:8px; width:9px; margin:0 6px 0 5px; }
+.blauPfeil { display:none; height:8px; width:9px; margin:0 3px 0 5px; }
+
+
+
+#autoMenuMehr li { width:113px; } 
+
+ul#navbar1 li#autoMenuMehr { border:0; }
+ul#navbar1 li#autoMenuMehr li { border:0; }
+
+/* Navigation */
+#autoMenuMehr .autoNav, #autoMenuMehr .autoNav ul { 
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#autoMenuMehr .autoNav {
+  font-family: Arial, Helvetica, sans-serif;
+  z-index: 99; 
+  position: absolute;
+}
+
+#autoMenuMehr .autoNav li {
+  float: left; 
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+#auto-nav-one li:hover a, 
+#auto-nav-one li.sfHover a {
+  background: #164F84;
+  color: #fff;
+}
+
+#auto-nav-one li:hover a.More, 
+#auto-nav-one li.sfHover a.More {
+    border: 0 solid #000000;
+    background:url('/static/az/style/news/img/newsshades.png') repeat-x scroll 0 -564px transparent;
+    color: #164F84;
+}
+
+#auto-nav-one li:hover ul a, 
+#auto-nav-one li.sfHover ul a {
+  color: #164F84;
+}
+#auto-nav-one li:hover ul a:hover, 
+#auto-nav-one li.sfHover ul a:hover {
+  background: #d0dce6;
+  color: #164F84; 
+}
+
+.autoNav ul {
+  list-style: none;
+  margin: 0;
+  width: 100px;
+  position: absolute;
+  top: -999em; 
+}
+
+#autoMenuMehr .autoNav li:hover ul,
+#autoMenuMehr .autoNav li.sfHover ul {
+  top: 21px; 
+  left:-15px;
+}
+#autoMenuMehr .autoNav ul li {
+  border: 0;
+  float: none;
+}
+#autoMenuMehr .autoNav ul a {
+  width: 100px; 
+  white-space: nowrap;
+}
+
+#autoMenuMehr ul.autoNav li a {  padding-top:0px;}
+#autoMenuMehr div#navigation_level1 ul.autoNav   { margin:0;}
+#autoMenuMehr ul.autoNav li ul { padding:15px 0 0 0; }
+#autoMenuMehr ul.autoNav li ul li a { color:#fff; }
+#autoMenuMehr ul.autoNav li:hover a.More { color:#164F84; }
+#autoMenuMehr ul.autoNav li:hover a.More .PfeilWhite  { display:none; height:8px; width:9px; margin:0 5px 0 5px;  }
+#autoMenuMehr ul.autoNav li:hover a.More .blauPfeil { display:inline-block; height:8px; width:9px; margin:0 6px 0 5px; }
+
+.PfeilWhite { display:inline-block; height:8px; width:9px; margin:0 6px 0 5px; }
+.blauPfeil { display:none; height:8px; width:9px; margin:0 3px 0 5px; }
+
+
+
+#marketizerBox { 
+  border:2px solid #d0dce6; 
+  background:#f1f6f9; 
+  margin:5px 0 18px 0; 
+  font-family:arial,verdana;
+}
+  
+#marketizerBox #marketizerTitle { 
+  color:#164F84; 
+  text-shadow:#fff 2px 1px 2px; 
+  margin:8px 5px 5px 7px; 
+  height:20px; 
+  font-weight:bold;  
+}
+
+#marketizerBox .box-list-item { border-top:1px dotted #828282; }
+#marketizerBox .box-list-item:hover { background:#afc1d0; cursor:pointer; }
+#marketizerBox .box-list-item:hover a { color:#000; }
+#marketizerBox .first { font-weight:bold; }
+#marketizerBox .business-widget a { color:#646769; }
+
+/* SEARCH */
+#marketizerSearchBox { 
+  border-top:1px dotted #828282; 
+  background:#e8f1f8; 
+  height:90px; 
+} 
+
+#marketizerBox input[type=submit] { 
+  background:url("/static/az/img/newssprite.png") no-repeat scroll -5px -936px transparent; 
+  height: 29px; 
+  width:33px; 
+  margin: 0 0 0 -1px; 
+  position: absolute; 
+  float:right;
+}
+
+#marketizerBox input[type=text] { 
+  background:url("/static/az/img/az-input-background.png") repeat-x scroll 0 0 transparent; 
+  height: 21px; 
+  font-size:18px;
+  margin-left:8px; 
+  padding: 6px 33px 0 0; 
+  width:61%; 
+  float:left;
+}
+
+#marketizerBox input[value] {  
+  font-size:0px; 
+  color: transparent; 
+  cursor:pointer; 
+}
+
+#marketizerBox input { border: 1px solid #3A597E; }
+
+.textanzeigenbox {
+    position: relative;
+    width: 220px;
+    height: 401px;
+    background-color: #cad3df;
+    border: none;
+    background-image: url('/static/az/img/Textanzeigen/TA_bgbox2.png');
+}
+.tabscroller {
+    position: absolute;
+    top: 15px;
+    left: 4px;
+}
+.tabmask {
+    position: relative;
+    width: 212px;
+    height: 346px; /* 4*86+3=347 */
+    overflow: hidden;
+    background-color: #FFF;
+}
+.tabcontainer{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.tabcontainer a {
+    display: block;
+    width: 203px; /* 5+203+4=212 */
+    height: 67px; /* 10+67+9+1=87 */
+    background-color: #FFF;
+    padding: 10px 4px 9px 5px;
+    border-bottom: 1px solid #ebedf3;
+}
+.tabnav {
+    position: absolute;
+    top: 370px;
+    left: 4px;
+}
+.tabnup,
+.tabndown {
+    float: left;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    border: none;
+}
+.tabnup {
+    margin-right: 3px;
+    background-image: url('/static/az/img/Textanzeigen/up.gif');
+}
+.tabndown {
+    background-image: url('/static/az/img/Textanzeigen/down.gif');
+}
+.tabndeactive {
+    opacity: 0.5;
+    filter:alpha(opacity=50); /* For IE8 and earlier */
+    cursor: default;
+}
+.tabninfo {
+    float: left;
+    padding: 2px 0 0 10px;
+    font: 10px arial, sans-serif;
+    color: #666;
+}
+.tabunselectable {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
