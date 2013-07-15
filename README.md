@@ -108,22 +108,44 @@ The script tag must have the attribute **type="ld-conf"** attribute to use it as
 For an example of a snippet file, see **designs/bootstrap/snippets/main_and_sidebar.html**
 
 ####editable Attributes
-There are different kinds of attributes you can use to tag the element as editable.  
+There are different kinds of attributes you can use to tag the element as editable.
 
-- `doc-image`  
-- `doc-editable`
+- `doc-image='image'`// for `<img>` tags only at the moment
+- `doc-editable='text'`
 
-Isch das korrekt? :)
+Each editable attribute inside a snippet must have a unique value. E.g.:
+```html
+<h1>
+  <span doc-editable="title">Title</span>
+  <small doc-editable="subtitle">Subtitle</small>
+</h1>
+```
 
+If there is only one editable in a snippet the name can be omitted.
+But it is better to always provide it since it gives you better control over the design.
 
+The name of an editable or image tells livingdocs that the content of an editable can
+be transferred to the editable of another snippet. 
 
-Each editable attribute must have a unique value inside a snippet.
+In the following case for example livingdocs can deduce that these to snippets
+are meant be converted to each other since they both have one editable with the same name.
 
-e.g.
+**Title**   
+```
+<h1 doc-editable='title'></h1>
+```
 
-    <h1 doc-editable="title"><small doc-editable="subtitle"></small></h1>
-    <p class="content" doc-editable="content"></p>
-    
+**Subtitle**  
+```
+<h2 doc-editable='title'></h2>
+```
+
+But livingdocs will not offer to convert a `Title` or `Subtitle` into an `Author` snippet
+
+**Author**  
+```
+<div class="author" doc-editable='author'></div>
+```
 
 
 
