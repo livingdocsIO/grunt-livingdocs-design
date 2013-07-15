@@ -40,7 +40,8 @@ The namespace can contain only alphanumeric characters like a-z,A-Z,0-9 and _
 Dashes (-) are prohibited as namespace value.
 
     {
-      "namespace": "design_name",
+      "namespace": "yourDesign",
+      "version": 1",
       "css": ["/designs/design-name/css/style.css"]
     }
     
@@ -59,7 +60,7 @@ e.g.
         canBeCSS.css             // will copy to canBeCSS.css
         _doNotCompile.less       // won't compile
         directoriesWontCompile/  // all files in this directory won't compile
-        ↳    fasdf.less          // won't compile
+        ↳    fasdf.less         // won't compile
 
     
 Each file you want to use in a template has to be defined in the designs config.json file.  
@@ -67,6 +68,7 @@ The file must be declared in an array of the key **css**.
 e.g.
 
     {
+      "namespace": "designName"
       "css": ["/designs/design-name/css/style.css", "/designs/design-name/css/anotherFile.css"]
     }
  
@@ -104,10 +106,25 @@ The script tag must have the attribute **type="ld-conf"** attribute to use it as
 For an example of a snippet file, see **designs/bootstrap/snippets/main_and_sidebar.html**
 
 ####editable Attributes
-There are different kinds of attributes you can use to tag the element as editable.
+There are different kinds of attributes you can use to tag the element as editable.  
 
-- `doc-image`
+- `doc-image`  
 - `doc-editable`
+
+Isch das korrekt? :)
+
+
+
+Each editable attribute must have a unique value inside a snippet.
+
+e.g.
+
+    <h1 doc-editable="title"><small doc-editable="subtitle"></small></h1>
+    <p class="content" doc-editable="content"></p>
+    
+
+
+
 
 
 
