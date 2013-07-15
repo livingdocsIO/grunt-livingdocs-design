@@ -22,7 +22,7 @@ grunt.initConfig
         # html-minifier doesn't work on watsons text.html snippet
         # snippets do not work unminified. Is there a bug in livingdocs-engine?
         minify: true
-        configurationElement: 'script[type=ld-conf]'
+        configurationElement: "script[type=ld-conf]"
         snippetsDirectory: "snippets"
       files: [
         expand: true

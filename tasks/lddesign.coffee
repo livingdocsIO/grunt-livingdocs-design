@@ -69,7 +69,7 @@ module.exports = (grunt) ->
     
     requiredResources.forEach (resource) ->
       unless grunt.file.exists(src, resource.name)
-        grunt.fail.warn 'The %s "%s" does not exist.', resource.type, path.join(src, resource.name)
+        grunt.fail.warn 'The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.'
 
     
     # Read snippets from directory, and store them in string variable
@@ -84,7 +84,7 @@ module.exports = (grunt) ->
     )
 
     unless design.config.namespace
-      grunt.fail.warn 'Error: the design "%" contains a config file which has no namespace.', designFolder
+      grunt.fail.warn 'Error: the design ' + designFolder + ' contains a config file which has no namespace.'
     
     # warn if a design contains no snippets
     unless snippetFiles.length
