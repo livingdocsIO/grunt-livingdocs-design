@@ -16,7 +16,7 @@ It defines a setup for easily creating and testing a design.
   
   
 In order to view a page run 'node app.js' and navigate to the page  
-(e.g. [http://localhost:3000/design/bootstrap](http://localhost:3000/design/bootstrap)
+(e.g. [http://localhost:3000/designs/bootstrap](http://localhost:3000/designs/bootstrap)
 or
 [http://localhost:3000/bootstrap.html](http://localhost:3000/bootstrap.html)).
 
