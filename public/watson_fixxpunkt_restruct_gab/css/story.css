@@ -92,12 +92,6 @@ h4, .story p.half_title /*Conflict*/ {
 
 
 
-
-
-
-
-
-
 /* inserts */
 /* ======= */
 /* default insert (hanging to the right) */
@@ -134,7 +128,7 @@ h4, .story p.half_title /*Conflict*/ {
 /* fat full width */
 .story .insert.fat_full {
 	position:relative;
-	width:118%;
+	width:117.6%;
 	left:6%;
 	margin:0px 0% 20px 0%;
 }
