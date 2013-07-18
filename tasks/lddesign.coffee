@@ -56,7 +56,7 @@ module.exports = (grunt) ->
   
   # process the config and snippets, create design object
   compileDesign = (src, dest, files, options) ->
-    designFolder = src.split('/').pop()
+    designFolder = options.design
     
     # Check existence of all directories and files
     requiredResources = [
@@ -103,18 +103,19 @@ module.exports = (grunt) ->
       
       # create snippet object using config
       snippetFile = snippet.replace('.html', '')
+      snippetFileName = snippetFile.split('/').pop()
       snippetObject = JSON.parse($(options.configurationElement).html()) || {}
       
-      # Disallow '-' in snippetFile
-      unless snippetFile.split('/').pop().indexOf('-') == -1
+      # Disallow '-' in snippetFileName
+      unless snippetFileName.indexOf('-') == -1
         grunt.fail.warn('Warning: snippet "' + snippet + '" in the design "' + designFolder + '": the character "-" (minus/dash) is not allowed in a snippet namespace')
       
       # store snippet config in design
-      design.snippets[snippetFile] = snippetObject
+      design.snippets[snippetFileName] = snippetObject
       
       # push snippet html into snippet object, remove config and minify the html
       $(options.configurationElement).remove()
-      design.snippets[snippetFile]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetFile })
+      design.snippets[snippetFileName]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetFileName })
       
       # Check if everything is compiled, close the templates file and save it;
       compiledSnippets = compiledSnippets + 1
@@ -140,15 +141,16 @@ module.exports = (grunt) ->
       option.src = src
       option.dest = dest
 
-      # copy assets
+      # create task to process the design
       grunt.config('lddesign.design_' + design + '.files', [
         expand: true
         src: [src + '/' + options.snippetsDirectory + '/**/*.html']
         dest: dest
       ])
-
       grunt.config('lddesign.design_' + design + '.options', option)
       grunt.log.writeln('Design "' + design + '" prepared for processing.')
+
+      #run task
       grunt.task.run('lddesign:design_' + design)
       
 
