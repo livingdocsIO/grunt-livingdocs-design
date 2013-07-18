@@ -34,16 +34,6 @@ grunt.initConfig
         dest: '.tmp/'
       ]
 
-
-  lddesign:
-    options:
-      minify: true
-      src: 'designs'
-      dest: '.tmp/designs'
-      snippetsDirectory: 'snippets'
-      configurationElement: 'script[type=ld-conf]'
- 
-
   copy:
     assets:
       files: [

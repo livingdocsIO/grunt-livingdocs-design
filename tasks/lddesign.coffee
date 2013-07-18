@@ -10,7 +10,7 @@
 
 # lddesign
 # --------
-# lddesign can only be used in the command shell.
+# lddesign is an internal task that is used to process single designs. This task is called from lddesigns.
 # It processes the whole design. So first the config and snippets are written to a file.
 # After that it copies all assets to the public/designs/designname directory and compiles the style.less file
 # use it the following way
@@ -55,7 +55,7 @@ module.exports = (grunt) ->
   
   
   # process the config and snippets, create design object
-  compileDesign = (src, dest, options) ->
+  compileDesign = (src, dest, files, options) ->
     designFolder = src.split('/').pop()
     
     # Check existence of all directories and files
@@ -76,10 +76,7 @@ module.exports = (grunt) ->
 
     
     # Read snippets from directory, and store them in string variable
-    snippetFiles = fs.readdirSync(path.join(src, options.snippetsDirectory))
-    snippetFiles = grunt.util._.filter(snippetFiles, (file) ->
-      file.indexOf('.html') != -1
-    )
+    snippetFiles = files
     design = {}
     design.snippets = {}
     design.config = grunt.file.readJSON(path.join(src, 'config.json'),
@@ -97,7 +94,7 @@ module.exports = (grunt) ->
     # iterate through file array and process the snippets, store them in templates.js file
     compiledSnippets = 0
     snippetFiles.forEach (snippet) ->
-      data = grunt.file.read(path.join(src, options.snippetsDirectory, snippet),
+      data = grunt.file.read(snippet,
         encoding: 'utf8'
       )
       
@@ -109,8 +106,8 @@ module.exports = (grunt) ->
       snippetObject = JSON.parse($(options.configurationElement).html()) || {}
       
       # Disallow '-' in snippetFile
-      unless snippetFile.indexOf('-') == -1
-        grunt.fail.warn('Warning: snippet "' + snippetNamespace + '" in the design "' + designFolder + '": the character "-" (minus/dash) is not allowed in a snippet namespace')
+      unless snippetFile.split('/').pop().indexOf('-') == -1
+        grunt.fail.warn('Warning: snippet "' + snippet + '" in the design "' + designFolder + '": the character "-" (minus/dash) is not allowed in a snippet namespace')
       
       # store snippet config in design
       design.snippets[snippetFile] = snippetObject
@@ -130,42 +127,43 @@ module.exports = (grunt) ->
     #var config = grunt.config(this.name);
     options = @options()
     designs = @files
-    countDesigns = designs.length
-    processedDesigns = 0
+    countDesigns = designs.length || 0
+    
     designs.forEach (file, i) ->
       src = designs[i].src[0]
       dest = designs[i].dest
-      compileDesign(src, dest, options)
+      #compileDesign(src, dest, options)
+      design = src.split('/').pop()
+
+      option = grunt.util._.clone(options)
+      option.design = design
+      option.src = src
+      option.dest = dest
+
+      # copy assets
+      grunt.config('lddesign.design_' + design + '.files', [
+        expand: true
+        src: [src + '/' + options.snippetsDirectory + '/**/*.html']
+        dest: dest
+      ])
+
+      grunt.config('lddesign.design_' + design + '.options', option)
+      grunt.log.writeln('Design "' + design + '" prepared for processing.')
+      grunt.task.run('lddesign:design_' + design)
+      
 
 
   # grunt task to compile specific design. executable only through console?
-  grunt.registerTask 'lddesign', 'Compile a single design', ->
-    design = grunt.option('design')
-    options = grunt.config('lddesign.options')
+  grunt.registerMultiTask 'lddesign', 'Compile a single design', ->
+    options = @options()
 
-    if design and design != true
+    src = options.src
+    dest = options.dest
+    files = @files
+    options = options
     
-      # compile a single 
-      src = options.src + '/' + design
-      dest = options.dest + '/' + design
-      compileDesign(src, dest, options)
-      
-      # copy assets
-      grunt.config 'copy.design.files', [
-        expand: true
-        src: ['designs/' + design + '/assets/**']
-        dest: 'public/'
-      ]
-      grunt.task.run('copy:design')
-      
-      # compile less
-      grunt.config 'recess.design.options.compile', true
-      grunt.config 'recess.design.files', [
-        expand: true
-        src: ['designs/' + design + '/css/style.less']
-        dest: 'public/'
-      ]
-      grunt.task.run('recess:design')
-      
-    else
-      grunt.fail.warn(@name + ' needs a designname as argument. e.g. grunt lddesign --design=watson\n')
+    snippets = []
+    files.forEach (file, i) ->
+      snippets[i] = file.src[0]
+    
+    compileDesign(src, dest, snippets, options)
