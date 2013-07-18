@@ -1,0 +1,145 @@
+
+
+/* social block */
+/* ============ */
+.socialblock {
+	position:fixed;
+	bottom:0;
+	left:0;
+	width:5.9em; /* 59px / 10px */
+	height:5.9em; /* 59px / 10px */
+	z-index:100;
+}
+
+.socialblock .sociallink {
+	position:absolute;
+	bottom:1.5em; /* 15px / 10px */
+	left:1.5em; /* 15px / 10px */
+	display:block;
+	width:6em; /* 60px / 10px */
+	height:5em; /* 50px / 10px */
+	-moz-transition:-moz-transform 0.2s ease;
+	-webkit-transition: -webkit-transform 0.2s ease;
+	-o-transformtransition: -o-transformtransform 0.2s ease;
+	transition: transform 0.2s ease;
+}
+
+.socialblock .sociallink:hover {
+	-moz-transform:scale(1.1,1.1);
+	-webkit-transform:scale(1.1,1.1);
+	-o-transform:scale(1.1,1.1);
+	transform:scale(1.1,1.1);
+}
+
+.socialblock .sociallink img {
+	position:absolute;
+}
+
+.socialblock .sociallink .number {
+	position:absolute;
+	color:#fe0090;
+	text-align:center;
+	width:100%;
+	font-size:1.8em; /* 18px / 10px */
+	line-height:2.2em; /* 44px / 20px */
+}
+
+.socialblock .sociallink:hover .number {
+	color:#ffffff;
+	-moz-transition: color 0.5s ease;
+	-webkit-transition: color 0.5s ease;
+	-o-transformtransition: color 0.5s ease;
+	transition: color 0.5s ease;
+}
+
+.socialblock .expandable {
+	background-color:#ffffff;
+	border-right:4px solid #dddddd;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box; 
+	position:fixed;
+	top:0;
+	left:-50em;
+	width:50em; /* 500px / 10px */
+	height:100%;
+	overflow:auto;
+}
+
+.socialblock .segment {
+	padding: 3em 0 0em 0; /* 30px / 10px */
+	width: auto;
+	clear:both;
+	text-align:center;
+}
+
+.socialblock .segment .talkback {
+	font-size:1.8em; /* 18px / 10px */
+	text-align:left;
+	margin-bottom: 5.555em; /* 100px / 18px */
+}
+
+.socialblock .segment .talkback ul li {
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	-ms-hyphens: auto;
+	-o-hyphens: auto;
+	hyphens: auto;
+	background-color:#eeeeee;
+	margin-bottom:4px;
+	padding:0.833em; /* 15px / 18px */
+}
+
+.socialblock .segment .talkback ul li h6 {
+	font-weight:bold;
+	margin-bottom:4px;
+}
+
+.socialblock .segment .talkback ul li .date {
+	font-size:0.777em; /* 14px / 18px */
+	margin-bottom:4px;
+	color:#666666;
+}
+
+.socialblock .segment .talkback ul li img.portrait {
+	width:3.8em;
+	float:left;
+	margin-right:0.833em; /* 15px / 18px */
+	margin-bottom:0.833em; /* 15px / 18px */
+}
+
+.socialblock .segment .talkback ul li .field {
+	width:98%;
+	margin-top:4px;
+	background-color:rgba(255,255,255,0.8);
+}
+
+
+
+
+
+/* mobile */
+/* ====== */
+@media screen and (max-width: 600px) {	
+	.socialblock .expandable {
+		width:100%;
+		left:-100%;
+		border:transparent;
+	}
+	.socialblock .segment {
+		width:100%;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
