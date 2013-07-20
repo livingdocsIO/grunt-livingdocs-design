@@ -78,18 +78,18 @@ module.exports = (grunt) ->
 
    
     # Read snippets from directory, and store them in string variable
-    snippetFiles = files
-    design = {}
-    design.snippets = {}
-    design.config = grunt.file.readJSON(path.join(src, 'config.json'),
-      encoding: 'utf8'
-    )
+    design =
+      snippets: {}
+      groups: {}
+      config: grunt.file.readJSON(path.join(src, 'config.json'),
+        encoding: 'utf8'
+      )
 
     unless design.config.namespace
       grunt.fail.fatal('The design ' + designFolder + ' contains a config file which has no namespace.')
     
     # warn if a design contains no snippets
-    unless snippetFiles.length
+    unless files.length
       grunt.fail.warn('The design "' + designFolder + '" has no snippets')
       writeDesignConfig(design, dest)
     
@@ -97,8 +97,32 @@ module.exports = (grunt) ->
 
     # iterate through file array and process the snippets, store them in templates.js file
     compiledSnippets = 0
-    snippetFiles.forEach (snippet) ->
-      
+    files.forEach (snippet) ->
+
+      snippetPath = snippet.replace(src + '/' + options.snippetsDirectory + '/', '').split('/')
+      snippetFileName = snippetPath[snippetPath.length - 1].replace('.html', '')
+
+      if(snippetPath.length > 2)
+        grunt.fail.warn('Design "' + designFolder + '", Snippet "' + snippetPath.join('/') + '": Snippets can only be only be nested in one directory.')
+
+      addSnippetToGroup = (group, snippet) ->
+        groupConfigFile = path.join(src, options.snippetsDirectory, group, 'config.json')
+        unless design.groups[group]
+          if grunt.file.exists(groupConfigFile)
+            design.groups[group] = grunt.file.readJSON(groupConfigFile, { encoding: 'utf8' })
+          else
+            design.groups[group] = {name: group}
+        
+        if design.groups[group]['snippets']
+          design.groups[group]['snippets'][design.groups[group]['snippets'].length] = snippetFileName
+        else
+          design.groups[group]['snippets'] = [snippetFileName]
+
+
+      if snippetPath.length > 1
+        addSnippetToGroup(snippetPath[0], snippetPath[1])
+     
+
       data = grunt.file.read(snippet,
         encoding: 'utf8'
       )
@@ -107,8 +131,6 @@ module.exports = (grunt) ->
       $ = cheerio.load(data)
       
       # create snippet object using config
-      snippetFile = snippet.replace('.html', '')
-      snippetFileName = snippetFile.split('/').pop()
       snippetObject = JSON.parse($(options.configurationElement).html()) || {}
       
       # Disallow '-' in snippetFileName
@@ -123,8 +145,10 @@ module.exports = (grunt) ->
       design.snippets[snippetFileName]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetFileName })
       
       # Check if everything is compiled, close the templates file and save it;
-      compiledSnippets = compiledSnippets + 1
-      if snippetFiles.length == compiledSnippets
+      compiledSnippets += 1
+      if files.length == compiledSnippets       
+
+        # write design to file
         writeDesignConfig(design, dest)
 
 
@@ -138,7 +162,6 @@ module.exports = (grunt) ->
     designs.forEach (file, i) ->
       src = designs[i].src[0]
       dest = designs[i].dest
-      #compileDesign(src, dest, options)
       design = src.split('/').pop()
 
       option = grunt.util._.clone(options)
@@ -163,11 +186,9 @@ module.exports = (grunt) ->
   # grunt task to compile specific design. executable only through console?
   grunt.registerMultiTask 'lddesign', 'Compile a single design', ->
     options = @options()
-
     src = options.src
     dest = options.dest
     files = @files
-    options = options
     
     snippets = []
     files.forEach (file, i) ->
