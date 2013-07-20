@@ -105,6 +105,8 @@ module.exports = (grunt) ->
       if(snippetPath.length > 2)
         grunt.fail.warn('Design "' + designFolder + '", Snippet "' + snippetPath.join('/') + '": Snippets can only be only be nested in one directory.')
 
+
+      # Add a snippet to a group if it's in a subdirectory
       addSnippetToGroup = (group, snippet) ->
         groupConfigFile = path.join(src, options.snippetsDirectory, group, 'config.json')
         unless design.groups[group]
@@ -154,7 +156,9 @@ module.exports = (grunt) ->
 
   # grunt task to compile all snippets
   grunt.registerMultiTask 'lddesigns', 'Compile snippets to livingdocs-engine template', ->
-    #var config = grunt.config(this.name);
+
+    grunt.config.requires('snippetsDirectory', 'configurationElement')
+
     options = @options()
     designs = @files
     countDesigns = designs.length || 0
