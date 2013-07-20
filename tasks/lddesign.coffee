@@ -57,7 +57,8 @@ module.exports = (grunt) ->
   # process the config and snippets, create design object
   compileDesign = (src, dest, files, options) ->
     designFolder = options.design
-    
+  
+
     # Check existence of all directories and files
     requiredResources = [
       name: ''
@@ -74,7 +75,8 @@ module.exports = (grunt) ->
       unless grunt.file.exists(src, resource.name)
         grunt.fail.warn('The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.')
 
-    
+
+   
     # Read snippets from directory, and store them in string variable
     snippetFiles = files
     design = {}
@@ -84,16 +86,19 @@ module.exports = (grunt) ->
     )
 
     unless design.config.namespace
-      grunt.fail.warn('Error: the design ' + designFolder + ' contains a config file which has no namespace.')
+      grunt.fail.fatal('The design ' + designFolder + ' contains a config file which has no namespace.')
     
     # warn if a design contains no snippets
     unless snippetFiles.length
-      grunt.fail.warn('Warning: the design "' + designFolder + '" has no snippets')
+      grunt.fail.warn('The design "' + designFolder + '" has no snippets')
       writeDesignConfig(design, dest)
     
+
+
     # iterate through file array and process the snippets, store them in templates.js file
     compiledSnippets = 0
     snippetFiles.forEach (snippet) ->
+      
       data = grunt.file.read(snippet,
         encoding: 'utf8'
       )
@@ -108,7 +113,7 @@ module.exports = (grunt) ->
       
       # Disallow '-' in snippetFileName
       unless snippetFileName.indexOf('-') == -1
-        grunt.fail.warn('Warning: snippet "' + snippet + '" in the design "' + designFolder + '": the character "-" (minus/dash) is not allowed in a snippet namespace')
+        grunt.fail.warn('Snippet "' + snippet + '" in the design "' + designFolder + '" contains the character "-" which is not allowed in a snippet namespace')
       
       # store snippet config in design
       design.snippets[snippetFileName] = snippetObject

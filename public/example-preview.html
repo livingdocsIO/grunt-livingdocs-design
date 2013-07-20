@@ -1,0 +1,136 @@
+<html>
+<head>
+  <title>Emmet Documentation</title>
+
+
+    <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link rel="stylesheet" href="/css/livingdocs.css">
+
+    <!-- load design css (and fonts) -->
+    <script src="/js/vendor/jquery-1.9.js"></script>
+
+
+    <!-- dependencies of livingdocs-engine -->
+    <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+    <script src="/js/vendor/store/store.js"></script>
+    <script src="/js/vendor/editableJS/editable.js"></script>
+    <script src="/designs/bootstrap/design.js"></script>
+    <script src="/js/livingdocs_engine.js"></script>
+</head>
+<body>
+
+  <!-- document template with content to easily preview and test a design -->
+  <div class="doc-section">
+    <column>
+      <child>
+
+        <main_and_sidebar>
+          <child container="main">
+            <hero>
+              <title>Houston, we have a problem.</title>
+              <tagline></tagline>
+            </hero>
+          </child>
+          <child container="sidebar">
+            <text editable="text">Sharks in a tornado. Sharknado. Simply stunning.</text>
+            <text editable="text">Have you ever sucked feet for weed?</text> 
+          </child>
+        </main_and_sidebar>
+
+        <text editable="text">Sharks in a tornado. Sharknado. Simply stunning.</text>
+        <text editable="text">Have you ever sucked feet for weed?</text>
+        <text editable="text">That pet store's got everything we need. Except for piranhas.</text>
+        <text editable="text">My life is as good as an Abba song. It’s as good as Dancing Queen.</text>
+        <text editable="text">See what happens when you find a stranger in the alps?</text>
+
+      </child>
+    </column>
+
+  </div>
+
+
+  <!-- script to parse and render the template -->
+  <script>
+    doc.addDesign(design.bootstrap.snippets, design.bootstrap.config)
+
+    doc.kickstart = function(dest, html) {
+
+      function processChild(parent, child) {
+        child.each(function(i) {
+          child = this;
+          var tagName = $(child).prop('tagName');
+          if(tagName) {
+            tagName = tagName.toLowerCase() 
+
+            if(tagName == "child") {
+              var children = $(child).children();
+              children.each(function() {
+                var subchild = this;
+                var subchildTagName = $(subchild).prop('tagName');
+                if(subchildTagName) {
+                  subchildTagName = subchildTagName.toLowerCase();
+
+                  // Create snippet and set content if no children
+                  var snippet = doc.create("bootstrap." + subchildTagName);
+                  var text = $(subchild).clone().children().remove().end().text();
+                  if(text.trim() != "") {
+                    var editable = $(subchild).attr('editable');
+                    if(editable) {
+                      snippet.set(editable, text);
+                    }
+                  }
+
+                  // Append to document
+                  var container = $(child).attr('container') || 'default';
+                  parent.append(container, snippet);
+                  processChild(snippet, $(subchild).children());
+
+                }
+              })
+            }
+
+            else {
+              // Set content of snippet
+              parent.set(tagName, $(child).html());
+
+            }
+            
+          }
+          
+        })
+        
+      }
+
+      $($.parseHTML(html)).each(function() {
+        var tagName = $(this).prop('tagName');
+        if(tagName) {
+          var row = dest.add("bootstrap." + tagName.toLowerCase());
+          processChild(row, $(this).children());
+        }
+      });
+
+    }
+ 
+    $(document).ready(function() {
+
+      var content = $('body > div').html();
+      var json = doc.stash.get();
+      doc.loadDocument({ json: json });
+
+      doc.ready(function() {
+
+        if (!json) {
+
+          // parse the template and kick everything off
+          doc.kickstart(doc, content)  
+
+        }
+
+      });
+
+      
+    });
+  </script>
+
+</body>
+</html>
