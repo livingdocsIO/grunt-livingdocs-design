@@ -1,0 +1,134 @@
+<html>
+<head>
+  <title>Emmet Documentation</title>
+
+
+    <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link rel="stylesheet" href="/css/livingdocs.css">
+
+    <!-- load design css (and fonts) -->
+    <script src="/js/vendor/jquery-1.9.js"></script>
+
+
+    <!-- dependencies of livingdocs-engine -->
+    <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+    <script src="/js/vendor/store/store.js"></script>
+    <script src="/js/vendor/editableJS/editable.js"></script>
+    <script src="/designs/bootstrap/design.js"></script>
+    <script src="/js/livingdocs_engine.js"></script>
+</head>
+<body>
+
+  <!-- Template 1
+       First example of Lukas.
+       Here snippets don't distinguish to editables and containers.
+       Lukas proposed something like comparing html to find out wether it's a snippet or editable.
+  -->
+  <column>
+    <hero>
+      <title>Memorable Movie Lines</title>
+      <tagline>Top 76 best lines from movies you never watched</tagline>
+    </hero>
+
+    <text>Sharks in a tornado. Sharknado. Simply stunning.</text>
+    <text>Have you ever sucked feet for weed?</text>
+    <text>That pet store's got everything we need. Except for piranhas.</text>
+    <text>My life is as good as an Abba song. It’s as good as Dancing Queen.</text>
+    <text>See what happens when you find a stranger in the alps?</text>
+  </colum>
+
+
+
+  <!-- Template 2
+    This is a solution that was hacked together by myself.
+    With this solution, html tags are not working. But doc-containers are recognized properly.
+  -->
+    <column>
+      <child>
+
+        <main_and_sidebar>
+          <child container="main">
+            <hero>
+              <title>Houston, we have a problem.</title>
+              <tagline></tagline>
+            </hero>
+          </child>
+          <child container="sidebar">
+            <text editable="text">Sharks in a tornado. Sharknado. Simply stunning.</text>
+            <text editable="text">Have you ever sucked feet for weed?</text> 
+          </child>
+        </main_and_sidebar>
+
+        <text editable="text">Sharks in a tornado. Sharknado. Simply stunning.</text>
+        <text editable="text">Have you ever sucked feet for weed?</text>
+        <text editable="text">That pet store's got everything we need. Except for piranhas.</text>
+        <text editable="text">My life is as good as an Abba song. It’s as good as Dancing Queen.</text>
+        <text editable="text">See what happens when you find a stranger in the alps?</text>
+
+      </child>
+    </column>
+
+
+
+  <!-- 
+    Template 3
+    If we want something without the child dom, we have to give the tags an attribute.
+    Some problems may occur if there are editables with uppercase/lowercase characters. DOM normaly returns tags in uppercase
+  -->
+    <column>
+      <default doc-container>
+        <main_and_sidebar>
+          <main doc-container>
+            <hero>
+              <title editable>Houston, we have a problem.</title>
+              <tagline editable></tagline>
+            </hero>
+          </main>
+          <sidebar doc-container>
+            <text><text editable>Sharks in a tornado. Sharknado. Simply stunning.</text></text>
+            <text><text editable>Have you ever sucked feet for weed?</text></text> 
+          </sidebar>
+        </main_and_sidebar>
+
+        <text><text editable>Sharks in a tornado. Sharknado. Simply stunning.</text></text>
+        <text><text editable>Have you ever sucked feet for weed?</text></text>
+        <text><text editable>That pet store's got everything we need. Except for piranhas.</text></text>
+        <text><text editable>My life is as good as an Abba song. It’s as good as Dancing Queen.</text></text>
+        <text><text editable>See what happens when you find a stranger in the alps?</text></text>
+      </default>
+    </column>
+
+
+
+  <!-- 
+    Template 4
+    If we don't want to rely on tags, we have to use attributes to name the snippets and containers.
+    This solution will work in each scenario.
+  -->
+    <snippet name="column">
+      <container name="default">
+        <snippet name="main_and_sidebar">
+          <container name="main">
+            <snippet name="hero">
+              <editable name="title">Houston, we have a problem.</editable>
+              <editable name="tagline"></editable>
+            </snippet>
+          </container>
+          <container name="sidebar">
+            <snippet name="text"><editable name="text">Sharks in a tornado. Sharknado. Simply stunning.</editable></snippet>
+            <snippet name="text"><editable name="text">Have you ever sucked feet for weed?</editable></snippet> 
+          </container>
+        </snippet>
+
+        <snippet name="text"><editable name="text">Sharks in a tornado. Sharknado. Simply stunning.</text></snippet>
+        <snippet name="text"><editable name="text">Have you ever sucked feet for weed?</text></snippet>
+        <snippet name="text"><editable name="text">That pet store's got everything we need. Except for piranhas.</text></snippet>
+        <snippet name="text"><editable name="text">My life is as good as an Abba song. It’s as good as Dancing Queen.</text></snippet>
+        <snippet name="text"><editable name="text">See what happens when you find a stranger in the alps?</text></snippet>
+      </container>
+    </snippet>
+
+
+
+</body>
+</html>
