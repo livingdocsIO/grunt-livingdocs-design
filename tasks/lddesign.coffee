@@ -23,6 +23,13 @@ path = require("path")
 cheerio = require("cheerio")
 htmlmin = require("html-minifier")
 
+
+String::toCamelCase = ->
+  @replace /^([A-Z])|[\s-_](\w)/g, (match, p1, p2, offset) ->
+    return p2.toUpperCase()  if p2
+    p1.toLowerCase()
+
+
 module.exports = (grunt) ->
 
   
@@ -58,8 +65,9 @@ module.exports = (grunt) ->
   compileDesign = (src, dest, files, options) ->
     designFolder = options.design
   
-
-    # Check existence of all directories and files
+    #
+    # Check existence of all directories and files that are required
+    #
     requiredResources = [
       name: ''
       type: 'design'
@@ -76,8 +84,9 @@ module.exports = (grunt) ->
         grunt.fail.warn('The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.')
 
 
-   
-    # Read snippets from directory, and store them in string variable
+    #
+    # create design object for snippets, groups and configuration
+    #
     design =
       snippets: {}
       groups: {}
@@ -85,42 +94,52 @@ module.exports = (grunt) ->
         encoding: 'utf8'
       )
 
+    # a design config file must contain a namespace, cancel grunt task
     unless design.config.namespace
       grunt.fail.fatal('The design ' + designFolder + ' contains a config file which has no namespace.')
     
+
     # warn if a design contains no snippets
     unless files.length
       grunt.fail.warn('The design "' + designFolder + '" has no snippets')
       writeDesignConfig(design, dest)
     
 
-
+    #
     # iterate through file array and process the snippets, store them in templates.js file
+    #
     compiledSnippets = 0
     files.forEach (snippet) ->
 
       snippetPath = snippet.replace(src + '/' + options.snippetsDirectory + '/', '').split('/')
-      snippetFileName = snippetPath[snippetPath.length - 1].replace('.html', '')
+      snippetName = snippetPath[snippetPath.length - 1].replace('.html', '')
+      snippetName = snippetName.toCamelCase()
 
       if(snippetPath.length > 2)
         grunt.fail.warn('Design "' + designFolder + '", Snippet "' + snippetPath.join('/') + '": Snippets can only be only be nested in one directory.')
 
+
       addSnippetToGroup = (group, snippet) ->
         groupConfigFile = path.join(src, options.snippetsDirectory, group, 'config.json')
+
+        # create group if it doesn't exist
         unless design.groups[group]
           if grunt.file.exists(groupConfigFile)
             design.groups[group] = grunt.file.readJSON(groupConfigFile, { encoding: 'utf8' })
           else
             design.groups[group] = {name: group}
         
+        # add snippet to group if snippets array already exists 
         if design.groups[group]['snippets']
-          design.groups[group]['snippets'][design.groups[group]['snippets'].length] = snippetFileName
+          design.groups[group]['snippets'][design.groups[group]['snippets'].length] = snippetName
+
+        # create snippet array if it doesn't exist 
         else
-          design.groups[group]['snippets'] = [snippetFileName]
+          design.groups[group]['snippets'] = [snippetName]
 
 
       if snippetPath.length > 1
-        addSnippetToGroup(snippetPath[0], snippetPath[1])
+        addSnippetToGroup(snippetPath[0], snippetPath[snippetPath.length - 1])
      
 
       data = grunt.file.read(snippet,
@@ -133,16 +152,12 @@ module.exports = (grunt) ->
       # create snippet object using config
       snippetObject = JSON.parse($(options.configurationElement).html()) || {}
       
-      # Disallow '-' in snippetFileName
-      unless snippetFileName.indexOf('-') == -1
-        grunt.fail.warn('Snippet "' + snippet + '" in the design "' + designFolder + '" contains the character "-" which is not allowed in a snippet namespace')
-      
       # store snippet config in design
-      design.snippets[snippetFileName] = snippetObject
+      design.snippets[snippetName] = snippetObject
       
       # push snippet html into snippet object, remove config and minify the html
       $(options.configurationElement).remove()
-      design.snippets[snippetFileName]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetFileName })
+      design.snippets[snippetName]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetName })
       
       # Check if everything is compiled, close the templates file and save it;
       compiledSnippets += 1
@@ -154,10 +169,8 @@ module.exports = (grunt) ->
 
   # grunt task to compile all snippets
   grunt.registerMultiTask 'lddesigns', 'Compile snippets to livingdocs-engine template', ->
-    #var config = grunt.config(this.name);
     options = @options()
     designs = @files
-    countDesigns = designs.length || 0
     
     designs.forEach (file, i) ->
       src = designs[i].src[0]

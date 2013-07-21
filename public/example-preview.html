@@ -73,6 +73,7 @@
                   // Create snippet and set content if no children
                   var snippet = doc.create("bootstrap." + subchildTagName);
                   var text = $(subchild).clone().children().remove().end().text();
+                  console.log(snippet);
                   if(text.trim() != "") {
                     var editable = $(subchild).attr('editable');
                     if(editable) {
