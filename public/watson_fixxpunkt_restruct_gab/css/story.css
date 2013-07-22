@@ -1,10 +1,7 @@
 /* wrappers */
 /* ======== */
 .wrapper {
-	width:1140px;
-	margin:0 auto;
 	overflow:visible;
-	top:-2px;
 }
 
 
