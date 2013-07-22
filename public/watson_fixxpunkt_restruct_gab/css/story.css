@@ -1,4 +1,11 @@
-
+/* wrappers */
+/* ======== */
+.wrapper {
+	width:1140px;
+	margin:0 auto;
+	overflow:visible;
+	top:-2px;
+}
 
 
 
@@ -22,13 +29,26 @@
 	margin-bottom:10px;
 }
 
-.story h3.uppertitle /*Conflict*/ {
+.story h3.uppertitle {
 	font-size:1.6em; /* 16px / 10px */
 	font-weight:normal;
 	text-transform:uppercase;
 	width:60%;
 	margin-bottom:10px;
 }
+
+.story h4.tweentitle {
+	font-size:2.2em /* 20px / 10px */;
+	line-height: 1.3em;
+    margin-bottom: 10px;
+	font-weight:bold;
+}
+
+/*.story h5 {
+	font-size:2em; /* 20px / 10px *
+	font-weight:normal;
+	margin-bottom:10px;
+}*/
 
 .story p.date,
 .story p.author {
@@ -52,11 +72,6 @@
 	float:left;
 }
 
-.story h5 {
-	font-size:2em; /* 20px / 10px */
-	font-weight:normal;
-	margin-bottom:10px;
-}
 
 .story p {
 	-moz-hyphens: auto;
@@ -71,13 +86,6 @@
 	font-size:1.8em /* 18px / 10px */;
 	line-height:1.3em;
 	margin-bottom:20px;
-}
-
-h4, .story p.half_title /*Conflict*/ {
-	font-size:2.2em /* 20px / 10px */;
-	line-height: 1.3em;
-    margin-bottom: 10px;
-	font-weight:bold;
 }
 
 .story ol {
@@ -97,12 +105,9 @@ h4, .story p.half_title /*Conflict*/ {
 /* default insert (hanging to the right) */
 /* reset insert values */
 .story .insert {
-	margin:0 0 20px 2%;
-	padding:0;
-	width:56%;
-	float:right;
-	font-size:inherit;
-	line-height:auto;
+	width:60%;
+	margin:0 0 10px 0;
+	float:none;
 }
 
 /* reset insert values */
@@ -125,15 +130,24 @@ h4, .story p.half_title /*Conflict*/ {
     margin-bottom: 5px;
 }
 
-/* fat full width */
-.story .insert.fat_full {
+
+.story .insert.cinemascope {
 	position:relative;
-	width:117.6%;
-	left:6%;
-	margin:0px 0% 20px 0%;
+	width:100%;
+	left:0;
+	margin:0px 0% 25px 0%;
 }
 
-.story .insert.fat_full p.caption {
+
+/* fat full width */
+.story .insert.jumbo {
+	position:relative;
+	width:117.5%;
+	left:-11.7%;
+	margin:0px 0% 25px 0%;
+}
+
+.story .insert.jumbo p.caption {
 	background-color: rgba(255, 255, 255, 0.8);
     bottom: 0;
     color: #222222;
@@ -143,6 +157,12 @@ h4, .story p.half_title /*Conflict*/ {
     position: absolute;
     width: auto;
 }
+
+.story .insert.jumbo p.source {
+	float: right;
+	margin-right: 5px;
+}
+
 /* full width */
 .story .insert.full {
 	width:100%;
@@ -158,22 +178,26 @@ h4, .story p.half_title /*Conflict*/ {
 
 /* right side only */
 .story .insert.side {
+	float: right;
 	width:37%;
 	margin:0 0 10px 2%;
 }
 
 /* left side only */
-.story .insert.maincol {
-	width:60%;
-	margin:0 0 10px 0;
-	float:none;
+.story .insert.right {
+	margin:0 0 20px 2%;
+	padding:0;
+	width:56%;
+	float:right;
+	font-size:inherit;
+	line-height:auto;
 }
 
-.story .insert.maincol.block {
+.story .insert.block {
 	display:inline-block;
 }
 
-.story .insert.maincol.shift {
+.story .insert.shift {
 	padding-left:10%;
 }
 
@@ -205,13 +229,13 @@ h4, .story p.half_title /*Conflict*/ {
 	
 	.story p,
 	.story h3,
-	.story .insert.maincol {
+	.story .insert {
 		width:80%;
 	}
 	
-	.story .insert.fat_full {
-		width:104% !important;
-		left:2% !important;
+	.story .insert.jumbo {
+		width:104.5% !important;
+		left:-15px !important;
 	}
 }
 
@@ -242,7 +266,7 @@ h4, .story p.half_title /*Conflict*/ {
 		display:block !important;
 	}
 	
-	.story .insert {
+	.story .insert.right {
 		margin:0 0 10px 0px !important;
 	}
 	
@@ -250,14 +274,14 @@ h4, .story p.half_title /*Conflict*/ {
 		display:none !important;
 	}
 	
-	.story .insert.fat_full {
-		width:111% !important;
-		left:-5.5% !important;
+	.story .insert.jumbo {
+		width:107.5% !important;
+		left:-15px !important;
 	}
 	
-	.story .insert.fat_full .caption,
-	.story .insert.fat_full .source {
-		padding-left:5.5%;
+	.story .insert.jumbo .caption,
+	.story .insert.jumbo .source {
+		padding-left:1%;
 	}
 	
 	.story .insert.commercial {
