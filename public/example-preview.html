@@ -20,36 +20,37 @@
 <body>
 
   <!-- document template with content to easily preview and test a design -->
-    <hero>
-      <title>Snippet outside container</title>
-      <tagline>Yep, it works</tagline>
-    </hero>
+  <hero>
+    <title>Snippet outside container</title>
+    <tagline>Yep, it works</tagline>
+  </hero>
 
-    <column>
-      <default>
-        <main-and-sidebar>
-          <main>
-            <hero>
-              <title>Houston, we have a problem.</title>
-              <tagline>Test</tagline>
-            </hero>
-          </main>
-          <sidebar>
-            <text>Sharks in a tornado. Sharknado. Simply stunning.</text>
-            <text>Have you ever sucked feet for weed?</text> 
-          </sidebar>
-        </main-and-sidebar>
+  <column>
+    <default>
+      <main-and-sidebar>
+        <main>
+          <hero>
+            <title>Houston, we have a problem.</title>
+            <tagline>Test</tagline>
+          </hero>
+        </main>
+        <sidebar>
+          <text>Sharks in a tornado. Sharknado. Simply stunning.</text>
+          <text>Have you ever sucked feet for weed?</text> 
+        </sidebar>
+      </main-and-sidebar>
 
-        <text>Sharks in a tornado. Sharknado. Simply stunning.</text>
-        <text>Have you ever sucked feet for weed?</text>
-        <text>That pet store's got everything we need. Except for piranhas.</text>
-        <text>My life is as good as an Abba song. It’s as good as Dancing Queen.</text>
-        <text>See what happens when you find a stranger in the alps?</text>
-      </default>
-    </column>
+      <text>Sharks in a tornado. Sharknado. Simply stunning.</text>
+      <text>Have you ever sucked feet for weed?</text>
+      <text>That pet store's got everything we need. Except for piranhas.</text>
+      <text>My life is as good as an Abba song. It’s as good as Dancing Queen.</text>
+      <text>See what happens when you find a stranger in the alps?</text>
+    </default>
+  </column>
 
 
 
+  
   <!-- script to parse and render the template -->
   <script>
  
@@ -76,64 +77,48 @@
     doc.kickstart = function(html) {
 
       var content = $(html).children().not('script');
+      $(html).html('<div class="doc-section"></div>');
 
-      $('body').html($(document.createElement('div')).addClass('doc-section'));
-      var templates = doc.getDesign().templates;
-      
       doc.loadDocument();
       doc.ready(function() {
 
         content.each(function() {
-          var element = this;
-          var row = doc.add("bootstrap." + snippetName(element));
-          if(row.hasContainers()) {
-            parseContainers(row, $(element).children(getContainers(row).join(',')));
-          }
-
-          if(row.hasEditables()) {
-            setEditables(row, element);
-          }
+          var row = doc.add(snippetName(this));
+          parseContainers(row, this);
+          setEditables(row, this);
         })
 
         function parseContainers(parent, data) {
-          data.each(function() {
-            var element = this;
-            var containerName = snippetName(element);
+          if(parent.hasContainers()) {
+            var containers = $(data).children(getContainers(parent).join(','));
+            containers.each(function() {
+              var containerName = snippetName(this);
 
-            $(element).children().each(function() {
-              var element = this;
-              parseSnippets(parent, containerName, this)
-            })
-          });
+              $(this).children().each(function() {
+                parseSnippets(parent, containerName, this)
+              })
+            });
+          }
         }
 
         function parseSnippets(parent, region, data) {
           $(data).each(function() {
-            var element = this;
-            var editableName = snippetName(element);
-            
-            var snippet = doc.create("bootstrap." + editableName);
-            if(snippet.hasEditables()) {
-              setEditables(snippet, element);
-            }
+            var snippet = doc.create(snippetName(this));
+            parent.append(region, snippet);
 
-            var row = parent.append(region, snippet);
-            if(snippet.hasContainers()) {
-              parseContainers(snippet, $(element).children(getContainers(snippet).join(',')));
-            }
+            setEditables(snippet, this);
+            parseContainers(snippet, this);
           })
         }
 
         function setEditables(parent, data) {
-          for(var key in parent.editables) {
-            var children = $(data).children().length;
-            parent.set(key, null);
+          if(parent.hasEditables()) {
+            for(var key in parent.editables) {
+              var children = $(data).children().length;
+              parent.set(key, null);
 
-            if(!children) {
-              parent.set(key, $(data).html());
-            }
-            else {
-              parent.set(key, $(data).children(key + ':first').html());
+              if(!children) parent.set(key, $(data).html());
+              else parent.set(key, $(data).children(key + ':first').html());
             }
           }
         }
@@ -146,7 +131,9 @@
     $(document).ready(function() {
 
       doc.addDesign(design.bootstrap.snippets, design.bootstrap.config);
-      doc.kickstart(document.body);       
+      
+      // use a jQuery selector as destination
+      doc.kickstart('body');
 
     });
   </script>
