@@ -66,7 +66,7 @@ grunt.initConfig
       tasks: ['default']
       options:
         nospawn: true
-        livereload: true
+        livereload: 35739
 
 
   moveToDist:
