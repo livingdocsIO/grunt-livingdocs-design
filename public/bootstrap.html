@@ -31,12 +31,10 @@
       doc.addDesign(design.bootstrap.snippets, design.bootstrap.config);
 
       $(document).ready(function() {
-        var json = doc.stash.get();
-        doc.loadDocument({ json: json });
+        doc.loadDocument();
 
         doc.ready(function() {
 
-          if (!json) {
             var row = doc.add("bootstrap.mainAndSidebar");
             row.append("main", doc.create("bootstrap.hero"));
             row.append("sidebar", doc.create("bootstrap.title"));
@@ -45,7 +43,6 @@
             row.append("main", doc.create("bootstrap.info"));
             row.append("main", doc.create("bootstrap.button"));
             
-          }
         });
 
       });
