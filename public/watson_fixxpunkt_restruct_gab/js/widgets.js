@@ -55,7 +55,10 @@ $(document).ready(function() {
 		
 			show_result:function() {
 				var current_poll = $(this).parents(".widget.poll");
-				var current_results = [64,30,6];
+				var current_results = [];
+				for (var counter=0; counter < current_poll.find("div.result .bubble").length; counter++) {
+					current_results[counter] = parseInt ( current_poll.find("div.result .bubble").eq(counter).text() );
+				}
 				current_poll.find("div.answers").slideUp(500, 'swing', function(){
 					current_poll.find("div.result").slideDown(200, 'linear', function() {
 						poll.calculate_bubbles(current_poll, current_results);
@@ -65,7 +68,8 @@ $(document).ready(function() {
 			
 			calculate_bubbles:function(current_poll, current_results) {
 				var max_diameter = current_poll.width() / 2.5;
-				if ( max_diameter > current_poll.height() / current_results.length && !current_poll.parents(".insert").length ) max_diameter = current_poll.height() / current_results.length;
+				var max_height = ((current_poll.height()-current_poll.find(".result p").height()) / current_results.length)-30;
+				if ( max_diameter > max_height && !current_poll.parents(".insert").length ) max_diameter = max_height;
 				var max_area = max_diameter * max_diameter; /* in pixels */
 				var max_bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * max_diameter;
 				for (var counter=0; counter<current_results.length; counter++) {
