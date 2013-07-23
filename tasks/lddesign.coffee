@@ -140,6 +140,9 @@ module.exports = (grunt) ->
 
       if snippetPath.length > 1
         addSnippetToGroup(snippetPath[0], snippetPath[snippetPath.length - 1])
+      
+      else
+        addSnippetToGroup('all', snippetPath[0])
      
 
       data = grunt.file.read(snippet,
