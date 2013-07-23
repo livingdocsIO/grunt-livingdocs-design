@@ -26,7 +26,6 @@
   </hero>
 
   <column>
-    <default>
       <main-and-sidebar>
         <main>
           <hero>
@@ -45,7 +44,6 @@
       <text>That pet store's got everything we need. Except for piranhas.</text>
       <text>My life is as good as an Abba song. It’s as good as Dancing Queen.</text>
       <text>See what happens when you find a stranger in the alps?</text>
-    </default>
   </column>
 
 
@@ -53,87 +51,69 @@
   
   <!-- script to parse and render the template -->
   <script>
- 
-    function snippetName(element) {
-      var tagName = element.tagName;
-      if(tagName) {
-        return $.camelCase(tagName.toLowerCase())
-      }
-      return null;
-    }
 
-    function getEditables(snippet) {
-      if (!snippet.editables) return null; 
-      return Object.keys(snippet.editables);
-    }
-
-
-    function getContainers(snippet) {
-      if (!snippet.containers) return null; 
-      return Object.keys(snippet.containers);
-    }
-
-
-    function getChildNodes(data, tags) {
-      var nodes = [];
-      if(!data.childNodes) return null;
-
-      for (var i = data.childNodes.length - 1; i >= 0; i--) {
-        if (tags) {
-          if(tags.indexOf(snippetName(data.childNodes[i])) != -1) nodes.push(data.childNodes[i]);
-        }
-        else {
-          if (data.childNodes[i].nodeType == 1 && data.childNodes[i].tagName != 'SCRIPT') {
-            nodes.push(data.childNodes[i]); 
-          }
-        }
-      };  
-      return nodes;
-    }
-    
 
     doc.kickstart = function(html) {
 
       var content = $(html).children().not('script');
       $(html).html('<div class="doc-section"></div>');
       doc.loadDocument();
-      
 
       doc.ready(function() {
 
+        // Add all snippets in the dom to the document.
+        // Process all containers and editables if available in the snippet.
         content.each(function() {
-          var row = doc.add(snippetName(this));
+          var row = doc.add(toSnippetName(this));
           parseContainers(row, this);
           setEditables(row, this);
         })
 
-            
+        
+        // Convert a dom element into a camelCase snippetName      
+        function toSnippetName(element) {
+          return (element.tagName)? $.camelCase(element.tagName.toLowerCase()) : null;
+        }
+
+
+        // process all containers
         function parseContainers(parent, data) {
-          if(parent.hasContainers()) {
-            var containers = getChildNodes(data, getContainers(parent));
-            for (var i = containers.length - 1; i >= 0; i--) {
-              
-              var children = getChildNodes(containers[i]);
-              for (var c = children.length - 1; c >= 0; c--) {
-                parseSnippets(parent, snippetName(containers[i]), children[c])
-              };
-
+          var containers = (parent.containers)? Object.keys(parent.containers): [];
+          if (containers.length == 1 && containers.indexOf('default') != -1 && !$('default', data).length) {
+            var children = $(data).children();
+            for (var c = children.length - 1; c >= 0; c--) {
+              parseSnippets(parent, 'default', children[c])
             };
+            return;
           }
+
+          var elements = $(containers.join(','), data);
+          for (var i = elements.length - 1; i >= 0; i--) {
+            
+            var children = $(elements[i]).children();
+            for (var c = children.length - 1; c >= 0; c--) {
+              parseSnippets(parent, toSnippetName(elements[i]), children[c])
+            };
+
+          };
         }
 
+
+        // Add snippet and parse its containers and editables
         function parseSnippets(parent, region, data) {
-            var snippet = doc.create(snippetName(data));
-            parent.append(region, snippet);
-            setEditables(snippet, data);
-            parseContainers(snippet, data);
+          var snippet = doc.create(toSnippetName(data));
+          parent.prepend(region, snippet);
+          parseContainers(snippet, data);
+          setEditables(snippet, data);
         }
 
+
+        // Set all editables of a livingdocs element
         function setEditables(parent, data) {
           if(parent.hasEditables()) {
             for(var key in parent.editables) {
               parent.set(key, null);
-              var child = getChildNodes(data, [key])[0];
+              var child = $(key + ':first', data).get()[0];
               if(!child) parent.set(key, data.innerHTML);
               else parent.set(key, child.innerHTML);
             }
