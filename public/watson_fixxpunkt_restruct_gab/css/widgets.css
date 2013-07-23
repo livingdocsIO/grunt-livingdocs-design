@@ -11,27 +11,6 @@
 	position:relative;
 }
 
-/* sources and captions */
-/* ================== */
-p.source,
-p.caption {
-	font-size:1.6em /* 16px / 10px */;
-	color:#888;
-	width:auto !important;
-	padding:0;
-	margin:0 !important;
-}
-
-p.source {
-	font-style: italic;
-}
-
-.insert.fat_full p.source, 
-.insert.fat_full p.caption {
-	padding-left:9.2%;
-}
-
-
 /* interview */
 /* ========= */
 p.statement {
@@ -547,7 +526,26 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 
 
+/* magazine cover */
+/* =================== */
+.widget.cover {
+	height:0;
+	padding-top:56.25%; 
+	position:relative;
+	background-attachment:fixed;
+	background-position:center center;
+	background-size:cover;
+	background-repeat:no-repeat;
+}
 
+.widget.cover .covertitle{
+	position: absolute;
+	right: 0;
+	bottom:150px;
+	width: 40%;
+	/*background-color:rgba(0,0,0,0.5);*/
+	color: #FFF;
+}
 
 /* article list */
 /* ============ */
@@ -594,7 +592,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* ======== */
 .widget.imagebar img {
 	width:33%;
-	margin:0 0.16666% 4px 0.16666%;
+	margin: 0;
 }
 
 .widget.image p.caption {

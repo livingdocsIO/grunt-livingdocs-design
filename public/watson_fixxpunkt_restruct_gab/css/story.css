@@ -35,10 +35,12 @@
 }
 
 .story h4.tweentitle {
+	width: 60%;
 	font-size:2.2em /* 20px / 10px */;
 	line-height: 1.3em;
     margin-bottom: 10px;
 	font-weight:bold;
+	
 }
 
 /*.story h5 {
@@ -46,6 +48,36 @@
 	font-weight:normal;
 	margin-bottom:10px;
 }*/
+
+p.source,
+p.caption {
+	font-size:1.6em /* 16px / 10px */;
+	color:#888;
+	width:auto !important;
+	padding:0;
+	margin:0 !important;
+}
+
+p.caption.inside {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	height: 40px;
+}
+
+p.source {
+	font-style: italic;
+}
+
+.insert.jumbo p.source, 
+.insert.jumbo p.caption,
+.insert.cinemascope p.source, 
+.insert.cinemascope p.caption {
+	padding-left:0.5%;
+}
+
 
 .story p.date,
 .story p.author {
@@ -70,7 +102,7 @@
 }
 
 
-.story p {
+.story p, .story ul, .story ol, .story h4.tweentitle {
 	-moz-hyphens: auto;
 	-webkit-hyphens: auto;
 	-ms-hyphens: auto;
@@ -102,6 +134,7 @@
 /* default insert (hanging to the right) */
 /* reset insert values */
 .story .insert {
+	position: relative;
 	width:60%;
 	margin:0 0 10px 0;
 	float:none;
@@ -127,16 +160,16 @@
     margin-bottom: 5px;
 }
 
-
+/* cinemascope insert */
 .story .insert.cinemascope {
 	position:relative;
-	width:100%;
-	left:0;
+	width:117.5%;
+	left:-11.7%;
 	margin:0px 0% 25px 0%;
 }
 
 
-/* fat full width */
+/* jumbo insert */
 .story .insert.jumbo {
 	position:relative;
 	width:117.5%;
@@ -144,36 +177,20 @@
 	margin:0px 0% 25px 0%;
 }
 
-.story .insert.jumbo p.caption {
-	background-color: rgba(255, 255, 255, 0.8);
-    bottom: 0;
-    color: #222222;
-    margin: 0;
-    max-width: 58%;
-    padding: 10px 15px;
-    position: absolute;
-    width: auto;
-}
-
-.story .insert.jumbo p.source {
-	float: right;
-	margin-right: 5px;
-}
-
-/* full width */
+/* full insert */
 .story .insert.full {
 	width:100%;
 	margin:0px 0 20px 0;
 }
 
-/* fifty fifty */
+/* fifty-fifty insert */
 .story .insert.fifty_fifty {
 	width:49.5%;
 	margin:0 0.25% 10px 0.25%;
 	float:left;
 }
 
-/* right side only */
+/* side insert */
 .story .insert.side {
 	float: right;
 	width:37%;
