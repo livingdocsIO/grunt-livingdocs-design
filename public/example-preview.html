@@ -55,7 +55,7 @@
   <script>
  
     function snippetName(element) {
-      var tagName = $(element).prop('tagName');
+      var tagName = element.tagName;
       if(tagName) {
         return $.camelCase(tagName.toLowerCase())
       }
@@ -67,19 +67,38 @@
       return Object.keys(snippet.editables);
     }
 
+
     function getContainers(snippet) {
       if (!snippet.containers) return null; 
       return Object.keys(snippet.containers);
     }
-    
 
+
+    function getChildNodes(data, tags) {
+      var nodes = [];
+      if(!data.childNodes) return null;
+
+      for (var i = data.childNodes.length - 1; i >= 0; i--) {
+        if (tags) {
+          if(tags.indexOf(snippetName(data.childNodes[i])) != -1) nodes.push(data.childNodes[i]);
+        }
+        else {
+          if (data.childNodes[i].nodeType == 1 && data.childNodes[i].tagName != 'SCRIPT') {
+            nodes.push(data.childNodes[i]); 
+          }
+        }
+      };  
+      return nodes;
+    }
+    
 
     doc.kickstart = function(html) {
 
       var content = $(html).children().not('script');
       $(html).html('<div class="doc-section"></div>');
-
       doc.loadDocument();
+      
+
       doc.ready(function() {
 
         content.each(function() {
@@ -88,37 +107,35 @@
           setEditables(row, this);
         })
 
+            
         function parseContainers(parent, data) {
           if(parent.hasContainers()) {
-            var containers = $(data).children(getContainers(parent).join(','));
-            containers.each(function() {
-              var containerName = snippetName(this);
+            var containers = getChildNodes(data, getContainers(parent));
+            for (var i = containers.length - 1; i >= 0; i--) {
+              
+              var children = getChildNodes(containers[i]);
+              for (var c = children.length - 1; c >= 0; c--) {
+                parseSnippets(parent, snippetName(containers[i]), children[c])
+              };
 
-              $(this).children().each(function() {
-                parseSnippets(parent, containerName, this)
-              })
-            });
+            };
           }
         }
 
         function parseSnippets(parent, region, data) {
-          $(data).each(function() {
-            var snippet = doc.create(snippetName(this));
+            var snippet = doc.create(snippetName(data));
             parent.append(region, snippet);
-
-            setEditables(snippet, this);
-            parseContainers(snippet, this);
-          })
+            setEditables(snippet, data);
+            parseContainers(snippet, data);
         }
 
         function setEditables(parent, data) {
           if(parent.hasEditables()) {
             for(var key in parent.editables) {
-              var children = $(data).children().length;
               parent.set(key, null);
-
-              if(!children) parent.set(key, $(data).html());
-              else parent.set(key, $(data).children(key + ':first').html());
+              var child = getChildNodes(data, [key])[0];
+              if(!child) parent.set(key, data.innerHTML);
+              else parent.set(key, child.innerHTML);
             }
           }
         }
@@ -128,14 +145,13 @@
     }
 
 
-    $(document).ready(function() {
 
-      doc.addDesign(design.bootstrap.snippets, design.bootstrap.config);
-      
-      // use a jQuery selector as destination
-      doc.kickstart('body');
+    doc.addDesign(design.bootstrap.snippets, design.bootstrap.config);
+    
+    // use a jQuery selector as destination
+    doc.kickstart('body');
 
-    });
+
   </script>
 
 </body>
