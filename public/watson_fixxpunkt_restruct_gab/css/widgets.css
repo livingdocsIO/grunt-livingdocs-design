@@ -165,37 +165,6 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 }
 
 
-
-
-
-
-/* fat_full header image */
-/* ===================== */
-.full-width-container {
-	position:relative;
-	min-height:7em; /* 70px / 10px */
-}
-
-.full-width-container p.caption {
-	position:absolute;
-	bottom:0;
-	background-color:rgba(255,255,255,0.8);
-	color:#222222;
-	padding:10px 15px;
-	max-width:58%; /* 60% - 2% */
-	width:auto;
-	margin:0;
-}
-
-.full-width-container img {
-	width:100%;
-}
-
-
-
-
-
-
 /* videos */
 /* ====== */
 .widget.video {
@@ -530,7 +499,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* =================== */
 .widget.cover {
 	height:0;
-	padding-top:56.25%; 
+	padding-top:60%; 
 	position:relative;
 	background-attachment:fixed;
 	background-position:center center;
@@ -540,8 +509,8 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 .widget.cover .covertitle{
 	position: absolute;
-	right: 0;
-	bottom:150px;
+	right: 2%;
+	bottom:8%;
 	width: 40%;
 	/*background-color:rgba(0,0,0,0.5);*/
 	color: #FFF;
@@ -590,8 +559,17 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* imagebar */
 /* ======== */
+.widget.imagebar {
+	width:100%;
+}
+
+.widget.imagebar .pic {
+	display: inline-block;
+	width: 33%;
+}
+
 .widget.imagebar img {
-	width:33%;
+	width: 100%;
 	margin: 0;
 }
 
@@ -606,6 +584,12 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	margin:0;
 }
 
+/* imagebar 2 spalten */
+/* ======== */
+.widget.imagebar.twopics .pic {
+	display: inline-block;
+	width: 49.77777%;
+}
 
 /* nur zum test */
 /* ============ */
@@ -639,12 +623,35 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	/* imagebar */
 	/* ============ */
 	.widget.imagebar img {
-		width:49.6%;
+		width:100%;
 		margin:0 0.2% 2px 0.2%;
 	}
+	
+	/* imagebar twopics*/
+	/* ============ */
+	.widget.imagebar.twopics .pic {
+		width: 49.77777%;
+	}
+	
+	/* magazine cover */
+	/* ======== */
+	.widget.cover {
+		background-attachment:scroll;
+		background-size:cover;
+		padding-top: 70%;
+	}
+	
+	.widget.cover .covertitle{
+		bottom:6%;
+		right: 2%;
+		width: 60%;
+	}
+
+	.widget.cover .covertitle h2.maintitle {
+		font-size: 6em;
+	}
 }
-
-
+	
 
 
 
@@ -685,16 +692,29 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	
 	/* imagebar */
 	/* ======== */
+	.widget.imagebar .pic {
+		width: 100%;
+	}
 	.widget.imagebar img {
 		width:100%;
 		margin: 0 0 2px 0;
 	}
 	
-	/* quotes */
-	/* ====== */
-	p.quote { font-size:3.5714em !important; } /* 25px / 7px */
+	/* imagebar twopics */
+	/* ======== */
+	.widget.imagebar.twopics .pic {
+		width: 100%;
+	}
 
-}
+	/* magazine cover */
+	/* ======== */
+	.widget.cover .covertitle{
+		bottom:4%;
+	}
+
+	.widget.cover .covertitle h2.maintitle {
+		font-size: 4.5em;
+	}
 
 
 
