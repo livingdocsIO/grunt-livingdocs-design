@@ -36,6 +36,7 @@ var dashboard = (function(){
 				dashboard.toggle_dashboard();
 			});
 			
+			/* focussing a field */
 			$(".dashboard .field").focus(function(){
 				var fields = $(".dashboard").find('.field');
 				for (var counter=0; counter < fields.length; counter++) {
@@ -49,18 +50,22 @@ var dashboard = (function(){
 				}
 			});
 			
+			/* focussing a password field */
 			$(".dashboard .field.password").focus(function(){
 				$(this).attr('type', 'password');
 			});
 			
+			/* changing forms */
 			$(".dashboard .register.link a, .dashboard .login.link a").click(function(){
 				$(".dashboard .details").slideToggle();
 				$(".dashboard .link").slideToggle();
 			});
 			
+			/* check form */
 			$(".dashboard form").submit(function(){
 				var fields = $(this).find('.field');
 				var missing_vals = 0;
+				/* check for empty fields or fields with default values */
 				for (var counter=0; counter < fields.length; counter++) {
 					if ( ( fields.eq(counter).val() == "" ) || ( fields.eq(counter).val() == fields.eq(counter).attr("data-default") ) ) {
 						if ( fields.eq(counter).hasClass("password") ) fields.eq(counter).attr("type", "text");
@@ -72,6 +77,14 @@ var dashboard = (function(){
 						fields.eq(counter).removeClass("error");
 					}
 				}
+				/* check for identical passwords */
+				var fields = $(this).find('.field.password');
+				if ( fields.length == 2 && ( fields.eq(0).val() != fields.eq(1).val() ) ) {
+					fields.addClass('error');
+					missing_vals++;
+				}
+				
+				/* abort or submit form */
 				if (missing_vals) return false;
 				else return true;
 			});
