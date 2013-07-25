@@ -166,17 +166,8 @@ p.source {
     width: 96% !important;
 }
 
-/* cinemascope insert */
-.story .insert.cinemascope {
-	position:relative;
-	width:117.5%;
-	left:-11.7%;
-	margin:0px 0% 25px 0%;
-}
-
-
-/* jumbo insert */
-.story .insert.jumbo {
+/*jumbo insert – cinemascope insert */
+.story .insert.jumbo, .story .insert.cinemascope {
 	position:relative;
 	width:117.5%;
 	left:-11.7%;
@@ -247,8 +238,8 @@ p.source {
 	}
 	
 	.story {
-		margin-left:15px;
-		margin-right:15px;
+		margin-left:4%;
+		margin-right:4%;
 		width:auto;
 	}
 	
@@ -266,12 +257,12 @@ p.source {
 	.story .insert.jumbo .source,
 	.story .insert.cinemascope .caption,
 	.story .insert.cinemascope .source {
-		padding-left:15px;
+		padding-left:4%;
 	}
 	
 	.story .insert.jumbo, .story .insert.cinemascope {
-		width:104.5% !important;
-		left:-15px !important;
+		width:110% !important;
+		left:-5% !important;
 	}
 }
 
@@ -308,8 +299,6 @@ p.source {
 		position: static;
 	}
 	
-
-	
 	.story .insert.hide_on_mobile {
 		display:none !important;
 	}
@@ -321,11 +310,6 @@ p.source {
 	
 	.story .insert.side {
 		margin:0 0 10px 0;
-	}
-	
-	.story .insert.jumbo, .story .insert.cinemascope {
-		width:109.5% !important;
-		left:-15px !important;
 	}
 	
 	.story .insert.commercial {

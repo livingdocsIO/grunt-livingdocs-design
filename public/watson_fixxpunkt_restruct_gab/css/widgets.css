@@ -563,9 +563,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	width:100%;
 }
 
-.widget.imagebar .pic {
-	display: inline-block;
-	width: 33%;
+.widget.imagebar .imagebox {
+	width: 32.83333%;
+	margin-right: 0.5%;
+	float: left;
 }
 
 .widget.imagebar img {
@@ -586,9 +587,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* imagebar 2 spalten */
 /* ======== */
-.widget.imagebar.twopics .pic {
-	display: inline-block;
-	width: 49.77777%;
+.widget.imagebar.twopics .imagebox {
+	float: left;
+	width: 49.5%;
+	margin-right: 0.5%;
 }
 
 /* nur zum test */
@@ -622,15 +624,23 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 	/* imagebar */
 	/* ============ */
+	.widget.imagebar .imagebox:last-child {
+		width: 33.33333%;
+		margin-right: 0%;
+		float: left;
+	}
+
 	.widget.imagebar img {
 		width:100%;
-		margin:0 0.2% 2px 0.2%;
+		margin:0 0 2px 0;
 	}
 	
-	/* imagebar twopics*/
-	/* ============ */
-	.widget.imagebar.twopics .pic {
-		width: 49.77777%;
+	/* imagebar 2 spalten */
+	/* ======== */
+	.widget.imagebar.twopics .imagebox:last-child {
+		float: left;
+		width: 50%;
+		margin-right: 0%;
 	}
 	
 	/* magazine cover */
@@ -692,7 +702,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	
 	/* imagebar */
 	/* ======== */
-	.widget.imagebar .pic {
+	.widget.imagebar .imagebox, .widget.imagebar .imagebox:last-child {
 		width: 100%;
 	}
 	.widget.imagebar img {
@@ -702,7 +712,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	
 	/* imagebar twopics */
 	/* ======== */
-	.widget.imagebar.twopics .pic {
+	.widget.imagebar.twopics .imagebox, .widget.imagebar.twopics .imagebox:last-child {
 		width: 100%;
 	}
 
