@@ -72,7 +72,8 @@
 	width:60%;
 }
 
-.dashboard .segment .register.details {
+.dashboard .segment .register.details,
+.dashboard .segment .login.link {
 	display:none;
 }
 

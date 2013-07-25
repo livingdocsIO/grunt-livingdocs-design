@@ -53,9 +53,9 @@ var dashboard = (function(){
 				$(this).attr('type', 'password');
 			});
 			
-			$(".dashboard .register.link a").click(function(){
-				$(".dashboard .register.link").slideUp();
-				$(".dashboard .register.details").slideDown();
+			$(".dashboard .register.link a, .dashboard .login.link a").click(function(){
+				$(".dashboard .details").slideToggle();
+				$(".dashboard .link").slideToggle();
 			});
 			
 			$(".dashboard form").submit(function(){
