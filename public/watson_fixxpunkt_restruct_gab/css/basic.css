@@ -72,6 +72,10 @@ input.lightfont, a.button.lightfont {
 	color:#ffffff;
 }
 
+input.error {
+	background-color:#f40f97;
+}
+
 input.button,
 a.button {
 	background-color:#009ccc;
