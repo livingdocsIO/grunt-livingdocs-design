@@ -39,7 +39,7 @@ grunt.initConfig
       files: [
         expand: true
         cwd: './'
-        src:['designs/**/assets/**', 'designs/**/img/**', 'designs/**/images/**', 'designs/**/media/**']
+        src:['designs/**/assets/**', 'designs/**/img/**', 'designs/**/images/**', 'designs/**/media/**', 'designs/**/preview.html']
         dest: '.tmp/'
         # exclude empty directories
         filter: (src) ->

@@ -22,14 +22,22 @@ app.use(function(err, req, res, next) {
 
 
 // Routes
-app.get('/designs/:design', function(req, res, next) {
-	res.sendfile('public/' + req.params.design + '.html');
-});
+app.get('/design/:design', getDesign);
+app.get('/designs/:design', getDesign);
 
-app.get('/designs/:design/*', function(req, res, next) {
+function getDesign(req, res, next) {
+	res.sendfile('public/' + req.params.design + '.html');
+};
+
+
+app.get('/design/:design/*', getDesignAssets);
+app.get('/designs/:design/*', getDesignAssets);
+
+function getDesignAssets(req, res, next) {
 	var path = req.params[0] ? 'designs/' + req.params.design + '/dist/' + req.params[0] : 'public/index.html';
 	res.sendfile(path);
-});
+}
+
 
 app.get('/*', function(req, res, next) {
 	var path = req.params[0] ? 'public/' + req.params[0] : 'public/index.html';

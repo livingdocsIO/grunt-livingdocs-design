@@ -64,14 +64,14 @@
         // Add all snippets in the dom to the document.
         // Process all containers and editables if available in the snippet.
         content.each(function() {
-          var row = doc.add(toSnippetName(this));
+          var row = doc.add(domElementToSnippetName(this));
           parseContainers(row, this);
           setEditables(row, this);
         })
 
         
         // Convert a dom element into a camelCase snippetName      
-        function toSnippetName(element) {
+        function domElementToSnippetName(element) {
           return (element.tagName)? $.camelCase(element.tagName.toLowerCase()) : null;
         }
 
@@ -79,7 +79,7 @@
         // process all containers
         function parseContainers(parent, data) {
           var containers = (parent.containers)? Object.keys(parent.containers): [];
-          if (containers.length == 1 && containers.indexOf('default') != -1 && !$('default', data).length) {
+          if (containers.length == 1 && containers.indexOf('default') != -1 && !$(data).children('default').length) {
             var children = $(data).children();
             for (var c = children.length - 1; c >= 0; c--) {
               parseSnippets(parent, 'default', children[c])
@@ -92,7 +92,7 @@
             
             var children = $(elements[i]).children();
             for (var c = children.length - 1; c >= 0; c--) {
-              parseSnippets(parent, toSnippetName(elements[i]), children[c])
+              parseSnippets(parent, domElementToSnippetName(elements[i]), children[c])
             };
 
           };
@@ -101,7 +101,7 @@
 
         // Add snippet and parse its containers and editables
         function parseSnippets(parent, region, data) {
-          var snippet = doc.create(toSnippetName(data));
+          var snippet = doc.create(domElementToSnippetName(data));
           parent.prepend(region, snippet);
           parseContainers(snippet, data);
           setEditables(snippet, data);
