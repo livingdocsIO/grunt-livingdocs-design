@@ -44,7 +44,7 @@ strong {
 
 /* form elements */
 /* ============= */
-input, a.button {
+input, a.button, textarea {
 	font-family:'Gudea', helvetica, arial, sans-serif;
 	font-size:1em;
 	border:0;
