@@ -71,19 +71,27 @@
 			
 			
 				<style type="text/css">
+				
+				
+				
+				
 					/* timeline */
 					/* ======== */
+					
+					/* one element */
 					.widget ul.timeline li {
 						position:relative;
 						padding-bottom:2.222em; /* 40px / 18px */
 					}				
-				
+					
+					/* ray to the left of the timeline */
 					.widget ul.timeline .ray {
 						width:13%;
 						display:inline-block;
 						vertical-align:top;
 					}
 					
+					/* thin grey line */
 					.widget ul.timeline .ray .line {
 						height:100%;
 						width:4px;
@@ -141,11 +149,30 @@
 						margin:0 auto;
 					}
 					
+					.widget ul.timeline li.highlight .ray .dot {
+						background-color:#f40f97;
+					}
+					
+					/* content area to the right of the timeline */
 					.widget ul.timeline .text {
 						width:85%;
 						display:inline-block;
 						vertical-align:top;
 					}
+					
+					/* entry header/name */
+					.widget ul.timeline .text .name {
+						font-weight:bold;
+						color:inherit;
+					}
+					
+					.widget ul.timeline li.highlight .text .name,
+					.widget ul.timeline li.highlight ul.timeline li.highlight .text .name {
+						background-color:#f40f97;
+						color:#ffffff;
+						padding:0 0.2em;
+					}
+					
 					/* nested timelines */
 					.widget ul.timeline ul.timeline {
 						font-size:inherit !important;
@@ -165,6 +192,12 @@
 						width:82%;
 					}
 					
+					.widget ul.timeline li.highlight ul.timeline .text .name {
+						background-color:inherit;
+						color:inherit;
+						padding:inherit;
+					}
+					
 					.widget ul.timeline ul.timeline li:last-child {
 						padding-bottom:0;
 					}
@@ -182,6 +215,10 @@
 						}
 					}
 					
+					
+					
+					
+					
 					/* talkback */
 					/* ======== */
 					
@@ -193,26 +230,36 @@
 						font-weight:bold;
 					}
 					
-					.widget.talkback .new_comment .pic {
+					.widget.talkback .new_comment .overview {
+						position:relative;
+					}
+					
+					.widget.talkback .new_comment .overview .pic {
 						width:11.7%; /* 13% (raysize in timeline) / 100% * 90* (picsize in timeline) */
 						-webkit-border-radius:50%;
 						border-radius:50%;
 					}
 					
-					.widget.talkback .new_comment .name {
-						padding-bottom:0.777em; /* 14px / 18px */
+					.widget.talkback .new_comment .overview .name {
 						padding-left:0.5em; /* 9px / 18px */
 						display:inline-block;
 					}
 					
-					.widget.talkback .new_comment .num_comments {
-						font-size:3.333em; /* 60px / 18px */
+					.widget.talkback .new_comment .overview .num_comments {
 						float:right;
+						font-size:3.333em; /* 60px / 18px */
 						background-image:url("media/img/main/icons/icon_comments.png");
 						background-size:auto 90%;
 						padding-right:1.1em;
 						background-repeat:no-repeat;
 						background-position:bottom right;
+						position:absolute;
+						bottom:0;
+						right:0;
+					}
+					
+					.widget.talkback .new_comment .comment {
+						margin-top:0.777em; /* 14px / 18px */
 					}
 					
 					.widget.talkback .new_comment .tools {
@@ -234,25 +281,7 @@
 						height:4em;
 					}
 					
-					/* main part */
-					.widget.talkback ul.timeline .text a.name {
-						font-weight:bold;
-						color:inherit;
-					}
-					
-					.widget.talkback ul.timeline li.highlight .text a.name,
-					.widget.talkback ul.timeline li.highlight ul.timeline li.highlight .text a.name {
-						background-color:#f40f97;
-						color:#ffffff;
-						padding:0 0.2em;
-					}
-					
-					.widget.talkback ul.timeline li.highlight ul.timeline .text a.name {
-						background-color:inherit;
-						color:inherit;
-						padding:inherit;
-					}
-					
+					/* main part (bottom) */
 					.widget.talkback .timeline .text .tools {
 						font-size:0.777em; /* 14px / 18px */
 						margin-top:1em; /* 14px / 14px */
@@ -316,11 +345,13 @@
 						margin-top:0.777em; /* 14px / 18px */
 					}
 					
+					/* textareas */
 					.widget.talkback .timeline .text .response textarea,
 					.widget.talkback .timeline .text .reportform textarea,
 					.widget.talkback .new_comment .comment textarea {
-						border:1px solid #444444;
-						width:97.25%; /* we're dropping 0.75% because of the border */
+						-webkit-box-shadow: inset 0px 0px 0px 1px #444444;
+						box-shadow: inset 0px 0px 0px 1px #444444; 
+						width:98%;
 						height:1.5em;
 						padding:1%;
 						resize:none;
@@ -334,6 +365,7 @@
 						height:9em;
 					}
 					
+					/* additional fields */
 					.widget.talkback .additional {
 						display:none;
 					}
@@ -373,15 +405,26 @@
 					/* ====== */
 					@media screen and (max-width: 600px) {
 						.widget.talkback .new_comment { font-size:2.2857em !important; } /* 16px / 7px */
+						
+						.widget.talkback .new_comment .overview .num_comments {
+							font-size:2em; /* 32px / 16px */
+						}
+
 					}
+					
+					
+					
+					
 				</style>
 			
 			
 				<div class="widget talkback">
 					<div class="new_comment">
-						<img class="pic" src="http://chavuttibliss.com/lib/img/headimg-portrait.jpg" />
-						<div class="name">Gabriel Anliker</div>
-						<div class="num_comments">23</div>
+						<div class="overview">
+							<img class="pic" src="http://chavuttibliss.com/lib/img/headimg-portrait.jpg" />
+							<div class="name">Gabriel Anliker</div>
+							<div class="num_comments">23</div>
+						</div>
 						<div class="comment">
 							<textarea data-default="Ihre Meinung">Ihre Meinung</textarea>
 							<div class="additional">
@@ -684,67 +727,68 @@
 	
 	<script type="text/javascript">
 		
-		/* textareas */
-		/* ========= */
-		$(".widget.talkback textarea").focus(function(){
-			/* reset all textareas */
-			$(".widget.talkback textarea").removeClass("focussed");
-			for (var counter=0; counter<$(".widget.talkback textarea").length; counter++ ) {
-				if ( $(".widget.talkback textarea").eq(counter).text() == "" ) {
-					var new_value = $(".widget.talkback textarea").eq(counter).attr("data-default");
-					$(".widget.talkback textarea").eq(counter).text(new_value);
-					$(".widget.talkback textarea").siblings(".additional").removeClass("expanded");
+		$(document).ready(function(){
+			/* textareas */
+			/* ========= */
+			$(".widget.talkback textarea").focus(function(){
+				/* reset all textareas */
+				$(".widget.talkback textarea").removeClass("focussed");
+				for (var counter=0; counter<$(".widget.talkback textarea").length; counter++ ) {
+					if ( $(".widget.talkback textarea").eq(counter).text() == "" ) {
+						var new_value = $(".widget.talkback textarea").eq(counter).attr("data-default");
+						$(".widget.talkback textarea").eq(counter).text(new_value);
+						$(".widget.talkback textarea").siblings(".additional").removeClass("expanded");
+					}
 				}
-			}
-			/* make current textarea active */
-			$(this).addClass("focussed");
-			$(this).siblings(".additional").addClass("expanded");
-			if ( $(this).text() == $(this).attr("data-default") ) $(this).empty();
-		});
-		
-		/* textfields */
-		/* ========== */
-		$(".widget.talkback input.field").focus(function(){
-			/* reset all fields */
-			for (var counter=0; counter<$(".widget.talkback input.field").length; counter++ ) {
-				if ( $(".widget.talkback input.field").eq(counter).val() == "" ) {
-					var new_value = $(".widget.talkback input.field").eq(counter).attr("data-default");
-					$(".widget.talkback input.field").eq(counter).val(new_value);
+				/* make current textarea active */
+				$(this).addClass("focussed");
+				$(this).siblings(".additional").addClass("expanded");
+				if ( $(this).text() == $(this).attr("data-default") ) $(this).empty();
+			});
+			
+			/* textfields */
+			/* ========== */
+			$(".widget.talkback input.field").focus(function(){
+				/* reset all fields */
+				for (var counter=0; counter<$(".widget.talkback input.field").length; counter++ ) {
+					if ( $(".widget.talkback input.field").eq(counter).val() == "" ) {
+						var new_value = $(".widget.talkback input.field").eq(counter).attr("data-default");
+						$(".widget.talkback input.field").eq(counter).val(new_value);
+					}
 				}
-			}
-			/* make current field active */
-			if ( $(this).val() == $(this).attr("data-default") ) $(this).val("");
+				/* make current field active */
+				if ( $(this).val() == $(this).attr("data-default") ) $(this).val("");
+			});
+			
+			/* love/hate-buttons */
+			/* ================= */
+			$(".widget.talkback .love, .widget.talkback .hate").click(function(){
+				var opposite_button = $(this).siblings(".love, .hate").not(this);
+				if (opposite_button.hasClass("your_vote")) {
+					opposite_button.removeClass("your_vote");
+					opposite_button.text(opposite_button.text()-1);
+				}
+				if ($(this).hasClass("your_vote")) {
+					$(this).text($(this).text()-1);
+				}
+				else {
+					$(this).text(parseInt($(this).text())+1);
+				}
+				$(this).toggleClass("your_vote").blur();
+			});
+			
+			/* expand order options */
+			/* ==================== */
+			$(".widget.talkback .new_comment .tools a.currentorder").click(function(){
+				$(".widget.talkback .new_comment .tools ul.orderoptions").toggleClass("expanded");
+			});
+			
+			/* expand report form */
+			/* ==================== */
+			$(".widget.talkback .report").click(function(){
+				$(this).siblings(".reportform").toggleClass("expanded");
+			});
 		});
-		
-		/* love/hate-buttons */
-		/* ================= */
-		$(".widget.talkback .love, .widget.talkback .hate").click(function(){
-			var opposite_button = $(this).siblings(".love, .hate").not(this);
-			if (opposite_button.hasClass("your_vote")) {
-				opposite_button.removeClass("your_vote");
-				opposite_button.text(opposite_button.text()-1);
-			}
-			if ($(this).hasClass("your_vote")) {
-				$(this).text($(this).text()-1);
-			}
-			else {
-				$(this).text(parseInt($(this).text())+1);
-			}
-			$(this).toggleClass("your_vote");
-		});
-		
-		/* expand order options */
-		/* ==================== */
-		$(".widget.talkback .new_comment .tools a.currentorder").click(function(){
-			$(".widget.talkback .new_comment .tools ul.orderoptions").toggleClass("expanded");
-		});
-		
-		/* expand report form */
-		/* ==================== */
-		$(".widget.talkback .report").click(function(){
-			$(this).siblings(".reportform").toggleClass("expanded");
-		});
-		
 			
 	</script>
 	
