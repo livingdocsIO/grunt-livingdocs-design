@@ -60,7 +60,15 @@
 }
 
 .widget.talkback .new_comment .tools ul.orderoptions.expanded {
-	height:4em;
+	height:4.5em;
+}
+
+.widget.talkback .new_comment .tools ul.orderoptions li {
+	border-top:1px dashed #bbbbbb;
+}
+
+.widget.talkback .new_comment .tools ul.orderoptions li:last-child {
+	border-bottom:1px dashed #bbbbbb;
 }
 
 /* main part (bottom) */
@@ -113,10 +121,15 @@
 
 .widget.talkback .timeline .text .tools .reportform {
 	display:none;
+	font-size:1.287em; /* 1em / 0.777em */
+	border-bottom:1px dashed #bbbbbb;
+	padding-bottom:0.5em; /* 9px / 18px */
+	padding-top:0.777em; /* 14px / 18px */
 }
 
 .widget.talkback .timeline .text .tools .reportform.expanded {
 	display:block;
+	
 }
 
 .widget.talkback .timeline .text .tools .report:hover {
