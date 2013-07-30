@@ -58,7 +58,8 @@
 }
 
 .dashboard .segment .login,
-.dashboard .segment .register {
+.dashboard .segment .register,
+.dashboard .segment .retrieve {
 	font-size:2em; /* 20px / 10px */
 	width:80%;
 	margin:0 auto;
@@ -73,6 +74,7 @@
 }
 
 .dashboard .segment .register.details,
+.dashboard .segment .retrieve.details,
 .dashboard .segment .login.link {
 	display:none;
 }

@@ -56,9 +56,17 @@ var dashboard = (function(){
 			});
 			
 			/* changing forms */
-			$(".dashboard .register.link a, .dashboard .login.link a").click(function(){
-				$(".dashboard .details").slideToggle();
-				$(".dashboard .link").slideToggle();
+			$(".dashboard .register.link a").click(function(){
+				$(".dashboard .details, .dashboard .link.register").slideUp();
+				$(".dashboard .details.register, .dashboard .link.login, .dashboard .link.retrieve").slideDown();
+			});
+			$(".dashboard .login.link a").click(function(){
+				$(".dashboard .details, .dashboard .link.login").slideUp();
+				$(".dashboard .details.login, .dashboard .link.register, .dashboard .link.retrieve").slideDown();
+			});
+			$(".dashboard .retrieve.link a").click(function(){
+				$(".dashboard .details, .dashboard .link.retrieve").slideUp();
+				$(".dashboard .details.retrieve, .dashboard .link.register, .dashboard .link.login").slideDown();
 			});
 			
 			/* check form */
