@@ -1,0 +1,166 @@
+
+
+
+
+
+/* timeline */
+/* ======== */
+
+/* one element */
+.widget ul.timeline li {
+	position:relative;
+	padding-bottom:2.222em; /* 40px / 18px */
+}				
+
+/* ray to the left of the timeline */
+.widget ul.timeline .ray {
+	width:13%;
+	display:inline-block;
+	vertical-align:top;
+}
+
+/* thin grey line */
+.widget ul.timeline .ray .line {
+	height:100%;
+	width:4px;
+	margin-left:-2px;
+	background-color:#cccccc;
+	position:absolute;
+	top:0;
+	left:5.8%;
+	z-index:1;
+}
+
+.widget ul.timeline li:last-child .ray .line {
+	display:none;
+}
+
+.widget ul.timeline .ray a {
+	position:relative;	
+}
+
+.widget ul.timeline .ray .pic {
+	width:90%;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	position:relative;
+	z-index:2;
+	-webkit-transition: -webkit-border-radius 0.5s ease;
+	transition: border-radius 0.5s ease;
+	outline: 8px solid #ffffff;
+}
+
+.widget ul.timeline .ray .pic:hover {
+	-webkit-border-radius:30%;
+	border-radius:30%;
+}
+
+.widget ul.timeline .ray .badge {
+	width:30%;
+	position:absolute;
+	right:0;
+	bottom:0;
+	z-index:3;
+	background-color:#f40f97;
+}
+
+.widget ul.timeline .ray .dot {
+	background-color:#cccccc;
+	width:15px;
+	height:15px;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	outline: 8px solid #ffffff;
+	position:relative;
+	left:-4px;
+	top:3px;
+	z-index:2;
+	margin:0 auto;
+}
+
+.widget ul.timeline li.highlight .ray .dot {
+	background-color:#f40f97;
+}
+
+/* content area to the right of the timeline */
+.widget ul.timeline .text {
+	width:85%;
+	display:inline-block;
+	vertical-align:top;
+}
+
+/* entry header/name */
+.widget ul.timeline .text .name {
+	font-weight:bold;
+	color:inherit;
+}
+
+.widget ul.timeline li.highlight .text .name,
+.widget ul.timeline li.highlight ul.timeline li.highlight .text .name {
+	background-color:#f40f97;
+	color:#ffffff;
+	padding:0 0.2em;
+}
+
+/* nested timelines */
+.widget ul.timeline ul.timeline {
+	font-size:inherit !important;
+	margin-top:2.222em; /* 40px / 18px */
+}
+
+.widget ul.timeline ul.timeline .ray {
+	width:15.662%; /* 13% / 83% * 100% */
+}
+
+.widget ul.timeline ul.timeline .ray .line,
+.widget ul.timeline ul.timeline .ray .dot {
+	display:none;
+}
+
+.widget ul.timeline ul.timeline .text {
+	width:82%;
+}
+
+.widget ul.timeline li.highlight ul.timeline .text .name {
+	background-color:inherit;
+	color:inherit;
+	padding:inherit;
+}
+
+.widget ul.timeline ul.timeline li:last-child {
+	padding-bottom:0;
+}
+
+
+
+
+
+/* mobile */
+/* ====== */
+@media screen and (max-width: 600px) {
+	.widget ul.timeline .ray .line {
+		width:3px;
+		left:5.6%;
+	}
+	.widget ul.timeline .ray .dot {
+		width:9px;
+		height:9px;
+		top:6px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

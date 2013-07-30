@@ -1,0 +1,229 @@
+
+
+
+/* talkback */
+/* ======== */
+
+/* top part */
+.widget.talkback .new_comment {
+	font-size:1.8em; /* 18px / 10px */
+	padding-bottom:2.222em; /* 40px / 18px */
+	padding-top:2.222em; /* 40px / 18px */
+	font-weight:bold;
+}
+
+.widget.talkback .new_comment .overview {
+	position:relative;
+}
+
+.widget.talkback .new_comment .overview .pic {
+	width:11.7%; /* 13% (raysize in timeline) / 100% * 90* (picsize in timeline) */
+	-webkit-border-radius:50%;
+	border-radius:50%;
+}
+
+.widget.talkback .new_comment .overview .name {
+	padding-left:0.5em; /* 9px / 18px */
+	display:inline-block;
+}
+
+.widget.talkback .new_comment .overview .num_comments {
+	float:right;
+	font-size:3.333em; /* 60px / 18px */
+	background-image:url("../media/img/main/icons/icon_comments.png");
+	background-size:auto 90%;
+	padding-right:1.1em;
+	background-repeat:no-repeat;
+	background-position:bottom right;
+	position:absolute;
+	bottom:0;
+	right:0;
+}
+
+.widget.talkback .new_comment .comment {
+	margin-top:0.777em; /* 14px / 18px */
+}
+
+.widget.talkback .new_comment .tools {
+	font-weight:normal;
+	padding-top:0.777em; /* 14px / 18px */
+	text-align:right;
+}
+
+.widget.talkback .new_comment .tools ul.orderoptions {
+	padding-top:0.777em; /* 14px / 18px */
+	font-size:inherit !important;
+	height:0;
+	overflow:hidden;
+	-webkit-transition: height 0.5s ease;
+	transition: height 0.5s ease;
+}
+
+.widget.talkback .new_comment .tools ul.orderoptions.expanded {
+	height:4em;
+}
+
+/* main part (bottom) */
+.widget.talkback .timeline .text .tools {
+	font-size:0.777em; /* 14px / 18px */
+	margin-top:1em; /* 14px / 14px */
+}
+
+.widget.talkback .timeline .text .tools .love,
+.widget.talkback .timeline .text .tools .hate {
+	height:1.714em; /* 24px / 14px */
+	background-size:contain;
+	display:inline-block;
+	padding-left:2.285em; /* 32px / 14px */
+	padding-right:0.5em; /* 7px / 14px */
+	background-position:top left;
+	background-repeat:no-repeat;
+}
+
+.widget.talkback .timeline .text .tools .love {
+	background-image:url("../media/img/main/icons/icon_love_grey.png");
+}
+
+.widget.talkback .timeline .text .tools .hate {
+	background-image:url("../media/img/main/icons/icon_hate_grey.png");
+}
+
+.widget.talkback .timeline .text .tools .love.highlight {
+	background-image:url("../media/img/main/icons/icon_love_dark.png");
+}
+
+.widget.talkback .timeline .text .tools .hate.highlight {
+	background-image:url("../media/img/main/icons/icon_hate_dark.png");
+}
+
+.widget.talkback .timeline .text .tools .love.your_vote,
+.widget.talkback .timeline .text .tools .love:hover {
+	background-image:url("../media/img/main/icons/icon_love_magenta.png");
+}
+
+.widget.talkback .timeline .text .tools .hate.your_vote,
+.widget.talkback .timeline .text .tools .hate:hover {
+	background-image:url("../media/img/main/icons/icon_hate_magenta.png");
+}
+
+.widget.talkback .timeline .text .tools .report {
+	float:right;
+	color:#aaaaaa;
+}
+
+.widget.talkback .timeline .text .tools .reportform {
+	display:none;
+}
+
+.widget.talkback .timeline .text .tools .reportform.expanded {
+	display:block;
+}
+
+.widget.talkback .timeline .text .tools .report:hover {
+	color:#222222;
+}
+
+.widget.talkback .timeline .text .response {
+	margin-top:0.777em; /* 14px / 18px */
+}
+
+/* textareas */
+.widget.talkback .timeline .text .response textarea,
+.widget.talkback .timeline .text .reportform textarea,
+.widget.talkback .new_comment .comment textarea {
+	-webkit-box-shadow: inset 0px 0px 0px 1px #444444;
+	box-shadow: inset 0px 0px 0px 1px #444444; 
+	width:98%;
+	height:1.5em;
+	padding:1%;
+	resize:none;
+	-webkit-transition: height 0.5s ease;
+	transition: height 0.5s ease;
+}
+
+.widget.talkback .timeline .text .response textarea.focussed,
+.widget.talkback .timeline .text .reportform textarea.focussed,
+.widget.talkback .new_comment .comment textarea.focussed {
+	height:9em;
+}
+
+/* additional fields */
+.widget.talkback .additional {
+	display:none;
+}
+
+.widget.talkback .additional.expanded {
+	display:block;
+}
+
+.widget.talkback .additional input.field {
+	border:1px solid #444444;
+	width:74%;
+	height:1.5em;
+	padding:1%;
+	margin:0;
+	float:right;
+}
+
+.widget.talkback .additional .imagedrop {
+	font-size:inherit;
+	border:1px dashed #444444;
+	display:inline-block;
+	width:20%;
+	height:1.5em;
+	padding:1%;
+	vertical-align:middle;
+	background-image:url("../media/img/main/icons/icon_picture.png");
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+.widget.talkback .additional input.button {
+	margin-top:0.2em;
+}
+
+
+
+
+/* tablet */
+/* ====== */
+@media screen and (max-width: 1000px) {
+	.widget.talkback .timeline .text .tools .love:hover { background-image:url("../media/img/main/icons/icon_love_grey.png"); }
+	.widget.talkback .timeline .text .tools .hate:hover { background-image:url("../media/img/main/icons/icon_hate_grey.png"); }
+	.widget.talkback .timeline .text .tools .love.highlight:hover { background-image:url("../media/img/main/icons/icon_love_dark.png"); }
+	.widget.talkback .timeline .text .tools .hate.highlight:hover { background-image:url("../media/img/main/icons/icon_hate_dark.png"); }
+	.widget.talkback .timeline .text .tools .love.your_vote:hover { background-image:url("../media/img/main/icons/icon_love_magenta.png"); }
+	.widget.talkback .timeline .text .tools .hate.your_vote:hover { background-image:url("../media/img/main/icons/icon_hate_magenta.png"); }
+}
+
+
+
+
+/* mobile */
+/* ====== */
+@media screen and (max-width: 600px) {
+	.widget.talkback .new_comment { font-size:2.2857em !important; } /* 16px / 7px */
+	
+	.widget.talkback .new_comment .overview .num_comments { font-size:2em; } /* 32px / 16px */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
