@@ -1,0 +1,38 @@
+
+
+
+
+/* collapsa */
+/* ======== */
+/* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! */
+.widget.ticker .collapsa {
+	font-size:1.8em;
+	font-weight:bold;
+	text-align:center;
+	background-color:#cccccc;
+	height:4px;
+	overflow:visible;
+	line-height:0.2em;
+	margin-top:1em;
+	margin-bottom:1em;
+}
+
+.widget.ticker .collapsa span {
+	background-color:#ffffff;
+	padding:0 4px;
+}
+
+
+
+
+
+
+
+
+/* headerbox */
+/* ========= */
+.widget.ticker.headerbox h3 {
+	font-size:4em;
+	text-align:center;
+	font-weight:bold;
+}
