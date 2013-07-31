@@ -41,7 +41,25 @@ $(document).ready(function() {
 	});
 
 
-	
+
+
+	/* video */
+	/* ===== */
+	var video = (function(){
+		return {
+			play:function(element, video_id) {
+				element.html('<iframe src="http://www.youtube.com/embed/'+video_id+'?autoplay=1" frameborder="0" allowfullscreen></iframe>');
+			}
+		}
+	})();
+	$(document).ready(function() {
+		if ( $('.widget.video').length ) {
+			$('.widget.video').click(function(){
+				var id = $(this).attr("data-video_id");
+				video.play($(this),id);
+			});
+		}
+	});
 	
 	
 	/* poll */
