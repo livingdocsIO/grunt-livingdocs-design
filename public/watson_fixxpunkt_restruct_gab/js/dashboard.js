@@ -57,16 +57,22 @@ var dashboard = (function(){
 			
 			/* changing forms */
 			$(".dashboard .register.link a").click(function(){
-				$(".dashboard .details, .dashboard .link.register").slideUp();
-				$(".dashboard .details.register, .dashboard .link.login, .dashboard .link.retrieve").slideDown();
+				var current_segment = $(this).parents(".segment");
+				current_segment.find(".error_msg").slideUp();
+				current_segment.find(".details, .link.register").slideUp();
+				current_segment.find(".details.register, .link.login, .link.retrieve").slideDown();
 			});
 			$(".dashboard .login.link a").click(function(){
-				$(".dashboard .details, .dashboard .link.login").slideUp();
-				$(".dashboard .details.login, .dashboard .link.register, .dashboard .link.retrieve").slideDown();
+				var current_segment = $(this).parents(".segment");
+				current_segment.find(".error_msg").slideUp();
+				current_segment.find(".details, .link.login").slideUp();
+				current_segment.find(".details.login, .link.register, .link.retrieve").slideDown();
 			});
 			$(".dashboard .retrieve.link a").click(function(){
-				$(".dashboard .details, .dashboard .link.retrieve").slideUp();
-				$(".dashboard .details.retrieve, .dashboard .link.register, .dashboard .link.login").slideDown();
+				var current_segment = $(this).parents(".segment");
+				current_segment.find(".error_msg").slideUp();
+				current_segment.find(".details, .link.retrieve").slideUp();
+				current_segment.find(".details.retrieve, .link.register, .link.login").slideDown();
 			});
 			
 			/* check form */
@@ -93,8 +99,14 @@ var dashboard = (function(){
 				}
 				
 				/* abort or submit form */
-				if (missing_vals) return false;
-				else return true;
+				if (missing_vals) {
+					$(this).parents(".segment").find(".error_msg").text("Your Error message here").slideDown();
+					return false;
+				}
+				else {
+					$(this).parents(".segment").find(".error_msg").slideUp();
+					return true;
+				}
 			});
 
 		}

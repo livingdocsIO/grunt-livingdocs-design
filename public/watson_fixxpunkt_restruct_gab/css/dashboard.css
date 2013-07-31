@@ -57,12 +57,20 @@
 	border-bottom:4px solid #dddddd;
 }
 
+.dashboard .segment .error_msg,
 .dashboard .segment .login,
 .dashboard .segment .register,
 .dashboard .segment .retrieve {
 	font-size:2em; /* 20px / 10px */
 	width:80%;
 	margin:0 auto;
+}
+
+.dashboard .segment .error_msg {
+	color:#f40f97;
+	display:none;
+	font-weight:bold;
+	margin-bottom:0.5em; /* 10px / 20px */
 }
 
 .dashboard .segment .login .field {
