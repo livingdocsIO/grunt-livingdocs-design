@@ -126,7 +126,15 @@ input.radio:checked, input.checkbox:checked {
 
 
 
-
+/* commercial */
+/* ======================= */
+.commercial {
+	width: 100%;
+	height: 100%;
+	padding: 5px 0px;
+	text-align: center;
+	background-color: #EEE;
+}
 
 
 
