@@ -4,7 +4,7 @@
 
 /* collapsa */
 /* ======== */
-/* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! */
+/* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! EBENSO JS */
 .widget.ticker .collapsa {
 	font-size:1.8em;
 	font-weight:bold;
@@ -18,6 +18,7 @@
 	cursor:pointer;
 }
 
+/* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! */
 .widget.ticker .collapsa span {
 	background-color:#ffffff;
 	padding:0 4px;
@@ -44,6 +45,10 @@
 
 
 
+
+
+
+
 /* last highlight */
 /* ============== */
 .widget.ticker.last_highlight p.name {
@@ -55,6 +60,119 @@
 
 
 
+
+/* main_result */
+/* =========== */
+.widget.ticker.main_result .colltent {
+	position:relative;
+}
+
+.widget.ticker.main_result .score {
+	font-size:16em; /* 160px / 10px */
+	text-align:center;
+	font-weight:bold;
+	position:absolute;
+	top:0;
+	width:100%;
+	text-align:center;
+}
+
+.widget.ticker.main_result .team {
+	width:40%;
+	display:inline-block;
+	vertical-align:top;
+	margin-top:-3.5em; /* -35px / 10px */
+}
+
+.widget.ticker.main_result .team.guest {
+	margin-left:19%;
+}
+
+.widget.ticker.main_result .team .fans {
+	font-size:1.4em; /* 14px / 10px */
+	line-height:0.9em;
+	font-weight:bold;
+	color:#ffffff;
+	text-align:center;
+	width:4.285em; /* 60px / 14px */
+	height:4.285em; /* 60px / 14px */
+	background-image:url("../media/img/main/icons/icon_love_dark.png");
+	background-size: contain;
+	background-repeat:no-repeat;
+	background-position:center center;
+	margin:0 1.785em; /* 50px / 14px */
+	display:block;
+}
+
+.widget.ticker.main_result .team .fans:hover {
+	background-image:url("../media/img/main/icons/icon_love_magenta.png");
+}
+
+.widget.ticker.main_result .team .fans .number {
+	padding-top:1em; /* 14px / 14px */
+	display:block;
+}
+
+.widget.ticker.main_result .team .pic {
+	width:11em; /* 110px / 10px */
+	height:11em; /* 110px / 10px */
+	background-size:contain;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+.widget.ticker.main_result .team.guest .fans,
+.widget.ticker.main_result .team.guest .pic {
+	margin-left:auto;
+}
+
+.widget.ticker.main_result .team .name {
+	font-size:4em; /* 40px / 10px */
+	font-weight:bold;
+	margin-top:0.5em; /* 20px / 40px */
+}
+
+.widget.ticker.main_result .team .events {
+	font-weight:bold;
+}
+
+.widget.ticker.main_result .team .events .time {
+	display:inline-block;
+	min-width:1.5em; /* 27px / 18px */
+}
+
+.widget.ticker.main_result .expand {
+	font-size:1.8em; /* 18px / 10px */
+	text-align:center;
+	display:block;
+}
+
+
+
+
+
+
+
+/* teams */
+/* ===== */
+.widget.ticker.teams ul {
+	display:inline-block;
+	width:36%;
+	margin-left:13%;
+}
+
+.widget.ticker.teams ul li.title {
+	font-weight:bold;
+}
+
+.widget.ticker.teams ul li.divider {
+	padding-bottom:1em;
+}
+
+
+
+
+
 /* tools */
 /* ===== */
 .widget.ticker.tools li {
@@ -63,14 +181,35 @@
 }
 
 
+
+
+
 /* author */
 /* ====== */
 .widget.ticker.author img.portrait {
 	width:40%;
 	float:left;
 	margin:0 10px 10px 0;
+	-webkit-border-radius:50%;
+	border-radius:50%; 
 } 
 
+
+
+
+/* heroes */
+/* ====== */
+.widget.ticker.heroes li {
+	clear:both;
+}
+
+.widget.ticker.heroes img.portrait {
+	width:15%;
+	float:left;
+	margin:0 10px 10px 0;
+	-webkit-border-radius:50%;
+	border-radius:50%; 
+} 
 
 
 

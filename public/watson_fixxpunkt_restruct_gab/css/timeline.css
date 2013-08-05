@@ -64,6 +64,15 @@
 	background-color:#f40f97;
 }
 
+.widget ul.timeline .ray .icon {
+	width:70%;
+	left:10%;
+	position:relative;
+	z-index:2;
+	outline: 8px solid #ffffff;
+	background-color:#ffffff;
+}
+
 .widget ul.timeline .ray .dot {
 	background-color:#cccccc;
 	width:15px;
