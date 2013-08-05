@@ -38,6 +38,10 @@
 	right:-1em;
 }
 
+.widget.ticker .collapsa.expanded span.icon {
+	background-image:url("../media/img/main/icons/icon_arrow_top_down_inv_dark.png");
+}
+
 .widget.ticker .collapsa:hover span.icon {
 	display:block;
 }
@@ -269,6 +273,14 @@
 /* tablet */
 /* ====== */
 @media screen and (max-width: 1000px) {
+	.widget.ticker .collapsa span.icon {
+		display:block;
+	}
+	
+	.widget.ticker .main_result .team .fans:hover {
+		background-image:url("../media/img/main/icons/icon_love_dark.png");
+	}
+
 	.widget.ticker .insert {
 		width:100% !important;
 	}
@@ -282,6 +294,11 @@
 /* mobile */
 /* ====== */
 @media screen and (max-width: 600px) {
+	
+	/* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! EBENSO JS */
+	.widget.ticker .collapsa {
+		font-size:2.2857em !important; /* 16px / 7px */
+	}
 	
 	/* headerbox */
 	/* ========= */
@@ -315,6 +332,12 @@
 		display:none;
 	}
 	
+	.widget.ticker .main_result .expand,
+	.widget.ticker .main_result .collapse {
+		font-size:2.2857em !important; /* 16px / 7px */
+		padding:1em 0;
+	}
+	
 	/* teams */
 	/* ===== */
 	.widget.ticker .teams ul {
@@ -338,8 +361,10 @@
 	} 
 	
 	.widget.ticker .author .vita {
-		width: 69% !important;
-		display:inline !important;
+		width: 65% !important;
+		display:block !important;
+		float: right !important;
+		clear:none !important;
 	} 
 }
 
