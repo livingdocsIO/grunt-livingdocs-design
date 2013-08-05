@@ -171,6 +171,7 @@
 .widget.ticker .main_result .expand,
 .widget.ticker .main_result .collapse {
 	font-size:1.8em; /* 18px / 10px */
+	padding:1em 0;
 	text-align:center;
 	display:block;
 }
@@ -335,7 +336,6 @@
 	.widget.ticker .main_result .expand,
 	.widget.ticker .main_result .collapse {
 		font-size:2.2857em !important; /* 16px / 7px */
-		padding:1em 0;
 	}
 	
 	/* teams */
