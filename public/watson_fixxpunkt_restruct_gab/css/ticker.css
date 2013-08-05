@@ -19,13 +19,28 @@
 }
 
 /* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! */
-.widget.ticker .collapsa span {
+.widget.ticker .collapsa span.title {
 	background-color:#ffffff;
 	padding:0 4px;
+	position:relative;
 }
 
+.widget.ticker .collapsa span.icon {
+	background-image:url("../media/img/main/icons/icon_arrow_top_down_dark.png");
+	background-size: contain;
+	background-repeat:no-repeat;
+	background-position:center center;
+	height:1em;
+	width:1em;
+	display:none;
+	position:absolute;
+	top:0.15em;
+	right:-1em;
+}
 
-
+.widget.ticker .collapsa:hover span.icon {
+	display:block;
+}
 
 
 
@@ -33,13 +48,17 @@
 
 /* headerbox */
 /* ========= */
-.widget.ticker.headerbox h3 {
+.widget.ticker .headerbox {
+	margin-bottom:2em;
+}
+
+.widget.ticker .headerbox h3 {
 	font-size:4em;
 	text-align:center;
 	font-weight:bold;
 }
 
-.widget.ticker.headerbox h3 img {
+.widget.ticker .headerbox h3 img {
 	width:10%;
 }
 
@@ -51,11 +70,11 @@
 
 /* last highlight */
 /* ============== */
-.widget.ticker.last_highlight p.name {
+.widget.ticker .last_highlight p.name {
 	background-color:#f40f97;
 	color:#ffffff;
 	padding:0 0.2em;
-	display:inline;	
+	display:inline !important;	
 }
 
 
@@ -63,11 +82,11 @@
 
 /* main_result */
 /* =========== */
-.widget.ticker.main_result .colltent {
+.widget.ticker .main_result {
 	position:relative;
 }
 
-.widget.ticker.main_result .score {
+.widget.ticker .main_result .score {
 	font-size:16em; /* 160px / 10px */
 	text-align:center;
 	font-weight:bold;
@@ -77,18 +96,18 @@
 	text-align:center;
 }
 
-.widget.ticker.main_result .team {
+.widget.ticker .main_result .team {
 	width:40%;
 	display:inline-block;
 	vertical-align:top;
-	margin-top:-3.5em; /* -35px / 10px */
+	position:relative;
 }
 
-.widget.ticker.main_result .team.guest {
+.widget.ticker .main_result .team.guest {
 	margin-left:19%;
 }
 
-.widget.ticker.main_result .team .fans {
+.widget.ticker .main_result .team .fans {
 	font-size:1.4em; /* 14px / 10px */
 	line-height:0.9em;
 	font-weight:bold;
@@ -104,16 +123,16 @@
 	display:block;
 }
 
-.widget.ticker.main_result .team .fans:hover {
+.widget.ticker .main_result .team .fans:hover {
 	background-image:url("../media/img/main/icons/icon_love_magenta.png");
 }
 
-.widget.ticker.main_result .team .fans .number {
+.widget.ticker .main_result .team .fans .number {
 	padding-top:1em; /* 14px / 14px */
 	display:block;
 }
 
-.widget.ticker.main_result .team .pic {
+.widget.ticker .main_result .team .pic {
 	width:11em; /* 110px / 10px */
 	height:11em; /* 110px / 10px */
 	background-size:contain;
@@ -121,61 +140,89 @@
 	background-position:center center;
 }
 
-.widget.ticker.main_result .team.guest .fans,
-.widget.ticker.main_result .team.guest .pic {
+.widget.ticker .main_result .team.guest .fans,
+.widget.ticker .main_result .team.guest .pic {
 	margin-left:auto;
 }
 
-.widget.ticker.main_result .team .name {
+.widget.ticker .main_result .team .name {
 	font-size:4em; /* 40px / 10px */
 	font-weight:bold;
 	margin-top:0.5em; /* 20px / 40px */
 }
 
-.widget.ticker.main_result .team .events {
-	font-weight:bold;
+.widget.ticker .main_result .team .events .icon {
+	height:1em; /* 18px / 18px */
+	margin-right:0.5em;
 }
 
-.widget.ticker.main_result .team .events .time {
+.widget.ticker .main_result .team .events .time {
 	display:inline-block;
 	min-width:1.5em; /* 27px / 18px */
 }
 
-.widget.ticker.main_result .expand {
+.widget.ticker .main_result .events li:nth-child(n+4) { display:none; }
+.widget.ticker .main_result.expanded .events li:nth-child(n+4) { display:block; }
+
+.widget.ticker .main_result .expand,
+.widget.ticker .main_result .collapse {
 	font-size:1.8em; /* 18px / 10px */
 	text-align:center;
 	display:block;
 }
 
-
-
+.widget.ticker .main_result.expanded .expand { display:none; }
+.widget.ticker .main_result .collapse { display:none; }
+.widget.ticker .main_result.expanded .collapse { display:block; }
 
 
 
 
 /* teams */
 /* ===== */
-.widget.ticker.teams ul {
+.widget.ticker .teams {
+	margin-bottom:3em;	
+}
+
+.widget.ticker .teams .colltent {
+	display:none;
+}
+
+.widget.ticker .teams ul {
 	display:inline-block;
+	vertical-align:top;
 	width:36%;
 	margin-left:13%;
 }
 
-.widget.ticker.teams ul li.title {
+.widget.ticker .teams ul li.title {
 	font-weight:bold;
 }
 
-.widget.ticker.teams ul li.divider {
+.widget.ticker .teams ul li.divider {
 	padding-bottom:1em;
 }
 
+.widget.ticker .teams ul li {
+	position:relative;
+}
 
+.widget.ticker .teams ul li .icon {
+	height:1em; /* 18px / 18px */
+	position:absolute;
+	left:-1.5em;
+	top:0.1em;
+	vertical-align:middle;
+}
 
+.widget.ticker .teams ul li .icon:nth-child(2) { left:-2.5em; }
+.widget.ticker .teams ul li .icon:nth-child(3) { left:-3.5em; }
+.widget.ticker .teams ul li .icon:nth-child(n+4) { display:none; }
 
 
 /* tools */
 /* ===== */
-.widget.ticker.tools li {
+.widget.ticker .tools li {
 	display:inline-block;
 	width:49%;
 }
@@ -186,7 +233,7 @@
 
 /* author */
 /* ====== */
-.widget.ticker.author img.portrait {
+.widget.ticker .author img.portrait {
 	width:40%;
 	float:left;
 	margin:0 10px 10px 0;
@@ -194,22 +241,117 @@
 	border-radius:50%; 
 } 
 
+.widget.ticker .author p.title {
+	clear:both;
+	font-weight:bold;
+	display:block;
+	text-align:center;
+	margin-top:2em;
+	margin-bottom:1em;
+}
 
-
-
-/* heroes */
-/* ====== */
-.widget.ticker.heroes li {
+.widget.ticker .author ul.heroes li {
 	clear:both;
 }
 
-.widget.ticker.heroes img.portrait {
-	width:15%;
+.widget.ticker .author ul.heroes img.portrait {
+	width:19%;
 	float:left;
 	margin:0 10px 10px 0;
 	-webkit-border-radius:50%;
 	border-radius:50%; 
 } 
+
+
+
+
+
+/* tablet */
+/* ====== */
+@media screen and (max-width: 1000px) {
+	.widget.ticker .insert {
+		width:100% !important;
+	}
+}
+
+
+
+
+
+
+/* mobile */
+/* ====== */
+@media screen and (max-width: 600px) {
+	
+	/* headerbox */
+	/* ========= */
+	.widget.ticker .headerbox h3 {
+		font-size:3em !important;
+	}
+	
+	/* last highlight */
+	/* ============== */
+	.widget.ticker .last_highlight {
+		display:none;	
+	}
+
+	/* main_result */
+	/* =========== */
+	.widget.ticker .main_result .score {
+		font-size:7em;
+		margin-top:1em;
+	}
+	
+	.widget.ticker .main_result .team .name {
+		font-size:2.5em;
+	}
+	
+	.widget.ticker .main_result .team .events li {
+		font-size:0.8em;
+		line-height:1.2em;
+	}
+	
+	.widget.ticker .main_result .team .events .icon {
+		display:none;
+	}
+	
+	/* teams */
+	/* ===== */
+	.widget.ticker .teams ul {
+		width:33%;
+		margin-left:16%;	
+	}
+	
+	.widget.ticker .teams li {
+		font-size:0.8em;
+		line-height:1.2em;
+	}
+	
+	/* author */
+	/* ====== */
+	.widget.ticker .author .colltent {
+		display:none;
+	}
+	
+	.widget.ticker .author img.portrait {
+		width:30%;
+	} 
+	
+	.widget.ticker .author .vita {
+		width: 69% !important;
+		display:inline !important;
+	} 
+}
+
+
+
+
+
+
+
+
+
+
 
 
 
