@@ -3,9 +3,13 @@
 /* image preloader */
 /* =============== */
 function preload_img(images) {
-    $(images).each(function(){
-        $('<img/>')[0].src = this;
-    });
+    var window_width = $(window).width();
+    /* preload images only on desktop */
+    if (window_width > 1000) {
+	    $(images).each(function(){
+	        $('<img/>')[0].src = this;
+			});
+	}
 }
 	
 
