@@ -4,21 +4,24 @@
 
 /* collapsa */
 /* ======== */
-/* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! EBENSO JS */
 .widget.ticker .collapsa {
 	font-size:1.8em;
 	font-weight:bold;
 	text-align:center;
-	background-color:#cccccc;
+	background-color:#009ccc;
 	height:4px;
 	overflow:visible;
 	line-height:0.2em;
 	margin-top:1em;
 	margin-bottom:1em;
 	cursor:pointer;
+	clear:both;
 }
 
-/* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! */
+.widget.ticker .collapsa:hover { background-color:#007da4; }
+.widget.ticker .collapsa.inactive { cursor:default; background-color:#cccccc; }
+.widget.ticker .collapsa.inactive:hover { background-color:#cccccc; }
+
 .widget.ticker .collapsa span.title {
 	background-color:#ffffff;
 	padding:0 4px;
@@ -42,10 +45,8 @@
 	background-image:url("../media/img/main/icons/icon_arrow_top_down_inv_dark.png");
 }
 
-.widget.ticker .collapsa:hover span.icon {
-	display:block;
-}
-
+.widget.ticker .collapsa:hover span.icon { display:block; }
+.widget.ticker .collapsa.inactive:hover span.icon { display:none; }
 
 
 
@@ -117,13 +118,13 @@
 	font-weight:bold;
 	color:#ffffff;
 	text-align:center;
-	width:4.285em; /* 60px / 14px */
-	height:4.285em; /* 60px / 14px */
+	width:5em; /* 70px / 14px */
+	height:5em; /* 70px / 14px */
 	background-image:url("../media/img/main/icons/icon_love_dark.png");
 	background-size: contain;
 	background-repeat:no-repeat;
 	background-position:center center;
-	margin:0 1.785em; /* 50px / 14px */
+	margin:0 1.428em; /* 20px / 14px */
 	display:block;
 }
 
@@ -132,7 +133,7 @@
 }
 
 .widget.ticker .main_result .team .fans .number {
-	padding-top:1em; /* 14px / 14px */
+	padding-top:1.5em; /* 21px / 14px */
 	display:block;
 }
 
@@ -232,8 +233,28 @@
 	width:49%;
 }
 
+.widget.ticker .tools li a.order .arrow {
+	vertical-align:middle;
+	display:inline-block;
+	width:1em;
+	height:1em;
+	background-image:url("../media/img/main/icons/icon_arrow_down_grey.png");
+	background-size: contain;
+	background-repeat:no-repeat;
+	background-position:center center;
+}
 
+.widget.ticker .tools li a.order:hover .arrow {
+	background-image:url("../media/img/main/icons/icon_arrow_down_dark.png");
+}
 
+.widget.ticker .tools li a.order.up .arrow {
+	background-image:url("../media/img/main/icons/icon_arrow_up_grey.png");
+}
+
+.widget.ticker .tools li a.order.up:hover .arrow {
+	background-image:url("../media/img/main/icons/icon_arrow_up_dark.png");
+}
 
 
 /* author */
