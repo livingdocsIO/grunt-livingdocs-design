@@ -39,28 +39,12 @@
 	position:relative;	
 }
 
-.widget ul.timeline .ray .pic {
-	width:90%;
-	-webkit-border-radius:50%;
-	border-radius:50%;
-	position:relative;
+.widget ul.timeline .ray .member_icon {
 	z-index:2;
-	-webkit-transition: -webkit-border-radius 0.5s ease;
-	transition: border-radius 0.5s ease;
+}
+
+.widget ul.timeline .ray .member_icon .portrait {
 	outline: 8px solid #ffffff;
-}
-
-.widget ul.timeline .ray .pic:hover {
-	-webkit-border-radius:30%;
-	border-radius:30%;
-}
-
-.widget ul.timeline .ray .badge {
-	width:30%;
-	position:absolute;
-	right:0;
-	bottom:0;
-	z-index:3;
 }
 
 .widget ul.timeline .ray .icon {

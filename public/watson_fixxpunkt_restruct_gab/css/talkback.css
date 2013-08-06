@@ -16,10 +16,10 @@
 	position:relative;
 }
 
-.widget.talkback .new_comment .overview .pic {
+.widget.talkback .new_comment .overview .member_icon {
 	width:11.7%; /* 13% (raysize in timeline) / 100% * 90* (picsize in timeline) */
-	-webkit-border-radius:50%;
-	border-radius:50%;
+	float:none;
+	margin-bottom:0;
 }
 
 .widget.talkback .new_comment .overview .name {
