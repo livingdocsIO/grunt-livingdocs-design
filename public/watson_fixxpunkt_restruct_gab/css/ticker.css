@@ -127,7 +127,8 @@
 	display:block;
 }
 
-.widget.ticker .main_result .team .fans:hover {
+.widget.ticker .main_result .team .fans:hover,
+.widget.ticker .main_result .team .fans.your_vote {
 	background-image:url("../media/img/main/icons/icon_love_magenta.png");
 }
 
@@ -153,6 +154,7 @@
 	font-size:4em; /* 40px / 10px */
 	font-weight:bold;
 	margin-top:0.5em; /* 20px / 40px */
+	margin-bottom:0.5em; /* 20px / 40px */
 }
 
 .widget.ticker .main_result .team .events .icon {
