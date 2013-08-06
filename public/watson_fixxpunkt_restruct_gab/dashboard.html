@@ -16,20 +16,75 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="">
 		<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
 		<link rel="apple-touch-icon-precomposed" href="">
+		
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/basic.css" />	
+		<link rel="stylesheet" href="css/dashboard.css" />$
+		
 			
-		<link rel="stylesheet" href="" />
-			
-		<script src=""></script>
+		
+		<style type="text/css">
+			body {
+				background: #ccc;
+			}
+		</style>
+		
 
 	</head>
 
 	<body>
 	
-		<div class="container">
+			<div class="dashboard">
+				<div class="expandable expanded" style="left: 0px;">
+					
+					<!-- Header -->
+					<div class="header">
+						<a href="#" class="back" title="Zurueck"> 
+							<img src="media/img/main/arrows/arrow-dashboard.png" />
+						</a>
+						<h2>Dashboard</h2>
+					</div>
+					
+					<!-- Userprofil -->
+					<div class="segment list user">
+						<ul>
+							<li>
+								<img src="media/img/placeholderimg/bild_053.jpg" /> Nathalie Steiner
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Neuigkeiten -->
+					<div class="segment list notification">
+						<ul>
+							<li><span class="number">5</span>Neuigkeiten</li>
+							<li>
+								<span class="graph"><img src="media/img/placeholderimg/bild_054.jpg" /></span> 
+								<p class="note">Christoph Meier hat deinen Beitrag kommentiert.
+								Zum Artikel: «Diese Kameras sollte es in jeder Stadt geben»</p>
+							</li>
+							<li><span class="graph"><img src="media/img/placeholderimg/bild_055.jpg" width="50" /></span><p class="note">Du hast ein neues Achievement erhalten:<br />
+								Staubsauger-Verkäufer</p>
+							</li>
+						</ul>
+					</div>
+					
+					<!-- Kommentare -->
+					<div class="segment list">
+						<ul>
+							<li>Kommentare</li>
+							<li><p class="note">Artikel: „Mit dem Luxus-Liner ins CL-Abenteuer“<br />
+							Wäre ja schön wenn nicht nur Basel immer die Ehre der Schweizer retten…<br />
+							Geschrieben 4. Aug. 2013 </p>
+							</li>
+						</ul>
+						
+					</div>
+					
+				</div>
+			</div>
 			
 			
-			
-		</div>
 
 	</body>
 </html>
