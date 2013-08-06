@@ -291,12 +291,20 @@
 		display:block;
 	}
 	
+	.widget.ticker .insert {
+		width:100% !important;
+	}
+	
+	/* main_result */
+	/* =========== */
 	.widget.ticker .main_result .team .fans:hover {
 		background-image:url("../media/img/main/icons/icon_love_dark.png");
 	}
-
-	.widget.ticker .insert {
-		width:100% !important;
+	
+	/* last highlight */
+	/* ============== */
+	.widget.ticker .last_highlight {
+		display:none;	
 	}
 	
 	/* author */
@@ -304,6 +312,11 @@
 	.widget.ticker .author img.portrait {
 		width:18%;
 	} 
+	
+	.widget.ticker .author ul.heroes li {
+		width:49%;
+		display:inline-block;
+	}
 	
 	.widget.ticker .author ul.heroes img.portrait {
 		width:12%;
@@ -329,12 +342,6 @@
 		font-size:3em !important;
 	}
 	
-	/* last highlight */
-	/* ============== */
-	.widget.ticker .last_highlight {
-		display:none;	
-	}
-
 	/* main_result */
 	/* =========== */
 	.widget.ticker .main_result .score {
@@ -390,6 +397,10 @@
 		display:block !important;
 		float:left !important;
 		margin-bottom:1em;
+	}
+	
+	.widget.ticker .author ul.heroes li {
+		width:auto;
 	}
 }
 

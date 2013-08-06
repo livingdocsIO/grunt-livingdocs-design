@@ -66,25 +66,31 @@ $(document).ready(function() {
 	/* ==== */
 	var poll = (function(){
 		return {
-			highlight_vote_button:function() {
-				$(".widget.poll a.button").animate({'font-size': '1.75em', 'left': '0.75em'}, 500, 'swing' );
-				$(".widget.poll a.button").parents('li').animate({'margin-top': '0.75em', 'margin-bottom': '0.75em'}, 500, 'swing' );
+			highlight_vote_button:function(clicked_element) {
+				var button = clicked_element.parents(".widget.poll").find("a.button");
+				button.animate({
+					'font-size': '1.75em', 'left': '0.75em'
+				}, 500, 'swing' );
+				button.parents('li').animate({
+					'margin-top': '0.75em', 'margin-bottom': '0.75em'
+				}, 500, 'swing' );
 			},
 		
 			show_result:function() {
 				var current_poll = $(this).parents(".widget.poll");
 				var current_results = [];
-				for (var counter=0; counter < current_poll.find("div.result .bubble").length; counter++) {
-					current_results[counter] = parseInt ( current_poll.find("div.result .bubble").eq(counter).text() );
+				var bubbles = current_poll.find("div.result .bubble");
+				for (var counter=0; counter < bubbles.length; counter++) {
+					current_results[counter] = parseInt ( bubbles.eq(counter).text() );
 				}
 				current_poll.find("div.answers").slideUp(500, 'swing', function(){
 					current_poll.find("div.result").slideDown(200, 'linear', function() {
-						poll.calculate_bubbles(current_poll, current_results);
+						poll.calculate_bubblesizes(current_poll, current_results);
 					});
 				});
 			},
 			
-			calculate_bubbles:function(current_poll, current_results) {
+			calculate_bubblesizes:function(current_poll, current_results) {
 				var max_diameter = current_poll.width() / 2.5;
 				var max_height = ((current_poll.height()-current_poll.find(".result p").height()) / current_results.length)-30;
 				if ( max_diameter > max_height && !current_poll.parents(".insert").length ) max_diameter = max_height;
@@ -127,7 +133,9 @@ $(document).ready(function() {
 	})();
 	$(document).ready(function() {
 		if ( $('.widget.poll').length ) {
-			$(".widget.poll input").click(poll.highlight_vote_button);
+			$(".widget.poll input").click(function(){
+				poll.highlight_vote_button($(this));
+			});
 			$(".widget.poll a.button").click(poll.show_result);
 		}
 	});
