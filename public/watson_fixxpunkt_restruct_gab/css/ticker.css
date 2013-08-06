@@ -272,24 +272,12 @@
 	margin-bottom:1em;
 } 
 
-.widget.ticker .author p.vita {
-	width:55%;
-	display:block !important;
-	float: right !important;
-	clear:none !important;
-	margin-bottom:1em;
-}
-
 .widget.ticker .author ul.heroes li {
 	clear:both;
 }
 
 .widget.ticker .author ul.heroes img.portrait {
 	width:19%;
-	float:left;
-	margin:0 10px 10px 0;
-	-webkit-border-radius:50%;
-	border-radius:50%; 
 } 
 
 
@@ -299,6 +287,10 @@
 /* tablet */
 /* ====== */
 @media screen and (max-width: 1000px) {
+	.widget.ticker .insert:first-child {
+		margin-bottom:-3em !important;	
+	}
+	
 	.widget.ticker .collapsa span.icon {
 		display:block;
 	}
@@ -314,12 +306,8 @@
 	/* author */
 	/* ====== */
 	.widget.ticker .author img.portrait {
-		width:12%;
+		width:18%;
 	} 
-	
-	.widget.ticker .author .vita {
-		width:84% !important;
-	}
 	
 	.widget.ticker .author ul.heroes img.portrait {
 		width:12%;
@@ -334,8 +322,7 @@
 /* mobile */
 /* ====== */
 @media screen and (max-width: 600px) {
-	
-	/* IN WIDGETS CSS REIN!!!! ODER EIGENES CSS!!!!! EBENSO JS */
+
 	.widget.ticker .collapsa {
 		font-size:2.2857em !important; /* 16px / 7px */
 	}
@@ -401,9 +388,13 @@
 		width:30%;
 	} 
 	
-	.widget.ticker .author .vita {
-		width: 65% !important;
-	} 
+	.widget.ticker .author p.vita {
+		clear:right !important;
+		width:60% !important;
+		display:block !important;
+		float:left !important;
+		margin-bottom:1em;
+	}
 }
 
 
