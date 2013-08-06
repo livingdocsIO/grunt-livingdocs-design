@@ -1,7 +1,6 @@
 
 
 
-
 /* collapsa */
 /* ======== */
 .widget.ticker .collapsa {
@@ -287,9 +286,6 @@
 /* tablet */
 /* ====== */
 @media screen and (max-width: 1000px) {
-	.widget.ticker .insert:first-child {
-		margin-bottom:-3em !important;	
-	}
 	
 	.widget.ticker .collapsa span.icon {
 		display:block;
