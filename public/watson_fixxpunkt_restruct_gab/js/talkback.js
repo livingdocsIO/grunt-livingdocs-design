@@ -11,11 +11,11 @@ $(document).ready(function(){
 	/* preload images (function in widgets.js) */
 	/* ======================================= */
 	preload_img([
-    	"../media/img/main/icons/icon_love_dark.png",
-    	"../media/img/main/icons/icon_hate_dark.png",
-    	"../media/img/main/icons/icon_love_magenta.png",
-    	"../media/img/main/icons/icon_hate_magenta.png",
-    	"../media/img/main/icons/icon_picture.png"
+    	"media/img/main/icons/icon_love_dark.png",
+    	"media/img/main/icons/icon_hate_dark.png",
+    	"media/img/main/icons/icon_love_magenta.png",
+    	"media/img/main/icons/icon_hate_magenta.png",
+    	"media/img/main/icons/icon_picture.png"
 	]);
 
 	/* textareas */

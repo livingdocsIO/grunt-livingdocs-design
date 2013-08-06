@@ -45,11 +45,11 @@ var ticker = (function(){
 			/* preload images (function in widgets.js) */
 			/* ======================================= */
 			preload_img([
-		    	"../media/img/main/arrows/arrow_top_down_dark.png",
-		    	"../media/img/main/arrows/arrow_top_down_inv_dark.png",
-		    	"../media/img/main/icons/icon_love_magenta.png",
-		    	"../media/img/main/arrows/arrow_down_dark.png",
-		    	"../media/img/main/arrows/arrow_up_dark.png"
+		    	"media/img/main/arrows/arrow_top_down_dark.png",
+		    	"media/img/main/arrows/arrow_top_down_inv_dark.png",
+		    	"media/img/main/icons/icon_love_magenta.png",
+		    	"media/img/main/arrows/arrow_down_dark.png",
+		    	"media/img/main/arrows/arrow_up_dark.png"
 			]);
 		
 			/* collapsa */
