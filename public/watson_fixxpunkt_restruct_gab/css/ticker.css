@@ -264,20 +264,15 @@
 
 /* author */
 /* ====== */
-.widget.ticker .author img.portrait {
+.widget.ticker .author .member_icon {
 	width:40%;
-	float:left;
-	margin:0 10px 10px 0;
-	-webkit-border-radius:50%;
-	border-radius:50%; 
-	margin-bottom:1em;
-} 
+}
 
 .widget.ticker .author ul.heroes li {
 	clear:both;
 }
 
-.widget.ticker .author ul.heroes img.portrait {
+.widget.ticker .author ul.heroes .member_icon {
 	width:19%;
 } 
 
@@ -311,7 +306,7 @@
 	
 	/* author */
 	/* ====== */
-	.widget.ticker .author img.portrait {
+	.widget.ticker .author .member_icon {
 		width:18%;
 	} 
 	
@@ -319,10 +314,6 @@
 		width:49%;
 		display:inline-block;
 	}
-	
-	.widget.ticker .author ul.heroes img.portrait {
-		width:12%;
-	} 
 }
 
 
@@ -389,7 +380,7 @@
 	
 	/* author */
 	/* ====== */
-	.widget.ticker .author img.portrait {
+	.widget.ticker .author .member_icon {
 		width:30%;
 	} 
 	

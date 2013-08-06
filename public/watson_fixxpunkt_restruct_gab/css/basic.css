@@ -124,6 +124,35 @@ input.radio:checked, input.checkbox:checked {
 	-o-hyphens: manual !important;
 }
 
+/* member icons */
+/* ============ */
+.member_icon {
+	position:relative;
+	margin:0 10px 10px 0;
+	display:inline-block;
+	float:left;
+}
+
+.member_icon .badge {
+	width:30%;
+	position:absolute;
+	right:0;
+	bottom:0;
+	z-index:3;
+}
+
+.member_icon img.portrait {
+	-webkit-border-radius:50%;
+	border-radius:50%; 
+	width:100%;
+	-webkit-transition: -webkit-border-radius 0.5s ease;
+	transition: border-radius 0.5s ease;
+}
+
+.member_icon img.portrait:hover {
+	-webkit-border-radius:30%;
+	border-radius:30%;
+}
 
 
 /* commercial */
