@@ -134,7 +134,7 @@ input.radio:checked, input.checkbox:checked {
 }
 
 .member_icon .badge {
-	width:30%;
+	width:33.333%;
 	position:absolute;
 	right:0;
 	bottom:0;
@@ -217,7 +217,7 @@ and (orientation : landscape) {
 	.fat_wrapper {
 		width:101.5%;
 	}
-		
+	
 	/* custom hide and display */
 	.hide_on_mobile { display:none !important; }
 	.show_on_mobile { display:block !important; }
