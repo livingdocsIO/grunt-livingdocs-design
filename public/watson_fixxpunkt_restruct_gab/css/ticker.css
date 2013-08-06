@@ -299,13 +299,12 @@
 /* ====== */
 @media screen and (max-width: 1000px) {
 	
-	.widget.ticker .collapsa span.icon {
-		display:block;
-	}
+	.widget.ticker .insert { width:100% !important; }
 	
-	.widget.ticker .insert {
-		width:100% !important;
-	}
+	/* collapsa */
+	/* ======== */
+	.widget.ticker .collapsa span.icon { display:block; }
+	.widget.ticker .collapsa.inactive span.icon { display:none; }
 	
 	/* main_result */
 	/* =========== */
@@ -396,7 +395,7 @@
 	/* author */
 	/* ====== */
 	.widget.ticker .author .member_icon {
-		width:30%;
+		width:19%;
 	} 
 	
 	.widget.ticker .author p.vita {
