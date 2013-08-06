@@ -261,6 +261,15 @@
 	background-image:url("../media/img/main/arrows/arrow_up_dark.png");
 }
 
+.widget.ticker .tools li a .state.off,
+.widget.ticker .tools li a.off .state {
+	display:none;
+}
+
+.widget.ticker .tools li a.off .state.off {
+	display:inline;
+}
+
 
 /* author */
 /* ====== */

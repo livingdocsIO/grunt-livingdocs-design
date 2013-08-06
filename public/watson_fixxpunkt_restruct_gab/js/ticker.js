@@ -68,6 +68,10 @@ var ticker = (function(){
 				ul.children().each(function(i,li){ul.prepend(li)})
 			});
 			
+			$(".widget.ticker .tools a.alarm, .widget.ticker .tools a.automode").click(function(){
+				$(this).toggleClass("off").blur();
+			});
+			
 			/* fan-buttons */
 			/* =========== */
 			$(".widget.ticker .fans").click(function(){
