@@ -128,7 +128,7 @@ input.radio:checked, input.checkbox:checked {
 /* ============ */
 .member_icon {
 	position:relative;
-	margin:0 10px 10px 0;
+	margin:0;
 	display:inline-block;
 	float:left;
 }

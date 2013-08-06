@@ -19,7 +19,6 @@
 .widget.talkback .new_comment .overview .member_icon {
 	width:11.7%; /* 13% (raysize in timeline) / 100% * 90* (picsize in timeline) */
 	float:none;
-	margin-bottom:0;
 }
 
 .widget.talkback .new_comment .overview .name {

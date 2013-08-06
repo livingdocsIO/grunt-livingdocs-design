@@ -41,6 +41,7 @@
 
 .widget ul.timeline .ray .member_icon {
 	z-index:2;
+	margin-right:8px;
 }
 
 .widget ul.timeline .ray .member_icon .portrait {

@@ -266,6 +266,7 @@
 /* ====== */
 .widget.ticker .author .member_icon {
 	width:40%;
+	margin:0 10px 10px 0;
 }
 
 .widget.ticker .author ul.heroes li {
