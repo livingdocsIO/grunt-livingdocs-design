@@ -28,7 +28,7 @@
 }
 
 .widget.ticker .collapsa span.icon {
-	background-image:url("../media/img/main/icons/icon_arrow_top_down_dark.png");
+	background-image:url("../media/img/main/arrows/arrow_top_down_dark.png");
 	background-size: contain;
 	background-repeat:no-repeat;
 	background-position:center center;
@@ -41,7 +41,7 @@
 }
 
 .widget.ticker .collapsa.expanded span.icon {
-	background-image:url("../media/img/main/icons/icon_arrow_top_down_inv_dark.png");
+	background-image:url("../media/img/main/arrows/arrow_top_down_inv_dark.png");
 }
 
 .widget.ticker .collapsa:hover span.icon { display:block; }
@@ -243,22 +243,22 @@
 	display:inline-block;
 	width:1em;
 	height:1em;
-	background-image:url("../media/img/main/icons/icon_arrow_down_grey.png");
+	background-image:url("../media/img/main/arrows/arrow_down_grey.png");
 	background-size: contain;
 	background-repeat:no-repeat;
 	background-position:center center;
 }
 
 .widget.ticker .tools li a.order:hover .arrow {
-	background-image:url("../media/img/main/icons/icon_arrow_down_dark.png");
+	background-image:url("../media/img/main/arrows/arrow_down_dark.png");
 }
 
 .widget.ticker .tools li a.order.up .arrow {
-	background-image:url("../media/img/main/icons/icon_arrow_up_grey.png");
+	background-image:url("../media/img/main/arrows/arrow_up_grey.png");
 }
 
 .widget.ticker .tools li a.order.up:hover .arrow {
-	background-image:url("../media/img/main/icons/icon_arrow_up_dark.png");
+	background-image:url("../media/img/main/arrows/arrow_up_dark.png");
 }
 
 
@@ -266,7 +266,11 @@
 /* ====== */
 .widget.ticker .author .member_icon {
 	width:40%;
-	margin:0 10px 10px 0;
+	margin:0 10px 2em 0;
+}
+
+.widget.ticker .author p.vita {
+	margin-bottom:2em;
 }
 
 .widget.ticker .author ul.heroes li {
@@ -275,6 +279,7 @@
 
 .widget.ticker .author ul.heroes .member_icon {
 	width:19%;
+	margin-bottom:0.5em;
 } 
 
 
