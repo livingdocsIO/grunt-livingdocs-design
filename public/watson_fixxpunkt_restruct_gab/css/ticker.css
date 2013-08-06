@@ -63,8 +63,8 @@
 	font-weight:bold;
 }
 
-.widget.ticker .headerbox h3 img {
-	width:10%;
+.widget.ticker .headerbox h3 img.type {
+	height:1.5em;
 }
 
 
@@ -216,21 +216,25 @@
 .widget.ticker .teams ul li .icon {
 	height:1em; /* 18px / 18px */
 	position:absolute;
-	left:-1.5em;
+	left:-1.2em;
 	top:0.1em;
 	vertical-align:middle;
 }
 
-.widget.ticker .teams ul li .icon:nth-child(2) { left:-2.5em; }
-.widget.ticker .teams ul li .icon:nth-child(3) { left:-3.5em; }
+.widget.ticker .teams ul li .icon:nth-child(2) { left:-2.2em; }
+.widget.ticker .teams ul li .icon:nth-child(3) { left:-3.2em; }
 .widget.ticker .teams ul li .icon:nth-child(n+4) { display:none; }
 
 
 /* tools */
 /* ===== */
+.widget.ticker .tools {
+	margin-bottom:2em;
+}
+
 .widget.ticker .tools li {
 	display:inline-block;
-	width:49%;
+	width:24%;
 }
 
 .widget.ticker .tools li a.order .arrow {
@@ -265,14 +269,14 @@
 	margin:0 10px 10px 0;
 	-webkit-border-radius:50%;
 	border-radius:50%; 
+	margin-bottom:1em;
 } 
 
-.widget.ticker .author p.title {
-	clear:both;
-	font-weight:bold;
-	display:block;
-	text-align:center;
-	margin-top:2em;
+.widget.ticker .author p.vita {
+	width:55%;
+	display:block !important;
+	float: right !important;
+	clear:none !important;
 	margin-bottom:1em;
 }
 
@@ -306,6 +310,20 @@
 	.widget.ticker .insert {
 		width:100% !important;
 	}
+	
+	/* author */
+	/* ====== */
+	.widget.ticker .author img.portrait {
+		width:12%;
+	} 
+	
+	.widget.ticker .author .vita {
+		width:84% !important;
+	}
+	
+	.widget.ticker .author ul.heroes img.portrait {
+		width:12%;
+	} 
 }
 
 
@@ -371,21 +389,20 @@
 		line-height:1.2em;
 	}
 	
-	/* author */
-	/* ====== */
-	.widget.ticker .author .colltent {
-		display:none;
+	/* tools */
+	/* ===== */
+	.widget.ticker .tools li {
+		width:49%;
 	}
 	
+	/* author */
+	/* ====== */
 	.widget.ticker .author img.portrait {
 		width:30%;
 	} 
 	
 	.widget.ticker .author .vita {
 		width: 65% !important;
-		display:block !important;
-		float: right !important;
-		clear:none !important;
 	} 
 }
 
