@@ -1,8 +1,15 @@
 
 
+/* image preloader */
+/* =============== */
+function preload_img(images) {
+    $(images).each(function(){
+        $('<img/>')[0].src = this;
+    });
+}
+	
 
 $(document).ready(function() {
-
 
 
 	/* panorama */
