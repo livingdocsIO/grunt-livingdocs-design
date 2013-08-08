@@ -8,7 +8,7 @@ function preload_img(images) {
     if (window_width > 1000) {
 	    $(images).each(function(){
 	        $('<img/>')[0].src = this;
-			});
+		});
 	}
 }
 	
@@ -146,6 +146,22 @@ $(document).ready(function() {
 					current_poll.find("div.result .answertext").eq(counter).css("marginTop", ((bubble_height-text_height)/2)+"px");
 				}	
 				current_poll.find("div.result .answertext").fadeIn(500);		
+			},
+			
+			submit_vote:function(clicked_element) {
+				var current_poll = clicked_element.parents(".widget.poll");
+				/* send answer to server */
+				var poll_id = current_poll.find(".poll_id").val();
+				var answer_id = current_poll.find("input.radio:checked").val();
+				$.ajax("polls/vote/poll_id:"+poll_id+"/answer_id:"+answer_id)
+					.done(function() {
+						$.cookie("watson_poll_"+poll_id, "answered", { expires: 7, path: '/' });
+						/* show results of poll */
+						poll.show_result(current_poll);
+					})
+					.fail(function() { 
+						current_poll.find("div.answers").html("<h2>Fehler</h2><p>Ihre Antwort konnte nicht zum Server geschickt werden.</p>"); 
+					});
 			}
 		}
 	})();
@@ -160,9 +176,17 @@ $(document).ready(function() {
 			});
 			/* bind lick on submit button */
 			open_polls.find("a.button").click(function(){
-				var current_poll = $(this).parents(".widget.poll");
-				poll.show_result(current_poll);
+				poll.submit_vote($(this));
 			});
+			
+			for (var counter=0; counter<open_polls.length; counter++) {
+				var poll_id = open_polls.eq(counter).find(".poll_id").val();
+				var cookie = $.cookie("watson_poll_"+poll_id);
+				if ( cookie == "answered") {
+					open_polls.eq(counter).find("div.answers").remove();
+					poll.show_result(open_polls.eq(counter));
+				}
+			}
 		}
 		
 		if ( closed_polls.length ) {
