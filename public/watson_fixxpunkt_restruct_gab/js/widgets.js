@@ -87,18 +87,24 @@ $(document).ready(function() {
 				}, 500, 'swing' );
 			},
 		
-			show_result:function() {
-				var current_poll = $(this).parents(".widget.poll");
+			show_result:function(current_poll) {
 				var current_results = [];
 				var bubbles = current_poll.find("div.result .bubble");
 				for (var counter=0; counter < bubbles.length; counter++) {
 					current_results[counter] = parseInt ( bubbles.eq(counter).text() );
 				}
-				current_poll.find("div.answers").slideUp(500, 'swing', function(){
+				if ( current_poll.find("div.answers").length==1 ) {
+					current_poll.find("div.answers").slideUp(500, 'swing', function(){
+						current_poll.find("div.result").slideDown(200, 'linear', function() {
+							poll.calculate_bubblesizes(current_poll, current_results);
+						});
+					});
+				}
+				else {
 					current_poll.find("div.result").slideDown(200, 'linear', function() {
 						poll.calculate_bubblesizes(current_poll, current_results);
 					});
-				});
+				}
 			},
 			
 			calculate_bubblesizes:function(current_poll, current_results) {
@@ -143,11 +149,26 @@ $(document).ready(function() {
 		}
 	})();
 	$(document).ready(function() {
-		if ( $('.widget.poll').length ) {
-			$(".widget.poll input").click(function(){
+		var open_polls = $('.widget.poll:not(.closed)');
+		var closed_polls = $('.widget.poll.closed');
+		
+		if ( open_polls.length ) {
+			/* bind click on poll-option answer fields */
+			open_polls.find("input").click(function(){
 				poll.highlight_vote_button($(this));
 			});
-			$(".widget.poll a.button").click(poll.show_result);
+			/* bind lick on submit button */
+			open_polls.find("a.button").click(function(){
+				var current_poll = $(this).parents(".widget.poll");
+				poll.show_result(current_poll);
+			});
+		}
+		
+		if ( closed_polls.length ) {
+			/* loop through all closed polls and show their results */
+			for (var counter=0; counter < closed_polls.length; counter++) {
+				poll.show_result(closed_polls.eq(counter));
+			}
 		}
 	});
 	
