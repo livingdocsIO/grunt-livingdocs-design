@@ -113,12 +113,13 @@ $(document).ready(function() {
 				if ( max_diameter > max_height && !current_poll.parents(".insert").length ) max_diameter = max_height;
 				var max_area = max_diameter * max_diameter; /* in pixels */
 				var max_bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * max_diameter;
+				var max_value = Math.max.apply(Math, current_results);
 				for (var counter=0; counter<current_results.length; counter++) {
-					var current_area = current_results[counter] * max_area / current_results[0];
+					var current_area = current_results[counter] * max_area / max_value;
 					var bubble_width_pixels = Math.sqrt(current_area);
 					var bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * bubble_width_pixels; /* 30px = 2 * margin 15px */
 					var bubble_margin = (max_bubble_width_percentage - bubble_width_percentage) / 2;
-					var bubble_opacity = 1 - (counter * (1 / current_results.length) );
+					var bubble_opacity = 1 - ( ( max_value - current_results[counter] ) / max_value );
 					current_poll.find("div.result .bubble").eq(counter).text(current_results[counter]+"%").animate({
 						'width': bubble_width_percentage+'%',
 						'height': bubble_width_pixels+'px',
