@@ -77,6 +77,7 @@ $(document).ready(function() {
 	/* ==== */
 	var poll = (function(){
 		return {
+			/* after clicking on a radio button the "vote" button grows in size */
 			highlight_vote_button:function(clicked_element) {
 				var button = clicked_element.parents(".widget.poll").find("a.button");
 				button.animate({
@@ -86,7 +87,8 @@ $(document).ready(function() {
 					'margin-top': '0.75em', 'margin-bottom': '0.75em'
 				}, 500, 'swing' );
 			},
-		
+			
+			/* hides the answer div and shows the result div */
 			show_result:function(current_poll) {
 				var current_results = [];
 				var bubbles = current_poll.find("div.result .bubble");
@@ -107,6 +109,7 @@ $(document).ready(function() {
 				}
 			},
 			
+			/* calculates bubble sizes and opacities */
 			calculate_bubblesizes:function(current_poll, current_results) {
 				var max_diameter = current_poll.width() / 2.5;
 				var max_height = ((current_poll.height()-current_poll.find(".result p").height()) / current_results.length)-30;
@@ -134,6 +137,7 @@ $(document).ready(function() {
 				setTimeout(function(){poll.calculate_answer_position(current_poll, current_results)}, 1000);	
 			},
 			
+			/* calculates the vertical position of the answers to the right of the bubbles */
 			calculate_answer_position:function(current_poll, current_results) {
 				for (var counter=0; counter<current_results.length; counter++) {
 					var bubble_width = bubble_height = current_poll.find("div.result .bubble").eq(counter).height();
@@ -148,6 +152,7 @@ $(document).ready(function() {
 				current_poll.find("div.result .answertext").fadeIn(500);		
 			},
 			
+			/* submits the vote */
 			submit_vote:function(clicked_element) {
 				var current_poll = clicked_element.parents(".widget.poll");
 				/* send answer to server */
@@ -176,7 +181,8 @@ $(document).ready(function() {
 			});
 			/* bind lick on submit button */
 			open_polls.find("a.button").click(function(){
-				poll.submit_vote($(this));
+				var checked_radiobutton = $(this).parents("ul").find("input.radio:checked").length;
+				if (checked_radiobutton) poll.submit_vote($(this));
 			});
 			
 			for (var counter=0; counter<open_polls.length; counter++) {
