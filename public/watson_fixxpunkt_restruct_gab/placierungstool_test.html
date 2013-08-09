@@ -92,10 +92,9 @@
 			height:190px;
 			width:320px;
 			border-bottom:solid white 4px;
-			background-color:#0fb4f4;
+			background-color:#dddddd;
 		}
 
-		
 		.meter {
 			position:fixed;
 			top:-10px;
@@ -249,13 +248,18 @@
 	
 		var scroll_timeout;
 		$(window).scroll(function(){
+			position_meter();
 			clearTimeout(scroll_timeout);
 			scroll_timeout = setTimeout(position_iframes, 300);
-			position_meter();
 		});
 		
 		$(document).ready(function(){
 		});
+		
+		/*$('iframe.preview.desktop').load(function(){
+			position_meter();
+			position_iframes();
+		});*/
 		
 	</script>
 	
