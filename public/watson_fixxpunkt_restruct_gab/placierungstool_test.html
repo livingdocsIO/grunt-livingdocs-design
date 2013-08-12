@@ -17,6 +17,7 @@
 		
 		<script src="js/jquery-1.9.js" type="text/javascript"></script>
 		<script src="js/jquery.cookie.js" type="text/javascript"></script>
+		<script src="js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
 		
 		<link rel="shortcut icon" href="media/img/main/icons/favicon.ico" type="image/x-icon" />
 		<!-- Home screen icon -->
@@ -55,25 +56,85 @@
 			right:10px;
 		}
 		
+		.preview.tablet {
+			width:800px;
+			-moz-transform: scale(0.377);
+			-webkit-transform: scale(0.377);
+			transform: scale(0.377);
+			height:265%;
+			right:500px;
+		}
+		
 		.preview.mobile {
 			width:330px;
 			-moz-transform: scale(0.625);
 			-webkit-transform: scale(0.625);
 			transform: scale(0.625);
 			height:160%;
-			right:500px;
+			right:860px;
 		}
 		
 		.working_area {
 			margin-left:340px;
 		}
 		
-		.working_area .region {
-			font-size:2em;
-			height:190px;
-			width:320px;
-			border-bottom:solid white 4px;
+		.working_area .cluster {
+			border:8px solid #0fb4f4;
 			background-color:#dddddd;
+			width:320px;
+			min-height:100px;
+		}
+		
+		.working_area .cluster:nth-child(3n+2) {
+			border:8px solid #94e028;
+		}
+		
+		.working_area .cluster:nth-child(3n+3) {
+			border:8px solid #f40f97;
+		}
+		
+		.working_area .region {
+			font-size:1.4em;
+			height:180px;
+			width:310px;
+			padding:5px;
+			border-bottom:solid #dddddd 4px;
+			background-color:#ffffff;
+		}
+		
+		.working_area .region:last-child {
+			border-bottom:0;
+		} 
+		
+		.working_area .region.ui-draggable-dragging {
+			border:1px solid black;
+			z-index:100;
+		}
+		
+		.working_area .region .type {
+			text-align:center;
+			font-weight:bold;
+			font-size:20px;
+		}
+		
+		.working_area .region .rank {
+			display:inline-block;
+			font-size:55px;
+			font-weight:bold;
+		}
+		
+		.working_area .region .details {
+			display:inline-block;
+			width:75%;
+			vertical-align:top;
+			margin-top:6px;
+		}
+		
+		.working_area .region .graph {
+			background-color:#eeeeee;
+			width:160px;
+			height:80px;
+			float:right;
 		}
 
 		.meter {
@@ -84,17 +145,62 @@
 			height:0;
 			border-top:4px dashed #222222;
 			margin-top:-4px;
-			background-color:#ffffff;
+			background-color:rgba(255,255,255,0.75);
+		}
+		
+		
+		@media screen and (max-width: 1700px) {
+			.preview.tablet {
+				display:none;
+			}
+			
+			.preview.mobile {
+				right:500px;
+			}
+		}
+		
+		@media screen and (max-width: 1300px) {
+			.preview.desktop {
+				display:none;
+			}
+			
+			.preview.mobile {
+				right:10px;
+			}
 		}
 	</style>
 	
 		
 	<div class="working_area">
 		<div class="cluster">
-			<div class="region">Topelement</div>
+			<div class="region">
+				<div class="maininfo">
+					<div class="type">
+						Topelement<br/>
+						Tour de France 2013
+					</div>
+				</div>
+			</div>
 		</div>
 		<div class="cluster">
-			<div class="region">cluster 1.1 E1</div>
+			<div class="region">
+				<div class="maininfo">
+					<div class="rank">#3</div>
+					<div class="details">
+						<strong>Das Risiko sitzt unter der Haut</strong><br/>
+						Vor 52 Minuten<br/>
+						Daniel Huber
+					</div>
+				</div>
+				<div class="graph"></div>
+				<div class="options">
+					Bild<br/>
+					Lead<br/>
+					<select><option>Schrift: large</option></select><br/>
+					<select><option>Font: normal</option></select><br/>
+					<select><option>Farbe: Tokyo Flash</option></select>
+				</div>
+			</div>
 		</div>
 		<div class="cluster">
 			<div class="region">cluster 2.1 E1</div>
@@ -178,7 +284,7 @@
 	</div>
 	
 	<iframe src="front_bespielt.html" class="preview mobile" scrolling="no"></iframe>
-	
+	<iframe src="front_bespielt.html" class="preview tablet" scrolling="no"></iframe>
 	<iframe src="front_bespielt.html" class="preview desktop" scrolling="no"></iframe>
 	
 	<div class="meter"></div>
@@ -188,28 +294,56 @@
 	
 	
 	<script>
+	
+	
+	
+		$(function() {
+			$( ".region" ).draggable({ revert: "invalid" });
+			$( ".cluster" ).draggable({ revert: "invalid" });
+			
+			$( ".region" ).droppable({
+				drop: function( event, ui ) {
+					if ( !ui.draggable.hasClass("cluster") ) {
+						$(this).after(ui.draggable);
+						ui.draggable.css("top", 0).css("left", 0);
+					}
+				}
+			});
+			$( ".cluster" ).droppable({
+				drop: function( event, ui ) {
+					if ( ui.draggable.hasClass("cluster") ) {
+						$(this).after(ui.draggable);
+					}
+					else {
+						if ($(this).find(".region").length==0) $(this).append(ui.draggable);
+					}
+					ui.draggable.css("top", 0).css("left", 0);
+				}
+			});
+		});
+	
+	
+	
 		var top_region = 0;
 		var top_pos = 0;
-			
+		var scroll_timeout;
+		
 		function position_iframes () {
 			var mobile_iframe = $('iframe.preview.mobile').contents().find("html, body");
-			var new_pos_mobile = mobile_iframe.find(".region").not(":has(.region)").eq(top_region).offset().top;
-			var scale_mobile = 0.625;
-			if (new_pos_mobile != undefined) {
-				mobile_iframe.stop(true, true);
-				mobile_iframe.animate({ scrollTop: new_pos_mobile-(top_pos/scale_mobile) }, 1000 );
-				mobile_iframe.find(".region").not(":has(.region)").parents(".cluster").stop().animate({ opacity: 0.2 }, 1000 );
-				mobile_iframe.find(".region").not(":has(.region)").eq(top_region).parents(".cluster").stop().animate({ opacity: 1 }, 1000 );
-			}
-			
+			var tablet_iframe = $('iframe.preview.tablet').contents().find("html, body");
 			var desktop_iframe = $('iframe.preview.desktop').contents().find("html, body");
-			var new_pos_desktop = desktop_iframe.find(".region").not(":has(.region)").eq(top_region).offset().top;
-			var scale_desktop = 0.377;
-			if (new_pos_desktop != undefined) {
-				desktop_iframe.stop(true, true);
-				desktop_iframe.animate({ scrollTop: new_pos_desktop-(top_pos/scale_desktop) }, 1000 );
-				desktop_iframe.find(".region").not(":has(.region)").parents(".cluster").stop().animate({ opacity: 0.2 }, 1000 );
-				desktop_iframe.find(".region").not(":has(.region)").eq(top_region).parents(".cluster").stop().animate({ opacity: 1 }, 1000 );
+			
+			var iframes = [mobile_iframe, tablet_iframe, desktop_iframe];
+			var scales = [0.625, 0.377, 0.377];
+			
+			for (var counter=0; counter<iframes.length; counter++) {
+				var new_pos = iframes[counter].find(".region").not(":has(.region)").eq(top_region).offset().top;
+				if (new_pos != undefined) {
+					iframes[counter].stop(true, true);
+					iframes[counter].animate({ scrollTop: new_pos-(top_pos/scales[counter]) }, 1000 );
+					iframes[counter].find(".region").not(":has(.region)").parents(".cluster").stop().animate({ opacity: 0.2 }, 1000 );
+					iframes[counter].find(".region").not(":has(.region)").eq(top_region).parents(".cluster").stop().animate({ opacity: 1 }, 1000 );
+				}
 			}
 		}
 		
@@ -223,18 +357,17 @@
 			}
 			$(".meter").css("top", top_pos);
 		}
-	
-		var scroll_timeout;
-		$(window).scroll(function(){
+		
+		function start_positioning () {
 			position_meter();
 			clearTimeout(scroll_timeout);
 			scroll_timeout = setTimeout(position_iframes, 300);
-		});
+		}
 		
-		$(document).ready(function(){
-		});
-		
-		$('iframe.preview.desktop, iframe.preview.mobile').load(function(){
+		$(window).scroll(start_positioning);
+		$(window).resize(start_positioning);
+
+		$('iframe.preview').load(function(){
 			$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "2000px");
 		});
 		
