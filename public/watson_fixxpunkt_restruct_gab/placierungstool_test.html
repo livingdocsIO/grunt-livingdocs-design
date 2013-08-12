@@ -37,25 +37,6 @@
 	<body>
 	
 	<style type="text/css">
-		/* logo */
-		/* ==== */
-		.logoblock {
-			position:fixed;
-			top:0;
-			left:0;
-		}
-		
-		.logoblock .logo {
-			background-color:rgba(0,0,0,0.8);
-			display:block;
-			padding:1.2em; /* 12px / 10px */
-			height:3.5em; /* 35px / 10px */
-		}
-		
-		.logoblock .logo img {
-			width:14em; /* 140px / 10px */
-		}
-
 		.preview {
 			position:fixed;
 			top:0px;
@@ -202,9 +183,6 @@
 	
 	<div class="meter"></div>
 	
-	<div class="logoblock">
-		<a class="logo" href="front.html"><img src="media/img/main/logos/logo_watson.png" /></a>
-	</div>
 	
 	
 	
@@ -256,10 +234,9 @@
 		$(document).ready(function(){
 		});
 		
-		/*$('iframe.preview.desktop').load(function(){
-			position_meter();
-			position_iframes();
-		});*/
+		$('iframe.preview.desktop, iframe.preview.mobile').load(function(){
+			$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "2000px");
+		});
 		
 	</script>
 	
