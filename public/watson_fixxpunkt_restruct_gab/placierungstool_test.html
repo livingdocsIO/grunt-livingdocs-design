@@ -114,7 +114,6 @@
 		
 		.working_area .cluster:nth-child(3n+2) .handle { background-color:#94e028; }
 		.working_area .cluster:nth-child(3n+3) .handle { background-color:#f40f97; }
-		.working_area .cluster .masks .mask:hover { background-color:#222222; }
 		
 		.working_area .cluster .masks {
 			width:120px;
@@ -123,14 +122,19 @@
 		}
 		
 		.working_area .cluster .masks .mask {
-			height:47px;
+			height:40px;
+			width:100px;
 			background-color:#dddddd;
 			border-bottom:4px solid #ffffff;
-			background-size:contain;
-			background-repeat:no-repeat;
-			background-position:center center;
+			background-size:100%;
 			cursor:pointer;
+			-moz-transition:all 0.5s ease;
+			-webkit-transition: all 0.5s ease;
+			-o-transformtransition: all 0.5s ease;
+			transition: all 0.5s ease;
 		}
+		
+		.working_area .cluster .masks .mask:hover { background-color:#222222; }
 		
 		.working_area .cluster .masks .mask_1_1 { background-image:url("media/img/main/clusters/mask_1_1.png"); }
 		.working_area .cluster .masks .mask_2_1 { background-image:url("media/img/main/clusters/mask_2_1.png"); }
@@ -148,7 +152,12 @@
 		.working_area .cluster .masks .mask_5_3 { background-image:url("media/img/main/clusters/mask_5_3.png"); }
 		.working_area .cluster .masks .mask_6_1 { background-image:url("media/img/main/clusters/mask_6_1.png"); }
 		
-		.working_area .cluster .masks .mask.highlight { background-color:#0fb4f4; }
+		.working_area .cluster .masks .mask.highlight {
+			background-color:#0fb4f4;
+			width:120px;
+			height:47px;
+		}
+		
 		.working_area .cluster:nth-child(3n+2) .masks .mask.highlight { background-color:#94e028; }
 		.working_area .cluster:nth-child(3n+3) .masks .mask.highlight { background-color:#f40f97; }
 		
@@ -621,7 +630,7 @@
 			Neuer Partnercontent
 		</h3>
 		<ul>
-			<li class="element" data-title="Elefanten sind märchenhafte Wesen" data-rank="23" data-author="Peter Blunschi" data-time="160" data-performance="">
+			<li class="element" data-type="story" data-id="meineid" data-title="Elefanten sind märchenhafte Wesen" data-rank="23" data-author="Peter Blunschi" data-time="160" data-performance="0.5,10,20,25,30,35,40,50,60,70">
 				AZ: Elefanten sind märchenhafte...
 			</li>
 			<li class="element">
