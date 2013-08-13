@@ -82,6 +82,7 @@
 			margin-left:340px;
 		}
 		
+		/* clusters */
 		.working_area .cluster {
 			border:8px solid #0fb4f4;
 			background-color:#dddddd;
@@ -150,7 +151,8 @@
 		.working_area .cluster .masks .mask.highlight { background-color:#0fb4f4; }
 		.working_area .cluster:nth-child(3n+2) .masks .mask.highlight { background-color:#94e028; }
 		.working_area .cluster:nth-child(3n+3) .masks .mask.highlight { background-color:#f40f97; }
-			
+		
+		/* regions */
 		.working_area .region {
 			font-size:1.4em;
 			height:180px;
@@ -215,6 +217,45 @@
 			margin-top:160px;
 		}
 		
+		.working_area .region .note {
+			background-image:url("media/img/main/icons/icon_note_inactive.png");
+			position:absolute;
+			bottom:5px;
+			right:5px;
+			width:20px;
+			height:20px;
+			background-size:contain;
+			background-repeat:no-repeat;
+			background-position:center center;
+			cursor:pointer;
+		}
+		.working_area .region .note.active {
+			background-image:url("media/img/main/icons/icon_note_active.png");
+		}
+		
+		.working_area .region .note:hover {
+			-moz-transform: scale(1.2);
+			-webkit-transform: scale(1.2);
+			transform: scale(1.2);
+		}
+		
+		/* notepad */
+		/* ======= */
+		.notepad {
+			position:absolute;
+			display:none;
+			top:0;
+			left:680px;
+			padding:10px;
+			background-color:#e7ad12;
+			font-size:14px;
+		}
+		
+		.notepad textarea {
+			width:300px;
+			height:150px;
+		}
+				
 		/* horizontal meter */
 		/* ================ */
 		.meter {
@@ -307,6 +348,7 @@
 						Tour de France 2013
 					</div>
 				</div>
+				<div class="note" data-text="Hopp hopp Tour de France!"></div>
 			</div>
 		</div>
 		<div class="cluster">
@@ -334,12 +376,13 @@
 					<div class="bar" style="margin-top:30px"></div>
 				</div>
 				<div class="options">
-					Bild<br/>
-					Lead<br/>
+					<input type="checkbox" checked="checked"> Bild<br/>
+					<input type="checkbox" checked="checked"> Lead<br/>
 					<select><option>Schrift: large</option></select><br/>
 					<select><option>Font: normal</option></select><br/>
 					<select><option>Farbe: Tokyo Flash</option></select>
 				</div>
+				<div class="note" data-text=""></div>
 			</div>
 		</div>
 		<div class="cluster">
@@ -352,6 +395,7 @@
 						Wer gewinnt die Tour de France?
 					</div>
 				</div>
+				<div class="note" data-text=""></div>
 			</div>
 			<div class="region">
 				<div class="maininfo">
@@ -375,12 +419,13 @@
 					<div class="bar" style="margin-top:30px"></div>
 				</div>
 				<div class="options">
-					Bild<br/>
-					Lead<br/>
+					<input type="checkbox" checked="checked"> Bild<br/>
+					<input type="checkbox" checked="checked"> Lead<br/>
 					<select><option>Schrift: large</option></select><br/>
 					<select><option>Font: normal</option></select><br/>
 					<select><option>Farbe: Tokyo Flash</option></select>
 				</div>
+				<div class="note" data-text="Lorem ipsum dolor. Note text is very important."></div>
 			</div>
 		</div>
 		<div class="cluster">
@@ -408,12 +453,13 @@
 					<div class="bar" style="margin-top:80px"></div>
 				</div>
 				<div class="options">
-					Bild<br/>
-					Lead<br/>
+					<input type="checkbox" checked="checked"> Bild<br/>
+					<input type="checkbox" checked="checked"> Lead<br/>
 					<select><option>Schrift: large</option></select><br/>
 					<select><option>Font: normal</option></select><br/>
 					<select><option>Farbe: Tokyo Flash</option></select>
 				</div>
+				<div class="note" data-text="Another Text."></div>
 			</div>
 			<div class="region">
 				<div class="maininfo">
@@ -422,6 +468,7 @@
 						Reisen
 					</div>
 				</div>
+				<div class="note" data-text=""></div>
 			</div>
 		</div>
 		<div class="cluster">
@@ -449,12 +496,13 @@
 					<div class="bar" style="margin-top:80px"></div>
 				</div>
 				<div class="options">
-					Bild<br/>
-					Lead<br/>
+					<input type="checkbox" checked="checked"> Bild<br/>
+					<input type="checkbox" checked="checked"> Lead<br/>
 					<select><option>Schrift: large</option></select><br/>
 					<select><option>Font: normal</option></select><br/>
 					<select><option>Farbe: Tokyo Flash</option></select>
 				</div>
+				<div class="note" data-text=""></div>
 			</div>
 			<div class="region">
 				<div class="maininfo">
@@ -463,6 +511,7 @@
 						«Ich spiele jetzt beim besten Verein der Welt.»
 					</div>
 				</div>
+				<div class="note" data-text=""></div>
 			</div>
 		</div>
 		<div class="cluster">
@@ -619,7 +668,7 @@
 	
 	<div class="meter"></div>
 	
-	
+	<div class="notepad"><textarea></textarea></div>
 	
 	
 	
@@ -688,17 +737,15 @@
 							/* region dropped on another region */
 							if ( ui.draggable.hasClass("region") ) {
 								$(this).after(ui.draggable);
-								ui.draggable.css("top", 0).css("left", 0);
-								placer.reload_iframes();
-								placer.update_cluster_masks();
 							}
 							/* new element dropped on a region */
 							else if ( ui.draggable.hasClass("element") ) {
 								$(this).after("<div class='region'>NEW REGION</div>");
-								ui.draggable.css("top", 0).css("left", 0);
-								placer.reload_iframes();
-								placer.update_cluster_masks();
+								placer.init_draggable_clusters_and_regions();
 							}
+							ui.draggable.css("top", 0).css("left", 0);
+							placer.reload_iframes();
+							placer.update_cluster_masks();
 						}
 					});
 					$( ".cluster" ).droppable({
@@ -706,18 +753,23 @@
 							/* cluster dropped on another cluster */
 							if ( ui.draggable.hasClass("cluster") ) {
 								$(this).after(ui.draggable);
-								ui.draggable.css("top", 0).css("left", 0);
-								placer.reload_iframes();
 							}
 							/* region dropped on an EMPTY cluster */
 							else if ( ui.draggable.hasClass("region") ) {
 								if ($(this).find(".region").length==0) {
 									$(this).append(ui.draggable);
-									ui.draggable.css("top", 0).css("left", 0);
-									placer.reload_iframes();
-									placer.update_cluster_masks();
 								}
 							}
+							/* new element dropped on an EMPTY cluster */
+							else if ( ui.draggable.hasClass("element") ) {
+								if ($(this).find(".region").length==0) {
+									$(this).append("<div class='region'>NEW REGION</div>");
+									placer.init_draggable_clusters_and_regions();
+								}
+							}
+							ui.draggable.css("top", 0).css("left", 0);
+							placer.reload_iframes();
+							placer.update_cluster_masks();
 						}
 					});
 				},
@@ -762,6 +814,42 @@
 					$(".cluster .masks").on( "click", ".mask", placer.clicked_mask );
 					placer.update_cluster_masks ();
 				},
+				/* process click on note icon */
+				/* ========================== */
+				clicked_noteicon:function() {
+					var new_position = $(this).parents(".region").offset().top+"px";
+					var note_text = $(this).attr("data-text");
+					var index_region = $(".region").index($(this).parents(".region"));
+					$(".notepad textarea").val(note_text);
+					if ( index_region == $(".notepad").attr("data-index_region") ) { $(".notepad").toggle(); }
+					else { $(".notepad").css("top", new_position).show(); }
+					$(".notepad").attr("data-index_region", index_region);
+				},
+				/* repaint note icons */
+				/* ================== */
+				update_note_icons:function() {
+					var notes = $(".region .note");
+					for(var counter=0; counter<notes.length; counter++) {
+						var current_note = notes.eq(counter);
+						var current_notetext = current_note.attr("data-text");
+						if (current_notetext!="") { current_note.addClass("active"); }
+						else current_note.removeClass("active");
+					}
+				},
+				/* typing into notepad */
+				/* =================== */
+				note_typed:function() {
+					var index_region = $(".notepad").attr("data-index_region");
+					$(".cluster .region").eq(index_region).find(".note").attr("data-text", $(".notepad textarea").val());
+					placer.update_note_icons();
+				},
+				/* initialise notepad */
+				/* ================== */
+				init_notepad:function() {
+					$(".cluster .region").on( "click", ".note", placer.clicked_noteicon );
+					$(".notepad").keyup(placer.note_typed);
+					placer.update_note_icons();
+				},
 				/* initialise placer */
 				/* ================= */
 				init:function() {
@@ -775,6 +863,7 @@
 					placer.init_draggable_toolelements ();
 					placer.init_draggable_clusters_and_regions ();
 					placer.init_cluster_masks ();
+					placer.init_notepad ();
 				}
 			}
 		})();

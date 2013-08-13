@@ -54,6 +54,7 @@ input, a.button, textarea {
 	border-radius:0.2em; 
 	-webkit-appearance: none;
 	appearance: none;
+	resize:none;
 }
 
 input.darkback, a.button.darkback {
