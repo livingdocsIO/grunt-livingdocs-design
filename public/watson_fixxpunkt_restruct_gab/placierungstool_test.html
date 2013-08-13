@@ -729,8 +729,16 @@
 				/* initialise clusters and regions in workspace */
 				/* ============================================ */
 				init_draggable_clusters_and_regions:function() {
-					$( ".region" ).draggable({ revert: "invalid", axis: "y" });
-					$( ".cluster" ).draggable({ revert: "invalid", axis: "y" });
+					$( ".region" ).draggable({ 
+						revert: "invalid",
+						axis: "y",
+						start: function(){$(".notepad").hide();}
+					});
+					$( ".cluster" ).draggable({
+						revert: "invalid",
+						axis: "y",
+						start: function(){$(".notepad").hide();}
+					});
 					
 					$( ".region" ).droppable({
 						drop: function( event, ui ) {
@@ -776,7 +784,10 @@
 				/* initialise elements in tool stack */
 				/* ================================= */
 				init_draggable_toolelements:function() {
-					$( ".tools li.element" ).draggable({ revert: "invalid" });
+					$( ".tools li.element" ).draggable({
+						revert: "invalid",
+						start: function(){$(".notepad").hide();}
+					});
 				},
 				/* repaint cluster-layout selections */
 				/* ================================= */
