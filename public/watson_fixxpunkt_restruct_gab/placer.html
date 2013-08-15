@@ -191,6 +191,10 @@
 			position:relative;
 		}
 		
+		.working_area .region.disabled {
+			background-color:#eeeeee;
+		}
+		
 		.working_area .region:last-child {
 			border-bottom:0;
 		} 
@@ -365,6 +369,7 @@
 		.tools .element.ui-draggable-dragging,
 		.tools .container.ui-draggable-dragging {
 			z-index:100;
+			border:1px solid #444444;
 		}
 		
 		/* buttons */
@@ -723,8 +728,9 @@
 			<input type="text" class="field" value="Elemente suchen" />
 			<select>
 				<option>Filter</option>
-				<option>Story</option>
-				<option>Poll</option>
+				<option>Storys</option>
+				<option>Polls</option>
+				<option>Flipper</option>
 			</select>
 		</div>
 		
@@ -813,14 +819,10 @@
 			<li class="container" data-element='{"type":"Cluster"}'>
 				Leeres Cluster
 			</li>
-			<li class="container" data-element='{"type":"Cluster-Bastler","id":1234,"title":"Eishockey"}'>
-				Cluster-Bastler<br/>
-				Tag: <select><option>Eishockey</option></select>
-			</li>
-			<!--
-			<li class="element" data-element='{"type":"Tag Teaser","id":1234,"title":"Digital"}'>
-				Tag Teaser<br/>
-				Tag: <select>
+			<li class="container" data-element='{"type":"Autocluster","title":"-1","id":"-1"}'>
+				Autocluster<br/>
+				<select class="valueselect" name="id">
+					<option value="-1">Tag wählen</option>
 					<option value="5678">Digital</option>
 					<option value="5678">Sport</option>
 					<option value="5678">Ausland</option>
@@ -829,11 +831,21 @@
 					<option value="5678">Grünspan</option>
 				</select>
 			</li>
-			-->
+			<li class="element" data-element='{"type":"Tag Teaser","title":"-1","id":"-1"}'>
+				Tag Teaser<br/>
+				<select class="valueselect" name="id">
+					<option value="-1">Tag wählen</option>
+					<option value="5678">Sport</option>
+					<option value="5678">Ausland</option>
+					<option value="5678">Reisen</option>
+					<option value="5678">Eisenbahn</option>
+					<option value="5678">Grünspan</option>
+				</select>
+			</li>
 		</ul>
 		
 		<div class="button save">speichern</div>
-		<div class="button cancel">abbrechen</div>
+		<div class="button cancel">zurück</div>
 		<div class="button live">live!</div>
 		
 	</div>
@@ -878,9 +890,9 @@
 					"snippet": "",
 					"url": "placer_snippet_cluster.html"
 				},
-				"Cluster-Bastler": {
+				"Autocluster": {
 					"snippet": "",
-					"url": "placer_snippet_cluster_bastler.html"
+					"url": "placer_snippet_autocluster.html"
 				}
 			};
 		
@@ -994,9 +1006,11 @@
 								/* new element dropped on a region */
 								else if ( ui.draggable.hasClass("element") ) {
 									var values = $.parseJSON( ui.draggable.attr("data-element") );
-									$(this).after(templates[values.type].snippet);
-									var new_element = $(this).next(".region");
-									placer.fill_in_element(new_element,values);
+									if (values.id!=-1) {
+										$(this).after(templates[values.type].snippet);
+										var new_element = $(this).next(".region");
+										placer.fill_in_element(new_element,values);
+									}
 								}
 								ui.draggable.css("top", 0).css("left", 0);
 								placer.reload_iframes();
@@ -1020,20 +1034,24 @@
 							else if ( ui.draggable.hasClass("element") ) {
 								if ($(this).find(".region").length==0) {
 									var values = $.parseJSON( ui.draggable.attr("data-element") );
-									$(this).append(templates[values.type].snippet);
-									var new_element = $(this).find(".region");
-									placer.fill_in_element(new_element,values);
-									placer.init_draggable_clusters_and_regions();
+									if (values.id!=-1) {
+										$(this).append(templates[values.type].snippet);
+										var new_element = $(this).find(".region");
+										placer.fill_in_element(new_element,values);
+										placer.init_draggable_clusters_and_regions();
+									}
 								}
 							}
 							/* new cluster dropped on a cluster */
 							else if ( ui.draggable.hasClass("container") ) {
 								var values = $.parseJSON( ui.draggable.attr("data-element") );
-								$(this).after(templates[values.type].snippet);
-								placer.init_draggable_clusters_and_regions();
-								if (values.type=="Cluster-Bastler") {
-									var new_element = $(this).next(".cluster");
-									placer.fill_in_element(new_element, values);
+								if (values.id!=-1) {
+									$(this).after(templates[values.type].snippet);
+									if ( values.type=="Autocluster" ) {
+										var new_element = $(this).next(".cluster");
+										placer.fill_in_element(new_element, values);
+									}
+									placer.init_draggable_clusters_and_regions();
 								}
 							}
 							ui.draggable.css("top", 0).css("left", 0);
@@ -1048,6 +1066,20 @@
 					$( ".tools li.element, .tools li.container" ).draggable({
 						revert: "invalid",
 						start: function(){$(".notepad").hide();}
+					});
+				},
+				/* selectors in toolstack */
+				/* ====================== */
+				init_selectable_toolelements:function() {
+					$( ".tools li.element select.valueselect, .tools li.container select.valueselect" ).change(function(){
+						var value = $(this).val();
+						var key = $(this).attr("name");
+						var title = $(this).find("option:selected").text();
+						var data = $.parseJSON( $(this).parents("li").attr("data-element") );
+						data["title"] = title;
+						data[key] = value;
+						var new_data = JSON.stringify(data);
+						$(this).parents("li").attr("data-element", new_data);
 					});
 				},
 				
@@ -1186,6 +1218,7 @@
 						placer.position_iframes(0);
 					});
 					placer.init_draggable_toolelements ();
+					placer.init_selectable_toolelements ();
 					placer.init_draggable_clusters_and_regions ();
 					placer.init_cluster_masks ();
 					placer.init_notepad ();
