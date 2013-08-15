@@ -633,7 +633,7 @@
 			<li class="element" data-type="story" data-id="meineid" data-title="Elefanten sind märchenhafte Wesen" data-rank="23" data-author="Peter Blunschi" data-time="160" data-performance="0.5,10,20,25,30,35,40,50,60,70">
 				AZ: Elefanten sind märchenhafte...
 			</li>
-			<li class="element">
+			<li class="element" data-element='{"type":"story","title":"Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"preformance":[0.5,10,20,25,30,35,40,50,60,70]}'>
 				BZ: Märchen erzählen
 			</li>
 			<li class="element">
@@ -896,6 +896,10 @@
 		/* initialise placer */
 		/* ================= */
 		placer.init();
+		
+		var value = $(".element").eq(1).attr("data-element");
+		var obj = $.parseJSON(value);
+		alert(  obj.type );
 		
 	</script>
 	
