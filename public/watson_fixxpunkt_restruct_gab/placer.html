@@ -161,6 +161,25 @@
 		.working_area .cluster:nth-child(3n+2) .masks .mask.highlight { background-color:#94e028; }
 		.working_area .cluster:nth-child(3n+3) .masks .mask.highlight { background-color:#f40f97; }
 		
+		.working_area .cluster .cluster_delete {
+			width:20px;
+			height:20px;
+			background-color:#222222;
+			background-size: 60%;
+			background-repeat:no-repeat;
+			background-position:center center;
+			background-image:url("media/img/main/icons/icon_delete_negative.png");
+			position:absolute;
+			left:-28px;
+			top:27px;
+			cursor:pointer;
+			display:none;
+		}
+		
+		.working_area .cluster:hover .cluster_delete {
+			display:block;
+		}
+		
 		/* regions */
 		.working_area .region {
 			font-size:1.4em;
@@ -169,6 +188,7 @@
 			padding:5px;
 			border-bottom:solid #dddddd 4px;
 			background-color:#ffffff;
+			position:relative;
 		}
 		
 		.working_area .region:last-child {
@@ -246,6 +266,25 @@
 			-moz-transform: scale(1.2);
 			-webkit-transform: scale(1.2);
 			transform: scale(1.2);
+		}
+		
+		.working_area .region .region_delete {
+			width:20px;
+			height:20px;
+			background-color:#222222;
+			background-size: 60%;
+			background-repeat:no-repeat;
+			background-position:center center;
+			background-image:url("media/img/main/icons/icon_delete_negative.png");
+			position:absolute;
+			right:0;
+			top:0;
+			cursor:pointer;
+			display:none;
+		}
+		
+		.working_area .region:hover .region_delete {
+			display:block;
 		}
 		
 		/* notepad */
@@ -327,6 +366,44 @@
 			z-index:100;
 		}
 		
+		/* buttons */
+		/* ======= */
+		.button {
+			color: #FFF;
+			padding: 4px 8px;
+			margin: 20px 5px 0 0;
+			background: #444;
+			-webkit-transition:background 1s, color 1s;
+			-moz-transition:background 1s, color 1s;
+			transition:background 1s, color 1s;
+			display:inline-block;
+			cursor:pointer;
+		}
+		
+		.button:hover {
+			background: #222;
+			color: #0FB6F8;
+		}
+		
+		.button.save, .button.live {
+			background: #86cc25;
+		}
+		
+		.button.save:hover, .button.live:hover {
+			color:#86cc25;
+			background: #222;
+		}
+		
+		.button.cancel {
+			color: #FFF;
+			text-decoration: none;
+		}
+		
+		.button.cancel:hover {
+			color: #F50F96;
+			background: #222;
+		}
+		
 		/* responsive views */
 		/* ================ */
 		@media screen and (max-width: 1900px) {
@@ -354,21 +431,24 @@
 	<div class="working_area">
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region" data-element='{"type":"topelement","id":1234,"title":"Tour de France 2013"}'>
+			<div class="region" data-element='{"type":"Topelement","id":1234,"title":"Tour de France 2013"}'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="type">
 						Topelement:<br/>
 						Tour de France 2013
 					</div>
 				</div>
-				<div class="note" data-text="Hopp hopp Tour de France!"></div>
 			</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region" data-element='{"type":"story","id":1234,"title":"Das Risiko sitzt unter der Haut","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<div class="region" data-element='{"type":"Story","id":1234,"title":"Das Risiko sitzt unter der Haut","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":""}'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="rank topten">#3</div>
 					<div class="details">
@@ -401,17 +481,19 @@
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region" data-element='{"type":"poll","id":1234,"title":"Wer gewinnt die Tour de France?"'>
+			<div class="region" data-element='{"type":"Poll","id":1234,"title":"Wer gewinnt die Tour de France?"'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="type">
 						Poll:<br/>
 						Wer gewinnt die Tour de France?
 					</div>
 				</div>
-				<div class="note" data-text=""></div>
 			</div>
-			<div class="region" data-element='{"type":"story","id":1234,"title":"Laster kippt und sorgt für Verkehrschaos","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<div class="region" data-element='{"type":"Story","id":1234,"title":"Laster kippt und sorgt für Verkehrschaos","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"Lorem ipsum dolor. Note text is very important."}'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="rank topten">#7</div>
 					<div class="details">
@@ -444,8 +526,10 @@
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="2"></div>
-			<div class="region" data-element='{"type":"story","id":1234,"title":"Immer wieder Merkel","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<div class="region" data-element='{"type":"Story","id":1234,"title":"Immer wieder Merkel","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"Another Text."}'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="rank topthirty">#24</div>
 					<div class="details">
@@ -475,20 +559,22 @@
 				</div>
 				<div class="note" data-text="Another Text."></div>
 			</div>
-			<div class="region" data-element='{"type":"tag_teaser","id":1234,"title":"Reisen"}'>
+			<div class="region" data-element='{"type":"Tag Teaser","id":1234,"title":"Reisen"}'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="type">
 						Tag Teaser:<br/>
 						Reisen
 					</div>
 				</div>
-				<div class="note" data-text=""></div>
 			</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="3"></div>
-			<div class="region" data-element='{"type":"story","id":1234,"title":"Auch Obama ist wieder auf der Front vertreten","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<div class="region" data-element='{"type":"Story","id":1234,"title":"Auch Obama ist wieder auf der Front vertreten","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":""}'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="rank toponehundred">#55</div>
 					<div class="details">
@@ -518,104 +604,115 @@
 				</div>
 				<div class="note" data-text=""></div>
 			</div>
-			<div class="region" data-element='{"type":"flipper","id":1234,"title":"«Ich spiele jetzt beim besten Verein der Welt.»"}'>
+			<div class="region" data-element='{"type":"Flipper","id":1234,"title":"«Ich spiele jetzt beim besten Verein der Welt.»"}'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="type">
 						Flipper:<br/>
 						«Ich spiele jetzt beim besten Verein der Welt.»
 					</div>
 				</div>
-				<div class="note" data-text=""></div>
 			</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">cluster 3.1 E1</div>
-			<div class="region">cluster 3.1 E2</div>
-			<div class="region">cluster 3.1 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.1 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.1 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.1 E3</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="2"></div>
-			<div class="region">cluster 3.2 E1</div>
-			<div class="region">cluster 3.2 E2</div>
-			<div class="region">cluster 3.2 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.2 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.2 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.2 E3</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="3"></div>
-			<div class="region">cluster 3.3 E1</div>
-			<div class="region">cluster 3.3 E2</div>
-			<div class="region">cluster 3.3 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.3 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.3 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.3 E3</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="4"></div>
-			<div class="region">cluster 3.4 E1</div>
-			<div class="region">cluster 3.4 E2</div>
-			<div class="region">cluster 3.4 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.4 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.4 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.4 E3</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">cluster 4.1 E1</div>
-			<div class="region">cluster 4.1 E2</div>
-			<div class="region">cluster 4.1 E3</div>
-			<div class="region">cluster 4.1 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.1 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.1 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.1 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.1 E4</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="2"></div>
-			<div class="region">cluster 4.2 E1</div>
-			<div class="region">cluster 4.2 E2</div>
-			<div class="region">cluster 4.2 E3</div>
-			<div class="region">cluster 4.2 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.2 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.2 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.2 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.2 E4</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="3"></div>
-			<div class="region">cluster 4.3 E1</div>
-			<div class="region">cluster 4.3 E2</div>
-			<div class="region">cluster 4.3 E3</div>
-			<div class="region">cluster 4.3 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.3 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.3 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.3 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.3 E4</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">cluster 5.1 E1</div>
-			<div class="region">cluster 5.1 E2</div>
-			<div class="region">cluster 5.1 E3</div>
-			<div class="region">cluster 5.1 E4</div>
-			<div class="region">cluster 5.1 E5</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E5</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="2"></div>
-			<div class="region">cluster 5.2 E1</div>
-			<div class="region">cluster 5.2 E2</div>
-			<div class="region">cluster 5.2 E3</div>
-			<div class="region">cluster 5.2 E4</div>
-			<div class="region">cluster 5.2 E5</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E5</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="3"></div>
-			<div class="region">cluster 5.3 E1</div>
-			<div class="region">cluster 5.3 E2</div>
-			<div class="region">cluster 5.3 E3</div>
-			<div class="region">cluster 5.3 E4</div>
-			<div class="region">cluster 5.3 E5</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E5</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">cluster 6.1 E1</div>
-			<div class="region">cluster 6.1 E2</div>
-			<div class="region">cluster 6.1 E3</div>
-			<div class="region">cluster 6.1 E4</div>
-			<div class="region">cluster 6.1 E5</div>
-			<div class="region">cluster 6.1 E6</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E5</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E6</div>
 		</div>
 	</div>
 	
@@ -627,52 +724,118 @@
 		</div>
 		
 		<h3 class="title">
-			Neuer Partnercontent
+			Neue Partnerstorys
 		</h3>
 		<ul>
-			<li class="element" data-element='{"type":"story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"aaa"}'>
 				AZ: Elefanten sind märchenhafte...
 			</li>
-			<li class="element" data-element='{"type":"story","id":1234,"title":"BZ: Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"BZ: Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"bbb"}'>
 				BZ: Märchen erzählen
 			</li>
-			<li class="element" data-element='{"type":"story","id":1234,"title":"CZ: Es tut tuten tun","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"CZ: Es tut tuten tun","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"ccc"}'>
 				CZ: Es tut tuten tun
 			</li>
-			<li class="element" data-element='{"type":"story","id":1234,"title":"Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"ddd"}'>
 				AZ: Elefanten sind märchenhafte...
 			</li>
-			<li class="element" data-element='{"type":"story","id":1234,"title":"BZ: Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"BZ: Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"eee"}'>
 				BZ: Märchen erzählen
 			</li>
-			<li class="element" data-element='{"type":"story","id":1234,"title":"CZ: Es tut tuten tun","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"CZ: Es tut tuten tun","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"fff"}'>
 				CZ: Es tut tuten tun
 			</li>
 		</ul>
 		
 		<h3 class="title">
-			Neu Publiziert
+			Neu publizierte Storys
 		</h3>
 		<ul>
-			<li class="element">
-				Lorem ipsum dolor
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"ggg"}'>
+				Elefanten sind märchenhafte...
 			</li>
-			<li class="element">
-				Caelum obscurum est, Domitilla u...
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"hhh"}'>
+				Märchen erzählen
 			</li>
-			<li class="element">
-				Lucius ridet et clamat
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Es tut tuten tun","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"iii"}'>
+				Es tut tuten tun
 			</li>
-			<li class="element">
-				Lorem ipsum dolor
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"jjj"}'>
+				Elefanten sind märchenhafte...
 			</li>
-			<li class="element">
-				Sic amet
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"kkk"}'>
+				Märchen erzählen
 			</li>
-			<li class="element">
-				Caelum obscurum est, Domitilla u...
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Es tut tuten tun","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"lll"}'>
+				Es tut tuten tun
 			</li>
 		</ul>
+		
+		<h3 class="title">
+			Neue Polls
+		</h3>
+		<ul>
+			<li class="element" data-element='{"type":"Poll","id":1234,"title":"Superpoll"}'>
+				Superpoll
+			</li>
+			<li class="element" data-element='{"type":"Poll","id":1234,"title":"Schöner Poll"}'>
+				Schöner Poll
+			</li>
+			<li class="element" data-element='{"type":"Poll","id":1234,"title":"Trara Poll"}'>
+				Trara Poll
+			</li>
+		</ul>
+		
+		<h3 class="title">
+			Neue HTML-Elemente
+		</h3>
+		<ul>
+			<li class="element" data-element='{"type":"HTML","id":1234,"title":"Neues MonsterHTML"}'>
+				Neues MonsterHTML
+			</li>
+			<li class="element" data-element='{"type":"HTML","id":1234,"title":"«Ich mach alles kaputt»-HTML"}'>
+				«Ich mach alles kaputt»-HTML
+			</li>
+			<li class="element" data-element='{"type":"HTML","id":1234,"title":"HTM(hel)L"}'>
+				HTM(hel)L
+			</li>
+		</ul>
+		
+		<!--<h3 class="title">
+			Special
+		</h3>
+		<ul>
+			<li class="element" data-element='{"type":"Tag Teaser","id":1234,"title":"Digital"}'>
+				Tag Teaser<br/>
+				Tag: <select>
+					<option value="5678">Digital</option>
+					<option value="5678">Sport</option>
+					<option value="5678">Ausland</option>
+					<option value="5678">Reisen</option>
+					<option value="5678">Eisenbahn</option>
+					<option value="5678">Grünspan</option>
+				</select>
+			</li>
+			<li class="element" data-element='{"type":"Tag Teaser","id":1234,"title":"Reisen","size":3}'>
+				Cluster-Bastler<br/>
+				Tag: <select><option>Reisen</option></select><br/>
+				Grösse: <select>
+					<option>1</option>
+					<option>2</option>
+					<option>3</option>
+					<option>4</option>
+					<option>5</option>
+					<option>6</option>
+				</select>
+			</li>
+			<li class="element" data-element='{"type":"Cluster"}'>
+				Leeres Cluster
+			</li>
+		</ul>-->
+		
+		<div class="button save">speichern</div>
+		<div class="button cancel">abbrechen</div>
+		<div class="button live">live!</div>
 		
 	</div>
 	
@@ -696,9 +859,21 @@
 			/* this json holds all html-snippets */
 			/* ================================= */
 			var templates = {
-				"story": {
+				"Story": {
 					"snippet": "",
 					"url": "placer_snippet_story.html"
+				},
+				"Poll": {
+					"snippet": "",
+					"url": "placer_snippet_special.html"
+				},
+				"HTML": {
+					"snippet": "",
+					"url": "placer_snippet_special.html"
+				},
+				"Tag Teaser": {
+					"snippet": "",
+					"url": "placer_snippet_special.html"
 				}
 			};
 		
@@ -752,13 +927,13 @@
 				/* fill in values into new placed story */
 				/* ==================================== */
 				fill_in_story_values:function( new_element, values ) {
-					new_element.attr("data-element", JSON.stringify(values));
 					new_element.find(".rank").html("#"+values.rank);
 					if (values.rank<=10) new_element.find(".rank").addClass("topten");
 					else if (values.rank<=30) new_element.find(".rank").addClass("topthirty");
 					else if (values.rank<=100) new_element.find(".rank").addClass("toponehundred");
-					new_element.find(".details strong").html(values.title);
-					new_element.find(".details strong").after("<br/>Vor "+values.time+" Minuten<br/>"+values.author);
+					new_element.find(".details strong").html(values.title).after("<br/>Vor "+values.time+" Minuten<br/>"+values.author);
+					new_element.find(".note").attr("data-text", values.note);
+					placer.update_note_icons();
 					for (var counter=0; counter<values.performance.length; counter++ ) {
 						var current_val = values.performance[counter];
 						var margin = current_val * 80 / 100;
@@ -768,7 +943,15 @@
 				/* fill in values into new placed special_element */
 				/* ============================================== */
 				fill_in_special_element_values:function( new_element, values ) {
-					alert("gung ho!");
+					new_element.find(".type").html(values.type+"<br/>"+values.title);
+				},
+				/* basic fill in element */
+				/* ===================== */
+				fill_in_element:function( new_element, values ) {
+					new_element.attr("data-element", JSON.stringify(values));
+					if (values.type == "Story") placer.fill_in_story_values( new_element, values );
+					else placer.fill_in_special_element_values( new_element, values );
+					placer.init_draggable_clusters_and_regions();
 				},
 				/* initialise clusters and regions in workspace */
 				/* ============================================ */
@@ -786,22 +969,23 @@
 					
 					$( ".region" ).droppable({
 						drop: function( event, ui ) {
-							/* region dropped on another region */
-							if ( ui.draggable.hasClass("region") ) {
-								$(this).after(ui.draggable);
+							/* check if cluster is already full */
+							if ($(this).siblings(".region").length<5) {
+								/* region dropped on another region */
+								if ( ui.draggable.hasClass("region") ) {
+									$(this).after(ui.draggable);
+								}
+								/* new element dropped on a region */
+								else if ( ui.draggable.hasClass("element") ) {
+									var values = $.parseJSON( ui.draggable.attr("data-element") );
+									$(this).after(templates[values.type].snippet);
+									var new_element = $(this).next(".region");
+									placer.fill_in_element(new_element,values);
+								}
+								ui.draggable.css("top", 0).css("left", 0);
+								placer.reload_iframes();
+								placer.update_cluster_masks();
 							}
-							/* new element dropped on a region */
-							else if ( ui.draggable.hasClass("element") ) {
-								var values = $.parseJSON( ui.draggable.attr("data-element") );
-								$(this).after(templates[values.type].snippet);
-								var new_element = $(this).next(".region");
-								if (values.type == "story") placer.fill_in_story_values( new_element, values );
-								else placer.fill_in_special_element_values( new_element, values );
-								placer.init_draggable_clusters_and_regions();
-							}
-							ui.draggable.css("top", 0).css("left", 0);
-							placer.reload_iframes();
-							placer.update_cluster_masks();
 						}
 					});
 					$( ".cluster" ).droppable({
@@ -819,7 +1003,10 @@
 							/* new element dropped on an EMPTY cluster */
 							else if ( ui.draggable.hasClass("element") ) {
 								if ($(this).find(".region").length==0) {
-									$(this).append("<div class='region'>NEW REGION</div>");
+									var values = $.parseJSON( ui.draggable.attr("data-element") );
+									$(this).append(templates[values.type].snippet);
+									var new_element = $(this).find(".region");
+									placer.fill_in_element(new_element,values);
 									placer.init_draggable_clusters_and_regions();
 								}
 							}
@@ -870,7 +1057,7 @@
 				/* initialise cluster-layout options */
 				/* ================================= */
 				init_cluster_masks:function() {
-					$(".cluster .masks").on( "click", ".mask", placer.clicked_mask );
+					$(document).on( "click", ".mask", placer.clicked_mask );
 					placer.update_cluster_masks ();
 				},
 				/* process click on note icon */
@@ -905,7 +1092,7 @@
 				/* initialise notepad */
 				/* ================== */
 				init_notepad:function() {
-					$(".cluster .region").on( "click", ".note", placer.clicked_noteicon );
+					$(document).on( "click", ".note", placer.clicked_noteicon );
 					$(".notepad").keyup(placer.note_typed);
 					placer.update_note_icons();
 				},
@@ -922,6 +1109,23 @@
 				    	});
 					});
 				},
+				/* initialise delete buttons */
+				/* ========================= */
+				init_delete_buttons:function() {
+					$(document).on( "click", ".cluster_delete", function(){
+						$(".notepad").hide();
+						$(this).parents(".cluster").remove();
+						placer.position_meter();
+						placer.position_iframes(0);
+					} );
+					$(document).on( "click", ".region_delete", function(){
+						$(".notepad").hide();
+						$(this).parents(".region").remove();
+						placer.update_cluster_masks ();
+						placer.position_meter();
+						placer.position_iframes(0);
+					} );
+				},
 				/* initialise placer */
 				/* ================= */
 				init:function() {
@@ -937,6 +1141,7 @@
 					placer.init_draggable_clusters_and_regions ();
 					placer.init_cluster_masks ();
 					placer.init_notepad ();
+					placer.init_delete_buttons ();
 				}
 			}
 		})();
