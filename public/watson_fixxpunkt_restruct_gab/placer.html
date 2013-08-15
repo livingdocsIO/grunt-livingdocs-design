@@ -317,8 +317,8 @@
 			left:340px;
 			width:100%;
 			height:0;
-			border-top:4px dashed #222222;
-			margin-top:-4px;
+			border-top:2px dashed #222222;
+			margin-top:-2px;
 			background-color:rgba(255,255,255,0.75);
 		}
 		
@@ -355,14 +355,15 @@
 			display:inline-block;
 		}
 		
-		.tools .element {
+		.tools .element, .tools .container {
 			background-color:#dddddd;
 			padding:5px;
 			margin-bottom:4px;
 			cursor:move;
 		}
 		
-		.tools .element.ui-draggable-dragging {
+		.tools .element.ui-draggable-dragging,
+		.tools .container.ui-draggable-dragging {
 			z-index:100;
 		}
 		
@@ -720,7 +721,11 @@
 		
 		<div class="search">
 			<input type="text" class="field" value="Elemente suchen" />
-			<select><option>Filter</option></select>
+			<select>
+				<option>Filter</option>
+				<option>Story</option>
+				<option>Poll</option>
+			</select>
 		</div>
 		
 		<h3 class="title">
@@ -801,10 +806,18 @@
 			</li>
 		</ul>
 		
-		<!--<h3 class="title">
+		<h3 class="title">
 			Special
 		</h3>
 		<ul>
+			<li class="container" data-element='{"type":"Cluster"}'>
+				Leeres Cluster
+			</li>
+			<li class="container" data-element='{"type":"Cluster-Bastler","id":1234,"title":"Eishockey"}'>
+				Cluster-Bastler<br/>
+				Tag: <select><option>Eishockey</option></select>
+			</li>
+			<!--
 			<li class="element" data-element='{"type":"Tag Teaser","id":1234,"title":"Digital"}'>
 				Tag Teaser<br/>
 				Tag: <select>
@@ -816,22 +829,8 @@
 					<option value="5678">Grünspan</option>
 				</select>
 			</li>
-			<li class="element" data-element='{"type":"Tag Teaser","id":1234,"title":"Reisen","size":3}'>
-				Cluster-Bastler<br/>
-				Tag: <select><option>Reisen</option></select><br/>
-				Grösse: <select>
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-					<option>6</option>
-				</select>
-			</li>
-			<li class="element" data-element='{"type":"Cluster"}'>
-				Leeres Cluster
-			</li>
-		</ul>-->
+			-->
+		</ul>
 		
 		<div class="button save">speichern</div>
 		<div class="button cancel">abbrechen</div>
@@ -874,10 +873,22 @@
 				"Tag Teaser": {
 					"snippet": "",
 					"url": "placer_snippet_special.html"
+				},
+				"Cluster": {
+					"snippet": "",
+					"url": "placer_snippet_cluster.html"
+				},
+				"Cluster-Bastler": {
+					"snippet": "",
+					"url": "placer_snippet_cluster_bastler.html"
 				}
 			};
 		
 			return {
+				/* ========================== */
+				/* === IFRAME POSITIONING === */
+				/* ========================== */
+				
 				/* calculate new position of iframes and start animation */
 				/* ===================================================== */
 				position_iframes:function(duration) {
@@ -897,6 +908,11 @@
 							//iframes[counter].find(".region").not(":has(.region)").eq(top_region).parents(".cluster").stop().animate({ opacity: 1 }, duration );
 						}
 					}
+				},
+				/* reload preview iframe-content */
+				/* ===================== */
+				reload_iframes:function() {
+					$("iframe.preview").attr("src", "front_bespielt.html");
 				},
 				/* calculate and set new position of horizontal meter */
 				/* ================================================== */
@@ -919,11 +935,11 @@
 						placer.position_iframes(1000);
 					}, 300);
 				},
-				/* reload preview iframe-content */
-				/* ===================== */
-				reload_iframes:function() {
-					$("iframe.preview").attr("src", "front_bespielt.html");
-				},
+				
+				/* ============================ */
+				/* === PLACING NEW ELEMENTS === */
+				/* ============================ */
+				
 				/* fill in values into new placed story */
 				/* ==================================== */
 				fill_in_story_values:function( new_element, values ) {
@@ -956,18 +972,18 @@
 				/* initialise clusters and regions in workspace */
 				/* ============================================ */
 				init_draggable_clusters_and_regions:function() {
-					$( ".region" ).draggable({ 
+					$( ".region:not(.disabled)" ).draggable({ 
 						revert: "invalid",
 						axis: "y",
 						start: function(){$(".notepad").hide();}
 					});
-					$( ".cluster" ).draggable({
+					$( ".cluster:not(.disabled)" ).draggable({
 						revert: "invalid",
 						axis: "y",
 						start: function(){$(".notepad").hide();}
 					});
 					
-					$( ".region" ).droppable({
+					$( ".region:not(.disabled)" ).droppable({
 						drop: function( event, ui ) {
 							/* check if cluster is already full */
 							if ($(this).siblings(".region").length<5) {
@@ -1010,6 +1026,16 @@
 									placer.init_draggable_clusters_and_regions();
 								}
 							}
+							/* new cluster dropped on a cluster */
+							else if ( ui.draggable.hasClass("container") ) {
+								var values = $.parseJSON( ui.draggable.attr("data-element") );
+								$(this).after(templates[values.type].snippet);
+								placer.init_draggable_clusters_and_regions();
+								if (values.type=="Cluster-Bastler") {
+									var new_element = $(this).next(".cluster");
+									placer.fill_in_element(new_element, values);
+								}
+							}
 							ui.draggable.css("top", 0).css("left", 0);
 							placer.reload_iframes();
 							placer.update_cluster_masks();
@@ -1019,11 +1045,16 @@
 				/* initialise elements in tool stack */
 				/* ================================= */
 				init_draggable_toolelements:function() {
-					$( ".tools li.element" ).draggable({
+					$( ".tools li.element, .tools li.container" ).draggable({
 						revert: "invalid",
 						start: function(){$(".notepad").hide();}
 					});
 				},
+				
+				/* ================================ */
+				/* === CLUSTER-LAYOUT SELECTION === */
+				/* ================================ */
+				
 				/* repaint cluster-layout selections */
 				/* ================================= */
 				update_cluster_masks:function() {
@@ -1060,6 +1091,11 @@
 					$(document).on( "click", ".mask", placer.clicked_mask );
 					placer.update_cluster_masks ();
 				},
+				
+				/* ============= */
+				/* === NOTES === */
+				/* ============= */
+				
 				/* process click on note icon */
 				/* ========================== */
 				clicked_noteicon:function() {
@@ -1096,6 +1132,11 @@
 					$(".notepad").keyup(placer.note_typed);
 					placer.update_note_icons();
 				},
+				
+				/* =============== */
+				/* === VARIOUS === */
+				/* =============== */
+				
 				/* load html-snippets from files */
 				/* ============================= */
 				init_snippets:function() {
@@ -1120,7 +1161,14 @@
 					} );
 					$(document).on( "click", ".region_delete", function(){
 						$(".notepad").hide();
-						$(this).parents(".region").remove();
+						/* remove the region */
+						if ($(this).parents(".cluster").find(".region").length>1) {
+							$(this).parents(".region").remove();
+						}
+						/* if it's the last region, remove the cluster */
+						else {
+							$(this).parents(".cluster").remove();
+						}
 						placer.update_cluster_masks ();
 						placer.position_meter();
 						placer.position_iframes(0);
