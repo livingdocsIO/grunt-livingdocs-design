@@ -280,6 +280,10 @@
 	overflow:hidden;
 }
 
+.working_area .region select option.combo_bd {
+	border-left:20px solid;
+}
+
 /* notepad */
 /* ======= */
 .notepad {
