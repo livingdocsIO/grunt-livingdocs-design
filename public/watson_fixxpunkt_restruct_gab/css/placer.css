@@ -303,13 +303,31 @@
 	padding:5px;
 }
 
-.tools .search input.field {
+.tools input.field {
 	width:195px;
 	margin-bottom:5px;
 }
 
 .tools .search select {
 	width:210px;
+}
+
+.tools .search ul {
+	width:250px; 
+	background-color:#ffffff;
+	border:4px solid #ffffff;
+	border-bottom:0;
+	position:fixed;
+	z-index:100;
+	display:none;
+}
+
+.tools .search li.element {
+	background-color:#e7ad12;
+}
+
+.tools .search li.element .type {
+	font-weight:bold;
 }
 
 .tools .title {
@@ -362,12 +380,12 @@
 	background: #222;
 }
 
-.button.cancel {
+.button.revert {
 	color: #FFF;
 	text-decoration: none;
 }
 
-.button.cancel:hover {
+.button.revert:hover {
 	color: #F50F96;
 	background: #222;
 }

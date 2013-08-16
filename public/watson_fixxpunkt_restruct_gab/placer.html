@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
-		<title>watson - the web</title>
+		<title>watson - the front</title>
 		
 		<!-- Mobile viewport optimization -->
 		<meta name="HandheldFriendly" content="True">
@@ -88,6 +88,7 @@
 					<select><option>Font: normal</option></select><br/>
 					<select><option>Farbe: Tokyo Flash</option></select>
 				</div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="note" data-text=""></div>
 			</div>
 		</div>
@@ -133,6 +134,7 @@
 					<select><option>Font: normal</option></select><br/>
 					<select><option>Farbe: Tokyo Flash</option></select>
 				</div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="note" data-text="Lorem ipsum dolor. Note text is very important."></div>
 			</div>
 		</div>
@@ -169,6 +171,7 @@
 					<select><option>Font: normal</option></select><br/>
 					<select><option>Farbe: Tokyo Flash</option></select>
 				</div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="note" data-text="Another Text."></div>
 			</div>
 			<div class="region" data-element='{"type":"Tag Teaser","id":1234,"title":"Reisen"}'>
@@ -214,6 +217,7 @@
 					<select><option>Font: normal</option></select><br/>
 					<select><option>Farbe: Tokyo Flash</option></select>
 				</div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="note" data-text=""></div>
 			</div>
 			<div class="region" data-element='{"type":"Flipper","id":1234,"title":"«Ich spiele jetzt beim besten Verein der Welt.»"}'>
@@ -331,13 +335,30 @@
 	<div class="tools">
 		
 		<div class="search">
-			<input type="text" class="field" value="Elemente suchen" />
+			<input type="text" class="field" data-default="Elemente suchen" value="Elemente suchen" />
 			<select>
 				<option>Filter</option>
 				<option>Storys</option>
 				<option>Polls</option>
 				<option>Flipper</option>
 			</select>
+			<ul>
+				<li class="element" data-element='{"type":"Story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"aaa"}'>
+					AZ: Elefanten sind märchenhafte...
+				</li>
+				<li class="element" data-element='{"type":"Story","id":1234,"title":"BZ: Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"bbb"}'>
+					BZ: Märchen erzählen
+				</li>
+				<li class="element" data-element='{"type":"Poll","id":1234,"title":"Superpoll"}'>
+					<span class="type">Poll:</span> Superpoll
+				</li>
+				<li class="element" data-element='{"type":"Story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"ddd"}'>
+					AZ: Elefanten sind märchenhafte...
+				</li>
+				<li class="element" data-element='{"type":"HTML","id":1234,"title":"«Ich mach alles kaputt»-HTML"}'>
+					<span class="type">HTML:</span> «Ich mach alles kaputt»-HTML
+				</li>
+			</ul>
 		</div>
 		
 		<h3 class="title">
@@ -427,31 +448,33 @@
 			</li>
 			<li class="container" data-element='{"type":"Autocluster","title":"-1","id":"-1"}'>
 				Autocluster<br/>
-				<select class="valueselect" name="id">
+				<input class="field tagselect" data-default="Tag eingeben" value="Tag eingeben" />
+				<!--<select class="valueselect" name="id">
 					<option value="-1">Tag wählen</option>
-					<option value="5678">Digital</option>
-					<option value="5678">Sport</option>
-					<option value="5678">Ausland</option>
-					<option value="5678">Reisen</option>
-					<option value="5678">Eisenbahn</option>
-					<option value="5678">Grünspan</option>
-				</select>
+					<option value="1">Digital</option>
+					<option value="2">Sport</option>
+					<option value="3">Ausland</option>
+					<option value="4">Reisen</option>
+					<option value="5">Eisenbahn</option>
+					<option value="6">Grünspan</option>
+				</select>-->
 			</li>
 			<li class="element" data-element='{"type":"Tag Teaser","title":"-1","id":"-1"}'>
 				Tag Teaser<br/>
-				<select class="valueselect" name="id">
+				<input class="field tagselect" data-default="Tag eingeben" value="Tag eingeben" />
+				<!--<select class="valueselect" name="id">
 					<option value="-1">Tag wählen</option>
-					<option value="5678">Sport</option>
-					<option value="5678">Ausland</option>
-					<option value="5678">Reisen</option>
-					<option value="5678">Eisenbahn</option>
-					<option value="5678">Grünspan</option>
-				</select>
+					<option value="111">Sport</option>
+					<option value="222">Ausland</option>
+					<option value="333">Reisen</option>
+					<option value="444">Eisenbahn</option>
+					<option value="555">Grünspan</option>
+				</select>-->
 			</li>
 		</ul>
 		
 		<div class="button save">speichern</div>
-		<div class="button cancel">zurück</div>
+		<div class="button revert">zurück</div>
 		<div class="button live">live!</div>
 		
 	</div>
