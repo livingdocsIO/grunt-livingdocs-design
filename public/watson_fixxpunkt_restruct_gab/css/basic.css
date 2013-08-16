@@ -116,6 +116,8 @@ select {
 
 select option {
 	border-bottom:2px solid #eeeeee;
+	background-color:#ffffff;
+	color:#222222;
 }
 
 
