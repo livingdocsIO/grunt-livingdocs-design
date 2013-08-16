@@ -369,12 +369,21 @@ return {
 	/* === VARIOUS === */
 	/* =============== */
 	
+	check_for_empty_working_area:function() {
+		var num_clusters = $(".working_area .cluster").length;
+		if (!num_clusters) {
+			$(".working_area").append(templates.Cluster.snippet);
+			placer.init_draggable_clusters_and_regions();
+		}
+	},
+	
 	/* initialise delete buttons */
 	/* ========================= */
 	init_delete_buttons:function() {
 		$(document).on( "click", ".cluster_delete", function(){
 			$(".notepad").hide();
 			$(this).parents(".cluster").remove();
+			placer.check_for_empty_working_area();
 			placer.position_meter();
 			placer.position_iframes(0);
 		} );
@@ -388,6 +397,7 @@ return {
 			else {
 				$(this).parents(".cluster").remove();
 			}
+			placer.check_for_empty_working_area();
 			placer.update_cluster_masks ();
 			placer.position_meter();
 			placer.position_iframes(0);
@@ -412,6 +422,7 @@ return {
 		placer.init_notepad ();
 		placer.init_delete_buttons ();
 		placer.init_storage_buttons ();
+		placer.check_for_empty_working_area ();
 	}
 }
 })();
