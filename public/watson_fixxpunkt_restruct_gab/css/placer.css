@@ -167,6 +167,10 @@
 	cursor:move;
 }
 
+.working_area .region .maininfo {
+	margin-bottom:5px;
+}
+
 .working_area .region .type {
 	text-align:center;
 	font-weight:bold;
@@ -251,6 +255,30 @@
 
 .working_area .region:hover .region_delete {
 	display:block;
+}
+
+.working_area .region .edit {
+	display:inline-block;
+	height:20px;
+	background-color:#222222;
+	line-height:20px;
+	position:absolute;
+	top:0;
+	right:25px;
+	color:#ffffff;
+	font-weight:bold;
+	padding:0 2px;
+	display:none;
+}
+
+.working_area .region:hover .edit {
+	display:block;
+}
+
+.working_area .region select {
+	font-size:12px;
+	width:140px;
+	overflow:hidden;
 }
 
 /* notepad */
@@ -402,7 +430,7 @@
 	}
 }
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-width: 1550px) {
 	.preview.desktop {
 		display:none;
 	}
@@ -411,7 +439,13 @@
 		right:10px;
 	}
 }
-		
+
+@media screen and (max-width: 1050px) {
+	.preview.mobile,
+	.meter {
+		display:none;
+	}
+}	
 		
 		
 		

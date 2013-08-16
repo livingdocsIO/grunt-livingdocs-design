@@ -15,9 +15,9 @@ var scroll_timeout;
 /* ================================= */
 var templates = {
 	"Story": { "url": "placer_snippet_story.html" },
-	"Poll": { "url": "placer_snippet_special.html" },
-	"HTML": { "url": "placer_snippet_special.html" },
-	"Tag Teaser": { "url": "placer_snippet_special.html" },
+	"Poll": { "url": "placer_snippet_special_editable.html" },
+	"HTML": { "url": "placer_snippet_special_editable.html" },
+	"Tag Teaser": { "url": "placer_snippet_special_noneditable.html" },
 	"Cluster": { "url": "placer_snippet_cluster.html" },
 	"Autocluster": { "url": "placer_snippet_autocluster.html" }
 };
@@ -320,6 +320,7 @@ return {
 	/* ================== */
 	init_notepad:function() {
 		$(document).on( "click", ".note", placer.clicked_noteicon );
+		$(document).on( "blur", ".notepad textarea", function(){$(".notepad").hide();} );
 		$(".notepad").keyup(placer.note_typed);
 		placer.update_note_icons();
 	},
