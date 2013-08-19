@@ -25,6 +25,14 @@ strong {
 	font-weight:bold;
 }
 
+::selection {
+	background: #f488c8;
+}
+
+::-moz-selection {
+	background: #f488c8;
+}
+
 /* wrappers */
 /* ======== */
 .wrapper {

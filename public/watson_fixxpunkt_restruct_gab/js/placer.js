@@ -84,8 +84,15 @@ return {
 		else if (values.rank<=30) new_element.find(".rank").addClass("topthirty");
 		else if (values.rank<=100) new_element.find(".rank").addClass("toponehundred");
 		new_element.find(".details strong").html(values.title).after("<br/>Vor "+values.time+" Minuten<br/>"+values.author);
+		new_element.find("select[name=color_combo]").val(values.color_combo);
+		new_element.find("select[name=font_size]").val(values.font_size);
+		new_element.find("select[name=font_face]").val(values.font_face);
+		new_element.find("input[name=image]").attr("checked", values.image);
+		new_element.find("input[name=lead]").attr("checked", values.lead);
+		/* notes */
 		new_element.find(".note").attr("data-text", values.note);
 		placer.update_note_icons();
+		/* performance bars */
 		var performance_pixels = 80;
 		for (var counter=0; counter<values.performance.length; counter++ ) {
 			var current_val = values.performance[counter];
