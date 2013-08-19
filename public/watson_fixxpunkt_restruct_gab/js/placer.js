@@ -2,10 +2,6 @@
 
 
 
-
-
-
-
 var placer = (function(){
 var top_region = 0;
 var top_pos = 0;
@@ -15,9 +11,11 @@ var scroll_timeout;
 /* ================================= */
 var templates = {
 	"Story": { "url": "placer_snippet_story.html" },
-	"Poll": { "url": "placer_snippet_special_editable.html" },
-	"HTML": { "url": "placer_snippet_special_editable.html" },
-	"Tag Teaser": { "url": "placer_snippet_special_noneditable.html" },
+	"Poll": { "url": "placer_snippet_special.html" },
+	"HTML": { "url": "placer_snippet_special.html" },
+	"Topelement": { "url": "placer_snippet_special.html" },
+	"Flipper": { "url": "placer_snippet_special.html" },
+	"Tag Teaser": { "url": "placer_snippet_special.html" },
 	"Cluster": { "url": "placer_snippet_cluster.html" },
 	"Autocluster": { "url": "placer_snippet_autocluster.html" }
 };
@@ -88,9 +86,10 @@ return {
 		new_element.find(".details strong").html(values.title).after("<br/>Vor "+values.time+" Minuten<br/>"+values.author);
 		new_element.find(".note").attr("data-text", values.note);
 		placer.update_note_icons();
+		var performance_pixels = 80;
 		for (var counter=0; counter<values.performance.length; counter++ ) {
 			var current_val = values.performance[counter];
-			var margin = current_val * 80 / 100;
+			var margin = performance_pixels - (current_val * performance_pixels / 100);
 			new_element.find(".bar").eq(counter).css("marginTop", margin);
 		}
 	},
@@ -103,6 +102,8 @@ return {
 	/* ===================== */
 	fill_in_element:function( new_element, values ) {
 		new_element.attr("data-element", JSON.stringify(values));
+		if (values.edit_link==undefined) new_element.find(".edit").remove();
+		else new_element.find(".edit").attr("href",values.edit_link);
 		if (values.type == "Story") placer.fill_in_story_values( new_element, values );
 		else placer.fill_in_special_element_values( new_element, values );
 		placer.init_draggable_clusters_and_regions();
@@ -111,7 +112,8 @@ return {
 	/* ======================================= */
 	drop_on_region:function( event, ui ) {
 		/* check if cluster is already full */
-		if ($(this).siblings(".region").length<5) {
+		var inside_same_cluster = ($(this).siblings(".region.ui-draggable-dragging").length);
+		if ( ($(this).siblings(".region").length<5) || (inside_same_cluster) ) {
 			/* region dropped on another region */
 			if ( ui.draggable.hasClass("region") ) {
 				$(this).after(ui.draggable);
@@ -119,7 +121,7 @@ return {
 			/* new element dropped on a region */
 			else if ( ui.draggable.hasClass("element") ) {
 				var values = $.parseJSON( ui.draggable.attr("data-element") );
-				if (values.id!=-1) {
+				if (values.tag_id!=-1) {
 					$(this).after(templates[values.type].snippet);
 					var new_element = $(this).next(".region");
 					placer.fill_in_element(new_element,values);
@@ -147,7 +149,7 @@ return {
 		else if ( ui.draggable.hasClass("element") ) {
 			if ($(this).find(".region").length==0) {
 				var values = $.parseJSON( ui.draggable.attr("data-element") );
-				if (values.id!=-1) {
+				if (values.tag_id!=-1) {
 					$(this).append(templates[values.type].snippet);
 					var new_element = $(this).find(".region");
 					placer.fill_in_element(new_element,values);
@@ -158,7 +160,7 @@ return {
 		/* new cluster dropped on a cluster */
 		else if ( ui.draggable.hasClass("container") ) {
 			var values = $.parseJSON( ui.draggable.attr("data-element") );
-			if (values.id!=-1) {
+			if (values.tag_id!=-1) {
 				$(this).after(templates[values.type].snippet);
 				if ( values.type=="Autocluster" ) {
 					var new_element = $(this).next(".cluster");
@@ -236,7 +238,7 @@ return {
 			/* dynamic tag search here!!!! */
 			var data = $.parseJSON( $(this).parents("li").attr("data-element") );
 			data["title"] = value;
-			data["id"] = id;
+			data["tag_id"] = id;
 			var new_data = JSON.stringify(data);
 			$(this).parents("li").attr("data-element", new_data);
 		});
@@ -356,12 +358,12 @@ return {
 	init_snippets:function() {
 		$.each( templates, function( key, value ) {
 			$.ajax({
-	         	url:    templates[key].url,
-	         	success: function(result) {
-	         		templates[key]["snippet"]=result;
-	         	},
-	         	async: false
-	    	});
+			url: templates[key].url,
+			success: function(result) {
+				templates[key]["snippet"]=result;
+			},
+			async: false
+			});
 		});
 	},
 	
@@ -403,6 +405,45 @@ return {
 			placer.position_iframes(0);
 		} );
 	},
+	/* fill in working area from json */
+	/* ============================== */
+	fill_working_area:function(json_front) {
+		var working_area = $(".working_area");
+		/* loop through clusters */
+		$.each( json_front.clusters, function( key, values_cluster ) {
+			
+			working_area.append(templates[values_cluster.type].snippet);
+			var cluster = working_area.find(".cluster:last");
+			cluster.find(".masks").attr("data-mask", values_cluster.mask);
+			
+			/* regular cluster */
+			if ( values_cluster.type=="Cluster" ) {
+				/* loop through regions */
+				$.each( values_cluster.regions, function( key2, values_region ) {
+					cluster.append(templates[values_region.type].snippet);
+					var new_element = cluster.find(".region:last");
+					placer.fill_in_element(new_element,values_region);
+				});
+			}
+			/* autocluster */
+			else if ( values_cluster.type=="Autocluster" ) {
+				cluster.find(".region:gt("+(values_cluster.cluster_size-1)+")").remove();
+				placer.fill_in_element(cluster, values_cluster);
+			}
+		});
+	},
+	/* load front json */
+	/* =============== */
+	load_layout:function() {
+		$.ajax({
+			dataType: "json",
+			url: "placer_front_json.html",
+			success: function(result) {
+				placer.fill_working_area(result);
+			},
+			async: false
+	    });
+	},
 	/* initialise placer */
 	/* ================= */
 	init:function() {
@@ -410,10 +451,11 @@ return {
 		$(window).scroll(placer.start_positioning);
 		$(window).resize(placer.start_positioning);
 		$('iframe.preview').load(function(){
-			$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "2000px");
+			$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "4000px");
 			placer.position_meter();
 			placer.position_iframes(0);
 		});
+		placer.load_layout (); /* load json and fill working area */
 		placer.init_draggable_toolelements ();
 		placer.init_pulldowns ();
 		placer.init_search_fields ();
