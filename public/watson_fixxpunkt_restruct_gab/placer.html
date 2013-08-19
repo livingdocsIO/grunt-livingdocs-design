@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 	<head>
-		<title>watson - the web</title>
+		<title>watson - the front</title>
 		
 		<!-- Mobile viewport optimization -->
 		<meta name="HandheldFriendly" content="True">
@@ -18,6 +18,7 @@
 		<script src="js/jquery-1.9.js" type="text/javascript"></script>
 		<script src="js/jquery.cookie.js" type="text/javascript"></script>
 		<script src="js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+		<script src="js/placer.js" type="text/javascript"></script>
 		
 		<link rel="shortcut icon" href="media/img/main/icons/favicon.ico" type="image/x-icon" />
 		<!-- Home screen icon -->
@@ -30,6 +31,8 @@
 		
 		<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" />
 		<link rel="stylesheet" type="text/css" media="all" href="css/basic.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/color_combos.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/placer.css" />
 		
 		<link href='https://fonts.googleapis.com/css?family=Lustria' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
@@ -37,338 +40,30 @@
 	</head>
 	<body>
 	
-	<style type="text/css">
-		/* preview iframes */
-		/* =============== */
-		.preview {
-			position:fixed;
-			top:0px;
-			-moz-transform-origin:100% 0%;
-			-webkit-transform-origin:100% 0%;
-			transform-origin:100% 0%;
-			overflow:hidden;
-		}
-		
-		.preview.desktop {
-			width:1155px;
-			-moz-transform: scale(0.377);
-			-webkit-transform: scale(0.377);
-			transform: scale(0.377);
-			height:265%;
-			right:10px;
-		}
-		
-		.preview.tablet {
-			width:800px;
-			-moz-transform: scale(0.377);
-			-webkit-transform: scale(0.377);
-			transform: scale(0.377);
-			height:265%;
-			right:500px;
-		}
-		
-		.preview.mobile {
-			width:330px;
-			-moz-transform: scale(0.625);
-			-webkit-transform: scale(0.625);
-			transform: scale(0.625);
-			height:160%;
-			right:860px;
-		}
-		
-		/* working area */
-		/* ============ */
-		.working_area {
-			margin-left:340px;
-		}
-		
-		/* clusters */
-		.working_area .cluster {
-			border:8px solid #0fb4f4;
-			background-color:#dddddd;
-			width:320px;
-			min-height:100px;
-			position:relative;
-		}
-		
-		.working_area .cluster.ui-draggable-dragging {
-			z-index:100;
-		}
-		
-		.working_area .cluster:nth-child(3n+2) { border:8px solid #94e028; }
-		.working_area .cluster:nth-child(3n+3) { border:8px solid #f40f97; }
-		
-		.working_area .cluster .handle {
-			position:absolute;
-			width:35px;
-			height:35px;
-			background-color:#0fb4f4;
-			top:-8px;
-			left:-43px;
-			cursor:move;
-			background-image:url("media/img/main/arrows/arrow_top_down_white.png");
-			background-size: 60%;
-			background-repeat:no-repeat;
-			background-position:center center;
-		}
-		
-		.working_area .cluster:nth-child(3n+2) .handle { background-color:#94e028; }
-		.working_area .cluster:nth-child(3n+3) .handle { background-color:#f40f97; }
-		
-		.working_area .cluster .masks {
-			width:120px;
-			position:absolute;
-			right:-138px;
-		}
-		
-		.working_area .cluster .masks .mask {
-			height:40px;
-			width:100px;
-			background-color:#dddddd;
-			border-bottom:4px solid #ffffff;
-			background-size:100%;
-			cursor:pointer;
-			-moz-transition:all 0.5s ease;
-			-webkit-transition: all 0.5s ease;
-			-o-transformtransition: all 0.5s ease;
-			transition: all 0.5s ease;
-		}
-		
-		.working_area .cluster .masks .mask:hover { background-color:#222222; }
-		
-		.working_area .cluster .masks .mask_1_1 { background-image:url("media/img/main/clusters/mask_1_1.png"); }
-		.working_area .cluster .masks .mask_2_1 { background-image:url("media/img/main/clusters/mask_2_1.png"); }
-		.working_area .cluster .masks .mask_2_2 { background-image:url("media/img/main/clusters/mask_2_2.png"); }
-		.working_area .cluster .masks .mask_2_3 { background-image:url("media/img/main/clusters/mask_2_3.png"); }
-		.working_area .cluster .masks .mask_3_1 { background-image:url("media/img/main/clusters/mask_3_1.png"); }
-		.working_area .cluster .masks .mask_3_2 { background-image:url("media/img/main/clusters/mask_3_2.png"); }
-		.working_area .cluster .masks .mask_3_3 { background-image:url("media/img/main/clusters/mask_3_3.png"); }
-		.working_area .cluster .masks .mask_3_4 { background-image:url("media/img/main/clusters/mask_3_4.png"); }
-		.working_area .cluster .masks .mask_4_1 { background-image:url("media/img/main/clusters/mask_4_1.png"); }
-		.working_area .cluster .masks .mask_4_2 { background-image:url("media/img/main/clusters/mask_4_2.png"); }
-		.working_area .cluster .masks .mask_4_3 { background-image:url("media/img/main/clusters/mask_4_3.png"); }
-		.working_area .cluster .masks .mask_5_1 { background-image:url("media/img/main/clusters/mask_5_1.png"); }
-		.working_area .cluster .masks .mask_5_2 { background-image:url("media/img/main/clusters/mask_5_2.png"); }
-		.working_area .cluster .masks .mask_5_3 { background-image:url("media/img/main/clusters/mask_5_3.png"); }
-		.working_area .cluster .masks .mask_6_1 { background-image:url("media/img/main/clusters/mask_6_1.png"); }
-		
-		.working_area .cluster .masks .mask.highlight {
-			background-color:#0fb4f4;
-			width:120px;
-			height:47px;
-		}
-		
-		.working_area .cluster:nth-child(3n+2) .masks .mask.highlight { background-color:#94e028; }
-		.working_area .cluster:nth-child(3n+3) .masks .mask.highlight { background-color:#f40f97; }
-		
-		/* regions */
-		.working_area .region {
-			font-size:1.4em;
-			height:180px;
-			width:310px;
-			padding:5px;
-			border-bottom:solid #dddddd 4px;
-			background-color:#ffffff;
-		}
-		
-		.working_area .region:last-child {
-			border-bottom:0;
-		} 
-		
-		.working_area .region.ui-draggable-dragging {
-			border:2px solid #444444;
-			z-index:100;
-			cursor:move;
-		}
-		
-		.working_area .region .type {
-			text-align:center;
-			font-weight:bold;
-			font-size:20px;
-			margin-top:3em;
-		}
-		
-		.working_area .region .rank {
-			display:inline-block;
-			font-weight:bold;
-			font-size:15px;
-		}
-		
-		.working_area .region .rank.topten { font-size:55px; }
-		.working_area .region .rank.topthirty { font-size:35px; }
-		.working_area .region .rank.toponehundred { font-size:25px; }
-		
-		.working_area .region .details {
-			display:inline-block;
-			width:75%;
-			vertical-align:top;
-			margin-top:6px;
-			-moz-hyphens: auto;
-			-webkit-hyphens: auto;
-			-ms-hyphens: auto;
-			-o-hyphens: auto;
-		}
-		
-		.working_area .region .graph {
-			background-color:#eeeeee;
-			width:160px;
-			height:80px;
-			float:right;
-			overflow:hidden;
-		}
-		
-		.working_area .region .graph .bar {
-			float:left;
-			width:15px;
-			border-right:1px solid #eeeeee;
-			background-color:#888888;
-			height:80px;
-			margin-top:160px;
-		}
-		
-		.working_area .region .note {
-			background-image:url("media/img/main/icons/icon_note_inactive.png");
-			position:absolute;
-			bottom:5px;
-			right:5px;
-			width:20px;
-			height:20px;
-			background-size:contain;
-			background-repeat:no-repeat;
-			background-position:center center;
-			cursor:pointer;
-		}
-		.working_area .region .note.active {
-			background-image:url("media/img/main/icons/icon_note_active.png");
-		}
-		
-		.working_area .region .note:hover {
-			-moz-transform: scale(1.2);
-			-webkit-transform: scale(1.2);
-			transform: scale(1.2);
-		}
-		
-		/* notepad */
-		/* ======= */
-		.notepad {
-			position:absolute;
-			display:none;
-			top:0;
-			left:680px;
-			padding:10px;
-			background-color:#e7ad12;
-			font-size:14px;
-		}
-		
-		.notepad strong {
-			color:#ffffff;	
-		}
-		
-		.notepad textarea {
-			margin-top:5px;
-			width:300px;
-			height:120px;
-		}
-				
-		/* horizontal meter */
-		/* ================ */
-		.meter {
-			position:fixed;
-			top:-10px;
-			left:340px;
-			width:100%;
-			height:0;
-			border-top:4px dashed #222222;
-			margin-top:-4px;
-			background-color:rgba(255,255,255,0.75);
-		}
-		
-		/* tool stack */
-		/* ========== */
-		.tools {
-			width:220px;
-			position:fixed;
-			top:10px;
-			left:10px;
-			font-size:1.4em;
-		}
-		
-		.tools .search {
-			background-color:#dddddd;
-			padding:5px;
-		}
-		
-		.tools .search input.field {
-			width:195px;
-			margin-bottom:5px;
-		}
-		
-		.tools .search select {
-			width:210px;
-		}
-		
-		.tools .title {
-			margin-top:20px;
-			background-color:#222222;
-			color:#ffffff;
-			font-weight:bold;
-			padding:5px;
-			display:inline-block;
-		}
-		
-		.tools .element {
-			background-color:#dddddd;
-			padding:5px;
-			margin-bottom:4px;
-			cursor:move;
-		}
-		
-		.tools .element.ui-draggable-dragging {
-			z-index:100;
-		}
-		
-		/* responsive views */
-		/* ================ */
-		@media screen and (max-width: 1900px) {
-			.preview.tablet {
-				display:none;
-			}
-			
-			.preview.mobile {
-				right:500px;
-			}
-		}
-		
-		@media screen and (max-width: 1600px) {
-			.preview.desktop {
-				display:none;
-			}
-			
-			.preview.mobile {
-				right:10px;
-			}
-		}
-	</style>
-	
 		
 	<div class="working_area">
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">
+			<div class="region" data-element='{"type":"Topelement","id":1234,"title":"Tour de France 2013"}'>
+				<div class="region_delete"></div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="maininfo">
 					<div class="type">
 						Topelement:<br/>
 						Tour de France 2013
 					</div>
 				</div>
-				<div class="note" data-text="Hopp hopp Tour de France!"></div>
 			</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">
+			<div class="region" data-element='{"type":"Story","id":1234,"title":"Das Risiko sitzt unter der Haut","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":""}'>
+				<div class="region_delete"></div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="maininfo">
 					<div class="rank topten">#3</div>
 					<div class="details">
@@ -390,28 +85,54 @@
 					<div class="bar" style="margin-top:30px"></div>
 				</div>
 				<div class="options">
-					<input type="checkbox" checked="checked"> Bild<br/>
-					<input type="checkbox" checked="checked"> Lead<br/>
-					<select><option>Schrift: large</option></select><br/>
-					<select><option>Font: normal</option></select><br/>
-					<select><option>Farbe: Tokyo Flash</option></select>
+					<select class="darkback lightfont"><option>Schrift: large</option></select><br/>
+					<select class="darkback lightfont"><option>Font: normal</option></select><br/>
+					<select class="darkback lightfont">
+						<option value="-1">Farbe: wählen</option>
+						<option value="1" class="color_combo_1 combo_bd">Smokey Robinson</option>
+						<option value="2" class="color_combo_2 combo_bd">Classic Green</option>
+						<option value="3" class="color_combo_3 combo_bd">Classic Blue</option>
+						<option value="4" class="color_combo_4 combo_bd">Classic Magenta</option>
+						<option value="5" class="color_combo_5 combo_bd">Black Matter</option>
+						<option value="6" class="color_combo_6 combo_bd">Snowy Tundra</option>
+						<option value="7" class="color_combo_7 combo_bd">Cherry Blossom</option>
+						<option value="8" class="color_combo_8 combo_bd">Hello Pinky</option>
+						<option value="9" class="color_combo_9 combo_bd">Tokyo Flash</option>
+						<option value="10" class="color_combo_10 combo_bd">Pink Moon</option>
+						<option value="11" class="color_combo_11 combo_bd">Lazy Sunday</option>
+						<option value="12" class="color_combo_12 combo_bd">Indian Summer</option>
+						<option value="13" class="color_combo_13 combo_bd">Autumn Leaves</option>
+						<option value="14" class="color_combo_14 combo_bd">Muddy Water</option>
+						<option value="15" class="color_combo_15 combo_bd">From Dusk Till Dawn</option>
+						<option value="16" class="color_combo_16 combo_bd">Irish Spring</option>
+						<option value="17" class="color_combo_17 combo_bd">Forest Fire</option>
+						<option value="18" class="color_combo_18 combo_bd">Norwegian Woods</option>
+						<option value="19" class="color_combo_19 combo_bd">Green River</option>
+						<option value="20" class="color_combo_20 combo_bd">Silent Night</option>
+					</select>
+					<input type="checkbox" checked="checked" /> Bild<br/>
+					<input type="checkbox" checked="checked" /> Lead<br/>
 				</div>
 				<div class="note" data-text=""></div>
 			</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">
+			<div class="region" data-element='{"type":"Poll","id":1234,"title":"Wer gewinnt die Tour de France?"'>
+				<div class="region_delete"></div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="maininfo">
 					<div class="type">
 						Poll:<br/>
 						Wer gewinnt die Tour de France?
 					</div>
 				</div>
-				<div class="note" data-text=""></div>
 			</div>
-			<div class="region">
+			<div class="region" data-element='{"type":"Story","id":1234,"title":"Laster kippt und sorgt für Verkehrschaos","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"Lorem ipsum dolor. Note text is very important."}'>
+				<div class="region_delete"></div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="maininfo">
 					<div class="rank topten">#7</div>
 					<div class="details">
@@ -433,19 +154,44 @@
 					<div class="bar" style="margin-top:30px"></div>
 				</div>
 				<div class="options">
-					<input type="checkbox" checked="checked"> Bild<br/>
-					<input type="checkbox" checked="checked"> Lead<br/>
-					<select><option>Schrift: large</option></select><br/>
-					<select><option>Font: normal</option></select><br/>
-					<select><option>Farbe: Tokyo Flash</option></select>
+					<select class="darkback lightfont"><option>Schrift: large</option></select><br/>
+					<select class="darkback lightfont"><option>Font: normal</option></select><br/>
+					<select class="darkback lightfont">
+						<option value="-1">Farbe: wählen</option>
+						<option value="1" class="color_combo_1 combo_bd">Smokey Robinson</option>
+						<option value="2" class="color_combo_2 combo_bd">Classic Green</option>
+						<option value="3" class="color_combo_3 combo_bd">Classic Blue</option>
+						<option value="4" class="color_combo_4 combo_bd">Classic Magenta</option>
+						<option value="5" class="color_combo_5 combo_bd">Black Matter</option>
+						<option value="6" class="color_combo_6 combo_bd">Snowy Tundra</option>
+						<option value="7" class="color_combo_7 combo_bd">Cherry Blossom</option>
+						<option value="8" class="color_combo_8 combo_bd">Hello Pinky</option>
+						<option value="9" class="color_combo_9 combo_bd">Tokyo Flash</option>
+						<option value="10" class="color_combo_10 combo_bd">Pink Moon</option>
+						<option value="11" class="color_combo_11 combo_bd">Lazy Sunday</option>
+						<option value="12" class="color_combo_12 combo_bd">Indian Summer</option>
+						<option value="13" class="color_combo_13 combo_bd">Autumn Leaves</option>
+						<option value="14" class="color_combo_14 combo_bd">Muddy Water</option>
+						<option value="15" class="color_combo_15 combo_bd">From Dusk Till Dawn</option>
+						<option value="16" class="color_combo_16 combo_bd">Irish Spring</option>
+						<option value="17" class="color_combo_17 combo_bd">Forest Fire</option>
+						<option value="18" class="color_combo_18 combo_bd">Norwegian Woods</option>
+						<option value="19" class="color_combo_19 combo_bd">Green River</option>
+						<option value="20" class="color_combo_20 combo_bd">Silent Night</option>
+					</select>
+					<input type="checkbox" checked="checked" /> Bild<br/>
+					<input type="checkbox" checked="checked" /> Lead<br/>
 				</div>
 				<div class="note" data-text="Lorem ipsum dolor. Note text is very important."></div>
 			</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="2"></div>
-			<div class="region">
+			<div class="region" data-element='{"type":"Story","id":1234,"title":"Immer wieder Merkel","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"Another Text."}'>
+				<div class="region_delete"></div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="maininfo">
 					<div class="rank topthirty">#24</div>
 					<div class="details">
@@ -467,28 +213,53 @@
 					<div class="bar" style="margin-top:80px"></div>
 				</div>
 				<div class="options">
-					<input type="checkbox" checked="checked"> Bild<br/>
-					<input type="checkbox" checked="checked"> Lead<br/>
-					<select><option>Schrift: large</option></select><br/>
-					<select><option>Font: normal</option></select><br/>
-					<select><option>Farbe: Tokyo Flash</option></select>
+					<select class="darkback lightfont"><option>Schrift: large</option></select><br/>
+					<select class="darkback lightfont"><option>Font: normal</option></select><br/>
+					<select class="darkback lightfont">
+						<option value="-1">Farbe: wählen</option>
+						<option value="1" class="color_combo_1 combo_bd">Smokey Robinson</option>
+						<option value="2" class="color_combo_2 combo_bd">Classic Green</option>
+						<option value="3" class="color_combo_3 combo_bd">Classic Blue</option>
+						<option value="4" class="color_combo_4 combo_bd">Classic Magenta</option>
+						<option value="5" class="color_combo_5 combo_bd">Black Matter</option>
+						<option value="6" class="color_combo_6 combo_bd">Snowy Tundra</option>
+						<option value="7" class="color_combo_7 combo_bd">Cherry Blossom</option>
+						<option value="8" class="color_combo_8 combo_bd">Hello Pinky</option>
+						<option value="9" class="color_combo_9 combo_bd">Tokyo Flash</option>
+						<option value="10" class="color_combo_10 combo_bd">Pink Moon</option>
+						<option value="11" class="color_combo_11 combo_bd">Lazy Sunday</option>
+						<option value="12" class="color_combo_12 combo_bd">Indian Summer</option>
+						<option value="13" class="color_combo_13 combo_bd">Autumn Leaves</option>
+						<option value="14" class="color_combo_14 combo_bd">Muddy Water</option>
+						<option value="15" class="color_combo_15 combo_bd">From Dusk Till Dawn</option>
+						<option value="16" class="color_combo_16 combo_bd">Irish Spring</option>
+						<option value="17" class="color_combo_17 combo_bd">Forest Fire</option>
+						<option value="18" class="color_combo_18 combo_bd">Norwegian Woods</option>
+						<option value="19" class="color_combo_19 combo_bd">Green River</option>
+						<option value="20" class="color_combo_20 combo_bd">Silent Night</option>
+					</select>
+					<input type="checkbox" checked="checked" /> Bild<br/>
+					<input type="checkbox" checked="checked" /> Lead<br/>
 				</div>
 				<div class="note" data-text="Another Text."></div>
 			</div>
-			<div class="region">
+			<div class="region" data-element='{"type":"Tag Teaser","id":1234,"title":"Reisen"}'>
+				<div class="region_delete"></div>
 				<div class="maininfo">
 					<div class="type">
 						Tag Teaser:<br/>
 						Reisen
 					</div>
 				</div>
-				<div class="note" data-text=""></div>
 			</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="3"></div>
-			<div class="region">
+			<div class="region" data-element='{"type":"Story","id":1234,"title":"Auch Obama ist wieder auf der Front vertreten","rank":23,"author":"Daniel Huber","time":52,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":""}'>
+				<div class="region_delete"></div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="maininfo">
 					<div class="rank toponehundred">#55</div>
 					<div class="details">
@@ -510,169 +281,287 @@
 					<div class="bar" style="margin-top:80px"></div>
 				</div>
 				<div class="options">
-					<input type="checkbox" checked="checked"> Bild<br/>
-					<input type="checkbox" checked="checked"> Lead<br/>
-					<select><option>Schrift: large</option></select><br/>
-					<select><option>Font: normal</option></select><br/>
-					<select><option>Farbe: Tokyo Flash</option></select>
+					<select class="darkback lightfont"><option>Schrift: large</option></select><br/>
+					<select class="darkback lightfont"><option>Font: normal</option></select><br/>
+					<select class="darkback lightfont">
+						<option value="-1">Farbe: wählen</option>
+						<option value="1" class="color_combo_1 combo_bd">Smokey Robinson</option>
+						<option value="2" class="color_combo_2 combo_bd">Classic Green</option>
+						<option value="3" class="color_combo_3 combo_bd">Classic Blue</option>
+						<option value="4" class="color_combo_4 combo_bd">Classic Magenta</option>
+						<option value="5" class="color_combo_5 combo_bd">Black Matter</option>
+						<option value="6" class="color_combo_6 combo_bd">Snowy Tundra</option>
+						<option value="7" class="color_combo_7 combo_bd">Cherry Blossom</option>
+						<option value="8" class="color_combo_8 combo_bd">Hello Pinky</option>
+						<option value="9" class="color_combo_9 combo_bd">Tokyo Flash</option>
+						<option value="10" class="color_combo_10 combo_bd">Pink Moon</option>
+						<option value="11" class="color_combo_11 combo_bd">Lazy Sunday</option>
+						<option value="12" class="color_combo_12 combo_bd">Indian Summer</option>
+						<option value="13" class="color_combo_13 combo_bd">Autumn Leaves</option>
+						<option value="14" class="color_combo_14 combo_bd">Muddy Water</option>
+						<option value="15" class="color_combo_15 combo_bd">From Dusk Till Dawn</option>
+						<option value="16" class="color_combo_16 combo_bd">Irish Spring</option>
+						<option value="17" class="color_combo_17 combo_bd">Forest Fire</option>
+						<option value="18" class="color_combo_18 combo_bd">Norwegian Woods</option>
+						<option value="19" class="color_combo_19 combo_bd">Green River</option>
+						<option value="20" class="color_combo_20 combo_bd">Silent Night</option>
+					</select>
+					<input type="checkbox" checked="checked" /> Bild<br/>
+					<input type="checkbox" checked="checked" /> Lead<br/>
 				</div>
 				<div class="note" data-text=""></div>
 			</div>
-			<div class="region">
+			<div class="region" data-element='{"type":"Flipper","id":1234,"title":"«Ich spiele jetzt beim besten Verein der Welt.»"}'>
+				<div class="region_delete"></div>
+				<a href="#" target="_blank" class="edit">edit</a>
 				<div class="maininfo">
 					<div class="type">
 						Flipper:<br/>
 						«Ich spiele jetzt beim besten Verein der Welt.»
 					</div>
 				</div>
-				<div class="note" data-text=""></div>
 			</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">cluster 3.1 E1</div>
-			<div class="region">cluster 3.1 E2</div>
-			<div class="region">cluster 3.1 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.1 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.1 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.1 E3</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="2"></div>
-			<div class="region">cluster 3.2 E1</div>
-			<div class="region">cluster 3.2 E2</div>
-			<div class="region">cluster 3.2 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.2 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.2 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.2 E3</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="3"></div>
-			<div class="region">cluster 3.3 E1</div>
-			<div class="region">cluster 3.3 E2</div>
-			<div class="region">cluster 3.3 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.3 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.3 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.3 E3</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="4"></div>
-			<div class="region">cluster 3.4 E1</div>
-			<div class="region">cluster 3.4 E2</div>
-			<div class="region">cluster 3.4 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.4 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.4 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 3.4 E3</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">cluster 4.1 E1</div>
-			<div class="region">cluster 4.1 E2</div>
-			<div class="region">cluster 4.1 E3</div>
-			<div class="region">cluster 4.1 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.1 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.1 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.1 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.1 E4</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="2"></div>
-			<div class="region">cluster 4.2 E1</div>
-			<div class="region">cluster 4.2 E2</div>
-			<div class="region">cluster 4.2 E3</div>
-			<div class="region">cluster 4.2 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.2 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.2 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.2 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.2 E4</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="3"></div>
-			<div class="region">cluster 4.3 E1</div>
-			<div class="region">cluster 4.3 E2</div>
-			<div class="region">cluster 4.3 E3</div>
-			<div class="region">cluster 4.3 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.3 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.3 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.3 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 4.3 E4</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">cluster 5.1 E1</div>
-			<div class="region">cluster 5.1 E2</div>
-			<div class="region">cluster 5.1 E3</div>
-			<div class="region">cluster 5.1 E4</div>
-			<div class="region">cluster 5.1 E5</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.1 E5</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="2"></div>
-			<div class="region">cluster 5.2 E1</div>
-			<div class="region">cluster 5.2 E2</div>
-			<div class="region">cluster 5.2 E3</div>
-			<div class="region">cluster 5.2 E4</div>
-			<div class="region">cluster 5.2 E5</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.2 E5</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="3"></div>
-			<div class="region">cluster 5.3 E1</div>
-			<div class="region">cluster 5.3 E2</div>
-			<div class="region">cluster 5.3 E3</div>
-			<div class="region">cluster 5.3 E4</div>
-			<div class="region">cluster 5.3 E5</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 5.3 E5</div>
 		</div>
 		<div class="cluster">
 			<div class="handle"></div>
+			<div class="cluster_delete"></div>
 			<div class="masks" data-mask="1"></div>
-			<div class="region">cluster 6.1 E1</div>
-			<div class="region">cluster 6.1 E2</div>
-			<div class="region">cluster 6.1 E3</div>
-			<div class="region">cluster 6.1 E4</div>
-			<div class="region">cluster 6.1 E5</div>
-			<div class="region">cluster 6.1 E6</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E1</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E2</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E3</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E4</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E5</div>
+			<div class="region"><div class="region_delete"></div>cluster 6.1 E6</div>
 		</div>
 	</div>
 	
 	<div class="tools">
 		
 		<div class="search">
-			<input type="text" class="field" value="Elemente suchen" />
-			<select><option>Filter</option></select>
+			<input type="text" class="field" data-default="Elemente suchen" value="Elemente suchen" />
+			<select>
+				<option>Filter</option>
+				<option>Storys</option>
+				<option>Polls</option>
+				<option>Flipper</option>
+			</select>
+			<ul>
+				<li class="element" data-element='{"type":"Story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"aaa"}'>
+					AZ: Elefanten sind märchenhafte...
+				</li>
+				<li class="element" data-element='{"type":"Story","id":1234,"title":"BZ: Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"bbb"}'>
+					BZ: Märchen erzählen
+				</li>
+				<li class="element" data-element='{"type":"Poll","id":1234,"title":"Superpoll"}'>
+					<span class="type">Poll:</span> Superpoll
+				</li>
+				<li class="element" data-element='{"type":"Story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"ddd"}'>
+					AZ: Elefanten sind märchenhafte...
+				</li>
+				<li class="element" data-element='{"type":"HTML","id":1234,"title":"«Ich mach alles kaputt»-HTML"}'>
+					<span class="type">HTML:</span> «Ich mach alles kaputt»-HTML
+				</li>
+			</ul>
 		</div>
 		
 		<h3 class="title">
-			Neuer Partnercontent
+			Neue Partnerstorys
 		</h3>
 		<ul>
-			<li class="element" data-type="story" data-id="meineid" data-title="Elefanten sind märchenhafte Wesen" data-rank="23" data-author="Peter Blunschi" data-time="160" data-performance="0.5,10,20,25,30,35,40,50,60,70">
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"aaa"}'>
 				AZ: Elefanten sind märchenhafte...
 			</li>
-			<li class="element" data-element='{"type":"story","title":"Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"preformance":[0.5,10,20,25,30,35,40,50,60,70]}'>
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"BZ: Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"bbb"}'>
 				BZ: Märchen erzählen
 			</li>
-			<li class="element">
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"CZ: Es tut tuten tun","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"ccc"}'>
 				CZ: Es tut tuten tun
 			</li>
-			<li class="element">
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"AZ: Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"ddd"}'>
 				AZ: Elefanten sind märchenhafte...
 			</li>
-			<li class="element">
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"BZ: Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"eee"}'>
 				BZ: Märchen erzählen
-			</li>
-			<li class="element">
-				CZ: Es tut tuten tun
 			</li>
 		</ul>
 		
 		<h3 class="title">
-			Neu Publiziert
+			Neu publizierte Storys
 		</h3>
 		<ul>
-			<li class="element">
-				Lorem ipsum dolor
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"ggg"}'>
+				Elefanten sind märchenhafte...
 			</li>
-			<li class="element">
-				Caelum obscurum est, Domitilla u...
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"hhh"}'>
+				Märchen erzählen
 			</li>
-			<li class="element">
-				Lucius ridet et clamat
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Es tut tuten tun","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"iii"}'>
+				Es tut tuten tun
 			</li>
-			<li class="element">
-				Lorem ipsum dolor
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Elefanten sind märchenhafte Wesen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"jjj"}'>
+				Elefanten sind märchenhafte...
 			</li>
-			<li class="element">
-				Sic amet
-			</li>
-			<li class="element">
-				Caelum obscurum est, Domitilla u...
+			<li class="element" data-element='{"type":"Story","id":1234,"title":"Märchen erzählen","rank":23,"author":"Peter Blunschi","time":160,"performance":[0.5,10,20,25,30,35,40,50,60,70],"note":"kkk"}'>
+				Märchen erzählen
 			</li>
 		</ul>
+		
+		<h3 class="title">
+			Neue Polls
+		</h3>
+		<ul>
+			<li class="element" data-element='{"type":"Poll","id":1234,"title":"Superpoll"}'>
+				Superpoll
+			</li>
+			<li class="element" data-element='{"type":"Poll","id":1234,"title":"Schöner Poll"}'>
+				Schöner Poll
+			</li>
+			<li class="element" data-element='{"type":"Poll","id":1234,"title":"Trara Poll"}'>
+				Trara Poll
+			</li>
+		</ul>
+		
+		<h3 class="title">
+			Neue HTML-Elemente
+		</h3>
+		<ul>
+			<li class="element" data-element='{"type":"HTML","id":1234,"title":"Neues MonsterHTML"}'>
+				Neues MonsterHTML
+			</li>
+			<li class="element" data-element='{"type":"HTML","id":1234,"title":"«Ich mach alles kaputt»-HTML"}'>
+				«Ich mach alles kaputt»-HTML
+			</li>
+			<li class="element" data-element='{"type":"HTML","id":1234,"title":"HTM(hel)L"}'>
+				HTM(hel)L
+			</li>
+		</ul>
+		
+		<h3 class="title">
+			Special
+		</h3>
+		<ul>
+			<li class="container" data-element='{"type":"Cluster"}'>
+				Leeres Cluster
+			</li>
+			<li class="container" data-element='{"type":"Autocluster","title":"-1","id":"-1"}'>
+				Autocluster<br/>
+				<input class="field tagselect" data-default="Tag eingeben" value="Tag eingeben" />
+				<!--<select class="valueselect" name="id">
+					<option value="-1">Tag wählen</option>
+					<option value="1">Digital</option>
+					<option value="2">Sport</option>
+					<option value="3">Ausland</option>
+					<option value="4">Reisen</option>
+					<option value="5">Eisenbahn</option>
+					<option value="6">Grünspan</option>
+				</select>-->
+			</li>
+			<li class="element" data-element='{"type":"Tag Teaser","title":"-1","id":"-1"}'>
+				Tag Teaser<br/>
+				<input class="field tagselect" data-default="Tag eingeben" value="Tag eingeben" />
+				<!--<select class="valueselect" name="id">
+					<option value="-1">Tag wählen</option>
+					<option value="111">Sport</option>
+					<option value="222">Ausland</option>
+					<option value="333">Reisen</option>
+					<option value="444">Eisenbahn</option>
+					<option value="555">Grünspan</option>
+				</select>-->
+			</li>
+		</ul>
+		
+		<div class="button save">speichern</div>
+		<div class="button revert">zurück</div>
+		<div class="button live">live!</div>
 		
 	</div>
 	
@@ -685,223 +574,6 @@
 	<div class="notepad"><strong>Memo</strong><br/><textarea></textarea></div>
 	
 	
-	
-	<script>
-	
-		var placer = (function(){
-			var top_region = 0;
-			var top_pos = 0;
-			var scroll_timeout;
-		
-			return {
-				/* calculate new position of iframes and start animation */
-				/* ===================================================== */
-				position_iframes:function(duration) {
-					var mobile_iframe = $('iframe.preview.mobile').contents().find("html, body");
-					var tablet_iframe = $('iframe.preview.tablet').contents().find("html, body");
-					var desktop_iframe = $('iframe.preview.desktop').contents().find("html, body");
-					
-					var iframes = [mobile_iframe, tablet_iframe, desktop_iframe];
-					var scales = [0.625, 0.377, 0.377];
-					
-					for (var counter=0; counter<iframes.length; counter++) {
-						var new_pos = iframes[counter].find(".region").not(":has(.region)").eq(top_region).offset().top;
-						if (new_pos != undefined) {
-							iframes[counter].stop(true, true);
-							iframes[counter].animate({ scrollTop: new_pos-(top_pos/scales[counter]) }, duration );
-							//iframes[counter].find(".region").not(":has(.region)").parents(".cluster").stop().animate({ opacity: 0.2 }, duration );
-							//iframes[counter].find(".region").not(":has(.region)").eq(top_region).parents(".cluster").stop().animate({ opacity: 1 }, duration );
-						}
-					}
-				},
-				/* calculate and set new position of horizontal meter */
-				/* ================================================== */
-				position_meter:function() {
-					for (var counter=0; counter<$(".working_area .region").length; counter++) {
-						if ($(".working_area .region").eq(counter).offset().top > $(window).scrollTop() ) {
-							top_region = counter;
-							top_pos = $(".working_area .region").eq(counter).offset().top - $(window).scrollTop();
-							break;
-						}
-					}
-					$(".meter").css("top", top_pos);
-				},
-				/* start timeout for positioning (after scrolling or window resize */
-				/* =============================================================== */
-				start_positioning:function() {
-					placer.position_meter();
-					clearTimeout(scroll_timeout);
-					scroll_timeout = setTimeout(function(){
-						placer.position_iframes(1000);
-					}, 300);
-				},
-				/* reload preview iframe-content */
-				/* ===================== */
-				reload_iframes:function() {
-					$("iframe.preview").attr("src", "front_bespielt.html");
-				},
-				/* initialise clusters and regions in workspace */
-				/* ============================================ */
-				init_draggable_clusters_and_regions:function() {
-					$( ".region" ).draggable({ 
-						revert: "invalid",
-						axis: "y",
-						start: function(){$(".notepad").hide();}
-					});
-					$( ".cluster" ).draggable({
-						revert: "invalid",
-						axis: "y",
-						start: function(){$(".notepad").hide();}
-					});
-					
-					$( ".region" ).droppable({
-						drop: function( event, ui ) {
-							/* region dropped on another region */
-							if ( ui.draggable.hasClass("region") ) {
-								$(this).after(ui.draggable);
-							}
-							/* new element dropped on a region */
-							else if ( ui.draggable.hasClass("element") ) {
-								$(this).after("<div class='region'>NEW REGION</div>");
-								placer.init_draggable_clusters_and_regions();
-							}
-							ui.draggable.css("top", 0).css("left", 0);
-							placer.reload_iframes();
-							placer.update_cluster_masks();
-						}
-					});
-					$( ".cluster" ).droppable({
-						drop: function( event, ui ) {
-							/* cluster dropped on another cluster */
-							if ( ui.draggable.hasClass("cluster") ) {
-								$(this).after(ui.draggable);
-							}
-							/* region dropped on an EMPTY cluster */
-							else if ( ui.draggable.hasClass("region") ) {
-								if ($(this).find(".region").length==0) {
-									$(this).append(ui.draggable);
-								}
-							}
-							/* new element dropped on an EMPTY cluster */
-							else if ( ui.draggable.hasClass("element") ) {
-								if ($(this).find(".region").length==0) {
-									$(this).append("<div class='region'>NEW REGION</div>");
-									placer.init_draggable_clusters_and_regions();
-								}
-							}
-							ui.draggable.css("top", 0).css("left", 0);
-							placer.reload_iframes();
-							placer.update_cluster_masks();
-						}
-					});
-				},
-				/* initialise elements in tool stack */
-				/* ================================= */
-				init_draggable_toolelements:function() {
-					$( ".tools li.element" ).draggable({
-						revert: "invalid",
-						start: function(){$(".notepad").hide();}
-					});
-				},
-				/* repaint cluster-layout selections */
-				/* ================================= */
-				update_cluster_masks:function() {
-					var num_options = [-1, 1, 3, 4, 3, 3, 1];
-					for (var counter=0; counter<$(".cluster").length; counter++) {
-						var current_cluster = $(".cluster").eq(counter);
-						var current_masks = current_cluster.find(".masks");
-						current_masks.empty();
-						var num_regions = current_cluster.find(".region").length;
-						var choice = current_masks.attr("data-mask");
-						if (choice>num_options[num_regions]) {
-							choice = 1;
-							current_masks.attr("data-mask", 1);
-						}
-						for ( counter2=1; counter2<=num_options[num_regions]; counter2++ ) {
-							current_masks.append("<div class='mask mask_"+num_regions+"_"+counter2+"'></div>");
-							if (choice==counter2) {
-								current_masks.find(".mask:last").addClass("highlight");
-							}
-						}
-					}
-				},
-				/* process click on cluster-layout option */
-				/* ====================================== */
-				clicked_mask:function() {
-					var mask_index = $(this).parents(".masks").find(".mask").index(this);
-					$(this).parents(".masks").attr("data-mask", mask_index+1);
-					placer.update_cluster_masks();
-					placer.reload_iframes();
-				},
-				/* initialise cluster-layout options */
-				/* ================================= */
-				init_cluster_masks:function() {
-					$(".cluster .masks").on( "click", ".mask", placer.clicked_mask );
-					placer.update_cluster_masks ();
-				},
-				/* process click on note icon */
-				/* ========================== */
-				clicked_noteicon:function() {
-					var new_position = $(this).parents(".region").offset().top+"px";
-					var note_text = $(this).attr("data-text");
-					var index_region = $(".region").index($(this).parents(".region"));
-					$(".notepad textarea").val(note_text);
-					if ( index_region == $(".notepad").attr("data-index_region") ) { $(".notepad").toggle(); }
-					else { $(".notepad").css("top", new_position).show(); }
-					$(".notepad").attr("data-index_region", index_region);
-				},
-				/* repaint note icons */
-				/* ================== */
-				update_note_icons:function() {
-					var notes = $(".region .note");
-					for(var counter=0; counter<notes.length; counter++) {
-						var current_note = notes.eq(counter);
-						var current_notetext = current_note.attr("data-text");
-						if (current_notetext!="") { current_note.addClass("active"); }
-						else current_note.removeClass("active");
-					}
-				},
-				/* typing into notepad */
-				/* =================== */
-				note_typed:function() {
-					var index_region = $(".notepad").attr("data-index_region");
-					$(".cluster .region").eq(index_region).find(".note").attr("data-text", $(".notepad textarea").val());
-					placer.update_note_icons();
-				},
-				/* initialise notepad */
-				/* ================== */
-				init_notepad:function() {
-					$(".cluster .region").on( "click", ".note", placer.clicked_noteicon );
-					$(".notepad").keyup(placer.note_typed);
-					placer.update_note_icons();
-				},
-				/* initialise placer */
-				/* ================= */
-				init:function() {
-					$(window).scroll(placer.start_positioning);
-					$(window).resize(placer.start_positioning);
-					$('iframe.preview').load(function(){
-						$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "2000px");
-						placer.position_meter();
-						placer.position_iframes(0);
-					});
-					placer.init_draggable_toolelements ();
-					placer.init_draggable_clusters_and_regions ();
-					placer.init_cluster_masks ();
-					placer.init_notepad ();
-				}
-			}
-		})();
-		
-		/* initialise placer */
-		/* ================= */
-		placer.init();
-		
-		var value = $(".element").eq(1).attr("data-element");
-		var obj = $.parseJSON(value);
-		alert(  obj.type );
-		
-	</script>
 	
 	</body>
 </html>
