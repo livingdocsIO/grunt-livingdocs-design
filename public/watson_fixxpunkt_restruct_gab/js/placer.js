@@ -83,7 +83,7 @@ return {
 		if (values.rank<=10) new_element.find(".rank").addClass("topten");
 		else if (values.rank<=30) new_element.find(".rank").addClass("topthirty");
 		else if (values.rank<=100) new_element.find(".rank").addClass("toponehundred");
-		new_element.find(".details strong").html(values.title).after("<br/>Vor "+values.time+" Minuten<br/>"+values.author);
+		new_element.find(".details strong").html(placer.short_string(values.title,35)).after("<br/>Vor "+values.time+" Minuten<br/>"+values.author);
 		new_element.find("select[name=color_combo]").val(values.color_combo);
 		new_element.find("select[name=font_size]").val(values.font_size);
 		new_element.find("select[name=font_face]").val(values.font_face);
@@ -244,7 +244,7 @@ return {
 					var result_list = $(".tools .search ul");
 					result_list.empty();
 					$.each( result.search_result, function( key, value ) {
-						var string_length = 30 - value.type.length;
+						var string_length = 35 - value.type.length;
 						result_list.append("<li class='element'><strong>"+value.type+":</strong> "+placer.short_string(value.title,string_length)+"</li>");
 						result_list.find("li:last").attr("data-element", JSON.stringify(value));
 					});
@@ -496,7 +496,7 @@ return {
 	/* =============== */
 	
 	short_string:function(the_string, the_length) {
-		if (the_string.length>the_length-3) the_string = the_string.substr(0,the_length)+"...";
+		if (the_string.length>the_length-3) the_string = the_string.substr(0,the_length-3)+"...";
 		return the_string;
 	},
 	check_for_empty_working_area:function() {
