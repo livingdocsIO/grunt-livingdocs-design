@@ -434,11 +434,18 @@
 }
 
 @media screen and (max-width: 1550px) {
+	.preview.mobile {
+		display:none;
+	}
+}
+
+@media screen and (max-width: 1300px) {
 	.preview.desktop {
 		display:none;
 	}
 	
 	.preview.mobile {
+		display:block;
 		right:10px;
 	}
 }
@@ -448,8 +455,7 @@
 	.meter {
 		display:none;
 	}
-}	
-		
+}
 		
 		
 		
