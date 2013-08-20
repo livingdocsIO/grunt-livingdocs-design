@@ -11,10 +11,10 @@ var scroll_timeout;
 /* ================================= */
 var templates = {
 	"Story": { "url": "placer_snippet_story.html" },
-	"Poll": { "url": "placer_snippet_special.html" },
+	"Poll": { "url": "placer_snippet_special_options.html" },
 	"HTML": { "url": "placer_snippet_special.html" },
 	"Topelement": { "url": "placer_snippet_special.html" },
-	"Flipper": { "url": "placer_snippet_special.html" },
+	"Flipper": { "url": "placer_snippet_special_options.html" },
 	"Tag Teaser": { "url": "placer_snippet_special.html" },
 	"Cluster": { "url": "placer_snippet_cluster.html" },
 	"Autocluster": { "url": "placer_snippet_autocluster.html" }
@@ -104,6 +104,8 @@ return {
 	/* ============================================== */
 	fill_in_special_element_values:function( new_element, values ) {
 		new_element.find(".type").html(values.type+"<br/>"+values.title);
+		new_element.find("select[name=color_combo]").val(values.color_combo);
+		new_element.find("select[name=font_size]").val(values.font_size);
 	},
 	/* basic fill in element */
 	/* ===================== */
@@ -343,15 +345,56 @@ return {
 	storage_revert:function() {
 		location.reload();	
 	},
+	/* generate json from working area */
+	/* =============================== */
+	return_json_front:function() {
+		/* which values are superfluous for json output? */
+		var delete_from_regions = ["type","title","rank","author","time","performance","edit_link"];
+		var delete_from_clusters = ["type","title"];
+		
+		var json_front={"layout_id":1234,"clusters":[]};
+		var num_clusters = $(".working_area .cluster").length;
+		for (var counter_clusters=0;counter_clusters<num_clusters;counter_clusters++) {
+			var current_cluster = $(".working_area .cluster").eq(counter_clusters);
+			var num_regions = current_cluster.find(".region:not(.disabled)").length;
+			var size_cluster = current_cluster.find(".region").length;
+			/* putting together array with region jsons for current cluster */
+			var json_regions=[];
+			for (var counter_regions=0;counter_regions<num_regions;counter_regions++) {
+				var current_region = current_cluster.find(".region").eq(counter_regions);
+				var region_json = JSON.parse(current_region.attr("data-element"));
+				region_json["note"]=current_region.find(".note").attr("data-text");
+				region_json["color_combo"]=current_region.find("select[name=color_combo]").val();
+				region_json["font_face"]=current_region.find("select[name=font_face]").val();
+				region_json["font_size"]=current_region.find("select[name=font_size]").val();
+				for (var counter_delete=0; counter_delete<delete_from_regions.length; counter_delete++) {
+					delete region_json[delete_from_regions[counter_delete]];
+				}
+				json_regions[counter_regions]=region_json;
+			}
+			/* putting together json for current cluster */
+			var cluster_json = JSON.parse(current_cluster.attr("data-element"));
+			if (num_regions) cluster_json["regions"]=json_regions;
+			cluster_json["mask"]=parseInt(current_cluster.find(".masks").attr("data-mask"));
+			cluster_json["cluster_size"]=size_cluster;
+			for (var counter_delete=0; counter_delete<delete_from_clusters.length; counter_delete++) {
+				delete cluster_json[delete_from_clusters[counter_delete]];
+			}
+			json_front["clusters"][counter_clusters]=cluster_json;
+		}
+		return(json_front);	
+	},
 	/* save new state */
 	/* ============== */
 	storage_save:function() {
-		alert("save!");	
+		var json_front = placer.return_json_front();	
+		alert(JSON.stringify(json_front));
 	},
 	/* put state online */
 	/* ================ */
 	storage_golive:function() {
-		alert("i am alive!");	
+		var json_front = placer.return_json_front();	
+		alert(JSON.stringify(json_front));	
 	},
 	/* initialise save, revert and live! buttons */
 	/* ========================================= */
@@ -372,6 +415,45 @@ return {
 			async: false
 			});
 		});
+	},
+	/* fill in working area from json */
+	/* ============================== */
+	fill_working_area:function(json_front) {
+		var working_area = $(".working_area");
+		/* loop through clusters */
+		$.each( json_front.clusters, function( key, values_cluster ) {
+			
+			working_area.append(templates[values_cluster.type].snippet);
+			var cluster = working_area.find(".cluster:last");
+			cluster.find(".masks").attr("data-mask", values_cluster.mask);
+			
+			/* regular cluster */
+			if ( values_cluster.type=="Cluster" ) {
+				/* loop through regions */
+				$.each( values_cluster.regions, function( key2, values_region ) {
+					cluster.append(templates[values_region.type].snippet);
+					var new_element = cluster.find(".region:last");
+					placer.fill_in_element(new_element,values_region);
+				});
+			}
+			/* autocluster */
+			else if ( values_cluster.type=="Autocluster" ) {
+				cluster.find(".region:gt("+(values_cluster.cluster_size-1)+")").remove();
+				placer.fill_in_element(cluster, values_cluster);
+			}
+		});
+	},
+	/* load front json */
+	/* =============== */
+	load_layout:function() {
+		$.ajax({
+			dataType: "json",
+			url: "placer_front_json_input.html",
+			success: function(result) {
+				placer.fill_working_area(result);
+			},
+			async: false
+	    });
 	},
 	
 	/* =============== */
@@ -411,45 +493,6 @@ return {
 			placer.position_meter();
 			placer.position_iframes(0);
 		} );
-	},
-	/* fill in working area from json */
-	/* ============================== */
-	fill_working_area:function(json_front) {
-		var working_area = $(".working_area");
-		/* loop through clusters */
-		$.each( json_front.clusters, function( key, values_cluster ) {
-			
-			working_area.append(templates[values_cluster.type].snippet);
-			var cluster = working_area.find(".cluster:last");
-			cluster.find(".masks").attr("data-mask", values_cluster.mask);
-			
-			/* regular cluster */
-			if ( values_cluster.type=="Cluster" ) {
-				/* loop through regions */
-				$.each( values_cluster.regions, function( key2, values_region ) {
-					cluster.append(templates[values_region.type].snippet);
-					var new_element = cluster.find(".region:last");
-					placer.fill_in_element(new_element,values_region);
-				});
-			}
-			/* autocluster */
-			else if ( values_cluster.type=="Autocluster" ) {
-				cluster.find(".region:gt("+(values_cluster.cluster_size-1)+")").remove();
-				placer.fill_in_element(cluster, values_cluster);
-			}
-		});
-	},
-	/* load front json */
-	/* =============== */
-	load_layout:function() {
-		$.ajax({
-			dataType: "json",
-			url: "placer_front_json.html",
-			success: function(result) {
-				placer.fill_working_area(result);
-			},
-			async: false
-	    });
 	},
 	/* initialise placer */
 	/* ================= */
