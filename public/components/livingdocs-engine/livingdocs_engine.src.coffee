@@ -1413,6 +1413,61 @@ class InterfaceInjector
     @injected.push($elem)
     $elem.addClass(docClass.interface)
 
+kickstart = do ->
+  init: (destination, design) ->
+    domElements = $(destination).children().not('script')
+    $(destination).html('<div class="doc-section"></div>')
+    doc.init(design: design)
+    doc.ready =>
+
+      # Convert a dom element into a camelCase snippetName
+      domElementToSnippetName = (element) =>
+        if element.tagName
+          $.camelCase(element.tagName.toLowerCase())
+        else
+          null
+
+
+      parseContainers = (parent, data) =>
+        containers = if parent.containers then Object.keys(parent.containers) else []
+        if containers.length == 1 && containers.indexOf('default') != -1 && !$(data).children('default').length
+          children = $(data).children()
+          for child in children
+            parseSnippets(parent, 'default', child)
+
+        elements = $(containers.join(','), data)
+        for element in elements
+          children = $(element).children()
+          for child in children
+            parseSnippets(parent, domElementToSnippetName(element), child)
+
+
+      parseSnippets = (parentContainer, region, data) =>
+        snippet = doc.create(domElementToSnippetName(data))
+        parentContainer.append(region, snippet)
+        parseContainers(snippet, data)
+        setEditables(snippet, data)
+
+
+      setEditables = (snippet, data) =>
+        if snippet.hasEditables()
+          for key of snippet.editables
+            snippet.set(key, null)
+            child = $(key + ':first', data).get()[0]
+            if !child
+              snippet.set(key, data.innerHTML)
+            else
+              snippet.set(key, child.innerHTML)
+
+
+      #add all rootSnippets, process their containers and set values
+      domElements.each (index, element) =>
+        row = doc.add(domElementToSnippetName(element))
+        parseContainers(row, element)
+        setEditables(row, element)
+
+
+
 # Script Loader
 # -------------
 # Loading of Javascript and CSS files using yepnope
@@ -2345,7 +2400,7 @@ class SnippetNodeList
     @count = {}
 
   add: (node) ->
-    @assertNodeNameNotUsed(node.name)
+    @assertNodeNameNotUsed(node)
 
     @all[node.name] = node
 
@@ -2355,15 +2410,13 @@ class SnippetNodeList
     @count[node.type] = if @count[node.type] then @count[node.type] + 1 else 1
 
 
-
-
-  # @private
-  assertNodeNameNotUsed: (name) ->
-    if @all[name]
+  # @api private
+  assertNodeNameNotUsed: (node) ->
+    if @all[node.name]
       log.error(
         """
-        A node with the name "#{name}" was already added.
-        Each node in a snippet requires a unique name, regardless of type.
+        #{node.type} Template parsing error: #{ docAttr[node.type] }="#{ node.name }".
+        "#{ node.name }" is a duplicate name.
         """
       )
 
@@ -3024,7 +3077,10 @@ chainable = chainableProxy(doc)
 
 setupApi = ->
 
-  # Initialize the document
+  # kickstart the document
+  @kickstart = chainable(kickstart, 'init')
+
+    # Initialize the document
   @init = chainable(document, 'init')
   @ready = chainable(document.ready, 'add')
 

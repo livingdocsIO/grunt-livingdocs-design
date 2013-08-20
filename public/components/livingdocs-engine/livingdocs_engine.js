@@ -1,5 +1,5 @@
 (function() {
-  var Design, DragDrop, EditableController, Focus, History, HistoryAction, InterfaceInjector, LimitedLocalstore, Loader, Page, Renderer, SnippetArray, SnippetContainer, SnippetDrag, SnippetModel, SnippetNode, SnippetNodeIterator, SnippetNodeList, SnippetSelection, SnippetTemplateList, SnippetTree, SnippetView, Template, chainable, chainableProxy, config, docAttr, docClass, document, dom, guid, htmlCompare, key, localstore, log, mixins, n, name, pageReady, setupApi, stash, templateAttr, templateAttrLookup, v, value,
+  var Design, DragDrop, EditableController, Focus, History, HistoryAction, InterfaceInjector, LimitedLocalstore, Loader, Page, Renderer, SnippetArray, SnippetContainer, SnippetDrag, SnippetModel, SnippetNode, SnippetNodeIterator, SnippetNodeList, SnippetSelection, SnippetTemplateList, SnippetTree, SnippetView, Template, chainable, chainableProxy, config, docAttr, docClass, document, dom, guid, htmlCompare, key, kickstart, localstore, log, mixins, n, name, pageReady, setupApi, stash, templateAttr, templateAttrLookup, v, value,
     __slice = [].slice;
 
   config = {
@@ -1408,6 +1408,86 @@
 
   })();
 
+  kickstart = (function() {
+    return {
+      init: function(destination, design) {
+        var domElements,
+          _this = this;
+        domElements = $(destination).children().not('script');
+        $(destination).html('<div class="doc-section"></div>');
+        doc.init({
+          design: design
+        });
+        return doc.ready(function() {
+          var domElementToSnippetName, parseContainers, parseSnippets, setEditables;
+          domElementToSnippetName = function(element) {
+            if (element.tagName) {
+              return $.camelCase(element.tagName.toLowerCase());
+            } else {
+              return null;
+            }
+          };
+          parseContainers = function(parent, data) {
+            var child, children, containers, element, elements, _i, _j, _len, _len1, _results;
+            containers = parent.containers ? Object.keys(parent.containers) : [];
+            if (containers.length === 1 && containers.indexOf('default') !== -1 && !$(data).children('default').length) {
+              children = $(data).children();
+              for (_i = 0, _len = children.length; _i < _len; _i++) {
+                child = children[_i];
+                parseSnippets(parent, 'default', child);
+              }
+            }
+            elements = $(containers.join(','), data);
+            _results = [];
+            for (_j = 0, _len1 = elements.length; _j < _len1; _j++) {
+              element = elements[_j];
+              children = $(element).children();
+              _results.push((function() {
+                var _k, _len2, _results1;
+                _results1 = [];
+                for (_k = 0, _len2 = children.length; _k < _len2; _k++) {
+                  child = children[_k];
+                  _results1.push(parseSnippets(parent, domElementToSnippetName(element), child));
+                }
+                return _results1;
+              })());
+            }
+            return _results;
+          };
+          parseSnippets = function(parentContainer, region, data) {
+            var snippet;
+            snippet = doc.create(domElementToSnippetName(data));
+            parentContainer.append(region, snippet);
+            parseContainers(snippet, data);
+            return setEditables(snippet, data);
+          };
+          setEditables = function(snippet, data) {
+            var child, _results;
+            if (snippet.hasEditables()) {
+              _results = [];
+              for (key in snippet.editables) {
+                snippet.set(key, null);
+                child = $(key + ':first', data).get()[0];
+                if (!child) {
+                  _results.push(snippet.set(key, data.innerHTML));
+                } else {
+                  _results.push(snippet.set(key, child.innerHTML));
+                }
+              }
+              return _results;
+            }
+          };
+          return domElements.each(function(index, element) {
+            var row;
+            row = doc.add(domElementToSnippetName(element));
+            parseContainers(row, element);
+            return setEditables(row, element);
+          });
+        });
+      }
+    };
+  })();
+
   Loader = (function() {
     function Loader() {
       this.loadedCssFiles = [];
@@ -2501,16 +2581,16 @@
 
     SnippetNodeList.prototype.add = function(node) {
       var _name;
-      this.assertNodeNameNotUsed(node.name);
+      this.assertNodeNameNotUsed(node);
       this.all[node.name] = node;
       this[_name = node.type] || (this[_name] = {});
       this[node.type][node.name] = node.htmlNode;
       return this.count[node.type] = this.count[node.type] ? this.count[node.type] + 1 : 1;
     };
 
-    SnippetNodeList.prototype.assertNodeNameNotUsed = function(name) {
-      if (this.all[name]) {
-        return log.error("A node with the name \"" + name + "\" was already added.\nEach node in a snippet requires a unique name, regardless of type.");
+    SnippetNodeList.prototype.assertNodeNameNotUsed = function(node) {
+      if (this.all[node.name]) {
+        return log.error("" + node.type + " Template parsing error: " + docAttr[node.type] + "=\"" + node.name + "\".\n\"" + node.name + "\" is a duplicate name.");
       }
     };
 
@@ -3152,6 +3232,7 @@
   chainable = chainableProxy(doc);
 
   setupApi = function() {
+    this.kickstart = chainable(kickstart, 'init');
     this.init = chainable(document, 'init');
     this.ready = chainable(document.ready, 'add');
     this.getDesign = function() {

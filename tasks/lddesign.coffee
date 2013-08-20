@@ -18,7 +18,6 @@
 # grunt lddesign --design=designname
 
 "use strict"
-fs = require("fs")
 path = require("path")
 cheerio = require("cheerio")
 htmlmin = require("html-minifier")
