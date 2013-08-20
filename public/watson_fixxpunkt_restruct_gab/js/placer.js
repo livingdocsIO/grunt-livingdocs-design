@@ -103,7 +103,7 @@ return {
 	/* fill in values into new placed special_element */
 	/* ============================================== */
 	fill_in_special_element_values:function( new_element, values ) {
-		new_element.find(".type").html(values.type+"<br/>"+values.title);
+		new_element.find(".type").html(values.type+"<br/>"+placer.short_string(values.title,35));
 		new_element.find("select[name=color_combo]").val(values.color_combo);
 		new_element.find("select[name=font_size]").val(values.font_size);
 	},
