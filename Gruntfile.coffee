@@ -1,8 +1,9 @@
 grunt = require('grunt')
 
+# load all grunt tasks
+require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
 
 grunt.initConfig
- 
 
   recess:
     development:
@@ -17,7 +18,6 @@ grunt.initConfig
         filter: (src) ->
           return src.split('/').pop()[0] != '_' && (src.indexOf('.css') != -1 || src.indexOf('.less') != -1)
       ]
-
 
   lddesigns:
     development:
@@ -39,13 +39,18 @@ grunt.initConfig
       files: [
         expand: true
         cwd: './'
-        src:['designs/**/assets/**', 'designs/**/img/**', 'designs/**/images/**', 'designs/**/media/**', 'designs/**/preview.html']
+        src:[
+          'designs/**/assets/**'
+          'designs/**/img/**'
+          'designs/**/images/**'
+          'designs/**/media/**'
+          'designs/**/preview.html'
+        ]
         dest: '.tmp/'
         # exclude empty directories
         filter: (src) ->
           return src.split('/').pop().indexOf('.') != -1
       ]
-
 
     cssDirectories:
       files: [
@@ -59,7 +64,6 @@ grunt.initConfig
           return src.indexOf('.less') == -1 && src.split('/').pop().indexOf('.') != -1
       ]
 
-      
   watch:
     scripts:
       files: ['designs/**/*', 'public/*.html']
@@ -68,7 +72,6 @@ grunt.initConfig
         nospawn: true
         livereload: 35739
 
-
   moveToDist:
     designs:
       files: [
@@ -76,27 +79,28 @@ grunt.initConfig
         cwd: '.tmp/'
         src:['designs/**']
         dest: ''
-      ]    
-
+      ]
 
   clean:
     preBuild: ['designs/*/dist', '.tmp/']
     postBuild: ['.tmp/']
-    
 
 
-# grunt-contrib-less uses a less.js in version 1.4.1 which has a bug. It's already fixed in v1.5 alpha
-# https://github.com/Paratron/SimpLESS/issues/97
-# grunt.loadNpmTasks "grunt-contrib-less"
-# alternative less compiler which uses recess from twitter
-grunt.loadNpmTasks "grunt-recess"
-
-
-grunt.loadNpmTasks "grunt-contrib-copy"
-grunt.loadNpmTasks "grunt-contrib-watch"
-grunt.loadNpmTasks "grunt-contrib-clean"
+# load livingdocs task lddesigns
 grunt.loadTasks "tasks"
 
 
-grunt.registerTask "default", ["clean:preBuild", "lddesigns", "recess", "copy:assets", "copy:cssDirectories", "moveToDist", "clean:postBuild"]
-grunt.registerTask "server", ["default", "watch"]
+grunt.registerTask "default", [
+  "clean:preBuild"
+  "lddesigns"
+  "recess"
+  "copy:assets"
+  "copy:cssDirectories"
+  "moveToDist"
+  "clean:postBuild"
+]
+
+grunt.registerTask "server", [
+  "default"
+  "watch"
+]
