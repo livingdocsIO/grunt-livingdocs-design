@@ -88,11 +88,12 @@ module.exports = (grunt) ->
     # create design object for snippets, groups and configuration
     #
     design =
-      snippets: {}
-      groups: {}
+      templates: {}
       config: grunt.file.readJSON(path.join(src, 'config.json'),
         encoding: 'utf8'
       )
+
+    design.config.groups = {}
 
     # a design config file must contain a namespace, cancel grunt task
     unless design.config.namespace
@@ -123,26 +124,26 @@ module.exports = (grunt) ->
         groupConfigFile = path.join(src, options.snippetsDirectory, group, 'config.json')
 
         # create group if it doesn't exist
-        unless design.groups[group]
+        unless design.config.groups[group]
           if grunt.file.exists(groupConfigFile)
-            design.groups[group] = grunt.file.readJSON(groupConfigFile, { encoding: 'utf8' })
+            design.config.groups[group] = grunt.file.readJSON(groupConfigFile, { encoding: 'utf8' })
           else
-            design.groups[group] = {name: group}
+            design.config.groups[group] = {name: group}
         
         # add snippet to group if snippets array already exists 
-        if design.groups[group]['snippets']
-          design.groups[group]['snippets'][design.groups[group]['snippets'].length] = snippetName
+        if design.config.groups[group]['templates']
+          design.config.groups[group]['templates'][design.config.groups[group]['templates'].length] = snippetName
 
         # create snippet array if it doesn't exist 
         else
-          design.groups[group]['snippets'] = [snippetName]
+          design.config.groups[group]['templates'] = [snippetName]
 
 
       if snippetPath.length > 1
         addSnippetToGroup(snippetPath[0], snippetPath[snippetPath.length - 1])
       
       else
-        addSnippetToGroup('all', snippetPath[0])
+        addSnippetToGroup('others', snippetPath[0])
      
 
       data = grunt.file.read(snippet,
@@ -156,11 +157,11 @@ module.exports = (grunt) ->
       snippetObject = JSON.parse($(options.configurationElement).html()) || {}
       
       # store snippet config in design
-      design.snippets[snippetName] = snippetObject
+      design.templates[snippetName] = snippetObject
       
       # push snippet html into snippet object, remove config and minify the html
       $(options.configurationElement).remove()
-      design.snippets[snippetName]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetName })
+      design.templates[snippetName]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetName })
       
       # Check if everything is compiled, close the templates file and save it;
       compiledSnippets += 1
@@ -206,8 +207,8 @@ module.exports = (grunt) ->
     dest = options.dest
     files = @files
     
-    snippets = []
+    templates = []
     files.forEach (file, i) ->
-      snippets[i] = file.src[0]
+      templates[i] = file.src[0]
     
-    compileDesign(src, dest, snippets, options)
+    compileDesign(src, dest, templates, options)

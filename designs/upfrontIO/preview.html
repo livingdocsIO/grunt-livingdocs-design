@@ -5,18 +5,18 @@
   <title>upfront</title>
   <link rel="shortcut icon" href="/favicon.png">
   <link href="http://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/css/livingdocs.css">
+  <link rel="stylesheet" href="/livingdocs-engine/css/livingdocs.css">
   <link rel="stylesheet" href="/designs/upfrontIO/css/style.css">
 
   <script src="http://localhost:35739/livereload.js"></script>
-  <script src="/js/vendor/jquery-1.9.js"></script>
+  <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
 
   <!-- dependencies of livingdocs-engine -->
-  <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
-  <script src="/js/vendor/store/store.js"></script>
-  <script src="/js/vendor/editableJS/editable.js"></script>
+  <script src="/components/livingdocs-engine/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+  <script src="/components/livingdocs-engine/vendor/store/store.js"></script>
+  <script src="/components/livingdocs-engine/vendor/editableJS/editable.js"></script>
   <script src="/designs/upfrontIO/design.js"></script>
-  <script src="/js/livingdocs_engine.js"></script>
+  <script src="/js/livingdocs-engine/livingdocs_engine.js"></script>
 
 </head>
 <body>
@@ -96,24 +96,21 @@
 
 <script>
 
-  // design.upfrontIO
-  doc.addDesign(design.upfrontIO.snippets, design.upfrontIO.config);
-
   $(document).ready(function() {
 
-    $(".upfront-story-title").html(design.upfrontIO.snippets.title.html);
-    $(".upfront-story-text").html(design.upfrontIO.snippets.text.html);
-    $(".upfront-story-highlight-text").html(design.upfrontIO.snippets.highlightedText.html);
-    $(".upfront-story-image").html(design.upfrontIO.snippets.linkedImage.html);
-    $(".upfront-footer").html(design.upfrontIO.snippets.footer.html);
-    $(".upfront-image-caption").html(design.upfrontIO.snippets.imageWithCaption.html);
-    $(".upfront-clients").html(design.upfrontIO.snippets.clientList.html);
-    $(".image").html(design.upfrontIO.snippets.image.html);
-    $(".upfront-story-link").html(design.upfrontIO.snippets.link.html);
+    $(".upfront-story-title").html(design.upfrontIO.templates.title.html);
+    $(".upfront-story-text").html(design.upfrontIO.templates.text.html);
+    $(".upfront-story-highlight-text").html(design.upfrontIO.templates.highlightedText.html);
+    $(".upfront-story-image").html(design.upfrontIO.templates.linkedImage.html);
+    $(".upfront-footer").html(design.upfrontIO.templates.footer.html);
+    $(".upfront-image-caption").html(design.upfrontIO.templates.imageWithCaption.html);
+    $(".upfront-clients").html(design.upfrontIO.templates.clientList.html);
+    $(".image").html(design.upfrontIO.templates.image.html);
+    $(".upfront-story-link").html(design.upfrontIO.templates.link.html);
 
     /*
     var json = doc.stash.get();
-    doc.loadDocument({ json: json });
+    doc.init({design: design.upfrontIO, json: json });
 
     doc.ready(function() {
 

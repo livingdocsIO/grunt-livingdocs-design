@@ -17,7 +17,8 @@ app.use(express.static(path.join(application_root, '/public')));
 
 // Errorhandler
 app.use(function(err, req, res, next) {
-	res.sendfile('public/bootstrap.html');
+//	res.sendfile('public/bootstrap.html');
+	res.send(404, 'Page or file not found');
 })
 
 

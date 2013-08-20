@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>watson</title>
+    
+  <link rel="stylesheet" href="/livingdocs-engine/css/livingdocs.css">
+  <link rel="stylesheet" href="/designs/watson/css/style.css">
+
+  <script src="http://localhost:35739/livereload.js"></script>
+  <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
+
+  <!-- dependencies of livingdocs-engine -->
+  <script src="/components/livingdocs-engine/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+  <script src="/components/livingdocs-engine/vendor/store/store.js"></script>
+  <script src="/components/livingdocs-engine/vendor/editableJS/editable.js"></script>
+  <script src="/designs/watson/design.js"></script>
+  <script src="/components/livingdocs-engine/livingdocs_engine.js"></script>
+
+  </head>
+  <body>
+    <div class="full-width-container">
+    </div>
+    <div class="story-container">
+    </div>
+  </body>
+  <script>
+    $(document).ready(function() {
+      headerContainer = $('.full-width-container');
+      headerContainer.html(design.watson.templates.fullWidthLayout.html);
+      headerContent = headerContainer.find('div[doc-container]');
+      headerContent.append(design.watson.templates.headerImage.html);
+
+
+      storyContainer = $('.story-container');
+      storyContainer.html(design.watson.templates.textLayout.html);
+      storyContent = storyContainer.find('div[doc-container]');
+      storyContent.append(design.watson.templates.date.html);
+      storyContent.append(design.watson.templates.socialMediaBox.html);
+      storyContent.append(design.watson.templates.title.html);
+      storyContent.append(design.watson.templates.lead.html);
+      storyContent.append(design.watson.templates.author.html);
+      storyContent.append(design.watson.templates.text);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.subtitle.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      insert = $(design.watson.templates.rightInsert.html);
+      storyContent.append(insert);
+      insert.append(design.watson.templates.image.html);
+      insert.append(design.watson.templates.caption.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.quote.html);
+      storyContent.append(design.watson.templates.source.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      imageBar = $(design.watson.templates.imageBar.html);
+      storyContent.append(imageBar);
+      imageBar.append(design.watson.templates.image.html);
+      imageBar.append(design.watson.templates.image.html);
+      imageBar.append(design.watson.templates.image.html);
+      imageBar.append(design.watson.templates.caption.html);
+      storyContent.append(design.watson.templates.subtitle.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      sideInsert = $(design.watson.templates.sideInsert.html);
+      storyContent.append(sideInsert);
+      sideInsert.append(design.watson.templates.infoBox.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+      storyContent.append(design.watson.templates.text.html);
+    });
+  </script>
+</html>

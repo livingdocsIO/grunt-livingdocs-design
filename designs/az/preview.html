@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="/designs/az/css/style.css">
   
   <script src="http://localhost:35739/livereload.js"></script>
-  <script src="/js/vendor/jquery-1.9.js"></script>
+  <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
 
   <!-- dependencies of livingdocs-engine -->
-  <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
-  <script src="/js/vendor/store/store.js"></script>
-  <script src="/js/vendor/editableJS/editable.js"></script>
+  <script src="/components/livingdocs-engine/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+  <script src="/components/livingdocs-engine/vendor/store/store.js"></script>
+  <script src="/components/livingdocs-engine/vendor/editableJS/editable.js"></script>
   <script src="/designs/az/design.js"></script>
-  <script src="/js/livingdocs_engine.min.js"></script>
+  <script src="/components/livingdocs-engine/livingdocs_engine.js"></script>
   
 
 </head>
@@ -127,19 +127,18 @@
 </html>
 
     <script>
-      doc.addDesign(design.az.snippets, design.az.config);
 
       $(document).ready(function() {
 
-            $('.linked-image').html(design.az.snippets.linkedImage.html);
-            $('.topnavigation').html(design.az.snippets.navigation.html);
-            $('.subnavigation').html(design.az.snippets.subnavigation.html);
-            $('.title').html(design.az.snippets.title.html);
-            $('.image').html(design.az.snippets.imageWithCaption.html);
-            $('.filet').html(design.az.snippets.filet.html);
-            $('.text').html(design.az.snippets.text.html);
-            $('.recommendation').html(design.az.snippets.recommendation.html);
-            $('.footer').html(design.az.snippets.footer.html);
+        $('.linked-image').html(design.az.templates.linkedImage.html);
+        $('.topnavigation').html(design.az.templates.navigation.html);
+        $('.subnavigation').html(design.az.templates.subnavigation.html);
+        $('.title').html(design.az.templates.title.html);
+        $('.image').html(design.az.templates.imageWithCaption.html);
+        $('.filet').html(design.az.templates.filet.html);
+        $('.text').html(design.az.templates.text.html);
+        $('.recommendation').html(design.az.templates.recommendation.html);
+        $('.footer').html(design.az.templates.footer.html);
 
       });
     </script>

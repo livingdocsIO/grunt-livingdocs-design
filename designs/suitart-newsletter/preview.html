@@ -8,14 +8,14 @@
     <link rel="stylesheet" href="/css/livingdocs.css">
   
     <script src="http://localhost:35739/livereload.js"></script>
-    <script src="/js/vendor/jquery-1.9.js"></script>
+    <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
 
     <!-- dependencies of livingdocs-engine -->
-    <script src="/js/vendor/yepnope/yepnope.1.5.3-min.js"></script>
-    <script src="/js/vendor/store/store.js"></script>
-    <script src="/js/vendor/editableJS/editable.js"></script>
+    <script src="/components/livingdocs-engine/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+    <script src="/components/livingdocs-engine/vendor/store/store.js"></script>
+    <script src="/components/livingdocs-engine/vendor/editableJS/editable.js"></script>
     <script src="/designs/suitart-newsletter/design.js"></script>
-    <script src="/js/livingdocs_engine.js"></script>
+    <script src="/components/livingdocs-engine/livingdocs_engine.js"></script>
 
     <meta name="viewport" content="width=720">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -89,10 +89,8 @@ table,td,div,p {font-family: Lucida Grande, Lucida Sans, Lucida Sans Unicode, Ar
 
 
 <script>
-  doc.addDesign(design.suitart_newsletter.snippets, design.suitart_newsletter.config);
-
   $(document).ready(function() {
-    doc.loadDocument();
+    doc.init({design: design.suitart_newsletter});
 
     doc.ready(function() {
 
