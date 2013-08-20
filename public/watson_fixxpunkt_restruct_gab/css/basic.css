@@ -136,6 +136,12 @@ select option {
 	height:100%;
 }
 
+img.loading {
+	display:block;
+	margin:20px auto;
+	width:32px;
+}
+
 /* custom hide and display */
 /* ======================= */
 .hide_on_desktop { display:none !important; }

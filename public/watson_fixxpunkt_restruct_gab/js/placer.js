@@ -435,6 +435,7 @@ return {
 	/* ============================== */
 	fill_working_area:function(json_front) {
 		var working_area = $(".working_area");
+		working_area.empty();
 		/* loop through clusters */
 		$.each( json_front.clusters, function( key, values_cluster ) {
 			
@@ -478,9 +479,10 @@ return {
 			url: "placer_library_json.html",
 			success: function(result) {
 				$.each( result, function( key, value ) {
+				var current_list=$(".tools ul."+key);
+				current_list.empty();
 					$.each( result[key], function( key2, value2 ) {
-						var current_list=$(".tools ul."+key);
-						current_list.append("<li class='element'>"+placer.short_string(value2.title,25)+"</li>");
+						current_list.append("<li class='element'>"+placer.short_string(value2.title,30)+"</li>");
 						current_list.find("li:last").attr("data-element", JSON.stringify(value2));
 					});
 				});
