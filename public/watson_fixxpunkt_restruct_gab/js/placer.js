@@ -237,7 +237,22 @@ return {
 		
 		/* element search*/
 		$(".tools .search input").keyup(function(){
-			$(".tools .search ul").show();
+			$.ajax({
+				dataType: "json",
+				url: "placer_search_result_json.html",
+				success: function(result) {
+					var result_list = $(".tools .search ul");
+					result_list.empty();
+					$.each( result.search_result, function( key, value ) {
+						var string_length = 30 - value.type.length;
+						result_list.append("<li class='element'><strong>"+value.type+":</strong> "+placer.short_string(value.title,string_length)+"</li>");
+						result_list.find("li:last").attr("data-element", JSON.stringify(value));
+					});
+					placer.init_draggable_toolelements();
+					$(".tools .search ul").show();
+				},
+				async: false
+		    });
 		});
 		
 		/* tag search */
@@ -455,11 +470,33 @@ return {
 			async: false
 	    });
 	},
+	/* load library json */
+	/* ================= */
+	load_library:function() {
+		$.ajax({
+			dataType: "json",
+			url: "placer_library_json.html",
+			success: function(result) {
+				$.each( result, function( key, value ) {
+					$.each( result[key], function( key2, value2 ) {
+						var current_list=$(".tools ul."+key);
+						current_list.append("<li class='element'>"+placer.short_string(value2.title,25)+"</li>");
+						current_list.find("li:last").attr("data-element", JSON.stringify(value2));
+					});
+				});
+			},
+			async: false
+	    });
+	},
 	
 	/* =============== */
 	/* === VARIOUS === */
 	/* =============== */
 	
+	short_string:function(the_string, the_length) {
+		if (the_string.length>the_length-3) the_string = the_string.substr(0,the_length)+"...";
+		return the_string;
+	},
 	check_for_empty_working_area:function() {
 		var num_clusters = $(".working_area .cluster").length;
 		if (!num_clusters) {
@@ -505,6 +542,7 @@ return {
 			placer.position_meter();
 			placer.position_iframes(0);
 		});
+		placer.load_library (); /* load json and fill toollibrary to the left */
 		placer.load_layout (); /* load json and fill working area */
 		placer.init_draggable_toolelements ();
 		placer.init_pulldowns ();
