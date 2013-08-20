@@ -40,8 +40,8 @@ return {
 			if (new_pos != undefined) {
 				iframes[counter].stop(true, true);
 				iframes[counter].animate({ scrollTop: new_pos-(top_pos/scales[counter]) }, duration );
-				iframes[counter].find(".region").not(":has(.region)").parents(".cluster").stop().animate({ opacity: 0.2 }, duration );
-				iframes[counter].find(".region").not(":has(.region)").eq(top_region).parents(".cluster").stop().animate({ opacity: 1 }, duration );
+				//iframes[counter].find(".region").not(":has(.region)").parents(".cluster").stop().animate({ opacity: 0.2 }, duration );
+				//iframes[counter].find(".region").not(":has(.region)").eq(top_region).parents(".cluster").stop().animate({ opacity: 1 }, duration );
 			}
 		}
 	},
