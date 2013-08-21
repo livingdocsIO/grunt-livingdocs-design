@@ -274,6 +274,10 @@
 /* ================= */
 .teaser.tag_teaser .text { background-color:rgba(0,0,0,0.8); }
 
+.teaser.tag_teaser .media_icons .tag {
+	font-size:2.4em;
+}
+
 .teaser.tag_teaser h2 { 
 	color:#ffffff;
 	font-size:4em; /* 40px / 10px => ignores .font_l etc. */
@@ -282,6 +286,11 @@
 .teaser.tag_teaser h3 {
 	color:#ffffff;
 	font-size:3em; /* 30px / 10px => ignores .font_l etc. */
+}
+
+.teaser.tag_teaser h2 a:hover, 
+.teaser.tag_teaser h3 a:hover {
+	color:#ffffff;
 }
 
 
