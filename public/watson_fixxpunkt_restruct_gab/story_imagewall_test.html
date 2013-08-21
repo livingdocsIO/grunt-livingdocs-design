@@ -89,20 +89,32 @@
 			<!-- ========= -->
 			<div class="insert full">
 				<div class="widget image_wall">
-					<div class="frame size_100" style="background-image:url('media/img/placeholderimg/bild_052.jpg');"></div>
-					<div class="frame size_66" style="background-image:url('media/img/placeholderimg/bild_053.jpg');"></div>
-					<div class="frame size_33" style="background-image:url('media/img/placeholderimg/bild_054.jpg');"></div>
-					<div class="frame size_25" style="background-image:url('media/img/placeholderimg/bild_055.jpg');"></div>
-					<div class="frame size_75" style="background-image:url('media/img/placeholderimg/bild_056.png');"></div>
-					<div class="frame size_33" style="background-image:url('media/img/placeholderimg/bild_057.png');"></div>
-					<div class="frame size_33" style="background-image:url('media/img/placeholderimg/bild_052.jpg');"></div>
-					<div class="frame size_33" style="background-image:url('media/img/placeholderimg/bild_053.jpg');"></div>
+					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_052.jpg');"></div>
+					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_053.jpg');"></div>
+					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_054.jpg');"></div>
+					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_055.jpg');"></div>
+					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_056.png');"></div>
+					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_057.png');"></div>
+					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_052.jpg');"></div>
+					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_053.jpg');"></div>
 				</div>
 			</div>
 			
 						
 			<script type="text/javascript">
-				
+				var frames = $(".image_wall .frame");
+				for (var counter=0; counter<frames.length; counter++) {
+					var current_frame = frames.eq(counter);
+					var next_frame = frames.eq(counter+1);
+					if ( counter==0) {
+						current_frame.addClass("size_100");
+					}
+					else {
+						var current_landscape = ( current_frame.find("img").width() > current_frame.find("img").height() );
+						alert(current_landscape+" width:"+current_frame.find("img").width()+" height:"+current_frame.find("img").height());
+					}
+					
+				}
 			</script>
 			
 			
