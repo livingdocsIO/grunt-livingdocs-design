@@ -91,6 +91,7 @@
 
 .dashboard .segment .error_msg,
 .dashboard .segment .login,
+.dashboard .segment .logout,
 .dashboard .segment .register,
 .dashboard .segment .retrieve {
 	font-size:2em; /* 20px / 10px */
