@@ -112,7 +112,7 @@ $(document).ready(function() {
 			/* calculates bubble sizes and opacities */
 			calculate_bubblesizes:function(current_poll, current_results) {
 				var max_diameter = current_poll.width() / 2.5;
-				var max_height = ((current_poll.height()-current_poll.find(".result p").outerHeight()) / current_results.length)-20;
+				var max_height = ((current_poll.height()-current_poll.find(".result p").outerHeight()) / current_results.length)-25;
 				if ( max_diameter > max_height && !current_poll.parents(".insert").length ) max_diameter = max_height;
 				var max_area = max_diameter * max_diameter; /* in pixels */
 				var max_bubble_width_percentage = 100 / (current_poll.find("div.result li").innerWidth()-30) * max_diameter;
