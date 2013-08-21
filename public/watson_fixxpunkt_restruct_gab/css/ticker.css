@@ -227,6 +227,17 @@
 .widget.ticker .teams ul li .icon:nth-child(n+4) { display:none; }
 
 
+
+
+/* tables */
+/* ====== */
+.widget.ticker .tables .colltent {
+	display:none;
+}
+
+
+
+
 /* tools */
 /* ===== */
 .widget.ticker .tools {
