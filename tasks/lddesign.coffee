@@ -42,8 +42,8 @@ module.exports = (grunt) ->
         htmlmin.minify html,
           collapseWhitespace: true
       catch err
-        grunt.log.writeln('\n>> Design "%s", snippet "%s": HTML minify error\n %s\n'.yellow, info.design, info.snippet, err)
-        return '<div class="error minify" style="color: red">Error while minifying: Design "' + info.design + '", Snippet "' + info.snippet + '"</div>'
+        grunt.log.writeln('\n>> Design "%s", template "%s": HTML minify error\n %s\n'.yellow, info.design, info.template, err)
+        return '<div class="error minify" style="color: red">Error while minifying: Design "' + info.design + '", Template "' + info.template + '"</div>'
         
     else
       html
@@ -87,7 +87,7 @@ module.exports = (grunt) ->
     # create design object for templates, groups and configuration
     #
     design =
-      templates: {}
+      templates: []
       config: grunt.file.readJSON(path.join(src, 'config.json'),
         encoding: 'utf8'
       )
@@ -109,17 +109,18 @@ module.exports = (grunt) ->
     # iterate through file array and process the templates, store them in templates.js file
     #
     compiledTemplates = 0
-    files.forEach (snippet) ->
+    files.forEach (template) ->
 
-      snippetPath = snippet.replace(src + '/' + options.templatesDirectory + '/', '').split('/')
-      snippetName = snippetPath[snippetPath.length - 1].replace('.html', '')
-      snippetName = snippetName.toCamelCase()
+      templatePath = template.replace(src + '/' + options.templatesDirectory + '/', '').split('/')
+      templateName = templatePath[templatePath.length - 1].replace('.html', '')
+      templateName = templateName.toCamelCase()
 
-      if(snippetPath.length > 2)
-        grunt.fail.warn('Design "' + designFolder + '", Snippet "' + snippetPath.join('/') + '": Templates can only be only be nested in one directory.')
+      if(templatePath.length > 2)
+        grunt.fail.warn('Design "' + designFolder + '", Template "' + templatePath.join('/') + '": Templates can only be only be nested in one directory.')
 
 
-      addSnippetToGroup = (group, snippet) ->
+
+      addTemplateToGroup = (group, template) ->
         groupConfigFile = path.join(src, options.templatesDirectory, group, 'config.json')
 
         # create group if it doesn't exist
@@ -129,42 +130,44 @@ module.exports = (grunt) ->
           else
             design.config.groups[group] = {name: group}
         
-        # add snippet to group if templates array already exists 
+        # add template to group if templates array already exists 
         if design.config.groups[group]['templates']
-          design.config.groups[group]['templates'][design.config.groups[group]['templates'].length] = snippetName
+          design.config.groups[group]['templates'][design.config.groups[group]['templates'].length] = templateName
 
-        # create snippet array if it doesn't exist 
+        # create template array if it doesn't exist 
         else
-          design.config.groups[group]['templates'] = [snippetName]
+          design.config.groups[group]['templates'] = [templateName]
 
 
-      if snippetPath.length > 1
-        addSnippetToGroup(snippetPath[0], snippetPath[snippetPath.length - 1])
+
+
+      if templatePath.length > 1
+        addTemplateToGroup(templatePath[0], templatePath[templatePath.length - 1])
       
       else
-        addSnippetToGroup('others', snippetPath[0])
+        addTemplateToGroup('others', templatePath[0])
      
 
-      data = grunt.file.read(snippet,
-        encoding: 'utf8'
-      )
-      
+
+      # store template config in design
+      if(design.templates[templateName])
+        grunt.fail.warn('The template "' + templateName + '" is not unique.')
+
+
+      data = grunt.file.read(template, encoding: 'utf8')
+
       # load file in jQuery object to read json & html
       $ = cheerio.load(data)
       
-      # create snippet object using config
-      snippetObject = JSON.parse($(options.configurationElement).html()) || {}
+      # create template object using config
+      newTemplate = JSON.parse($(options.configurationElement).html()) || {}
       
-      # store snippet config in design
-      if(design.templates[snippetName])
-        grunt.fail.warn('The template "' + snippetName + '" is not unique.')
-
-      design.templates[snippetName] = snippetObject
-      
-      # push snippet html into snippet object, remove config and minify the html
+      # push template html into template object, remove config and minify the html
       $(options.configurationElement).remove()
-      design.templates[snippetName]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetName })
-      
+      newTemplate.name = templateName
+      newTemplate.html = processHtml($.html(), options.minify, { design: design.config.namespace, template: templateName })
+      design.templates.push(newTemplate)
+
       # Check if everything is compiled, close the templates file and save it;
       compiledTemplates += 1
       if files.length == compiledTemplates
