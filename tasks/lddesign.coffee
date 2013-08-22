@@ -156,6 +156,9 @@ module.exports = (grunt) ->
       snippetObject = JSON.parse($(options.configurationElement).html()) || {}
       
       # store snippet config in design
+      if(design.templates[snippetName])
+        grunt.fail.warn('The template "' + snippetName + '" is not unique.')
+
       design.templates[snippetName] = snippetObject
       
       # push snippet html into snippet object, remove config and minify the html
