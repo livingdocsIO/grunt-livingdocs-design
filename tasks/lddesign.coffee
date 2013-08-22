@@ -5,13 +5,13 @@
 
 # lddesigns
 # ---------
-# this task only processes the config and snippets. the css and assets should be handled in other tasks
+# this task only processes the config and templates. the css and assets should be handled in other tasks
 
 
 # lddesign
 # --------
 # lddesign is an internal task that is used to process single designs. This task is called from lddesigns.
-# It processes the whole design. So first the config and snippets are written to a file.
+# It processes the whole design. So first the config and templates are written to a file.
 # After that it copies all assets to the public/designs/designname directory and compiles the style.less file
 # use it the following way
 #
@@ -25,7 +25,7 @@ htmlmin = require("html-minifier")
 
 String::toCamelCase = ->
   @replace /^([A-Z])|[\s-_](\w)/g, (match, p1, p2, offset) ->
-    return p2.toUpperCase()  if p2
+    return p2.toUpperCase() if p2
     p1.toLowerCase()
 
 
@@ -49,7 +49,7 @@ module.exports = (grunt) ->
       html
       
       
-  # write the config and snippets to disk
+  # write the config and templates to disk
   writeDesignConfig = (design, destination) ->
     templateBegin = '(function() { this.design || (this.design = {}); design.' + design.config.namespace + ' = (function() { return '
     templateEnd = ';})();}).call(this);'
@@ -60,7 +60,7 @@ module.exports = (grunt) ->
     grunt.log.writeln('Design "%s" compiled.', destination)
   
   
-  # process the config and snippets, create design object
+  # process the config and templates, create design object
   compileDesign = (src, dest, files, options) ->
     designFolder = options.design
   
@@ -71,7 +71,7 @@ module.exports = (grunt) ->
       name: ''
       type: 'design'
     ,
-      name: options.snippetsDirectory
+      name: options.templatesDirectory
       type: 'directory'
     ,
       name: 'config.json'
@@ -84,7 +84,7 @@ module.exports = (grunt) ->
 
 
     #
-    # create design object for snippets, groups and configuration
+    # create design object for templates, groups and configuration
     #
     design =
       templates: {}
@@ -99,28 +99,28 @@ module.exports = (grunt) ->
       grunt.fail.fatal('The design ' + designFolder + ' contains a config file which has no namespace.')
     
 
-    # warn if a design contains no snippets
+    # warn if a design contains no templates
     unless files.length
-      grunt.fail.warn('The design "' + designFolder + '" has no snippets')
+      grunt.fail.warn('The design "' + designFolder + '" has no templates')
       writeDesignConfig(design, dest)
     
 
     #
-    # iterate through file array and process the snippets, store them in templates.js file
+    # iterate through file array and process the templates, store them in templates.js file
     #
-    compiledSnippets = 0
+    compiledTemplates = 0
     files.forEach (snippet) ->
 
-      snippetPath = snippet.replace(src + '/' + options.snippetsDirectory + '/', '').split('/')
+      snippetPath = snippet.replace(src + '/' + options.templatesDirectory + '/', '').split('/')
       snippetName = snippetPath[snippetPath.length - 1].replace('.html', '')
       snippetName = snippetName.toCamelCase()
 
       if(snippetPath.length > 2)
-        grunt.fail.warn('Design "' + designFolder + '", Snippet "' + snippetPath.join('/') + '": Snippets can only be only be nested in one directory.')
+        grunt.fail.warn('Design "' + designFolder + '", Snippet "' + snippetPath.join('/') + '": Templates can only be only be nested in one directory.')
 
 
       addSnippetToGroup = (group, snippet) ->
-        groupConfigFile = path.join(src, options.snippetsDirectory, group, 'config.json')
+        groupConfigFile = path.join(src, options.templatesDirectory, group, 'config.json')
 
         # create group if it doesn't exist
         unless design.config.groups[group]
@@ -129,7 +129,7 @@ module.exports = (grunt) ->
           else
             design.config.groups[group] = {name: group}
         
-        # add snippet to group if snippets array already exists 
+        # add snippet to group if templates array already exists 
         if design.config.groups[group]['templates']
           design.config.groups[group]['templates'][design.config.groups[group]['templates'].length] = snippetName
 
@@ -166,15 +166,15 @@ module.exports = (grunt) ->
       design.templates[snippetName]['html'] = processHtml($.html(), options.minify, { design: design.config.namespace, snippet: snippetName })
       
       # Check if everything is compiled, close the templates file and save it;
-      compiledSnippets += 1
-      if files.length == compiledSnippets       
+      compiledTemplates += 1
+      if files.length == compiledTemplates
 
         # write design to file
         writeDesignConfig(design, dest)
 
 
-  # grunt task to compile all snippets
-  grunt.registerMultiTask 'lddesigns', 'Compile snippets to livingdocs-engine template', ->
+  # grunt task to compile all templates
+  grunt.registerMultiTask 'lddesigns', 'Compile templates to livingdocs-engine template', ->
     options = @options()
     designs = @files
     
@@ -191,7 +191,7 @@ module.exports = (grunt) ->
       # create task to process the design
       grunt.config('lddesign.design_' + design + '.files', [
         expand: true
-        src: [src + '/' + options.snippetsDirectory + '/**/*.html']
+        src: [src + '/' + options.templatesDirectory + '/**/*.html']
         dest: dest
       ])
       grunt.config('lddesign.design_' + design + '.options', option)
