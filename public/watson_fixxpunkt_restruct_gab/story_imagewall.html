@@ -241,23 +241,21 @@
 				}
 				
 				function fill_in_image (thumbnail) {
-					$(".image_wall .zoom .img_wrapper").html("<img src='"+thumbnail.attr("src")+"' />");
-					$(".image_wall .zoom .caption").html(thumbnail.parents(".frame").attr("data-caption"));
-					if ( thumbnail.width() > thumbnail.height() ) $(".image_wall .zoom img").addClass("landscape");
-					else $(".image_wall .zoom img").css("height", 0.75* $(".image_wall").width());
+					thumbnail.parents(".imagerow").next(".zoom").find(".img_wrapper").html("<img src='"+thumbnail.attr("src")+"' />");
+					thumbnail.parents(".imagerow").next(".zoom").find(".caption").html(thumbnail.parents(".frame").attr("data-caption"));
+					if ( thumbnail.width() > thumbnail.height() ) thumbnail.parents(".imagerow").next(".zoom").find("img").addClass("landscape");
+					else thumbnail.parents(".imagerow").next(".zoom").find("img").css("height", 0.75* $(".image_wall").width());
 					var left_pixels = thumbnail.position().left + (thumbnail.width()/2);
 					var left_percent = 100 / $(".image_wall").width() * left_pixels;
-					$(".image_wall .zoom .arrow").css("left", left_percent+"%");
+					thumbnail.parents(".imagerow").next(".zoom").find(".arrow").css("left", left_percent+"%");
 					
 				}
 				
 				function sliding_images (thumbnail) {
-					$(".image_wall .zoom").remove();
-					thumbnail.parents(".imagerow").after(code_zoom);
 					fill_in_image(thumbnail);
-					$(".image_wall .zoom").slideDown();
-					$(".image_wall .zoom .arrow").fadeIn(1000);
-					$('html, body').animate({ scrollTop: $(".image_wall .zoom").offset().top-75 }, 1000);
+					thumbnail.parents(".imagerow").next(".zoom").slideDown();
+					thumbnail.parents(".imagerow").next(".zoom").find(".arrow").fadeIn(1000);
+					$('html, body').animate({ scrollTop: thumbnail.parents(".imagerow").next(".zoom").offset().top-75 }, 1000);
 				}
 				
 				function show_image () {
@@ -265,12 +263,8 @@
 					if ( thumbnail.parents(".imagerow").next(".zoom").length ) {
 						fill_in_image(thumbnail);
 					}
-					else if ( $(".image_wall .zoom").length ) {
-						$(".image_wall .zoom").slideUp(function(){
-							sliding_images(thumbnail);
-						});
-					}
 					else {
+						thumbnail.parents(".imagerow").after(code_zoom);
 						sliding_images(thumbnail);
 					}
 				}
