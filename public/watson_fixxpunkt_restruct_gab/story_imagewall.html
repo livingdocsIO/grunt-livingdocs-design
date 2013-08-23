@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+    	<script src="js/jquery-1.9.js" type="text/javascript"></script>
+		<script src="js/jquery.cookie.js" type="text/javascript"></script>
+    
+		<title>watson - Story Ticker Test</title>
+		
+		<!-- Mobile viewport optimization -->
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-touch-fullscreen" content="yes" />
+		<meta names="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="robots" content="index,follow" />
+		
+		<link rel="shortcut icon" href="media/img/main/icons/favicon.ico" type="image/x-icon" />
+		<!-- Home screen icon -->
+		<!-- For iPhone 4 with high-resolution Retina display: -->
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="media/img/main/icons/apple_touch_icon_114.png">
+		<!-- For first-generation iPad: -->
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="media/img/main/icons/apple_touch_icon_72.png">
+		<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+		<link rel="apple-touch-icon-precomposed" href="media/img/main/icons/apple_touch_icon_57.png">
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/color_combos.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/basic.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/teasers.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/story.css" />
+		<script src="js/story.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" media="all" href="css/widgets.css" />
+		<script src="js/widgets.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" media="all" href="css/timeline.css" />
+		<script src="js/talkback.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" media="all" href="css/navi.css" />	
+		<script src="js/navi.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" media="all" href="css/dashboard.css" />	
+		<script src="js/dashboard.js" type="text/javascript"></script>
+		
+		<!--<link href='https://fonts.googleapis.com/css?family=Lustria' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>-->
+		
+	</head>
+	<body>	
+	
+	
+	
+	<div class="wrapper">
+	
+		<div class="story">
+				
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			
+			
+			
+			<style type="text/css">
+				.widget.image_wall {
+					visibility:hidden;
+				}
+			
+				.widget.image_wall .frame {
+					float:left;
+					padding-bottom:50%;
+					height:0;
+					overflow:hidden;
+					box-sizing:border-box;
+					-moz-box-sizing:border-box;
+					border:2px solid #ffffff;
+				}
+				.widget.image_wall .frame.size_25 { width:25%; }
+				.widget.image_wall .frame.size_33 { width:33.333333%; }
+				.widget.image_wall .frame.size_50 { width:50%; }
+				.widget.image_wall .frame.size_66 { width:66.666666%; }
+				.widget.image_wall .frame.size_75 { width:75%; }
+				.widget.image_wall .frame.size_100 { width:100%; }
+				
+				.widget.image_wall .frame img {
+					width:100%;
+					cursor:pointer;
+					position:relative;
+					-moz-transition:-moz-transform 0.5s ease;
+					-webkit-transition: -webkit-transform 0.5s ease;
+					-o-transformtransition: -o-transformtransform 0.5s ease;
+					transition: transform 0.5s ease;
+				}
+				
+				.widget.image_wall .frame img:hover {
+					-moz-transform:scale(1.05,1.05);
+					-webkit-transform:scale(1.05,1.05);
+					-o-transform:scale(1.05,1.05);
+					transform:scale(1.05,1.05);
+				}
+				
+				.widget.image_wall .zoom {
+					display:none;
+					clear:both;
+					float:none;
+					background-color:#222222;
+					color:#ffffff;
+					font-size:1.8em;
+					width:100%;
+					overflow:hidden;
+					text-align:center;
+					border-top:2em solid #ffffff;
+					border-bottom:2em solid #ffffff;
+					padding-bottom:1em;
+					position:relative;
+					overflow:visible;
+				}
+				
+				.widget.image_wall .zoom img {
+					margin:1em 2%;
+				}
+				
+				.widget.image_wall .zoom img.landscape {
+					width:96%;
+				}
+				
+				.widget.image_wall .zoom img.portrait {
+					height:35em;
+				}
+				
+				.widget.image_wall .zoom .caption {
+					text-align:left;
+					padding:0 2%;
+				}
+				
+				.widget.image_wall .zoom .arrow {
+					position:absolute;
+					z-index:1;
+					width:0;
+					height:0;
+					border:1.4em solid #222222;
+					margin-left:-0.7em;
+					top:-2.4em;
+					border-top-color: transparent !important;
+					border-left-color: transparent !important;
+					border-right-color: transparent !important;
+					display:none;
+				}
+			</style>
+			
+			
+			<!-- imagewall -->
+			<!-- ========= -->
+			<div class="insert full">
+				<div class="widget image_wall">
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/1.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/2.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/3.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/4.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/5.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/6.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/7.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/8.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/9.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/10.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/11.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/12.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/13.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/14.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/15.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/16.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/17.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/18.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/19.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/20.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/21.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/22.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/23.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/24.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/25.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/26.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/27.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/28.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/29.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/30.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/31.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/32.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/33.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/34.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/35.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/36.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/37.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/38.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/39.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/40.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/41.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/42.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/43.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/imagewall_testbilder/44.jpg" /></div>
+				</div>
+			</div>
+			
+						
+			<script type="text/javascript">
+				
+				var code_zoom = "<div class='zoom'><div class='arrow'></div><div class='img_wrapper'></div><div class='caption'>Lorem ipsum dolor</div></div>";
+				
+				function adjust_sizes () {
+					var frames = $(".image_wall .frame");
+					for (var counter=0; counter<frames.length; counter++) {
+						var current_frame = frames.eq(counter);
+						var current_image = current_frame.find("img");
+						var target_width = current_frame.width();
+						var target_height = parseInt( current_frame.css("paddingBottom") );
+						var image_width = current_image.width();
+						var image_height = current_image.height();
+						
+						var target_proportions = target_width / target_height;
+						var image_proportions = image_width / image_height;
+						
+						if (target_proportions>image_proportions) {
+							current_image.css("width", "100%").css("height", "auto");
+							var adjusted_image_height = current_image.height();
+							var vertical_adjust = ( target_height - adjusted_image_height ) / 2;
+							current_image.css("top", vertical_adjust+"px");
+						}
+						else {
+							current_image.css("height", target_height+"px").css("width", "auto");
+							var adjusted_image_width = current_image.width();
+							var horizontal_adjust = ( target_width - adjusted_image_width ) / 2;
+							current_image.css("left", horizontal_adjust+"px");
+						}
+					}	
+				}
+				
+				function fill_in_image (thumbnail) {
+					$(".image_wall .zoom .img_wrapper").html("<img src='"+thumbnail.attr("src")+"' />");
+					if ( thumbnail.width() > thumbnail.height() ) $(".image_wall .zoom img").addClass("landscape");
+					else $(".image_wall .zoom img").addClass("portrait");
+					var left_pixels = thumbnail.position().left + (thumbnail.width()/2);
+					var left_percent = 100 / $(".image_wall").width() * left_pixels;
+					$(".image_wall .zoom .arrow").css("left", left_percent+"%");
+					
+				}
+				
+				function sliding_images (thumbnail) {
+					$(".image_wall .zoom").remove();
+					thumbnail.parents(".imagerow").after(code_zoom);
+					fill_in_image(thumbnail);
+					$(".image_wall .zoom").slideDown();
+					$(".image_wall .zoom .arrow").fadeIn(1000);
+					$('html, body').animate({ scrollTop: $(".image_wall .zoom").offset().top-75 }, 1000);
+				}
+				
+				function show_image () {
+					var thumbnail = $(this);
+					if ( thumbnail.parents(".imagerow").next(".zoom").length ) {
+						fill_in_image(thumbnail);
+					}
+					else if ( $(".image_wall .zoom").length ) {
+						$(".image_wall .zoom").slideUp(function(){
+							sliding_images(thumbnail);
+						});
+					}
+					else {
+						sliding_images(thumbnail);
+					}
+				}
+				
+				$(document).ready(function() {
+					var frames = $(".image_wall .frame");
+					/* determine frame-style */
+					for (var counter=0; counter<frames.length; counter++) {
+						var current_frame = frames.eq(counter);
+						var next_frame = frames.eq(counter+1);
+						var after_next_frame = frames.eq(counter+2);
+						
+						current_frame.before("<div class='imagerow'></div>");
+						
+						var current_landscape = ( current_frame.find("img").width() > current_frame.find("img").height() );
+						var next_landscape = ( next_frame.find("img").width() > next_frame.find("img").height() );
+						var after_next_landscape = ( after_next_frame.find("img").width() > after_next_frame.find("img").height() );
+						
+						if (!current_landscape && !next_landscape && !after_next_landscape) {
+							current_frame.addClass("size_33");
+							next_frame.addClass("size_33");
+							after_next_frame.addClass("size_33");
+							$(".imagerow:last").append(current_frame).append(next_frame).append(after_next_frame);
+							counter+=2;
+						}
+						else if (!current_landscape && next_landscape) {
+							if (Math.random()>0.5) {
+								current_frame.addClass("size_33");
+								next_frame.addClass("size_66");
+							}
+							else {
+								current_frame.addClass("size_25");
+								next_frame.addClass("size_75");
+							}
+							$(".imagerow:last").append(current_frame).append(next_frame);
+							counter++;
+						}
+						else if (current_landscape && !next_landscape) {
+							if (Math.random()>0.5) {
+								current_frame.addClass("size_66");
+								next_frame.addClass("size_33");
+							}
+							else {
+								current_frame.addClass("size_75");
+								next_frame.addClass("size_25");
+							}
+							$(".imagerow:last").append(current_frame).append(next_frame);
+							counter++;
+						}
+						else if (!current_landscape && !next_landscape) {
+							current_frame.addClass("size_50");
+							next_frame.addClass("size_50");
+							$(".imagerow:last").append(current_frame).append(next_frame);
+							counter++;
+						}
+						else if (current_landscape && next_landscape && after_next_landscape) {
+							if (Math.random()>0.5) {
+								current_frame.addClass("size_33").css("paddingBottom","25%");
+								next_frame.addClass("size_33").css("paddingBottom","25%");
+								after_next_frame.addClass("size_33").css("paddingBottom","25%");
+								$(".imagerow:last").append(current_frame).append(next_frame).append(after_next_frame);
+								counter+=2;
+							}
+							else {
+								current_frame.addClass("size_100");
+								$(".imagerow:last").append(current_frame);
+							}
+						}
+						else if (current_landscape && next_landscape) {
+							current_frame.addClass("size_100");
+							$(".imagerow:last").append(current_frame);
+						}
+						else {
+							alert("not able to determine frame-style");
+						}
+					}
+					
+					if ( $(".imagerow:last .frame").length == 1 ) $(".imagerow:last .frame").addClass("size_100");
+					
+					adjust_sizes();
+					
+					$(".image_wall .frame img").click(show_image);
+					
+					$(".image_wall").hide().css("visibility", "visible").fadeIn(1000);
+				});
+				
+				$(window).resize( adjust_sizes );
+				
+				
+			</script>
+			
+			
+					
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>	
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+			<p>
+				Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.
+			</p>
+					
+				
+					
+		</div>
+        
+	</div>
+	
+	<div class="naviblock">
+		<div class="expandable">
+			<div class="segment">
+				<form class="search">
+					<a class="fav"><img src="media/img/main/icons/icon_fav_active.png" /></a>
+					<input class="field lightback lightfont" type="text" value="suchen" /><input class="button" type="submit" value="go" />
+					<ul class="suggestions">
+						<li><a href="#">Fukushima</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Fundraising</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Furrer</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Fundamentalismus</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">mehr...</a></li>
+					</ul>
+					<ul class="favs">
+						<li><a href="#">Ausland</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Sport</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">FCZ</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">RPG</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Game of Thrones</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">LOL</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Musik</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Wetter</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+					</ul>
+				</form>
+			</div>
+			<ul class="tagcloud">
+				<li class="size_3 ressort"><a href="#">Sport</a></li>
+				<li class="size_4 ressort"><a href="#">Ausland</a></li>
+				<li class="size_3 ressort"><a href="#">Inland</a></li>
+				<li class="size_4 ressort"><a href="#">Musik</a></li>
+				<li class="size_2"><a href="#">Events</a></li>
+				<li class="size_3"><a href="#">Tour de France</a></li>
+				<li><a href="#">FCZ</a></li>
+				<li><a href="#">Kampusch</a></li>
+				<li class="size_1 ressort"><a href="#">Wissen</a></li>
+				<li class="size_4 ressort"><a href="#">Schweiz</a></li>
+				<li><a href="#">Natur</a></li>
+				<li class="size_1"><a href="#">Essen</a></li>
+				<li class="size_2 ressort"><a href="#">Zürich</a></li>
+				<li class="size_4 ressort"><a href="#">TV</a></li>
+				<li class="size_2"><a href="#">Roger Federer</a></li>
+				<li><a href="#">Toggi</a></li>
+				<li class="size_1"><a href="#">Bundesrat</a></li>
+				<li class="ressort"><a href="#">Digital</a></li>
+				<li class="size_3 ressort"><a href="#">Games</a></li>
+				<li class="size_2"><a href="#">LOL</a></li>
+				<li class="size_1"><a href="#">FC Thun</a></li>
+				<li class="ressort"><a href="#">Reisen</a></li>
+				<li class="size_2 ressort"><a href="#">Unterhaltung</a></li>
+				<li class="size_4"><a href="#">WTF</a></li>
+				<li><a href="#">Ueli Maurer</a></li>
+				<li class="size_1"><a href="#">Hochwasser</a></li>
+				<li><a href="#">Dollarkurs</a></li>
+				<li class="size_2 ressort"><a href="#">Wirtschaft</a></li>
+				<li class="size_2"><a href="#">Katie</a></li>
+				<li class="ressort"><a href="#">Infografiken</a></li>
+				<li class="size_3 ressort"><a href="#">Videos</a></li>
+			</ul>
+			<div class="segment">
+				<ul class="alt_links">
+					<li><a href="#">Apps</a></li>
+					<li><a href="#">Impressum</a></li>
+				</ul>
+			</div>
+		</div>
+		<a class="navilink"><img src="media/img/main/icons/icon_navi.png" /></a>
+	</div>
+
+	<div class="logoblock">
+		<a class="logo" href="front.html"><img src="media/img/main/logos/logo_watson.png" /></a>
+	</div>
+	
+	<div class="currentblock">
+		<a href="front.html">Ticker Test</a>
+	</div>
+	
+	<div class="dashboard">
+		<div class="expandable">
+			<div class="segment">
+				<div class="error_msg"></div>
+				<div class="login details">
+					Mit bestehendem Account einloggen
+					<form action="">
+						<input data-default="Email" class="field darkback lightfont" type="text" name="email" value="Email" /><input data-default="Passwort" class="field password darkback lightfont" type="text" name="passwort" value="Passwort" /><input class="button" type="submit" value="go">
+					</form>
+				</div>
+				<div class="retrieve details">
+					Neues Passwort zuschicken
+					<form action="">
+						<input data-default="Email" class="field darkback lightfont" type="text" name="email" value="Email" /><br/>
+						<input class="button" type="submit" value="abschicken">
+					</form>
+				</div>
+				<div class="register details">
+					Neuen Account erstellen
+					<form action="">
+						<input data-default="Email" class="field darkback lightfont" type="text" name="email" value="Email" /><br/>
+						<input data-default="Nickname" class="field darkback lightfont" type="text" name="nickname" value="Nickname" /><br/>
+						<input data-default="Passwort" class="field password darkback lightfont" type="text" name="passwort" value="Passwort" /><br/>
+						<input data-default="Passwort wiederholen" class="field password darkback lightfont" type="text" name="passwort2" value="Passwort wiederholen" /><br/>
+						<input class="button" type="submit" value="registrieren">
+					</form>
+				</div>
+				<div class="login link">
+					<a href="javascript:;">Einloggen</a>
+				</div>
+				<div class="register link">
+					<a href="javascript:;">Registrieren</a>
+				</div>
+				<div class="retrieve link">
+					<a href="javascript:;">Passwort vergessen</a>
+				</div>
+				<div class="logout link">
+					<a href="#">Ausloggen</a>
+				</div>
+			</div>
+		</div>
+		<a class="dashboardlink"><img src="media/img/main/logos/logo_watson_w.png" class="stretch_to_fit" /></a>
+	</div>
+	
+	
+	
+	
+	
+	</body>
+	
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
