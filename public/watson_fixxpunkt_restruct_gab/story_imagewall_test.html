@@ -73,8 +73,7 @@
 					float:left;
 					padding-bottom:50%;
 					height:0;
-					background-size: cover;
-					background-position: center center;
+					overflow:hidden;
 				}
 				.widget.image_wall .frame.size_25 { width:25%; }
 				.widget.image_wall .frame.size_33 { width:33.333333%; }
@@ -82,6 +81,10 @@
 				.widget.image_wall .frame.size_66 { width:66.666666%; }
 				.widget.image_wall .frame.size_75 { width:75%; }
 				.widget.image_wall .frame.size_100 { width:100%; }
+				
+				.widget.image_wall .frame img {
+					width:100%;
+				}
 			</style>
 			
 			
@@ -89,32 +92,103 @@
 			<!-- ========= -->
 			<div class="insert full">
 				<div class="widget image_wall">
-					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_052.jpg');"></div>
-					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_053.jpg');"></div>
-					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_054.jpg');"></div>
-					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_055.jpg');"></div>
-					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_056.png');"></div>
-					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_057.png');"></div>
-					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_052.jpg');"></div>
-					<div class="frame" style="background-image:url('media/img/placeholderimg/bild_053.jpg');"></div>
+					<div class="frame"><img src="media/img/placeholderimg/bild_052.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/bild_053.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/bild_054.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/bild_055.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/bild_056.png" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/bild_057.png" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/bild_052.jpg" /></div>
+					<div class="frame"><img src="media/img/placeholderimg/bild_053.jpg" /></div>
 				</div>
 			</div>
 			
 						
 			<script type="text/javascript">
-				var frames = $(".image_wall .frame");
-				for (var counter=0; counter<frames.length; counter++) {
-					var current_frame = frames.eq(counter);
-					var next_frame = frames.eq(counter+1);
-					if ( counter==0) {
-						current_frame.addClass("size_100");
-					}
-					else {
-						var current_landscape = ( current_frame.find("img").width() > current_frame.find("img").height() );
-						alert(current_landscape+" width:"+current_frame.find("img").width()+" height:"+current_frame.find("img").height());
+				
+				function adjust_sizes () {
+					var frames = $(".image_wall .frame");
+					for (var counter=0; counter<frames.length; counter++) {
+						var current_frame = frames.eq(counter);
+						var current_image = current_frame.find("img");
+						var target_width = current_frame.width();
+						var target_height = parseInt( current_frame.css("paddingBottom") );
+						var image_width = current_image.width();
+						var image_height = current_image.height();
+						
+						var target_proportions = target_width / target_height;
+						var image_proportions = image_width / image_height;
+						
+						if (target_proportions>image_proportions) {
+							current_image.css("width", "100%").css("height", "auto");
+							var adjusted_image_height = current_image.height();
+							var vertical_adjust = ( target_height - adjusted_image_height ) / 2;
+							current_image.css("marginTop", vertical_adjust+"px");
+						}
+						else {
+							current_image.css("height", target_height+"px").css("width", "auto");
+							var adjusted_image_width = current_image.width();
+							var horizontal_adjust = ( target_width - adjusted_image_width ) / 2;
+							current_image.css("marginLeft", horizontal_adjust+"px");
+						}
+					}	
+				}
+				
+				$(document).ready(function() {
+					var frames = $(".image_wall .frame");
+					/* determine frame-style */
+					for (var counter=0; counter<frames.length; counter++) {
+						var current_frame = frames.eq(counter);
+						var next_frame = frames.eq(counter+1);
+						var after_next_frame = frames.eq(counter+2);
+						var num_placed_styles = 0;
+						if ( counter==0) {
+							current_frame.addClass("size_100");
+						}
+						else {
+							var current_landscape = ( current_frame.find("img").width() > current_frame.find("img").height() );
+							var next_landscape = ( next_frame.find("img").width() > next_frame.find("img").height() );
+							var after_next_landscape = ( after_next_frame.find("img").width() > after_next_frame.find("img").height() );
+							if (!current_landscape && !next_landscape && !after_next_landscape) {
+								current_frame.addClass("size_33");
+								next_frame.addClass("size_33");
+								after_next_frame.addClass("size_33");
+								num_placed_styles=3;
+								counter+=2;
+							}
+							else if (!current_landscape && next_landscape) {
+								current_frame.addClass("size_33");
+								next_frame.addClass("size_66");
+								num_placed_styles=2;
+								counter++;
+							}
+							else if (current_landscape && !next_landscape) {
+								current_frame.addClass("size_66");
+								next_frame.addClass("size_33");
+								num_placed_styles=2;
+								counter++;
+							}
+							else if (!current_landscape && !next_landscape) {
+								current_frame.addClass("size_50");
+								next_frame.addClass("size_50");
+								num_placed_styles=2;
+								counter++;
+							}
+							else if (current_landscape && next_landscape) {
+								current_frame.addClass("size_100");
+								num_placed_styles=1;
+							}
+							else {
+								alert("not able to determine frame-style");
+							}
+						}
 					}
 					
-				}
+					adjust_sizes();
+				});
+				
+				$(window).resize( adjust_sizes );
+				
 			</script>
 			
 			
