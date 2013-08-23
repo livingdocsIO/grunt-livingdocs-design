@@ -128,7 +128,7 @@ module.exports = (grunt) ->
           if grunt.file.exists(groupConfigFile)
             design.config.groups[group] = grunt.file.readJSON(groupConfigFile, { encoding: 'utf8' })
           else
-            design.config.groups[group] = {name: group}
+            design.config.groups[group] = {title: group}
         
         # add template to group if templates array already exists 
         if design.config.groups[group]['templates']
