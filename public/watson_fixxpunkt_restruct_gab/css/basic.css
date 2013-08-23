@@ -66,10 +66,12 @@ input, a.button, textarea {
 }
 
 input.darkback, a.button.darkback, select.darkback {
+	background-color:#888888;
 	background-color:rgba(0,0,0,0.5);
 }
 
 input.lightback, a.button.lightback, select.lightback {
+	background-color:#aaaaaa;
 	background-color:rgba(255,255,255,0.5);
 }
 
@@ -102,6 +104,8 @@ input.radio, input.checkbox {
 	height:1em;
 	background-color:#ffffff;
 	vertical-align:middle;
+	
+	background-color /*\**/: transparent\9 /* IE 8 HACK */
 }	
 
 input.radio:checked, input.checkbox:checked {

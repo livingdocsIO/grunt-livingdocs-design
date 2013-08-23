@@ -35,6 +35,7 @@
 	width:100%;
 	position:absolute;
 	bottom:0;
+	background-color:#eeeeee;
 	background-color:rgba(255,255,255,0.8);
 	padding-top:10px;
 	-moz-hyphens: auto;
@@ -81,7 +82,7 @@
 	top:1.071em; /* 15px / 14px */
 	right:1.071em; /* 15px / 14px */
 	width:7.142em; /* 100px / 14px */
-	background-color:rgba(255,255,255,1);
+	background-color:#ffffff;
 	font-size:1.4em; /* 14px / 10px */
 	padding:0.5em;
 }
@@ -97,7 +98,7 @@
 	left:50%;
 	width:0;
 	height:0;
-	border-top: 10px solid rgba(255,255,255,1);
+	border-top: 10px solid #ffffff;
 	border-right: 10px solid transparent !important;
 	border-bottom: 10px solid transparent !important;
 	border-left: 10px solid transparent !important;
@@ -186,6 +187,7 @@
 	-webkit-transition:color 0.5s ease;
 	-moz-transition:color 0.5s ease;
 	transition:color 0.5s ease;
+	background-color:#222222;
 	background-color:rgba(0,0,0,0.8);
 	margin-bottom:4px;
 	margin-left:-9px;
@@ -272,7 +274,7 @@
 
 /* non story teasers */
 /* ================= */
-.teaser.tag_teaser .text { background-color:rgba(0,0,0,0.8); }
+.teaser.tag_teaser .text { background-color:#222222; background-color:rgba(0,0,0,0.8); }
 
 .teaser.tag_teaser .media_icons .tag {
 	font-size:2.4em;
@@ -305,6 +307,7 @@
 	font-size:1.333em;
 	height:3.525em; /* 47px / 13.333px */
 	padding:0.375em 0.75em; /* 5px / 13.333px */ /* 10px / 13.333px */
+	background-color:#eeeeee;
 	background-color:rgba(255,255,255,0.8);
 	color:#222222;
 }

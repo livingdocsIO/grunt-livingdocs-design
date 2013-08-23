@@ -79,5 +79,5 @@ $(document).ready( navi.init );
 $(window).scroll( navi.check_for_current_tag_sticky );
 $(window).resize( navi.check_for_current_tag_sticky );
 
-document.addEventListener('touchmove', function(){$(".currentblock").hide();}, false);
+//document.addEventListener('touchmove', function(){$(".currentblock").hide();}, false); /* !! nicht ie8-tauglich!! */
 

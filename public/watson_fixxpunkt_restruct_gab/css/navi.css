@@ -10,6 +10,7 @@
 }
 
 .logoblock .logo {
+	background-color:#222222;
 	background-color:rgba(0,0,0,0.8);
 	display:block;
 	padding:1.2em; /* 12px / 10px */
@@ -41,6 +42,7 @@
 
 .currentblock a {
 	display:block;
+	background-color:#666666;
 	background-color:rgba(0,0,0,0.4);
 	font-size:1.6em; /* 16px / 10px */
 	text-transform:uppercase;
@@ -58,6 +60,7 @@
 	position:fixed;
 	top:0;
 	right:0;
+	background-color:#222222;
 	background-color:rgba(0,0,0,0.8);
 	width:5.9em; /* 59px / 10px */
 	height:5.9em; /* 59px / 10px */
@@ -89,6 +92,7 @@
 }
 
 .naviblock .expandable {
+	background-color:#222222;
 	background-color:rgba(0,0,0,0.8);
 	position:fixed;
 	top:0;
