@@ -164,7 +164,7 @@ module.exports = (grunt) ->
       
       # push template html into template object, remove config and minify the html
       $(options.configurationElement).remove()
-      newTemplate.name = templateName
+      newTemplate.id = templateName
       newTemplate.html = processHtml($.html(), options.minify, { design: design.config.namespace, template: templateName })
       design.templates.push(newTemplate)
 
