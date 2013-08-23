@@ -500,6 +500,50 @@ class SnippetNodeIterator
     @current = @_next = @root = null
 
 
+stash = do ->
+  initialized = false
+
+
+  init: ->
+    if not initialized
+      initialized = true
+
+      # store up to ten versions
+      @store = new LimitedLocalstore('stash', 10)
+
+
+  snapshot: ->
+    @store.push(document.toJson())
+
+
+  stash: ->
+    @snapshot()
+    document.reset()
+
+
+  delete: ->
+    @store.pop()
+
+
+  get: ->
+    @store.get()
+
+
+  restore: ->
+    json = @store.get()
+
+    if json
+      document.restore(json)
+    else
+      log.error('stash is empty')
+
+
+  list: ->
+    entries = for obj in @store.getIndex()
+      { key: obj.key, date: new Date(obj.date).toString() }
+
+    words.readableJson(entries)
+
 # String Helpers
 # --------------
 # inspired by [https://github.com/epeli/underscore.string]()
@@ -556,6 +600,1061 @@ class SnippetNodeIterator
 
 
 
+# History
+# -------
+# Represents the performed actions in a document
+class History
+
+  history: []
+
+  constructor: () ->
+    #todo
+
+
+  # add an action to the history
+  add: () ->
+    #todo
+
+
+  # track the saved state
+  saved: () ->
+    #todo
+
+
+  # The history is dirty if there are unsaved actions in the history
+  isDirty: () ->
+    return false if history.length == 0
+
+
+
+class HistoryAction
+
+  constructor: () ->
+    #todo
+
+# jQuery like results when searching for snippets.
+# `doc("hero")` will return a SnippetArray that works similar to a jQuery object.
+# For extensibility via plugins we expose the prototype of SnippetArray via `doc.fn`.
+class SnippetArray
+
+
+  # @param snippets: array of snippets
+  constructor: (@snippets) ->
+    @snippets = [] unless @snippets?
+    @createPseudoArray()
+
+
+  createPseudoArray: () ->
+    for result, index in @snippets
+      @[index] = result
+
+    @length = @snippets.length
+    if @snippets.length
+      @first = @[0]
+      @last = @[@snippets.length - 1]
+
+
+  each: (callback) ->
+    for snippet in @snippets
+      callback(snippet)
+
+    this
+
+
+  remove: () ->
+    @each (snippet) ->
+      snippet.remove()
+
+    this
+
+# SnippetContainer
+# ----------------
+# A SnippetContainer contains and manages a linked list
+# of snippets.
+#
+# The snippetContainer is responsible for keeping its snippetTree
+# informed about changes (only if they are attached to one).
+# 
+# @prop first: first snippet in the container
+# @prop last: last snippet in the container
+# @prop parentSnippet: parent SnippetModel
+class SnippetContainer
+
+
+  constructor: ({ @parentSnippet, @name, isRoot }) ->
+    @isRoot = isRoot?
+    @first = @last = undefined
+
+
+  prepend: (snippet) ->
+    if @first
+      @insertBefore(@first, snippet)
+    else
+      @attachSnippet(snippet)
+
+    this
+
+
+  append: (snippet) ->
+    if @parentSnippet? and snippet == @parentSnippet
+      log.error('cannot append snippet to itself')
+
+    if @last
+      @insertAfter(@last, snippet)
+    else
+      @attachSnippet(snippet)
+
+    this
+
+
+  insertBefore: (snippet, insertedSnippet) ->
+    return if snippet.previous == insertedSnippet
+    log.error('cannot insert snippet before itself') if snippet == insertedSnippet
+
+    position =
+      previous: snippet.previous
+      next: snippet
+      parentContainer: snippet.parentContainer
+
+    @attachSnippet(insertedSnippet, position)
+
+
+  insertAfter: (snippet, insertedSnippet) ->
+    return if snippet.next == insertedSnippet
+    log.error('cannot insert snippet after itself') if snippet == insertedSnippet
+
+    position =
+      previous: snippet
+      next: snippet.next
+      parentContainer: snippet.parentContainer
+
+    @attachSnippet(insertedSnippet, position)
+
+
+  up: (snippet) ->
+    if snippet.previous?
+      @insertBefore(snippet.previous, snippet)
+
+
+  down: (snippet) ->
+    if snippet.next?
+      @insertAfter(snippet.next, snippet)
+
+
+  getSnippetTree: ->
+    @snippetTree || @parentSnippet?.snippetTree
+
+
+  # Traverse all snippets
+  each: (callback) ->
+    snippet = @first
+    while (snippet)
+      snippet.descendantsAndSelf(callback)
+      snippet = snippet.next
+
+
+  eachContainer: (callback) ->
+    callback(this)
+    @each (snippet) ->
+      for name, snippetContainer of snippet.containers
+        callback(snippetContainer)
+
+
+  # Traverse all snippets and containers
+  all: (callback) ->
+    callback(this)
+    @each (snippet) ->
+      callback(snippet)
+      for name, snippetContainer of snippet.containers
+        callback(snippetContainer)
+
+
+  remove: (snippet) ->
+    snippet.destroy()
+    @_detachSnippet(snippet)
+
+
+  ui: ->
+    if not @uiInjector
+      snippetTree = @getSnippetTree()
+      snippetTree.renderer.createInterfaceInjector(this)
+    @uiInjector
+
+
+  # Private
+  # -------
+
+  # Every snippet added or moved most come through here.
+  # Notifies the snippetTree if the parent snippet is
+  # attached to one.
+  # @api private
+  attachSnippet: (snippet, position = {}) ->
+    func = =>
+      @link(snippet, position)
+
+    if snippetTree = @getSnippetTree()
+      snippetTree.attachingSnippet(snippet, func)
+    else
+      func()
+
+
+  # Every snippet that is removed must come through here.
+  # Notifies the snippetTree if the parent snippet is
+  # attached to one.
+  # Snippets that are moved inside a snippetTree should not
+  # call _detachSnippet since we don't want to raise
+  # SnippetRemoved events on the snippet tree, in these
+  # cases unlink can be used
+  # @api private
+  _detachSnippet: (snippet) ->
+    func = =>
+      @unlink(snippet)
+
+    if snippetTree = @getSnippetTree()
+      snippetTree.detachingSnippet(snippet, func)
+    else
+      func()
+
+
+  # @api private
+  link: (snippet, position) ->
+    @unlink(snippet) if snippet.parentContainer
+
+    position.parentContainer ||= this
+    @setSnippetPosition(snippet, position)
+
+
+  # @api private
+  unlink: (snippet) ->
+    container = snippet.parentContainer
+    if container
+
+      # update parentContainer links
+      container.first = snippet.next unless snippet.previous?
+      container.last = snippet.previous unless snippet.next?
+
+      # update previous and next nodes
+      snippet.next?.previous = snippet.previous
+      snippet.previous?.next = snippet.next
+
+      @setSnippetPosition(snippet, {})
+
+
+  # @api private
+  setSnippetPosition: (snippet, { parentContainer, previous, next }) ->
+    snippet.parentContainer = parentContainer
+    snippet.previous = previous
+    snippet.next = next
+
+    if parentContainer
+      previous.next = snippet if previous
+      next.previous = snippet if next
+      parentContainer.first = snippet unless snippet.previous?
+      parentContainer.last = snippet unless snippet.next?
+
+
+
+# SnippetModel
+# ------------
+# Each SnippetModel has a template which allows to generate a snippetView
+# from a snippetModel
+#
+# Represents a node in a SnippetTree.
+# Every SnippetModel can have a parent (SnippetContainer),
+# siblings (other snippets) and multiple containers (SnippetContainers).
+#
+# The containers are the parents of the child SnippetModels.
+# E.g. a grid row would have as many containers as it has
+# columns
+#
+# # @prop parentContainer: parent SnippetContainer
+class SnippetModel
+
+
+  constructor: ({ @template, id } = {}) ->
+    if !@template
+      log.error('cannot instantiate snippet without template reference')
+
+    @initializeContainers()
+    @initializeEditables()
+    @initializeImages()
+
+    @id = id || guid.next()
+    @identifier = @template.identifier
+
+    @next = undefined # set by SnippetContainer
+    @previous = undefined # set by SnippetContainer
+    @snippetTree = undefined # set by SnippetTree
+
+
+  initializeContainers: ->
+    @containerCount = @template.directives.count.container
+    for containerName of @template.directives.container
+      @containers ||= {}
+      @containers[containerName] = new SnippetContainer
+        name: containerName
+        parentSnippet: this
+
+
+  initializeEditables: ->
+    @editableCount = @template.directives.count.editable
+    for editableName of @template.directives.editable
+      @editables ||= {}
+      @editables[editableName] = undefined
+
+
+  initializeImages: ->
+    @imageCount = @template.directives.count.image
+    for imageName of @template.directives.image
+      @images ||= {}
+      @images[imageName] = undefined
+
+
+  hasImages: ->
+    @imageCount > 0
+
+
+  hasContainers: ->
+    @containers?
+
+
+  before: (snippetModel) ->
+    if snippetModel
+      @parentContainer.insertBefore(this, snippetModel)
+      this
+    else
+      @previous
+
+
+  after: (snippetModel) ->
+    if snippetModel
+      @parentContainer.insertAfter(this, snippetModel)
+      this
+    else
+      @next
+
+
+  append: (containerName, snippetModel) ->
+    if arguments.length == 1
+      snippetModel = containerName
+      containerName = templateAttr.defaultValues.container
+
+    @containers[containerName].append(snippetModel)
+    this
+
+
+  prepend: (containerName, snippetModel) ->
+    if arguments.length == 1
+      snippetModel = containerName
+      containerName = templateAttr.defaultValues.container
+
+    @containers[containerName].prepend(snippetModel)
+    this
+
+
+  set: (name, value) ->
+    if @editables?.hasOwnProperty(name)
+      if @editables[name] != value
+        @editables[name] = value
+        @snippetTree.contentChanging(this) if @snippetTree
+    else if @images?.hasOwnProperty(name)
+      if @images[name] != value
+        @images[name] = value
+        @snippetTree.contentChanging(this) if @snippetTree
+    else
+      log.error("set error: #{ @identifier } has no content named #{ name }")
+
+
+  get: (name) ->
+    if @editables?.hasOwnProperty(name)
+      @editables[name]
+    else if @images?.hasOwnProperty(name)
+      @images[name]
+    else
+      log.error("get error: #{ @identifier } has no name named #{ name }")
+
+
+  copy: ->
+    log.warn("SnippetModel#copy() is not implemented yet.")
+
+    # serializing/deserializing should work but needs to get some tests first
+    # json = @toJson()
+    # json.id = guid.next()
+    # SnippetModel.fromJson(json)
+
+
+  copyWithoutContent: ->
+    @template.createModel()
+
+
+  hasEditables: ->
+    @editables?
+
+
+  # move up (previous)
+  up: ->
+    @parentContainer.up(this)
+    this
+
+
+  # move down (next)
+  down: ->
+    @parentContainer.down(this)
+    this
+
+
+  # remove TreeNode from its container and SnippetTree
+  remove: ->
+    @parentContainer.remove(this)
+
+
+  # @api private
+  destroy: ->
+    # todo: move into to renderer
+
+    # remove user interface elements
+    @uiInjector.remove() if @uiInjector
+
+
+  getParent: ->
+     @parentContainer?.parentSnippet
+
+
+  ui: ->
+    if not @uiInjector
+      @snippetTree.renderer.createInterfaceInjector(this)
+    @uiInjector
+
+
+  # Iterators
+  # ---------
+
+  parents: (callback) ->
+    snippetModel = this
+    while (snippetModel = snippetModel.getParent())
+      callback(snippetModel)
+
+
+  children: (callback) ->
+    for name, snippetContainer of @containers
+      snippetModel = snippetContainer.first
+      while (snippetModel)
+        callback(snippetModel)
+        snippetModel = snippetModel.next
+
+
+  descendants: (callback) ->
+    for name, snippetContainer of @containers
+      snippetModel = snippetContainer.first
+      while (snippetModel)
+        callback(snippetModel)
+        snippetModel.descendants(callback)
+        snippetModel = snippetModel.next
+
+
+  descendantsAndSelf: (callback) ->
+    callback(this)
+    @descendants(callback)
+
+
+  # return all descendant containers (including those of this snippetModel)
+  descendantContainers: (callback) ->
+    @descendantsAndSelf (snippetModel) ->
+      for name, snippetContainer of snippetModel.containers
+        callback(snippetContainer)
+
+
+  # return all descendant containers and snippets
+  allDescendants: (callback) ->
+    @descendantsAndSelf (snippetModel) =>
+      callback(snippetModel) if snippetModel != this
+      for name, snippetContainer of snippetModel.containers
+        callback(snippetContainer)
+
+
+  childrenAndSelf: (callback) ->
+    callback(this)
+    @children(callback)
+
+
+  # Serialization
+  # -------------
+
+  toJson: ->
+
+    json =
+      id: @id
+      identifier: @identifier
+
+    if @hasEditables()
+      json.editables = {}
+      for name, value of @editables
+        json.editables[name] = value
+
+    for name of @images
+      json.images ||= {}
+      for name, value of @images
+        json.images[name] = value
+
+    for name of @containers
+      json.containers ||= {}
+      json.containers[name] = []
+
+    json
+
+
+SnippetModel.fromJson = (json, design) ->
+  template = design.get(json.identifier)
+
+  if not template?
+    log.error("error while deserializing snippet: unknown template identifier '#{ json.identifier }'")
+
+  model = new SnippetModel({ template, id: json.id })
+  for editableName, value of json.editables
+    if model.editables.hasOwnProperty(editableName)
+      model.editables[editableName] = value
+    else
+      log.error("error while deserializing snippet: unknown editable #{ editableName }")
+
+  for imageName, value of json.images
+    if model.images.hasOwnProperty(imageName)
+      model.images[imageName] = value
+    else
+      log.error("error while deserializing snippet: unknown image #{ imageName }")
+
+  for containerName, snippetArray of json.containers
+    if not model.containers.hasOwnProperty(containerName)
+      log.error("error while deserializing snippet: unknown container #{ containerName }")
+
+    if snippetArray
+
+      if not $.isArray(snippetArray)
+        log.error("error while deserializing snippet: container is not array #{ containerName }")
+
+      for child in snippetArray
+        model.append( containerName, SnippetModel.fromJson(child, design) )
+
+  model
+
+# SnippetTree
+# -----------
+# Livingdocs equivalent to the DOM tree.
+# A snippet tree containes all the snippets of a page in hierarchical order.
+#
+# The root of the SnippetTree is a SnippetContainer. A SnippetContainer
+# contains a list of snippets.
+#
+# snippets can have multible SnippetContainers themselves.
+#
+# ### Example:
+#     - SnippetContainer (root)
+#       - Snippet 'Hero'
+#       - Snippet '2 Columns'
+#         - SnippetContainer 'main'
+#           - Snippet 'Title'
+#         - SnippetContainer 'sidebar'
+#           - Snippet 'Info-Box''
+#
+# ### Events:
+# The first set of SnippetTree Events are concerned with layout changes like
+# adding, removing or moving snippets.
+#
+# Consider: Have a documentFragment as the rootNode if no rootNode is given
+# maybe this would help simplify some code (since snippets are always
+# attached to the DOM).
+class SnippetTree
+
+
+  constructor: ({ content, design } = {}) ->
+    @root = new SnippetContainer(isRoot: true)
+
+    # initialize content before we set the snippet tree to the root
+    # otherwise all the events will be triggered while building the tree
+    if content? and design?
+      @fromJson(content, design)
+
+    @root.snippetTree = this
+
+    @history = new History()
+    @initializeEvents()
+
+
+  # insert snippet at the beginning
+  prepend: (snippet) ->
+    @root.prepend(snippet)
+    this
+
+
+  # insert snippet at the end
+  append: (snippet) ->
+    @root.append(snippet)
+    this
+
+
+  initializeEvents: () ->
+
+    # layout changes
+    @snippetAdded = $.Callbacks()
+    @snippetRemoved = $.Callbacks()
+    @snippetMoved = $.Callbacks()
+
+    # content changes
+    @snippetContentChanged = $.Callbacks()
+    @snippetHtmlChanged = $.Callbacks()
+    @snippetSettingsChanged = $.Callbacks()
+
+    @changed = $.Callbacks()
+
+
+  # Traverse the whole snippet tree.
+  each: (callback) ->
+    @root.each(callback)
+
+
+  eachContainer: (callback) ->
+    @root.eachContainer(callback)
+
+
+  # Traverse all containers and snippets
+  all: (callback) ->
+    @root.all(callback)
+
+
+  find: (search) ->
+    if typeof search == 'string'
+      res = []
+      @each (snippet) ->
+        if snippet.identifier == search || snippet.template.id == search
+          res.push(snippet)
+
+      new SnippetArray(res)
+    else
+      new SnippetArray()
+
+
+  detach: ->
+    @root.snippetTree = undefined
+    @each (snippet) ->
+      snippet.snippetTree = undefined
+
+    oldRoot = @root
+    @root = new SnippetContainer(isRoot: true)
+
+    oldRoot
+
+
+  # eachWithParents: (snippet, parents) ->
+  #   parents ||= []
+
+  #   # traverse
+  #   parents = parents.push(snippet)
+  #   for name, snippetContainer of snippet.containers
+  #     snippet = snippetContainer.first
+
+  #     while (snippet)
+  #       @eachWithParents(snippet, parents)
+  #       snippet = snippet.next
+
+  #   parents.splice(-1)
+
+
+  # returns a readable string representation of the whole tree
+  print: () ->
+    output = 'SnippetTree\n-----------\n'
+
+    addLine = (text, indentation = 0) ->
+      output += "#{ Array(indentation + 1).join(" ") }#{ text }\n"
+
+    walker = (snippet, indentation = 0) ->
+      template = snippet.template
+      addLine("- #{ template.title } (#{ template.identifier })", indentation)
+
+      # traverse children
+      for name, snippetContainer of snippet.containers
+        addLine("#{ name }:", indentation + 2)
+        walker(snippetContainer.first, indentation + 4) if snippetContainer.first
+
+      # traverse siblings
+      walker(snippet.next, indentation) if snippet.next
+
+    walker(@root.first) if @root.first
+    return output
+
+
+  # Tree Change Events
+  # ------------------
+  # Raise events for Add, Remove and Move of snippets
+  # These functions should only be called by snippetContainers
+
+  attachingSnippet: (snippet, attachSnippetFunc) ->
+    if snippet.snippetTree == this
+      # move snippet
+      attachSnippetFunc()
+      @fireEvent('snippetMoved', snippet)
+    else
+      if snippet.snippetTree?
+        # remove from other snippet tree
+        snippet.snippetContainer.detachSnippet(snippet)
+
+      snippet.descendantsAndSelf (descendant) =>
+        descendant.snippetTree = this
+
+      attachSnippetFunc()
+      @fireEvent('snippetAdded', snippet)
+
+
+  fireEvent: (event, args...) ->
+    this[event].fire.apply(event, args)
+    @changed.fire()
+
+
+  detachingSnippet: (snippet, detachSnippetFunc) ->
+    if snippet.snippetTree == this
+
+      snippet.descendantsAndSelf (descendants) ->
+        descendants.snippetTree = undefined
+
+      detachSnippetFunc()
+      @fireEvent('snippetRemoved', snippet)
+    else
+      log.error('cannot remove snippet from another SnippetTree')
+
+
+  contentChanging: (snippet) ->
+    @fireEvent('snippetContentChanged', snippet)
+
+
+  # Serialization
+  # -------------
+
+  printJson: ->
+    words.readableJson(@toJson())
+
+
+  # returns a JSON representation of the whole tree
+  toJson: ->
+    json = {}
+    json['content'] = []
+
+    snippetToJson = (snippet, level, containerArray) ->
+      snippetJson = snippet.toJson()
+      containerArray.push snippetJson
+
+      snippetJson
+
+    walker = (snippet, level, jsonObj) ->
+      snippetJson = snippetToJson(snippet, level, jsonObj)
+
+      # traverse children
+      for name, snippetContainer of snippet.containers
+        containerArray = snippetJson.containers[snippetContainer.name] = []
+        walker(snippetContainer.first, level + 1, containerArray) if snippetContainer.first
+
+      # traverse siblings
+      walker(snippet.next, level, jsonObj) if snippet.next
+
+    walker(@root.first, 0, json['content']) if @root.first
+
+    json
+
+
+  fromJson: (json, design) ->
+    @root.snippetTree = undefined
+    for snippetJson in json.content
+      snippet = SnippetModel.fromJson(snippetJson, design)
+      @root.append(snippet)
+
+    @root.snippetTree = this
+    @root.each (snippet) =>
+      snippet.snippetTree = this
+
+
+
+
+class SnippetNode
+
+  attributePrefix = /^(x-|data-)/
+
+  constructor: (@htmlNode) ->
+    @parseAttributes()
+
+
+  parseAttributes: () ->
+    for attr in @htmlNode.attributes
+      attributeName = attr.name
+      normalizedName = attributeName.replace(attributePrefix, '')
+      if type = templateAttrLookup[normalizedName]
+        @isDataNode = true
+        @type = type
+        @name = attr.value || templateAttr.defaultValues[@type]
+
+        if attributeName != docAttr[@type]
+          @normalizeAttribute(attributeName)
+        else if not attr.value
+          @normalizeAttribute()
+
+        return
+
+
+  normalizeAttribute: (attr) ->
+    @htmlNode.removeAttribute(attr) if attr
+    @htmlNode.setAttribute(docAttr[@type], @name)
+
+class SnippetNodeList
+
+
+  constructor: (@all={}) ->
+    @count = {}
+
+  add: (node) ->
+    @assertNodeNameNotUsed(node)
+
+    @all[node.name] = node
+
+    this[node.type] ||= {}
+    this[node.type][node.name] = node.htmlNode
+
+    @count[node.type] = if @count[node.type] then @count[node.type] + 1 else 1
+
+
+  # @api private
+  assertNodeNameNotUsed: (node) ->
+    if @all[node.name]
+      log.error(
+        """
+        #{node.type} Template parsing error: #{ docAttr[node.type] }="#{ node.name }".
+        "#{ node.name }" is a duplicate name.
+        """
+      )
+
+# SnippetTemplateList
+# -------------------
+# Represents a repeatable Template inside another Template
+#
+# Consider: Instead of defining a list inside a template we could
+# just define another template. If we can mark the position of the first
+# and last element, we don't need a container as in the current implementation
+#
+# Consider: Implement limitations. An attribute like `list-repetitions="{1,3}"`
+# could deifine how many elements can be created (here with a regex-like syntax).
+class SnippetTemplateList
+
+  constructor: (@name, $list) ->
+    @$list = $list
+    $item = @$list.children().first().detach()
+
+    @_item = new Template(
+      id: "#{ @id }-item",
+      html: $item
+    )
+
+
+  # array with an object literal for every list item
+  # if only one item is submitted then the wrapping array can be omitted
+  content: (content) ->
+    if !@isEmpty()
+      @clear()
+
+    if $.isArray(content)
+      for listItem in content
+        @add(listItem)
+    else
+      @add(content)
+
+
+  # param is the same as in content()
+  # but the elements are appended instead of replaced
+  add: (listItems, events) ->
+    if $.isArray(listItems)
+      for listItem in listItems
+        @add(listItem, events)
+    else
+      $newItem = @_item.create(listItems)
+
+      # register events
+      for event, func of events
+        $newItem.on(event, func)
+
+      @$list.append($newItem)
+
+
+  # remove list item
+  # if index is blank or -1, the last item is removed
+  # the first list item has index == 0
+  remove: (index) ->
+    if index == undefined || index == -1
+      @$list.children(":last").remove()
+    else
+      @$list.children(":nth-child(#{ index + 1 })").remove()
+
+
+  clear: ($list) ->
+    @$list.children().remove()
+
+
+  isEmpty: ($list) ->
+    !@$list.children().length
+
+# Template
+# --------
+# Parses snippet templates and creates snippet html.
+#
+# __Methods:__
+# @snippet() create new snippets with content
+#
+# Consider: allow tags to be optional. These tags can then be hidden by
+# the user. The template needs to know where to reinsert the tag if it is
+# reinserted again.
+# Options could be to set `display:none` or to remove the element and
+# leave a marker instead.
+# (a comment or a script tag like ember does for example)
+#
+# Consider: Replace lists with inline Templates. Inline
+# Templates are repeatable and can only be used inside their
+# defining snippet.
+class Template
+
+
+  constructor: ({ html, @namespace, @id, identifier, title, version } = {}) ->
+    if not html
+      log.error('Template: param html missing')
+
+    if identifier
+      { @namespace, @id } = Template.parseIdentifier(identifier)
+
+    @identifier = if @namespace && @id
+      "#{ @namespace }.#{ @id }"
+
+    @version = version || 1
+
+    @$template = $( @pruneHtml(html) ).wrap('<div>')
+    @$wrap = @$template.parent()
+    @title = title || words.humanize( @id )
+
+    @editables = undefined
+    @editableCount = 0
+    @containers = undefined
+    @containerCount = 0
+    @defaults = {}
+
+    @parseTemplate()
+    @lists = @createLists()
+
+
+  # create a new SnippetModel instance from this template
+  createModel: () ->
+    new SnippetModel(template: this)
+
+
+  createView: (snippetModel) ->
+    snippetModel ||= @createModel()
+    $html = @$template.clone()
+    list = @getNodeLinks($html[0])
+
+    snippetView = new SnippetView
+      model: snippetModel
+      $html: $html
+      editables: list.editable
+      containers: list.container
+      images: list.image
+
+
+  # todo
+  pruneHtml: (html) ->
+    # e.g. remove ids
+    html
+
+
+  # @param snippetNode: root DOM node of the snippet
+  parseTemplate: () ->
+    snippetNode = @$template[0]
+    @directives = @getNodeLinks(snippetNode)
+    @editables = @directives.editable
+    @containers = @directives.container
+    @editableCount = @directives.count.editable
+    @containerCount = @directives.count.container
+
+    for name, node of @editables
+      @formatEditable(name, node)
+
+    for name, node of @containers
+      @formatContainer(name, node)
+
+
+  # Find and store all DOM nodes which are editables or containers
+  # in the html of a snippet or the html of a template.
+  getNodeLinks: (snippetNode) ->
+    iterator = new SnippetNodeIterator(snippetNode)
+    list = new SnippetNodeList()
+
+    while element = iterator.nextElement()
+      node = new SnippetNode(element)
+      list.add(node) if node.isDataNode
+
+    list
+
+
+  formatEditable: (name, elem) ->
+    $elem = $(elem)
+    $elem.addClass(docClass.editable)
+
+    defaultValue = elem.innerHTML
+    # not sure how to deal with default values in editables...
+    # elem.innerHTML = ''
+
+    if defaultValue
+      @defaults[name] = defaultValue
+
+
+  formatContainer: (name, elem) ->
+    # remove all content fron a container from the template
+    elem.innerHTML = ''
+
+
+  createLists: () ->
+    lists = {}
+    @$wrap.find("[#{ docAttr.list }]").each( ->
+      $list = $(this)
+      listName = $list.attr("#{ docAttr.list }")
+      lists[listName] = new SnippetTemplateList(listName, $list)
+    )
+    lists
+
+
+  # alias to lists
+  list: (listName) ->
+    @lists[listName]
+
+
+  # output the accepted content of the snippet
+  # that can be passed to create
+  # e.g: { title: "Itchy and Scratchy" }
+  printDoc: () ->
+    doc =
+      identifier: @identifier
+      editables: Object.keys @editables if @editables
+      containers: Object.keys @containers if @containers
+
+    words.readableJson(doc)
+
+
+# Static functions
+# ----------------
+
+Template.parseIdentifier = (identifier) ->
+  return unless identifier # silently fail on undefined or empty strings
+
+  parts = identifier.split('.')
+  if parts.length == 1
+    { namespace: undefined, id: parts[0] }
+  else if parts.length == 2
+    { namespace: parts[0], id: parts[1] }
+  else
+    log.error("could not parse snippet template identifier: #{ identifier }")
+    { namespace: undefined , id: undefined }
+
+
+
 class Design
 
   constructor: (design) ->
@@ -574,53 +1673,53 @@ class Design
     @addGroups(groups)
 
 
-  # pass the name and template in two parameters
-  # e.g add('title', '[template]')
-  add: (name, template) ->
-    @templates[name] = new Template
+  # pass the template as object
+  # e.g add({id: "title", name:"Title", html: "<h1 doc-editable>Title</h1>"})
+  add: (template) ->
+    @templates[template.id] = new Template
       namespace: @namespace
-      name: name
+      id: template.id
+      title: template.title
       html: template.html
-      title: template.name
 
 
   addTemplates: (templates) ->
-    for name, template of templates
-      @add(name, template)
+    for template in templates
+      @add(template)
 
 
   addGroups: (collection) ->
     for key, group of collection
-      snippets = {}
-      for index, snippet of group.snippets
-        snippets[snippet] = @templates[snippet]
+      templates = {}
+      for index, template of group.templates
+        templates[template] = @templates[template]
 
       @groups[key] = new Object
-        name: group.name
-        snippets: snippets
+        title: group.title
+        templates: templates
 
 
   remove: (identifier) ->
-    @checkNamespace identifier, (name) =>
-      delete @templates[name]
+    @checkNamespace identifier, (id) =>
+      delete @templates[id]
 
 
   get: (identifier) ->
-    @checkNamespace identifier, (name) =>
-      @templates[name]
+    @checkNamespace identifier, (id) =>
+      @templates[id]
 
 
   checkNamespace: (identifier, callback) ->
-    { namespace, name } = Template.parseIdentifier(identifier)
+    { namespace, id } = Template.parseIdentifier(identifier)
 
     if not namespace || @namespace == namespace
-      callback(name)
+      callback(id)
     else
       log.error("design #{ @namespace }: cannot get template with different namespace #{ namespace } ")
 
 
   each: (callback) ->
-    for name, template of @templates
+    for id, template of @templates
       callback(template)
 
 
@@ -832,6 +1931,13 @@ dom = do ->
     if node.hasAttribute(docAttr.image)
       imageName = node.getAttribute(docAttr.image)
       return imageName
+
+
+  getEditableName: (node) ->
+    if node.hasAttribute(docAttr.editable)
+      imageName = node.getAttribute(docAttr.editable)
+      return editableName
+
 
 
   dropTarget: (node, { top, left }) ->
@@ -1212,7 +2318,6 @@ DragDrop.placeholder = (drag) ->
 # Integrate EditableJS into Livingdocs
 class EditableController
 
-
   constructor: (@page) ->
 
     # configure editableJS
@@ -1225,6 +2330,7 @@ class EditableController
       .focus($.proxy(@focus, @))
       .blur($.proxy(@blur, @))
       .insert($.proxy(@insert, @))
+      .merge($.proxy(@merge, @))
       .split($.proxy(@split, @))
       .selection($.proxy(@selectionChanged, @))
 
@@ -1246,18 +2352,42 @@ class EditableController
 
 
   insert: (element, direction, cursor) ->
-    snippetView = dom.findSnippetView(element)
-    template = snippetView.template
-    if template.editableCount == 1
+    view = dom.findSnippetView(element)
+    if view.model.editableCount == 1
+
+      # todo: make this configurable
+      template = document.design.get('text')
       copy = template.createModel()
-      snippetView.model.after(copy)
-      if copiedElem = snippetView.next()
-        copiedElem.focus()
+
+      newView = if direction == 'before'
+        view.model.before(copy)
+        view.prev()
+      else
+        view.model.after(copy)
+        view.next()
+
+      newView.focus() if newView
 
     false # disable editableJS default behaviour
 
 
+  merge: (element, direction, cursor) ->
+    view = dom.findSnippetView(element)
+    if view.model.editableCount == 1
+      mergedView = if direction == 'before' then view.prev() else view.next()
+      mergedView.focus() if mergedView
+
+      # todo: check if mergedView is of same type or of type text
+      if mergedView.template == view.template
+        view.model.remove()
+
+
+    log('engine: merge')
+    false # disable editableJS default behaviour
+
+
   split: (element, before, after, cursor) ->
+    snippetView = dom.findSnippetView(element)
     log('engine: split')
     false # disable editableJS default behaviour
 
@@ -1332,38 +2462,6 @@ class Focus
       @snippetBlur.fire(previous)
 
 
-
-# History
-# -------
-# Represents the performed actions in a document
-class History
-
-  history: []
-
-  constructor: () ->
-    #todo
-
-
-  # add an action to the history
-  add: () ->
-    #todo
-
-
-  # track the saved state
-  saved: () ->
-    #todo
-
-
-  # The history is dirty if there are unsaved actions in the history
-  isDirty: () ->
-    return false if history.length == 0
-
-
-
-class HistoryAction
-
-  constructor: () ->
-    #todo
 
 class InterfaceInjector
 
@@ -1610,7 +2708,7 @@ class Page
       @focus.snippetFocused(snippetView)
 
       if imageName = dom.getImageName(event.target)
-        @imageClick.fire(snippetView, imageName)
+        @imageClick.fire(snippetView, imageName, event)
     else
       @focus.blur()
 
@@ -1781,228 +2879,6 @@ class Renderer
 
 
 
-# jQuery like results when searching for snippets.
-# `doc("hero")` will return a SnippetArray that works similar to a jQuery object.
-# For extensibility via plugins we expose the prototype of SnippetArray via `doc.fn`.
-class SnippetArray
-
-
-  # @param snippets: array of snippets
-  constructor: (@snippets) ->
-    @snippets = [] unless @snippets?
-    @createPseudoArray()
-
-
-  createPseudoArray: () ->
-    for result, index in @snippets
-      @[index] = result
-
-    @length = @snippets.length
-    if @snippets.length
-      @first = @[0]
-      @last = @[@snippets.length - 1]
-
-
-  each: (callback) ->
-    for snippet in @snippets
-      callback(snippet)
-
-    this
-
-
-  remove: () ->
-    @each (snippet) ->
-      snippet.remove()
-
-    this
-
-# SnippetContainer
-# ----------------
-# A SnippetContainer contains and manages a linked list
-# of snippets.
-#
-# The snippetContainer is responsible for keeping its snippetTree
-# informed about changes (only if they are attached to one).
-# 
-# @prop first: first snippet in the container
-# @prop last: last snippet in the container
-# @prop parentSnippet: parent SnippetModel
-class SnippetContainer
-
-
-  constructor: ({ @parentSnippet, @name, isRoot }) ->
-    @isRoot = isRoot?
-    @first = @last = undefined
-
-
-  prepend: (snippet) ->
-    if @first
-      @insertBefore(@first, snippet)
-    else
-      @attachSnippet(snippet)
-
-    this
-
-
-  append: (snippet) ->
-    if @parentSnippet? and snippet == @parentSnippet
-      log.error('cannot append snippet to itself')
-
-    if @last
-      @insertAfter(@last, snippet)
-    else
-      @attachSnippet(snippet)
-
-    this
-
-
-  insertBefore: (snippet, insertedSnippet) ->
-    return if snippet.previous == insertedSnippet
-    log.error('cannot insert snippet before itself') if snippet == insertedSnippet
-
-    position =
-      previous: snippet.previous
-      next: snippet
-      parentContainer: snippet.parentContainer
-
-    @attachSnippet(insertedSnippet, position)
-
-
-  insertAfter: (snippet, insertedSnippet) ->
-    return if snippet.next == insertedSnippet
-    log.error('cannot insert snippet after itself') if snippet == insertedSnippet
-
-    position =
-      previous: snippet
-      next: snippet.next
-      parentContainer: snippet.parentContainer
-
-    @attachSnippet(insertedSnippet, position)
-
-
-  up: (snippet) ->
-    if snippet.previous?
-      @insertBefore(snippet.previous, snippet)
-
-
-  down: (snippet) ->
-    if snippet.next?
-      @insertAfter(snippet.next, snippet)
-
-
-  getSnippetTree: ->
-    @snippetTree || @parentSnippet?.snippetTree
-
-
-  # Traverse all snippets
-  each: (callback) ->
-    snippet = @first
-    while (snippet)
-      snippet.descendantsAndSelf(callback)
-      snippet = snippet.next
-
-
-  eachContainer: (callback) ->
-    callback(this)
-    @each (snippet) ->
-      for name, snippetContainer of snippet.containers
-        callback(snippetContainer)
-
-
-  # Traverse all snippets and containers
-  all: (callback) ->
-    callback(this)
-    @each (snippet) ->
-      callback(snippet)
-      for name, snippetContainer of snippet.containers
-        callback(snippetContainer)
-
-
-  remove: (snippet) ->
-    snippet.destroy()
-    @_detachSnippet(snippet)
-
-
-  ui: ->
-    if not @uiInjector
-      snippetTree = @getSnippetTree()
-      snippetTree.renderer.createInterfaceInjector(this)
-    @uiInjector
-
-
-  # Private
-  # -------
-
-  # Every snippet added or moved most come through here.
-  # Notifies the snippetTree if the parent snippet is
-  # attached to one.
-  # @api private
-  attachSnippet: (snippet, position = {}) ->
-    func = =>
-      @link(snippet, position)
-
-    if snippetTree = @getSnippetTree()
-      snippetTree.attachingSnippet(snippet, func)
-    else
-      func()
-
-
-  # Every snippet that is removed must come through here.
-  # Notifies the snippetTree if the parent snippet is
-  # attached to one.
-  # Snippets that are moved inside a snippetTree should not
-  # call _detachSnippet since we don't want to raise
-  # SnippetRemoved events on the snippet tree, in these
-  # cases unlink can be used
-  # @api private
-  _detachSnippet: (snippet) ->
-    func = =>
-      @unlink(snippet)
-
-    if snippetTree = @getSnippetTree()
-      snippetTree.detachingSnippet(snippet, func)
-    else
-      func()
-
-
-  # @api private
-  link: (snippet, position) ->
-    @unlink(snippet) if snippet.parentContainer
-
-    position.parentContainer ||= this
-    @setSnippetPosition(snippet, position)
-
-
-  # @api private
-  unlink: (snippet) ->
-    container = snippet.parentContainer
-    if container
-
-      # update parentContainer links
-      container.first = snippet.next unless snippet.previous?
-      container.last = snippet.previous unless snippet.next?
-
-      # update previous and next nodes
-      snippet.next?.previous = snippet.previous
-      snippet.previous?.next = snippet.next
-
-      @setSnippetPosition(snippet, {})
-
-
-  # @api private
-  setSnippetPosition: (snippet, { parentContainer, previous, next }) ->
-    snippet.parentContainer = parentContainer
-    snippet.previous = previous
-    snippet.next = next
-
-    if parentContainer
-      previous.next = snippet if previous
-      next.previous = snippet if next
-      parentContainer.first = snippet unless snippet.previous?
-      parentContainer.last = snippet unless snippet.next?
-
-
-
 class SnippetDrag
 
 
@@ -2095,331 +2971,6 @@ class SnippetDrag
       #consider: maybe add a 'drop failed' effect
 
 
-# SnippetModel
-# ------------
-# Each SnippetModel has a template which allows to generate a snippetView
-# from a snippetModel
-#
-# Represents a node in a SnippetTree.
-# Every SnippetModel can have a parent (SnippetContainer),
-# siblings (other snippets) and multiple containers (SnippetContainers).
-#
-# The containers are the parents of the child SnippetModels.
-# E.g. a grid row would have as many containers as it has
-# columns
-#
-# # @prop parentContainer: parent SnippetContainer
-class SnippetModel
-
-
-  constructor: ({ @template, id } = {}) ->
-    if !@template
-      log.error('cannot instantiate snippet without template reference')
-
-    @initializeContainers()
-    @initializeEditables()
-    @initializeImages()
-
-    @id = id || guid.next()
-    @identifier = @template.identifier
-
-    @next = undefined # set by SnippetContainer
-    @previous = undefined # set by SnippetContainer
-    @snippetTree = undefined # set by SnippetTree
-
-
-  initializeContainers: ->
-    @containerCount = @template.directives.count.container
-    for containerName of @template.directives.container
-      @containers ||= {}
-      @containers[containerName] = new SnippetContainer
-        name: containerName
-        parentSnippet: this
-
-
-  initializeEditables: ->
-    @editableCount = @template.directives.count.editable
-    for editableName of @template.directives.editable
-      @editables ||= {}
-      @editables[editableName] = undefined
-
-
-  initializeImages: ->
-    @imageCount = @template.directives.count.image
-    for imageName of @template.directives.image
-      @images ||= {}
-      @images[imageName] = undefined
-
-
-  hasImages: ->
-    @imageCount > 0
-
-
-  hasContainers: ->
-    @containers?
-
-
-  before: (snippetModel) ->
-    if snippetModel
-      @parentContainer.insertBefore(this, snippetModel)
-      this
-    else
-      @previous
-
-
-  after: (snippetModel) ->
-    if snippetModel
-      @parentContainer.insertAfter(this, snippetModel)
-      this
-    else
-      @next
-
-
-  append: (containerName, snippetModel) ->
-    if arguments.length == 1
-      snippetModel = containerName
-      containerName = templateAttr.defaultValues.container
-
-    @containers[containerName].append(snippetModel)
-    this
-
-
-  prepend: (containerName, snippetModel) ->
-    if arguments.length == 1
-      snippetModel = containerName
-      containerName = templateAttr.defaultValues.container
-
-    @containers[containerName].prepend(snippetModel)
-    this
-
-
-  set: (name, value) ->
-    if @editables?.hasOwnProperty(name)
-      if @editables[name] != value
-        @editables[name] = value
-        @snippetTree.contentChanging(this) if @snippetTree
-    else if @images?.hasOwnProperty(name)
-      if @images[name] != value
-        @images[name] = value
-        @snippetTree.contentChanging(this) if @snippetTree
-    else
-      log.error("set error: #{ @identifier } has no content named #{ name }")
-
-
-  get: (name) ->
-    if @editables?.hasOwnProperty(name)
-      @editables[name]
-    else if @images?.hasOwnProperty(name)
-      @images[name]
-    else
-      log.error("get error: #{ @identifier } has no name named #{ name }")
-
-
-  hasEditables: ->
-    @editables?
-
-
-  # move up (previous)
-  up: ->
-    @parentContainer.up(this)
-    this
-
-
-  # move down (next)
-  down: ->
-    @parentContainer.down(this)
-    this
-
-
-  # remove TreeNode from its container and SnippetTree
-  remove: ->
-    @parentContainer.remove(this)
-
-
-  # @api private
-  destroy: ->
-    # todo: move into to renderer
-
-    # remove user interface elements
-    @uiInjector.remove() if @uiInjector
-
-
-  getParent: ->
-     @parentContainer?.parentSnippet
-
-
-  ui: ->
-    if not @uiInjector
-      @snippetTree.renderer.createInterfaceInjector(this)
-    @uiInjector
-
-
-  # Iterators
-  # ---------
-
-  parents: (callback) ->
-    snippetModel = this
-    while (snippetModel = snippetModel.getParent())
-      callback(snippetModel)
-
-
-  children: (callback) ->
-    for name, snippetContainer of @containers
-      snippetModel = snippetContainer.first
-      while (snippetModel)
-        callback(snippetModel)
-        snippetModel = snippetModel.next
-
-
-  descendants: (callback) ->
-    for name, snippetContainer of @containers
-      snippetModel = snippetContainer.first
-      while (snippetModel)
-        callback(snippetModel)
-        snippetModel.descendants(callback)
-        snippetModel = snippetModel.next
-
-
-  descendantsAndSelf: (callback) ->
-    callback(this)
-    @descendants(callback)
-
-
-  # return all descendant containers (including those of this snippetModel)
-  descendantContainers: (callback) ->
-    @descendantsAndSelf (snippetModel) ->
-      for name, snippetContainer of snippetModel.containers
-        callback(snippetContainer)
-
-
-  # return all descendant containers and snippets
-  allDescendants: (callback) ->
-    @descendantsAndSelf (snippetModel) =>
-      callback(snippetModel) if snippetModel != this
-      for name, snippetContainer of snippetModel.containers
-        callback(snippetContainer)
-
-
-  childrenAndSelf: (callback) ->
-    callback(this)
-    @children(callback)
-
-
-  # Serialization
-  # -------------
-
-  toJson: ->
-
-    json =
-      id: @id
-      identifier: @identifier
-
-    if @hasEditables()
-      json.editables = {}
-      for name, value of @editables
-        json.editables[name] = value
-
-    for name of @images
-      json.images ||= {}
-      for name, value of @images
-        json.images[name] = value
-
-    for name of @containers
-      json.containers ||= {}
-      json.containers[name] = []
-
-    json
-
-
-SnippetModel.fromJson = (json, design) ->
-  template = design.get(json.identifier)
-
-  if not template?
-    log.error("error while deserializing snippet: unknown template identifier '#{ json.identifier }'")
-
-  model = new SnippetModel({ template, id: json.id })
-  for editableName, value of json.editables
-    if model.editables.hasOwnProperty(editableName)
-      model.editables[editableName] = value
-    else
-      log.error("error while deserializing snippet: unknown editable #{ editableName }")
-
-  for imageName, value of json.images
-    if model.images.hasOwnProperty(imageName)
-      model.images[imageName] = value
-    else
-      log.error("error while deserializing snippet: unknown image #{ imageName }")
-
-  for containerName, snippetArray of json.containers
-    if not model.containers.hasOwnProperty(containerName)
-      log.error("error while deserializing snippet: unknown container #{ containerName }")
-
-    if snippetArray
-
-      if not $.isArray(snippetArray)
-        log.error("error while deserializing snippet: container is not array #{ containerName }")
-
-      for child in snippetArray
-        model.append( containerName, SnippetModel.fromJson(child, design) )
-
-  model
-
-class SnippetNode
-
-  attributePrefix = /^(x-|data-)/
-
-  constructor: (@htmlNode) ->
-    @parseAttributes()
-
-
-  parseAttributes: () ->
-    for attr in @htmlNode.attributes
-      attributeName = attr.name
-      normalizedName = attributeName.replace(attributePrefix, '')
-      if type = templateAttrLookup[normalizedName]
-        @isDataNode = true
-        @type = type
-        @name = attr.value || templateAttr.defaultValues[@type]
-
-        if attributeName != docAttr[@type]
-          @normalizeAttribute(attributeName)
-        else if not attr.value
-          @normalizeAttribute()
-
-        return
-
-
-  normalizeAttribute: (attr) ->
-    @htmlNode.removeAttribute(attr) if attr
-    @htmlNode.setAttribute(docAttr[@type], @name)
-
-class SnippetNodeList
-
-
-  constructor: (@all={}) ->
-    @count = {}
-
-  add: (node) ->
-    @assertNodeNameNotUsed(node)
-
-    @all[node.name] = node
-
-    this[node.type] ||= {}
-    this[node.type][node.name] = node.htmlNode
-
-    @count[node.type] = if @count[node.type] then @count[node.type] + 1 else 1
-
-
-  # @api private
-  assertNodeNameNotUsed: (node) ->
-    if @all[node.name]
-      log.error(
-        """
-        #{node.type} Template parsing error: #{ docAttr[node.type] }="#{ node.name }".
-        "#{ node.name }" is a duplicate name.
-        """
-      )
-
 # SnippetSelection
 # ----------------
 # Manage selection and manipulation of multiple snippets at once
@@ -2427,309 +2978,6 @@ class SnippetSelection
 
   constructor: () ->
     @snippets = []
-
-
-
-
-# SnippetTemplateList
-# -------------------
-# Represents a repeatable Template inside another Template
-#
-# Consider: Instead of defining a list inside a template we could
-# just define another template. If we can mark the position of the first
-# and last element, we don't need a container as in the current implementation
-#
-# Consider: Implement limitations. An attribute like `list-repetitions="{1,3}"`
-# could deifine how many elements can be created (here with a regex-like syntax).
-class SnippetTemplateList
-
-  constructor: (@name, $list) ->
-    @$list = $list
-    $item = @$list.children().first().detach()
-
-    @_item = new Template(
-      name: "#{ @name }-item",
-      html: $item
-    )
-
-
-  # array with an object literal for every list item
-  # if only one item is submitted then the wrapping array can be omitted
-  content: (content) ->
-    if !@isEmpty()
-      @clear()
-
-    if $.isArray(content)
-      for listItem in content
-        @add(listItem)
-    else
-      @add(content)
-
-
-  # param is the same as in content()
-  # but the elements are appended instead of replaced
-  add: (listItems, events) ->
-    if $.isArray(listItems)
-      for listItem in listItems
-        @add(listItem, events)
-    else
-      $newItem = @_item.create(listItems)
-
-      # register events
-      for event, func of events
-        $newItem.on(event, func)
-
-      @$list.append($newItem)
-
-
-  # remove list item
-  # if index is blank or -1, the last item is removed
-  # the first list item has index == 0
-  remove: (index) ->
-    if index == undefined || index == -1
-      @$list.children(":last").remove()
-    else
-      @$list.children(":nth-child(#{ index + 1 })").remove()
-
-
-  clear: ($list) ->
-    @$list.children().remove()
-
-
-  isEmpty: ($list) ->
-    !@$list.children().length
-
-# SnippetTree
-# -----------
-# Livingdocs equivalent to the DOM tree.
-# A snippet tree containes all the snippets of a page in hierarchical order.
-#
-# The root of the SnippetTree is a SnippetContainer. A SnippetContainer
-# contains a list of snippets.
-#
-# snippets can have multible SnippetContainers themselves.
-#
-# ### Example:
-#     - SnippetContainer (root)
-#       - Snippet 'Hero'
-#       - Snippet '2 Columns'
-#         - SnippetContainer 'main'
-#           - Snippet 'Title'
-#         - SnippetContainer 'sidebar'
-#           - Snippet 'Info-Box''
-#
-# ### Events:
-# The first set of SnippetTree Events are concerned with layout changes like
-# adding, removing or moving snippets.
-#
-# Consider: Have a documentFragment as the rootNode if no rootNode is given
-# maybe this would help simplify some code (since snippets are always
-# attached to the DOM).
-class SnippetTree
-
-
-  constructor: ({ content, design } = {}) ->
-    @root = new SnippetContainer(isRoot: true)
-
-    # initialize content before we set the snippet tree to the root
-    # otherwise all the events will be triggered while building the tree
-    if content? and design?
-      @fromJson(content, design)
-
-    @root.snippetTree = this
-
-    @history = new History()
-    @initializeEvents()
-
-
-  # insert snippet at the beginning
-  prepend: (snippet) ->
-    @root.prepend(snippet)
-    this
-
-
-  # insert snippet at the end
-  append: (snippet) ->
-    @root.append(snippet)
-    this
-
-
-  initializeEvents: () ->
-
-    # layout changes
-    @snippetAdded = $.Callbacks()
-    @snippetRemoved = $.Callbacks()
-    @snippetMoved = $.Callbacks()
-
-    # content changes
-    @snippetContentChanged = $.Callbacks()
-    @snippetHtmlChanged = $.Callbacks()
-    @snippetSettingsChanged = $.Callbacks()
-
-    @changed = $.Callbacks()
-
-
-  # Traverse the whole snippet tree.
-  each: (callback) ->
-    @root.each(callback)
-
-
-  eachContainer: (callback) ->
-    @root.eachContainer(callback)
-
-
-  # Traverse all containers and snippets
-  all: (callback) ->
-    @root.all(callback)
-
-
-  find: (search) ->
-    if typeof search == 'string'
-      res = []
-      @each (snippet) ->
-        if snippet.identifier == search || snippet.template.name == search
-          res.push(snippet)
-
-      new SnippetArray(res)
-    else
-      new SnippetArray()
-
-
-  detach: ->
-    @root.snippetTree = undefined
-    @each (snippet) ->
-      snippet.snippetTree = undefined
-
-    oldRoot = @root
-    @root = new SnippetContainer(isRoot: true)
-
-    oldRoot
-
-
-  # eachWithParents: (snippet, parents) ->
-  #   parents ||= []
-
-  #   # traverse
-  #   parents = parents.push(snippet)
-  #   for name, snippetContainer of snippet.containers
-  #     snippet = snippetContainer.first
-
-  #     while (snippet)
-  #       @eachWithParents(snippet, parents)
-  #       snippet = snippet.next
-
-  #   parents.splice(-1)
-
-
-  # returns a readable string representation of the whole tree
-  print: () ->
-    output = 'SnippetTree\n-----------\n'
-
-    addLine = (text, indentation = 0) ->
-      output += "#{ Array(indentation + 1).join(" ") }#{ text }\n"
-
-    walker = (snippet, indentation = 0) ->
-      template = snippet.template
-      addLine("- #{ template.title } (#{ template.identifier })", indentation)
-
-      # traverse children
-      for name, snippetContainer of snippet.containers
-        addLine("#{ name }:", indentation + 2)
-        walker(snippetContainer.first, indentation + 4) if snippetContainer.first
-
-      # traverse siblings
-      walker(snippet.next, indentation) if snippet.next
-
-    walker(@root.first) if @root.first
-    return output
-
-
-  # Tree Change Events
-  # ------------------
-  # Raise events for Add, Remove and Move of snippets
-  # These functions should only be called by snippetContainers
-
-  attachingSnippet: (snippet, attachSnippetFunc) ->
-    if snippet.snippetTree == this
-      # move snippet
-      attachSnippetFunc()
-      @fireEvent('snippetMoved', snippet)
-    else
-      if snippet.snippetTree?
-        # remove from other snippet tree
-        snippet.snippetContainer.detachSnippet(snippet)
-
-      snippet.descendantsAndSelf (descendant) =>
-        descendant.snippetTree = this
-
-      attachSnippetFunc()
-      @fireEvent('snippetAdded', snippet)
-
-
-  fireEvent: (event, args...) ->
-    this[event].fire.apply(event, args)
-    @changed.fire()
-
-
-  detachingSnippet: (snippet, detachSnippetFunc) ->
-    if snippet.snippetTree == this
-
-      snippet.descendantsAndSelf (descendants) ->
-        descendants.snippetTree = undefined
-
-      detachSnippetFunc()
-      @fireEvent('snippetRemoved', snippet)
-    else
-      log.error('cannot remove snippet from another SnippetTree')
-
-
-  contentChanging: (snippet) ->
-    @fireEvent('snippetContentChanged', snippet)
-
-
-  # Serialization
-  # -------------
-
-  printJson: ->
-    words.readableJson(@toJson())
-
-
-  # returns a JSON representation of the whole tree
-  toJson: ->
-    json = {}
-    json['content'] = []
-
-    snippetToJson = (snippet, level, containerArray) ->
-      snippetJson = snippet.toJson()
-      containerArray.push snippetJson
-
-      snippetJson
-
-    walker = (snippet, level, jsonObj) ->
-      snippetJson = snippetToJson(snippet, level, jsonObj)
-
-      # traverse children
-      for name, snippetContainer of snippet.containers
-        containerArray = snippetJson.containers[snippetContainer.name] = []
-        walker(snippetContainer.first, level + 1, containerArray) if snippetContainer.first
-
-      # traverse siblings
-      walker(snippet.next, level, jsonObj) if snippet.next
-
-    walker(@root.first, 0, json['content']) if @root.first
-
-    json
-
-
-  fromJson: (json, design) ->
-    @root.snippetTree = undefined
-    for snippetJson in json.content
-      snippet = SnippetModel.fromJson(snippetJson, design)
-      @root.append(snippet)
-
-    @root.snippetTree = this
-    @root.each (snippet) =>
-      snippet.snippetTree = this
 
 
 
@@ -2761,7 +3009,8 @@ class SnippetView
     @$html.prev().data('snippet')
 
 
-  focus: ->
+  # @param cursor: undefined, 'start', 'end'
+  focus: (cursor) ->
     first = @firstEditableElem()
     $(first).focus()
 
@@ -2857,210 +3106,6 @@ class SnippetView
 
   get$container: ->
     $(dom.findContainer(@$html[0]).node)
-
-
-stash = do ->
-  initialized = false
-
-
-  init: ->
-    if not initialized
-      initialized = true
-
-      # store up to ten versions
-      @store = new LimitedLocalstore('stash', 10)
-
-
-  snapshot: ->
-    @store.push(document.toJson())
-
-
-  stash: ->
-    @snapshot()
-    document.reset()
-
-
-  delete: ->
-    @store.pop()
-
-
-  get: ->
-    @store.get()
-
-
-  restore: ->
-    json = @store.get()
-
-    if json
-      document.restore(json)
-    else
-      log.error('stash is empty')
-
-
-  list: ->
-    entries = for obj in @store.getIndex()
-      { key: obj.key, date: new Date(obj.date).toString() }
-
-    words.readableJson(entries)
-
-# Template
-# --------
-# Parses snippet templates and creates snippet html.
-#
-# __Methods:__
-# @snippet() create new snippets with content
-#
-# Consider: allow tags to be optional. These tags can then be hidden by
-# the user. The template needs to know where to reinsert the tag if it is
-# reinserted again.
-# Options could be to set `display:none` or to remove the element and
-# leave a marker instead.
-# (a comment or a script tag like ember does for example)
-#
-# Consider: Replace lists with inline Templates. Inline
-# Templates are repeatable and can only be used inside their
-# defining snippet.
-class Template
-
-
-  constructor: ({ html, @namespace, @name, identifier, title, version } = {}) ->
-    if not html
-      log.error('Template: param html missing')
-
-    if identifier
-      { @namespace, @name } = Template.parseIdentifier(identifier)
-
-    @identifier = if @namespace && @name
-      "#{ @namespace }.#{ @name }"
-
-    @version = version || 1
-
-    @$template = $( @pruneHtml(html) ).wrap('<div>')
-    @$wrap = @$template.parent()
-    @title = title || words.humanize( @name )
-
-    @editables = undefined
-    @editableCount = 0
-    @containers = undefined
-    @containerCount = 0
-    @defaults = {}
-
-    @parseTemplate()
-    @lists = @createLists()
-
-
-  # create a new SnippetModel instance from this template
-  createModel: () ->
-    new SnippetModel(template: this)
-
-
-  createView: (snippetModel) ->
-    snippetModel ||= @createModel()
-    $html = @$template.clone()
-    list = @getNodeLinks($html[0])
-
-    snippetView = new SnippetView
-      model: snippetModel
-      $html: $html
-      editables: list.editable
-      containers: list.container
-      images: list.image
-
-
-  # todo
-  pruneHtml: (html) ->
-    # e.g. remove ids
-    html
-
-
-  # @param snippetNode: root DOM node of the snippet
-  parseTemplate: () ->
-    snippetNode = @$template[0]
-    @directives = @getNodeLinks(snippetNode)
-    @editables = @directives.editable
-    @containers = @directives.container
-    @editableCount = @directives.count.editable
-    @containerCount = @directives.count.container
-
-    for name, node of @editables
-      @formatEditable(name, node)
-
-    for name, node of @containers
-      @formatContainer(name, node)
-
-
-  # Find and store all DOM nodes which are editables or containers
-  # in the html of a snippet or the html of a template.
-  getNodeLinks: (snippetNode) ->
-    iterator = new SnippetNodeIterator(snippetNode)
-    list = new SnippetNodeList()
-
-    while element = iterator.nextElement()
-      node = new SnippetNode(element)
-      list.add(node) if node.isDataNode
-
-    list
-
-
-  formatEditable: (name, elem) ->
-    $elem = $(elem)
-    $elem.addClass(docClass.editable)
-
-    defaultValue = elem.innerHTML
-    # not sure how to deal with default values in editables...
-    # elem.innerHTML = ''
-
-    if defaultValue
-      @defaults[name] = defaultValue
-
-
-  formatContainer: (name, elem) ->
-    # remove all content fron a container from the template
-    elem.innerHTML = ''
-
-
-  createLists: () ->
-    lists = {}
-    @$wrap.find("[#{ docAttr.list }]").each( ->
-      $list = $(this)
-      listName = $list.attr("#{ docAttr.list }")
-      lists[listName] = new SnippetTemplateList(listName, $list)
-    )
-    lists
-
-
-  # alias to lists
-  list: (listName) ->
-    @lists[listName]
-
-
-  # output the accepted content of the snippet
-  # that can be passed to create
-  # e.g: { title: "Itchy and Scratchy" }
-  printDoc: () ->
-    doc =
-      identifier: @identifier
-      editables: Object.keys @editables if @editables
-      containers: Object.keys @containers if @containers
-
-    words.readableJson(doc)
-
-
-# Static functions
-# ----------------
-
-Template.parseIdentifier = (identifier) ->
-  return unless identifier # silently fail on undefined or empty strings
-
-  parts = identifier.split('.')
-  if parts.length == 1
-    { namespace: undefined, name: parts[0] }
-  else if parts.length == 2
-    { namespace: parts[0], name: parts[1] }
-  else
-    log.error("could not parse snippet template identifier: #{ identifier }")
-    { namespace: undefined , name: undefined }
-
 
 
 # Public API
