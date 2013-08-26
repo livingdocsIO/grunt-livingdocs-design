@@ -45,8 +45,15 @@ var image_wall = (function(){
 			var zoom = thumbnail.parents(".imagerow").next(".zoom");
 			zoom.find(".img_wrapper").html("<img src='"+thumbnail.attr("src")+"' />");
 			zoom.find(".caption").html(thumbnail.attr("alt"));
-			if ( thumbnail.width() > thumbnail.height() ) zoom.find("img").addClass("landscape");
-			else zoom.find("img").css("height", 0.75* $(".image_wall").width());
+			var max_height = $(".image_wall").width();
+			var window_height = $(window).height();
+			if ( thumbnail.width() > thumbnail.height() ) {
+				
+			}
+			else {
+				if (max_height>window_height) max_height = window_height;
+			}
+			zoom.find("img").css("height", 0.75* max_height);
 			var left_pixels = thumbnail.position().left + (thumbnail.width()/2);
 			var left_percent = 100 / $(".image_wall").width() * left_pixels;
 			zoom.find(".arrow").css("left", left_percent+"%");
