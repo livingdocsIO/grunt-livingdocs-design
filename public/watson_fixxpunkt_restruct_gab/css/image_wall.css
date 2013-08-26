@@ -18,12 +18,16 @@
 	-moz-box-sizing:border-box;
 	border:2px solid #ffffff;
 }
-.widget.image_wall .imagebox.size_25 { width:25%; }
-.widget.image_wall .imagebox.size_33 { width:33.333333%; }
-.widget.image_wall .imagebox.size_50 { width:50%; }
-.widget.image_wall .imagebox.size_66 { width:66.666666%; }
-.widget.image_wall .imagebox.size_75 { width:75%; }
-.widget.image_wall .imagebox.size_100 { width:100%; }
+.widget.image_wall .imagebox.width_20 { width:20%; }
+.widget.image_wall .imagebox.width_25 { width:25%; }
+.widget.image_wall .imagebox.width_33 { width:33.333333%; }
+.widget.image_wall .imagebox.width_40 { width:40%; }
+.widget.image_wall .imagebox.width_50 { width:50%; }
+.widget.image_wall .imagebox.width_66 { width:66.666666%; }
+.widget.image_wall .imagebox.width_75 { width:75%; }
+.widget.image_wall .imagebox.width_100 { width:100%; }
+
+.widget.image_wall .imagebox.height_25 { padding-bottom:25%; }
 
 .widget.image_wall .imagebox img {
 	width:100%;

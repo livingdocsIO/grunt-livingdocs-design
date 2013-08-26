@@ -118,57 +118,72 @@ var image_wall = (function(){
 					var next_landscape = ( next_imagebox.find("img").width() > next_imagebox.find("img").height() );
 					var after_next_landscape = ( after_next_imagebox.find("img").width() > after_next_imagebox.find("img").height() );
 					
+					/* three portraits in a row */
 					if (!current_landscape && !next_landscape && !after_next_landscape) {
-						current_imagebox.addClass("size_33");
-						next_imagebox.addClass("size_33");
-						after_next_imagebox.addClass("size_33");
+						current_imagebox.addClass("width_33");
+						next_imagebox.addClass("width_33");
+						after_next_imagebox.addClass("width_33");
 						$(".imagerow:last")
 							.append(current_imagebox)
 							.append(next_imagebox)
 							.append(after_next_imagebox);
 						counter+=2;
 					}
+					/* two landscapes and one portrait in any order */
+					else if (current_landscape+next_landscape+after_next_landscape == 2) {
+						if (current_landscape) current_imagebox.addClass("width_40").addClass("height_25");
+						else current_imagebox.addClass("width_20").addClass("height_25");
+						if (next_landscape) next_imagebox.addClass("width_40").addClass("height_25");
+						else next_imagebox.addClass("width_20").addClass("height_25");
+						if (after_next_landscape) after_next_imagebox.addClass("width_40").addClass("height_25");
+						else after_next_imagebox.addClass("width_20").addClass("height_25");
+						counter+=2;
+					}
+					/* one portrait, one landscape */
 					else if (!current_landscape && next_landscape) {
 						if (Math.random()>0.5) {
-							current_imagebox.addClass("size_33");
-							next_imagebox.addClass("size_66");
+							current_imagebox.addClass("width_33");
+							next_imagebox.addClass("width_66");
 						}
 						else {
-							current_imagebox.addClass("size_25");
-							next_imagebox.addClass("size_75");
+							current_imagebox.addClass("width_25");
+							next_imagebox.addClass("width_75");
 						}
 						$(".imagerow:last")
 							.append(current_imagebox)
 							.append(next_imagebox);
 						counter++;
 					}
+					/* one landscape, one portrait */
 					else if (current_landscape && !next_landscape) {
 						if (Math.random()>0.5) {
-							current_imagebox.addClass("size_66");
-							next_imagebox.addClass("size_33");
+							current_imagebox.addClass("width_66");
+							next_imagebox.addClass("width_33");
 						}
 						else {
-							current_imagebox.addClass("size_75");
-							next_imagebox.addClass("size_25");
+							current_imagebox.addClass("width_75");
+							next_imagebox.addClass("width_25");
 						}
 						$(".imagerow:last")
 							.append(current_imagebox)
 							.append(next_imagebox);
 						counter++;
 					}
+					/* two portraits */
 					else if (!current_landscape && !next_landscape) {
-						current_imagebox.addClass("size_50");
-						next_imagebox.addClass("size_50");
+						current_imagebox.addClass("width_50");
+						next_imagebox.addClass("width_50");
 						$(".imagerow:last")
 							.append(current_imagebox)
 							.append(next_imagebox);
 						counter++;
 					}
+					/* three landscapes in a row */
 					else if (current_landscape && next_landscape && after_next_landscape) {
 						if (Math.random()>0.5) {
-							current_imagebox.addClass("size_33").css("paddingBottom","25%");
-							next_imagebox.addClass("size_33").css("paddingBottom","25%");
-							after_next_imagebox.addClass("size_33").css("paddingBottom","25%");
+							current_imagebox.addClass("width_33").addClass("height_25");
+							next_imagebox.addClass("width_33").addClass("height_25");
+							after_next_imagebox.addClass("width_33").addClass("height_25");
 							$(".imagerow:last")
 								.append(current_imagebox)
 								.append(next_imagebox)
@@ -176,21 +191,27 @@ var image_wall = (function(){
 							counter+=2;
 						}
 						else {
-							current_imagebox.addClass("size_100");
+							current_imagebox.addClass("width_100");
 							$(".imagerow:last").append(current_imagebox);
 						}
 					}
+					/* two landscapes */
 					else if (current_landscape && next_landscape) {
-						current_imagebox.addClass("size_100");
-						$(".imagerow:last").append(current_imagebox);
+						current_imagebox.addClass("width_50").addClass("height_25");
+						next_imagebox.addClass("width_50").addClass("height_25");
+						$(".imagerow:last")
+							.append(current_imagebox)
+							.append(next_imagebox);
+						counter++;
 					}
+					/* something bad happened on the way to the circus */
 					else {
 						alert("not able to determine imagebox-style");
 					}
 				}
 				
 				if ( current_wall.find(".imagerow:last .imagebox").length == 1 ) {
-					current_wall.find(".imagerow:last .imagebox").addClass("size_100");
+					current_wall.find(".imagerow:last .imagebox").addClass("width_100");
 				}
 			}
 			
