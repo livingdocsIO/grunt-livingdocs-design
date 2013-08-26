@@ -137,6 +137,10 @@ var image_wall = (function(){
 						else next_imagebox.addClass("width_20").addClass("height_25");
 						if (after_next_landscape) after_next_imagebox.addClass("width_40").addClass("height_25");
 						else after_next_imagebox.addClass("width_20").addClass("height_25");
+						$(".imagerow:last")
+							.append(current_imagebox)
+							.append(next_imagebox)
+							.append(after_next_imagebox);
 						counter+=2;
 					}
 					/* one portrait, one landscape */
@@ -192,7 +196,8 @@ var image_wall = (function(){
 						}
 						else {
 							current_imagebox.addClass("width_100");
-							$(".imagerow:last").append(current_imagebox);
+							$(".imagerow:last")
+								.append(current_imagebox);
 						}
 					}
 					/* two landscapes */
@@ -204,7 +209,7 @@ var image_wall = (function(){
 							.append(next_imagebox);
 						counter++;
 					}
-					/* something bad happened on the way to the circus */
+					/* something funny happened on the way to the circus */
 					else {
 						alert("not able to determine imagebox-style");
 					}
