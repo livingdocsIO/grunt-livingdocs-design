@@ -153,6 +153,24 @@
 					border-right-color: transparent !important;
 					display:none;
 				}
+				
+				/* tablet */
+				/* ====== */
+				@media screen and (max-width: 1000px) {
+					.widget.image_wall .imagebox img {
+						-moz-transition: none;
+						-webkit-transition: none;
+						-o-transformtransition: none;
+						transition: none;
+					}
+					
+					.widget.image_wall .imagebox img:hover {
+						-moz-transform:none;
+						-webkit-transform:none;
+						-o-transform:none;
+						transform:none;
+					}
+				}
 			</style>
 			
 			
@@ -253,11 +271,30 @@
 					
 				}
 				
-				function sliding_images (thumbnail) {
+				function open_zoom (thumbnail) {
 					fill_in_image(thumbnail);
-					thumbnail.parents(".imagerow").next(".zoom").slideDown();
-					thumbnail.parents(".imagerow").next(".zoom").find(".arrow").fadeIn(1000);
+					if (true) { /* !!!!!! this has to be completed with devicecheck (first part high performance, second part low performance) !!!!!! */
+						thumbnail.parents(".imagerow").next(".zoom").slideDown();
+						thumbnail.parents(".imagerow").next(".zoom").find(".arrow").fadeIn(1000);
+					}
+					else {
+						thumbnail.parents(".imagerow").next(".zoom").show();
+						thumbnail.parents(".imagerow").next(".zoom").find(".arrow").show();
+					}
 					$('html, body').animate({ scrollTop: thumbnail.parents(".imagerow").next(".zoom").offset().top-75 }, 1000);
+					
+					
+				}
+				
+				function close_zoom (zoom) {
+					if (true) { /* !!!!!! this has to be completed with devicecheck (first part high performance, second part low performance) !!!!!! */
+						zoom.slideUp(function(){
+							$(this).remove();
+						});
+					}
+					else {
+						zoom.remove();
+					}
 				}
 				
 				function toggle_image () {
@@ -270,14 +307,12 @@
 							fill_in_image(thumbnail);
 						}
 						else {
-							zoom.slideUp(function(){
-								$(this).remove();
-							});
+							close_zoom(zoom);
 						}
 					}
 					else {
 						thumbnail.parents(".imagerow").after(code_zoom);
-						sliding_images(thumbnail);
+						open_zoom(thumbnail);
 					}
 				}
 				
