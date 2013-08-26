@@ -45,11 +45,6 @@ return {
 			}
 		}
 	},
-	/* reload preview iframe-content */
-	/* ===================== */
-	reload_iframes:function() {
-		$("iframe.preview").attr("src", "front_bespielt.html");
-	},
 	/* calculate and set new position of horizontal meter */
 	/* ================================================== */
 	position_meter:function() {
@@ -137,8 +132,6 @@ return {
 				}
 			}
 			ui.draggable.css("top", 0).css("left", 0);
-			placer.reload_iframes();
-			placer.update_cluster_masks();
 		}
 	},
 	/* an element has been dropped on a cluster */
@@ -179,7 +172,7 @@ return {
 			}
 		}
 		ui.draggable.css("top", 0).css("left", 0);
-		placer.reload_iframes();
+		placer.save_and_update_preview();
 		placer.update_cluster_masks();
 	},
 	/* initialise clusters and regions in workspace */
@@ -198,6 +191,13 @@ return {
 		
 		$( ".region:not(.disabled)" ).droppable({ drop: placer.drop_on_region });
 		$( ".cluster" ).droppable({ drop: placer.drop_on_cluster });
+	},
+	/* initialise options-events in regions */
+	/* ==================================== */
+	init_region_options:function() {
+		$(document).on( "change", ".region .options select, .region .options input", function(){
+			placer.save_and_update_preview();
+		} );
 	},
 	/* initialise elements in tool stack */
 	/* ================================= */
@@ -300,7 +300,7 @@ return {
 		var mask_index = $(this).parents(".masks").find(".mask").index(this);
 		$(this).parents(".masks").attr("data-mask", mask_index+1);
 		placer.update_cluster_masks();
-		placer.reload_iframes();
+		placer.save_and_update_preview();
 	},
 	/* initialise cluster-layout options */
 	/* ================================= */
@@ -399,24 +399,31 @@ return {
 		}
 		return(json_front);	
 	},
-	/* save new state */
-	/* ============== */
-	storage_save:function() {
-		var json_front = placer.return_json_front();	
-		alert(JSON.stringify(json_front));
-	},
 	/* put state online */
 	/* ================ */
 	storage_golive:function() {
 		var json_front = placer.return_json_front();	
 		alert(JSON.stringify(json_front));	
 	},
-	/* initialise save, revert and live! buttons */
+	/* initialise revert and live! buttons */
 	/* ========================================= */
 	init_storage_buttons:function() {
 		$(".button.revert").click(placer.storage_revert);
-		$(".button.save").click(placer.storage_save);
 		$(".button.live").click(placer.storage_golive);
+	},
+	/* save current state and load preview */
+	/* =================================== */
+	save_and_update_preview:function() {
+		var json_front = placer.return_json_front();
+		$.ajax({
+			type: "POST",
+			url: "placer_my_fictional_url.html",
+			data: json_front
+		}).done(function( msg ) {
+			//alert( "Data Saved: " + msg );
+			$("iframe.preview").attr("src", "front_bespielt.html");
+			//alert("saved successfully!!");
+		});
 	},
 	/* load html-snippets from files */
 	/* ============================= */
@@ -516,6 +523,7 @@ return {
 			placer.check_for_empty_working_area();
 			placer.position_meter();
 			placer.position_iframes(0);
+			placer.save_and_update_preview();
 		} );
 		$(document).on( "click", ".region_delete", function(){
 			$(".notepad").hide();
@@ -531,6 +539,7 @@ return {
 			placer.update_cluster_masks ();
 			placer.position_meter();
 			placer.position_iframes(0);
+			placer.save_and_update_preview();
 		} );
 	},
 	/* initialise placer */
@@ -550,6 +559,7 @@ return {
 		placer.init_pulldowns ();
 		placer.init_search_fields ();
 		placer.init_draggable_clusters_and_regions ();
+		placer.init_region_options ();
 		placer.init_cluster_masks ();
 		placer.init_notepad ();
 		placer.init_delete_buttons ();
