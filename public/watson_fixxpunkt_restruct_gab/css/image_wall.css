@@ -67,6 +67,10 @@
 	margin:2%;
 }
 
+.widget.image_wall .zoom img.landscape {
+	width:96%;
+}
+
 .widget.image_wall .zoom .caption {
 	text-align:left;
 	padding:0 2%;
