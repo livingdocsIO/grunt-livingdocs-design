@@ -1,117 +1,321 @@
-.region.full_story .text {
-  position:static;
-  margin-left:10%;
-  margin-bottom:60px;
-  width:85%;
+/* wrappers */
+/* ======== */
+.wrapper {
+	overflow:visible;
 }
 
-.region.full_story p.date,
-.region.full_story p.author {
-  color:#666666;
-  font-size:1.4em /* 14px / 10px */
+
+
+/* story definitions, only used on story layouts */
+/* ============================================= */
+.story {
+	position:static;
+	margin-left:10%;
+	width:85%;
 }
 
-.region.full_story p.lead {
-  font-weight:bold;
-  font-style:italic;
+.story h2.maintitle /*Conflict*/ {
+	font-size:8em; /* 30px / 10px */
+	font-weight:bold;
+	line-height:1em;
+	-moz-hyphens: manual;
+	-webkit-hyphens: manual;
+	-ms-hyphens: manual;
+	-o-hyphens: manual;
+	hyphens: manual;
+	margin-bottom:10px;
 }
 
-.region.full_story p.half_title {
-  font-size:2em /* 20px / 10px */;
-  font-weight:bold;
-  margin-top:20px;
+.story h3.uppertitle {
+	font-size:1.6em; /* 16px / 10px */
+	font-weight:normal;
+	text-transform:uppercase;
+	width:60%;
+	margin-bottom:10px;
 }
 
-.region.full_story .illu {
-  width:100%;
+.story h4.tweentitle {
+	width: 60%;
+	font-size:2.2em /* 22px / 10px */;
+	line-height: 1.3em;
+    margin-bottom: 10px;
+	font-weight:bold;
+	
 }
 
-.region.full_story p,
-.region.full_story h3,
-.region.full_story h2 {
-  width:60%;
+/*.story h5 {
+	font-size:2em; /* 20px / 10px *
+	font-weight:normal;
+	margin-bottom:10px;
+}*/
+
+p.source,
+p.caption {
+	font-size:1.6em /* 16px / 10px */;
+	color:#888;
+	width:auto !important;
+	padding:0;
+	margin:0 !important;
 }
 
-.region.full_story .insert p,
-.region.full_story .insert h4 {
-  width:90%;
+p.source {
+	font-style: italic;
 }
 
-.region.full_story .insert {
-  margin:0 2% 10px 2%;
-  padding:0;
-  width:56%;
-  float:right;
+.insert.jumbo p.source, 
+.insert.jumbo p.caption,
+.insert.cinemascope p.source, 
+.insert.cinemascope p.caption {
+	padding-left:0.5%;
 }
 
-.region.full_story .insert.full {
-  width:97%;
-  margin:0 1.5% 10px 1.5%;
+
+.story p.date,
+.story p.author {
+	color:#666666;
+	font-size:1.4em /* 14px / 10px */
 }
 
-.region.full_story .insert.side {
-  width:34%;
-  margin:0 2% 10px 2%;
+.story p.lead {
+	font-weight:bold;
+	font-style:italic;
+	font-size:2.2em;
 }
 
-.region.full_story p.quote {
-  font-family:'Times New Roman',Times,serif;
-  font-size:3.6em /* 36px / 10px */;
-  margin-top:20px;
-  line-height:1.1em;
-  font-style: italic;
-  color:#009ccc;
+.story p.lead .author {
+	text-transform: lowercase;
 }
 
-.region.full_story p.source,
-.region.full_story p.caption {
-  font-size:1.6em /* 16px / 10px */;
-  color:#aaaaaa;
-  padding-left:15%;
-  width:45%;
+.story p.lead .author .internal {
+	border-bottom:2px solid #f9349e;
+	height:1.1em;
+	float:left;
 }
 
-.region.full_story .insert p.source,
-.region.full_story .insert p.caption {
-  width:100%;
-  padding:4px 0;
-  text-align:right;
+
+.story p, .story ul, .story ol, .story h4.tweentitle {
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	-ms-hyphens: auto;
+	-o-hyphens: auto;
+	hyphens: auto;
+	width:60%;
 }
 
-.region.full_story .insert p.caption {
-  text-align:left;
+.story p, .story ul, .story ol {
+	font-size:1.8em /* 18px / 10px */;
+	line-height:1.3em;
+	margin-bottom:20px;
 }
 
-/* nur zum test */
-.bsp1 {
-  background-color:rgb(70,186,210);
+.story ol {
+	list-style-type:decimal;
+	margin: 0px 0 20px 35px;
 }
 
-.bsp2 {
-  background-color:rgb(103,182,71);
+.story ol li {
+	margin:0;
+	padding: 0 0 10px 15px; 
 }
 
-.bsp3 {
-  background-color:rgb(170,182,70);
+
+
+/* inserts */
+/* ======= */
+/* default insert (hanging to the right) */
+/* reset insert values */
+.story .insert {
+	position: relative;
+	width:60%;
+	margin:0 0 10px 0;
+	float:none;
+	overflow: hidden;
 }
 
-.imagebar img {
-  width:33%;
-  margin:0 0.16666% 4px 0.16666%;
+/* reset insert values */
+.story .insert p,
+.story .insert h2,
+.story .insert h3,
+.story .insert h4,
+.story .insert ul,
+.story .insert ol {
+	width:auto;
+	padding:0;
+	margin:0 0 4px 0;
 }
 
-.social_box {
-  width:321px;
-  float:right;
-  margin-right:2%;
+.story .insert h4.inserttitle {
+	font-size: 1.8em;
+	color: #888;
+    font-weight: bold;
+    line-height: 1.3em;
+    margin-bottom: 5px;
 }
 
-.infobox {
-  background-color:#e8e8e8;
-  padding:10px 0;
+.story .insert p.caption.inside {
+	bottom: 0;
+    font-family: 'Lustria','Times New Roman',Times,serif;
+    font-size: 3.6em;
+    font-style: italic;
+    left: 0;
+    line-height: 1em;
+    margin: 0;
+    padding: 2%;
+    position: absolute;
+    text-align: center;
+    width: 96% !important;
 }
 
-.infobox p,
-.infobox h4 {
-  color:#666666;
+/*jumbo insert – cinemascope insert */
+.story .insert.jumbo, .story .insert.cinemascope {
+	position:relative;
+	width:117.5%;
+	left:-11.7%;
+	margin:0px 0% 25px 0%;
 }
+
+/* full insert */
+.story .insert.full {
+	width:100%;
+	margin:0px 0 20px 0;
+}
+
+/* fifty-fifty insert */
+.story .insert.fifty_fifty {
+	width:49.5%;
+	margin:0 0.25% 10px 0.25%;
+	float:left;
+}
+
+/* side insert */
+.story .insert.side {
+	float: right;
+	width:37%;
+	margin:0 0 10px 2%;
+}
+
+/* left side only */
+.story .insert.right {
+	margin:0 0 20px 2%;
+	padding:0;
+	width:56%;
+	float:right;
+	font-size:inherit;
+	line-height:auto;
+}
+
+.story .insert.block {
+	display:inline-block;
+}
+
+.story .insert.shift {
+	padding-left:10%;
+}
+
+.story .insert.commercial {
+	text-align:center;
+	background-color:#eeeeee;
+}
+
+.story .insert.commercial img {
+	width:90%;
+	margin:1.5em 0;
+}
+
+
+
+
+
+
+
+
+/* tablet */
+/* ====== */
+@media screen and (max-width: 1000px) {
+	
+	.wrapper {
+		overflow: hidden;
+	}
+	
+	.story {
+		margin-left:4%;
+		margin-right:4%;
+		width:auto;
+	}
+	
+	.story p,
+	.story h3,
+	.story .insert {
+		width:80%;
+	}
+	
+	.story .insert {
+		clear: right;
+	}
+	
+	.story .insert.jumbo .caption,
+	.story .insert.jumbo .source,
+	.story .insert.cinemascope .caption,
+	.story .insert.cinemascope .source {
+		padding-left:4%;
+	}
+	
+	.story .insert.jumbo, .story .insert.cinemascope {
+		width:110% !important;
+		left:-5% !important;
+	}
+}
+
+
+
+
+
+
+
+/* mobile */
+/* ====== */
+@media screen and (max-width: 600px) {
+	
+	.story h2, .story h3, .story h4, .story p {letter-spacing:0 !important;}
+	/*.story h2 { font-size:3.5714em !important; } /* 25px / 7px */
+	.story p, .story p.lead, .story ul, .story ol { font-size:2.2857em !important; } /* 16px / 7px */
+	.story h3, .story p.label, .story p.date { font-size:1.7142em !important; } /* 12px / 7px */
+	.story h4, .story p.lead, .story p.half_title { font-size:2.571em !important; } /* 18px / 7px */
+	.story p.caption, .story p.source { font-size:2em !important; } /* 14px / 7px */
+	
+	.story p,
+	.story h2,
+	.story h3,
+	.story h4,
+	.story .insert {
+		width:auto !important;
+		clear:both !important;
+		float:none !important;
+		display:block !important;
+	}
+	
+	.story .insert p.caption.inside {
+		font-size:2.571em !important;
+		position: static;
+	}
+	
+	.story .insert.hide_on_mobile {
+		display:none !important;
+	}
+	
+	/* inserts */
+	.story .insert.right {
+		margin:0 0 10px 0px !important;
+	}
+	
+	.story .insert.side {
+		margin:0 0 10px 0;
+	}
+	
+	.story .insert.commercial {
+		width:100%;
+		margin:0 0 10px 0 !important;
+	}
+}
+
+
