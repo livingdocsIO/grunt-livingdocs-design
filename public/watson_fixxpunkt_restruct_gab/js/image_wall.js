@@ -51,7 +51,6 @@ var image_wall = (function(){
 			var left_percent = 100 / $(".image_wall").width() * left_pixels;
 			zoom.find(".arrow").css("left", left_percent+"%");
 			zoom.attr("data-index", index);
-			
 		},
 		
 		open_zoom:function(thumbnail) {
@@ -219,12 +218,6 @@ var image_wall = (function(){
 					current_wall.find(".imagerow:last .imagebox").addClass("width_100");
 				}
 			}
-			
-			image_wall.adjust_sizes();
-			
-			$(".image_wall .imagebox img").click(image_wall.toggle_image);
-			
-			$(".image_wall").hide().css("visibility", "visible").fadeIn(1000);
 		},
 		
 		init:function() {
@@ -236,6 +229,9 @@ var image_wall = (function(){
 					/* start setup when all images are loaded */
 					if ( $(".image_wall img").length == num_images ) {
 						image_wall.setup_grid ();
+						image_wall.adjust_sizes();
+						$(".image_wall .imagebox img").click(image_wall.toggle_image);
+						$(".image_wall").hide().css("visibility", "visible").fadeIn(1000);
 					}
 				});
 				/* recalculate images while scaling window */
