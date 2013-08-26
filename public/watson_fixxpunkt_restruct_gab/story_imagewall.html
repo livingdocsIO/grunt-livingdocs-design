@@ -4,7 +4,7 @@
     	<script src="js/jquery-1.9.js" type="text/javascript"></script>
 		<script src="js/jquery.cookie.js" type="text/javascript"></script>
     
-		<title>watson - Story Ticker Test</title>
+		<title>watson - Imagewall</title>
 		
 		<!-- Mobile viewport optimization -->
 		<meta name="HandheldFriendly" content="True">
@@ -77,7 +77,7 @@
 					visibility:hidden;
 				}
 			
-				.widget.image_wall .frame {
+				.widget.image_wall .imagebox {
 					float:left;
 					padding-bottom:50%;
 					height:0;
@@ -86,14 +86,14 @@
 					-moz-box-sizing:border-box;
 					border:2px solid #ffffff;
 				}
-				.widget.image_wall .frame.size_25 { width:25%; }
-				.widget.image_wall .frame.size_33 { width:33.333333%; }
-				.widget.image_wall .frame.size_50 { width:50%; }
-				.widget.image_wall .frame.size_66 { width:66.666666%; }
-				.widget.image_wall .frame.size_75 { width:75%; }
-				.widget.image_wall .frame.size_100 { width:100%; }
+				.widget.image_wall .imagebox.size_25 { width:25%; }
+				.widget.image_wall .imagebox.size_33 { width:33.333333%; }
+				.widget.image_wall .imagebox.size_50 { width:50%; }
+				.widget.image_wall .imagebox.size_66 { width:66.666666%; }
+				.widget.image_wall .imagebox.size_75 { width:75%; }
+				.widget.image_wall .imagebox.size_100 { width:100%; }
 				
-				.widget.image_wall .frame img {
+				.widget.image_wall .imagebox img {
 					width:100%;
 					cursor:pointer;
 					position:relative;
@@ -103,7 +103,7 @@
 					transition: transform 0.5s ease;
 				}
 				
-				.widget.image_wall .frame img:hover {
+				.widget.image_wall .imagebox img:hover {
 					-moz-transform:scale(1.05,1.05);
 					-webkit-transform:scale(1.05,1.05);
 					-o-transform:scale(1.05,1.05);
@@ -120,15 +120,15 @@
 					width:100%;
 					overflow:hidden;
 					text-align:center;
-					border-top:2em solid #ffffff;
-					border-bottom:2em solid #ffffff;
+					border-top:1.4em solid #ffffff;
+					border-bottom:1.4em solid #ffffff;
 					padding-bottom:1em;
 					position:relative;
 					overflow:visible;
 				}
 				
 				.widget.image_wall .zoom img {
-					margin:1em 2%;
+					margin:2%;
 				}
 				
 				.widget.image_wall .zoom img.landscape {
@@ -145,9 +145,9 @@
 					z-index:1;
 					width:0;
 					height:0;
-					border:1.4em solid #222222;
-					margin-left:-0.7em;
-					top:-2.4em;
+					border:1.2em solid #222222;
+					margin-left:-0.6em;
+					top:-2em;
 					border-top-color: transparent !important;
 					border-left-color: transparent !important;
 					border-right-color: transparent !important;
@@ -160,50 +160,50 @@
 			<!-- ========= -->
 			<div class="insert full">
 				<div class="widget image_wall">
-					<div class="frame" data-caption="Lorem ipsum dolor 1"><img src="media/img/placeholderimg/imagewall_testbilder/1.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 2"><img src="media/img/placeholderimg/imagewall_testbilder/2.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 3"><img src="media/img/placeholderimg/imagewall_testbilder/3.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 4"><img src="media/img/placeholderimg/imagewall_testbilder/4.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 5"><img src="media/img/placeholderimg/imagewall_testbilder/5.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 6"><img src="media/img/placeholderimg/imagewall_testbilder/6.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 7"><img src="media/img/placeholderimg/imagewall_testbilder/7.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 8"><img src="media/img/placeholderimg/imagewall_testbilder/8.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 9"><img src="media/img/placeholderimg/imagewall_testbilder/9.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 10"><img src="media/img/placeholderimg/imagewall_testbilder/10.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 11"><img src="media/img/placeholderimg/imagewall_testbilder/11.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 12"><img src="media/img/placeholderimg/imagewall_testbilder/12.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 13"><img src="media/img/placeholderimg/imagewall_testbilder/13.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 14"><img src="media/img/placeholderimg/imagewall_testbilder/14.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 15"><img src="media/img/placeholderimg/imagewall_testbilder/15.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 16"><img src="media/img/placeholderimg/imagewall_testbilder/16.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 17"><img src="media/img/placeholderimg/imagewall_testbilder/17.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 18"><img src="media/img/placeholderimg/imagewall_testbilder/18.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 19"><img src="media/img/placeholderimg/imagewall_testbilder/19.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 20"><img src="media/img/placeholderimg/imagewall_testbilder/20.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 21"><img src="media/img/placeholderimg/imagewall_testbilder/21.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 22"><img src="media/img/placeholderimg/imagewall_testbilder/22.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 23"><img src="media/img/placeholderimg/imagewall_testbilder/23.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 24"><img src="media/img/placeholderimg/imagewall_testbilder/24.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 25"><img src="media/img/placeholderimg/imagewall_testbilder/25.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 26"><img src="media/img/placeholderimg/imagewall_testbilder/26.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 27"><img src="media/img/placeholderimg/imagewall_testbilder/27.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 28"><img src="media/img/placeholderimg/imagewall_testbilder/28.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 29"><img src="media/img/placeholderimg/imagewall_testbilder/29.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 30"><img src="media/img/placeholderimg/imagewall_testbilder/30.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 31"><img src="media/img/placeholderimg/imagewall_testbilder/31.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 32"><img src="media/img/placeholderimg/imagewall_testbilder/32.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 33"><img src="media/img/placeholderimg/imagewall_testbilder/33.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 34"><img src="media/img/placeholderimg/imagewall_testbilder/34.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 35"><img src="media/img/placeholderimg/imagewall_testbilder/35.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 36"><img src="media/img/placeholderimg/imagewall_testbilder/36.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 37"><img src="media/img/placeholderimg/imagewall_testbilder/37.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 38"><img src="media/img/placeholderimg/imagewall_testbilder/38.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 39"><img src="media/img/placeholderimg/imagewall_testbilder/39.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 40"><img src="media/img/placeholderimg/imagewall_testbilder/40.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 41"><img src="media/img/placeholderimg/imagewall_testbilder/41.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 42"><img src="media/img/placeholderimg/imagewall_testbilder/42.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 43"><img src="media/img/placeholderimg/imagewall_testbilder/43.jpg" /></div>
-					<div class="frame" data-caption="Lorem ipsum dolor 44"><img src="media/img/placeholderimg/imagewall_testbilder/44.jpg" /></div>
+					<img alt="Lorem ipsum dolor 1" src="media/img/placeholderimg/imagewall_testbilder/1.jpg" />
+					<img alt="Lorem ipsum dolor 2" src="media/img/placeholderimg/imagewall_testbilder/2.jpg" />
+					<img alt="Lorem ipsum dolor 3" src="media/img/placeholderimg/imagewall_testbilder/3.jpg" />
+					<img alt="Lorem ipsum dolor 4" src="media/img/placeholderimg/imagewall_testbilder/4.jpg" />
+					<img alt="Lorem ipsum dolor 5" src="media/img/placeholderimg/imagewall_testbilder/5.jpg" />
+					<img alt="Lorem ipsum dolor 6" src="media/img/placeholderimg/imagewall_testbilder/6.jpg" />
+					<img alt="Lorem ipsum dolor 7" src="media/img/placeholderimg/imagewall_testbilder/7.jpg" />
+					<img alt="Lorem ipsum dolor 8" src="media/img/placeholderimg/imagewall_testbilder/8.jpg" />
+					<img alt="Lorem ipsum dolor 9" src="media/img/placeholderimg/imagewall_testbilder/9.jpg" />
+					<img alt="Lorem ipsum dolor 10" src="media/img/placeholderimg/imagewall_testbilder/10.jpg" />
+					<img alt="Lorem ipsum dolor 11" src="media/img/placeholderimg/imagewall_testbilder/11.jpg" />
+					<img alt="Lorem ipsum dolor 12" src="media/img/placeholderimg/imagewall_testbilder/12.jpg" />
+					<img alt="Lorem ipsum dolor 13" src="media/img/placeholderimg/imagewall_testbilder/13.jpg" />
+					<img alt="Lorem ipsum dolor 14" src="media/img/placeholderimg/imagewall_testbilder/14.jpg" />
+					<img alt="Lorem ipsum dolor 15" src="media/img/placeholderimg/imagewall_testbilder/15.jpg" />
+					<img alt="Lorem ipsum dolor 16" src="media/img/placeholderimg/imagewall_testbilder/16.jpg" />
+					<img alt="Lorem ipsum dolor 17" src="media/img/placeholderimg/imagewall_testbilder/17.jpg" />
+					<img alt="Lorem ipsum dolor 18" src="media/img/placeholderimg/imagewall_testbilder/18.jpg" />
+					<img alt="Lorem ipsum dolor 19" src="media/img/placeholderimg/imagewall_testbilder/19.jpg" />
+					<img alt="Lorem ipsum dolor 20" src="media/img/placeholderimg/imagewall_testbilder/20.jpg" />
+					<img alt="Lorem ipsum dolor 21" src="media/img/placeholderimg/imagewall_testbilder/21.jpg" />
+					<img alt="Lorem ipsum dolor 22" src="media/img/placeholderimg/imagewall_testbilder/22.jpg" />
+					<img alt="Lorem ipsum dolor 23" src="media/img/placeholderimg/imagewall_testbilder/23.jpg" />
+					<img alt="Lorem ipsum dolor 24" src="media/img/placeholderimg/imagewall_testbilder/24.jpg" />
+					<img alt="Lorem ipsum dolor 25" src="media/img/placeholderimg/imagewall_testbilder/25.jpg" />
+					<img alt="Lorem ipsum dolor 26" src="media/img/placeholderimg/imagewall_testbilder/26.jpg" />
+					<img alt="Lorem ipsum dolor 27" src="media/img/placeholderimg/imagewall_testbilder/27.jpg" />
+					<img alt="Lorem ipsum dolor 28" src="media/img/placeholderimg/imagewall_testbilder/28.jpg" />
+					<img alt="Lorem ipsum dolor 29" src="media/img/placeholderimg/imagewall_testbilder/29.jpg" />
+					<img alt="Lorem ipsum dolor 30" src="media/img/placeholderimg/imagewall_testbilder/30.jpg" />
+					<img alt="Lorem ipsum dolor 31" src="media/img/placeholderimg/imagewall_testbilder/31.jpg" />
+					<img alt="Lorem ipsum dolor 32" src="media/img/placeholderimg/imagewall_testbilder/32.jpg" />
+					<img alt="Lorem ipsum dolor 33" src="media/img/placeholderimg/imagewall_testbilder/33.jpg" />
+					<img alt="Lorem ipsum dolor 34" src="media/img/placeholderimg/imagewall_testbilder/34.jpg" />
+					<img alt="Lorem ipsum dolor 35" src="media/img/placeholderimg/imagewall_testbilder/35.jpg" />
+					<img alt="Lorem ipsum dolor 36" src="media/img/placeholderimg/imagewall_testbilder/36.jpg" />
+					<img alt="Lorem ipsum dolor 37" src="media/img/placeholderimg/imagewall_testbilder/37.jpg" />
+					<img alt="Lorem ipsum dolor 38" src="media/img/placeholderimg/imagewall_testbilder/38.jpg" />
+					<img alt="Lorem ipsum dolor 39" src="media/img/placeholderimg/imagewall_testbilder/39.jpg" />
+					<img alt="Lorem ipsum dolor 40" src="media/img/placeholderimg/imagewall_testbilder/40.jpg" />
+					<img alt="Lorem ipsum dolor 41" src="media/img/placeholderimg/imagewall_testbilder/41.jpg" />
+					<img alt="Lorem ipsum dolor 42" src="media/img/placeholderimg/imagewall_testbilder/42.jpg" />
+					<img alt="Lorem ipsum dolor 43" src="media/img/placeholderimg/imagewall_testbilder/43.jpg" />
+					<img alt="Lorem ipsum dolor 44" src="media/img/placeholderimg/imagewall_testbilder/44.jpg" />
 				</div>
 			</div>
 			
@@ -213,12 +213,12 @@
 				var code_zoom = "<div class='zoom'><div class='arrow'></div><div class='img_wrapper'></div><div class='caption'></div></div>";
 				
 				function adjust_sizes () {
-					var frames = $(".image_wall .frame");
-					for (var counter=0; counter<frames.length; counter++) {
-						var current_frame = frames.eq(counter);
-						var current_image = current_frame.find("img");
-						var target_width = current_frame.width();
-						var target_height = parseInt( current_frame.css("paddingBottom") );
+					var imageboxes = $(".image_wall .imagebox");
+					for (var counter=0; counter<imageboxes.length; counter++) {
+						var current_imagebox = imageboxes.eq(counter);
+						var current_image = current_imagebox.find("img");
+						var target_width = current_imagebox.width();
+						var target_height = parseInt( current_imagebox.css("paddingBottom") );
 						var image_width = current_image.width();
 						var image_height = current_image.height();
 						
@@ -241,13 +241,15 @@
 				}
 				
 				function fill_in_image (thumbnail) {
+					var index = thumbnail.parents(".imagebox").attr("data-index");
 					thumbnail.parents(".imagerow").next(".zoom").find(".img_wrapper").html("<img src='"+thumbnail.attr("src")+"' />");
-					thumbnail.parents(".imagerow").next(".zoom").find(".caption").html(thumbnail.parents(".frame").attr("data-caption"));
+					thumbnail.parents(".imagerow").next(".zoom").find(".caption").html(thumbnail.attr("alt"));
 					if ( thumbnail.width() > thumbnail.height() ) thumbnail.parents(".imagerow").next(".zoom").find("img").addClass("landscape");
 					else thumbnail.parents(".imagerow").next(".zoom").find("img").css("height", 0.75* $(".image_wall").width());
 					var left_pixels = thumbnail.position().left + (thumbnail.width()/2);
 					var left_percent = 100 / $(".image_wall").width() * left_pixels;
 					thumbnail.parents(".imagerow").next(".zoom").find(".arrow").css("left", left_percent+"%");
+					thumbnail.parents(".imagerow").next(".zoom").attr("data-index", index);
 					
 				}
 				
@@ -258,10 +260,20 @@
 					$('html, body').animate({ scrollTop: thumbnail.parents(".imagerow").next(".zoom").offset().top-75 }, 1000);
 				}
 				
-				function show_image () {
+				function toggle_image () {
 					var thumbnail = $(this);
-					if ( thumbnail.parents(".imagerow").next(".zoom").length ) {
-						fill_in_image(thumbnail);
+					var zoom = thumbnail.parents(".imagerow").next(".zoom");
+					if ( zoom.length ) {
+						var zoom_index = zoom.attr("data-index");
+						var thumb_index = thumbnail.parents(".imagebox").attr("data-index");
+						if (zoom_index!=thumb_index) {
+							fill_in_image(thumbnail);
+						}
+						else {
+							zoom.slideUp(function(){
+								$(this).remove();
+							});
+						}
 					}
 					else {
 						thumbnail.parents(".imagerow").after(code_zoom);
@@ -270,94 +282,101 @@
 				}
 				
 				function setup_grid () {
-					var frames = $(".image_wall .frame");
-					/* determine frame-style */
-					for (var counter=0; counter<frames.length; counter++) {
-						var current_frame = frames.eq(counter);
-						var next_frame = frames.eq(counter+1);
-						var after_next_frame = frames.eq(counter+2);
+					$(".image_wall img").wrap("<div class='imagebox' />");
+					var imageboxes = $(".image_wall .imagebox");
+					/* determine imagebox-style */
+					for (var counter=0; counter<imageboxes.length; counter++) {
+						var current_imagebox = imageboxes.eq(counter).attr("data-index", counter);
+						var next_imagebox = imageboxes.eq(counter+1).attr("data-index", counter+1);
+						var after_next_imagebox = imageboxes.eq(counter+2).attr("data-index", counter+2);
 						
-						current_frame.before("<div class='imagerow'></div>");
+						current_imagebox.before("<div class='imagerow'></div>");
 						
-						var current_landscape = ( current_frame.find("img").width() > current_frame.find("img").height() );
-						var next_landscape = ( next_frame.find("img").width() > next_frame.find("img").height() );
-						var after_next_landscape = ( after_next_frame.find("img").width() > after_next_frame.find("img").height() );
+						var current_landscape = ( current_imagebox.find("img").width() > current_imagebox.find("img").height() );
+						var next_landscape = ( next_imagebox.find("img").width() > next_imagebox.find("img").height() );
+						var after_next_landscape = ( after_next_imagebox.find("img").width() > after_next_imagebox.find("img").height() );
 						
 						if (!current_landscape && !next_landscape && !after_next_landscape) {
-							current_frame.addClass("size_33");
-							next_frame.addClass("size_33");
-							after_next_frame.addClass("size_33");
-							$(".imagerow:last").append(current_frame).append(next_frame).append(after_next_frame);
+							current_imagebox.addClass("size_33");
+							next_imagebox.addClass("size_33");
+							after_next_imagebox.addClass("size_33");
+							$(".imagerow:last").append(current_imagebox).append(next_imagebox).append(after_next_imagebox);
 							counter+=2;
 						}
 						else if (!current_landscape && next_landscape) {
 							if (Math.random()>0.5) {
-								current_frame.addClass("size_33");
-								next_frame.addClass("size_66");
+								current_imagebox.addClass("size_33");
+								next_imagebox.addClass("size_66");
 							}
 							else {
-								current_frame.addClass("size_25");
-								next_frame.addClass("size_75");
+								current_imagebox.addClass("size_25");
+								next_imagebox.addClass("size_75");
 							}
-							$(".imagerow:last").append(current_frame).append(next_frame);
+							$(".imagerow:last").append(current_imagebox).append(next_imagebox);
 							counter++;
 						}
 						else if (current_landscape && !next_landscape) {
 							if (Math.random()>0.5) {
-								current_frame.addClass("size_66");
-								next_frame.addClass("size_33");
+								current_imagebox.addClass("size_66");
+								next_imagebox.addClass("size_33");
 							}
 							else {
-								current_frame.addClass("size_75");
-								next_frame.addClass("size_25");
+								current_imagebox.addClass("size_75");
+								next_imagebox.addClass("size_25");
 							}
-							$(".imagerow:last").append(current_frame).append(next_frame);
+							$(".imagerow:last").append(current_imagebox).append(next_imagebox);
 							counter++;
 						}
 						else if (!current_landscape && !next_landscape) {
-							current_frame.addClass("size_50");
-							next_frame.addClass("size_50");
-							$(".imagerow:last").append(current_frame).append(next_frame);
+							current_imagebox.addClass("size_50");
+							next_imagebox.addClass("size_50");
+							$(".imagerow:last").append(current_imagebox).append(next_imagebox);
 							counter++;
 						}
 						else if (current_landscape && next_landscape && after_next_landscape) {
 							if (Math.random()>0.5) {
-								current_frame.addClass("size_33").css("paddingBottom","25%");
-								next_frame.addClass("size_33").css("paddingBottom","25%");
-								after_next_frame.addClass("size_33").css("paddingBottom","25%");
-								$(".imagerow:last").append(current_frame).append(next_frame).append(after_next_frame);
+								current_imagebox.addClass("size_33").css("paddingBottom","25%");
+								next_imagebox.addClass("size_33").css("paddingBottom","25%");
+								after_next_imagebox.addClass("size_33").css("paddingBottom","25%");
+								$(".imagerow:last").append(current_imagebox).append(next_imagebox).append(after_next_imagebox);
 								counter+=2;
 							}
 							else {
-								current_frame.addClass("size_100");
-								$(".imagerow:last").append(current_frame);
+								current_imagebox.addClass("size_100");
+								$(".imagerow:last").append(current_imagebox);
 							}
 						}
 						else if (current_landscape && next_landscape) {
-							current_frame.addClass("size_100");
-							$(".imagerow:last").append(current_frame);
+							current_imagebox.addClass("size_100");
+							$(".imagerow:last").append(current_imagebox);
 						}
 						else {
-							alert("not able to determine frame-style");
+							alert("not able to determine imagebox-style");
 						}
 					}
 					
-					if ( $(".imagerow:last .frame").length == 1 ) $(".imagerow:last .frame").addClass("size_100");
+					if ( $(".imagerow:last .imagebox").length == 1 ) $(".imagerow:last .imagebox").addClass("size_100");
 					
 					adjust_sizes();
 					
-					$(".image_wall .frame img").click(show_image);
+					$(".image_wall .imagebox img").click(toggle_image);
 					
 					$(".image_wall").hide().css("visibility", "visible").fadeIn(1000);
 				}
 				
+				
+				
+				
 				var num_images = 0;
-				$(".image_wall .frame img").load(function(){
+				$(".image_wall img").load(function(){
 					num_images++;
-					if ( $(".image_wall .frame img").length == num_images ) {
+					if ( $(".image_wall img").length == num_images ) {
 						setup_grid ();
 					}
 				});
+				
+				
+				
 				
 				$(window).resize( adjust_sizes );
 				
@@ -524,7 +543,7 @@
 	</div>
 	
 	<div class="currentblock">
-		<a href="front.html">Ticker Test</a>
+		<a href="front.html">Imagewall</a>
 	</div>
 	
 	<div class="dashboard">
