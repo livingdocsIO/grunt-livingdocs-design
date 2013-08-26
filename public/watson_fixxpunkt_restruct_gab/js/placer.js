@@ -346,7 +346,10 @@ return {
 	/* ================== */
 	init_notepad:function() {
 		$(document).on( "click", ".note", placer.clicked_noteicon );
-		$(document).on( "blur", ".notepad textarea", function(){$(".notepad").hide();} );
+		$(document).on( "blur", ".notepad textarea", function(){
+			placer.save_and_update_preview();
+			$(".notepad").hide();
+		} );
 		$(".notepad").keyup(placer.note_typed);
 		placer.update_note_icons();
 	},
