@@ -1,3 +1,13 @@
 {
-  "namespace": "watson"
+  "namespace": "watson",
+  "styles": {
+    "name": "Insert",
+    "options": [
+      { "name": "Cinemascope", "class": "cinemascope" },
+      { "name": "Jumbo",       "class": "jumbo" },
+      { "name": "Full",        "class": "full" },
+      { "name": "Right",       "class": "right" },
+      { "name": "Side",        "class": "side" }
+    ]
+  }
 }
