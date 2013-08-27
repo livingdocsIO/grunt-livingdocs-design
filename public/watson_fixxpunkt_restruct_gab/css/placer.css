@@ -327,18 +327,22 @@
 	top:0;
 	left:0;
 	width:100%;
-	background-color:#000000;
 	z-index:10;
 	color:#ffffff;
 	font-weight:bold;
-	font-size:1.4em;
+	font-size:1.8em;
 	text-align:center;
-	padding:5px 0;
 	display:none;
 }
 
-.system_message.good { background-color: #94e028; }
-.system_message.bad { background-color: #f40f97; }
+.system_message span {
+	background-color:#000000;
+	padding:5px;
+	display:inline-block;
+}
+
+.system_message.good span { background-color: #94e028; }
+.system_message.bad span { background-color: #f40f97; }
 
 /* tool stack */
 /* ========== */
@@ -423,6 +427,7 @@
 	transition:background 1s, color 1s;
 	display:inline-block;
 	cursor:pointer;
+	font-size:1.4em;
 }
 
 .button:hover {

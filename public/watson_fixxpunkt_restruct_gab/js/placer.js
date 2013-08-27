@@ -17,7 +17,10 @@ var templates = [
 	{ "url": "placer_snippet_special_options.html" }, /* type_id = 3 */
 	{ "url": "placer_snippet_special.html" }, /* type_id = 4 */
 	{ "url": "placer_snippet_special_options.html" }, /* type_id = 5 */
-	{ "url": "placer_snippet_special.html" } /* type_id = 6 */
+	{ "url": "placer_snippet_special.html" }, /* type_id = 6 */
+	{ "url": "placer_snippet_special.html" }, /* type_id = 7 */
+	{ "url": "placer_snippet_special_options.html" }, /* type_id = 8 */
+	{ "url": "placer_snippet_special_options.html" } /* type_id = 9 */
 ];
 
 var region_type_ids = {
@@ -26,7 +29,10 @@ var region_type_ids = {
 	"gallery": 3,
 	"html": 4,
 	"flipper": 5,
-	"tag_teaser": 6	
+	"tag_teaser": 6,
+	"auto_story": 7,
+	"auto_poll": 8,
+	"auto_gallery": 9	
 };
 
 return {
@@ -438,11 +444,12 @@ return {
 			data: json_front
 		}).done(function() {
 			$("iframe.preview").attr("src", "front_bespielt.html");
-			$(".system_message").text("Saved successfully.").addClass("good").fadeIn(200);
+			$(".system_message span").text("Saved successfully.")
+			$(".system_message").addClass("good").show();
 			clearTimeout(system_message_timeout);
 			system_message_timeout = setTimeout(function(){
-				$(".system_message").fadeOut(200);
-			},1000)
+				$(".system_message").hide();
+			},500)
 		});
 	},
 	/* load html-snippets from files */
