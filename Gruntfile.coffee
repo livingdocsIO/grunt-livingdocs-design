@@ -25,6 +25,10 @@ grunt.initConfig
         # html-minifier doesn't work on watsons text.html template
         # templates do not work unminified. Is there a bug in livingdocs-engine?
         minify: true
+        minifyOptions:
+          collapseWhitespace: true
+          removeComments: true
+          removeCommentsFromCDATA: true
         templatesDirectory: 'templates'
         configurationElement: 'script[type=ld-conf]'
       files: [

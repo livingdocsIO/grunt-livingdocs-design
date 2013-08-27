@@ -2,7 +2,7 @@
   "name": "livingdocs-design",
   "version": "0.0.1",
   "dependencies": {
-    "express": "x"
+    "express": "*"
   },
   "devDependencies": {
     "cheerio": "~0.12.0",

@@ -36,11 +36,10 @@ module.exports = (grunt) ->
   # @param {string} html
   # @param {boolean} minify
   # @param {object} info
-  processHtml = (html, minify, info) ->
-    if minify
+  processHtml = (html, options, info) ->
+    if options.minify
       try
-        htmlmin.minify html,
-          collapseWhitespace: true
+        htmlmin.minify html, options.minifyOptions
       catch err
         grunt.log.writeln('\n>> Design "%s", template "%s": HTML minify error\n %s\n'.yellow, info.design, info.template, err)
         return '<div class="error minify" style="color: red">Error while minifying: Design "' + info.design + '", Template "' + info.template + '"</div>'
@@ -165,7 +164,7 @@ module.exports = (grunt) ->
       # push template html into template object, remove config and minify the html
       $(options.configurationElement).remove()
       newTemplate.id = templateName
-      newTemplate.html = processHtml($.html(), options.minify, { design: design.config.namespace, template: templateName })
+      newTemplate.html = processHtml($.html(), options, { design: design.config.namespace, template: templateName })
       design.templates.push(newTemplate)
 
       # Check if everything is compiled, close the templates file and save it;
