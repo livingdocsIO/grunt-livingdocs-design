@@ -6,6 +6,7 @@ var placer = (function(){
 var top_region = 0;
 var top_pos = 0;
 var scroll_timeout;
+var system_message_timeout;
 
 /* this json holds all html-snippets */
 /* ================================= */
@@ -435,10 +436,13 @@ return {
 			type: "POST",
 			url: "placer_my_fictional_url.html",
 			data: json_front
-		}).done(function( msg ) {
-			//alert( "Data Saved: " + msg );
+		}).done(function() {
 			$("iframe.preview").attr("src", "front_bespielt.html");
-			//alert("saved successfully!!");
+			$(".system_message").text("Saved successfully.").addClass("good").fadeIn(200);
+			clearTimeout(system_message_timeout);
+			system_message_timeout = setTimeout(function(){
+				$(".system_message").fadeOut(200);
+			},1000)
 		});
 	},
 	/* load html-snippets from files */
