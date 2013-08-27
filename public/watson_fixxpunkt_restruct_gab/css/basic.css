@@ -26,11 +26,13 @@ strong {
 }
 
 ::selection {
-	background: #f488c8;
+	background: #222222;
+	color:#ffffff;
 }
 
 ::-moz-selection {
-	background: #f488c8;
+	background: #222222;
+	color:#ffffff;
 }
 
 /* wrappers */

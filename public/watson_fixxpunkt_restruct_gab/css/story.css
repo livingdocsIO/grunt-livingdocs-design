@@ -76,6 +76,11 @@ p.source {
 	font-size:1.4em /* 14px / 10px */
 }
 
+.story p.date.shortmessage {
+	border-top:dotted 2px #888888;
+	padding-top:20px;
+}
+
 .story p.lead {
 	font-weight:bold;
 	font-style:italic;
