@@ -4,7 +4,9 @@
 	overflow:visible;
 }
 
-
+.wrapper.no_top_insert {
+	padding-top:7em;
+}
 
 /* story definitions, only used on story layouts */
 /* ============================================= */
@@ -79,6 +81,9 @@ p.source {
 .story p.date.shortmessage {
 	border-top:dotted 2px #888888;
 	padding-top:20px;
+	font-weight:bold;
+	font-size:1.6em;
+	color:#222222;
 }
 
 .story p.lead {
