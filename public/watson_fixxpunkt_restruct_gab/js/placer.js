@@ -9,16 +9,15 @@ var scroll_timeout;
 
 /* this json holds all html-snippets */
 /* ================================= */
-var templates = {
-	"Story": { "url": "placer_snippet_story.html" },
-	"Poll": { "url": "placer_snippet_special_options.html" },
-	"HTML": { "url": "placer_snippet_special.html" },
-	"Topelement": { "url": "placer_snippet_special.html" },
-	"Flipper": { "url": "placer_snippet_special_options.html" },
-	"Tag Teaser": { "url": "placer_snippet_special.html" },
-	"Cluster": { "url": "placer_snippet_cluster.html" },
-	"Autocluster": { "url": "placer_snippet_autocluster.html" }
-};
+var templates = [
+	{ "url": "placer_snippet_cluster.html" }, 
+	{ "url": "placer_snippet_story.html" }, /* type_id = 1 */
+	{ "url": "placer_snippet_special_options.html" }, /* type_id = 2 */
+	{ "url": "placer_snippet_special_options.html" }, /* type_id = 3 */
+	{ "url": "placer_snippet_special.html" }, /* type_id = 4 */
+	{ "url": "placer_snippet_special_options.html" }, /* type_id = 5 */
+	{ "url": "placer_snippet_special.html" } /* type_id = 6 */
+];
 
 var region_type_ids = {
 	"story": 1,
@@ -45,7 +44,7 @@ return {
 		var scales = [0.625, 0.377, 0.377];
 		
 		for (var counter=0; counter<iframes.length; counter++) {
-			var new_pos = iframes[counter].find(".region").not(":has(.region)").eq(top_region).offset().top;
+			var new_pos = iframes[counter].find(".region").not(":has(.region)").not(".notplaceable").eq(top_region).offset().top;
 			if (new_pos != undefined) {
 				iframes[counter].stop(true, true);
 				iframes[counter].animate({ scrollTop: new_pos-(top_pos/scales[counter]) }, duration );
@@ -117,7 +116,7 @@ return {
 		new_element.attr("data-element", JSON.stringify(values));
 		if (values.edit_link==undefined) new_element.find(".edit").remove();
 		else new_element.find(".edit").attr("href",values.edit_link);
-		if (values.type == "Story") placer.fill_in_story_values( new_element, values );
+		if (values.type_id == region_type_ids.story) placer.fill_in_story_values( new_element, values );
 		else placer.fill_in_special_element_values( new_element, values );
 		placer.init_draggable_clusters_and_regions();
 	},
@@ -135,7 +134,7 @@ return {
 			else if ( ui.draggable.hasClass("element") ) {
 				var values = $.parseJSON( ui.draggable.attr("data-element") );
 				if (values.tag_id!=-1) {
-					$(this).after(templates[values.type].snippet);
+					$(this).after(templates[values.type_id].snippet);
 					var new_element = $(this).next(".region");
 					placer.fill_in_element(new_element,values);
 				}
@@ -161,7 +160,7 @@ return {
 			if ($(this).find(".region").length==0) {
 				var values = $.parseJSON( ui.draggable.attr("data-element") );
 				if (values.tag_id!=-1) {
-					$(this).append(templates[values.type].snippet);
+					$(this).append(templates[values.type_id].snippet);
 					var new_element = $(this).find(".region");
 					placer.fill_in_element(new_element,values);
 					placer.init_draggable_clusters_and_regions();
@@ -170,15 +169,8 @@ return {
 		}
 		/* new cluster dropped on a cluster */
 		else if ( ui.draggable.hasClass("container") ) {
-			var values = $.parseJSON( ui.draggable.attr("data-element") );
-			if (values.tag_id!=-1) {
-				$(this).after(templates[values.type].snippet);
-				if ( values.type=="Autocluster" ) {
-					var new_element = $(this).next(".cluster");
-					placer.fill_in_element(new_element, values);
-				}
-				placer.init_draggable_clusters_and_regions();
-			}
+			$(this).after(templates[0].snippet);
+			placer.init_draggable_clusters_and_regions();
 		}
 		ui.draggable.css("top", 0).css("left", 0);
 		placer.save_and_update_preview();
@@ -367,10 +359,19 @@ return {
 	/* === STORAGE === */
 	/* =============== */
 	
-	/* revert to old state */
-	/* =================== */
-	storage_revert:function() {
-		location.reload();	
+	/* reset to old state */
+	/* ================== */
+	storage_reset:function() {
+		var json = {
+			"layout_id" : $(".working_area").attr("data-layout_id")
+		};
+		$.ajax({
+			type: "POST",
+			url: "placer_my_fictional_url.html",
+			data: json
+		}).done(function() {
+			location.reload();
+		});
 	},
 	/* generate json from working area */
 	/* =============================== */
@@ -379,7 +380,10 @@ return {
 		var delete_from_regions = ["type","title","rank","author","time","performance","edit_link"];
 		var delete_from_clusters = ["type","title"];
 		
-		var json_front={"layout_id":1234,"clusters":[]};
+		var json_front={
+			"layout_id" : $(".working_area").attr("data-layout_id"),
+			"clusters" : []
+		};
 		var num_clusters = $(".working_area .cluster").length;
 		for (var counter_clusters=0;counter_clusters<num_clusters;counter_clusters++) {
 			var current_cluster = $(".working_area .cluster").eq(counter_clusters);
@@ -400,7 +404,7 @@ return {
 				json_regions[counter_regions]=region_json;
 			}
 			/* putting together json for current cluster */
-			var cluster_json = JSON.parse(current_cluster.attr("data-element"));
+			var cluster_json = {};
 			if (num_regions) cluster_json["regions"]=json_regions;
 			cluster_json["mask"]=parseInt(current_cluster.find(".masks").attr("data-mask"));
 			cluster_json["cluster_size"]=size_cluster;
@@ -417,10 +421,10 @@ return {
 		var json_front = placer.return_json_front();	
 		alert(JSON.stringify(json_front));	
 	},
-	/* initialise revert and live! buttons */
-	/* ========================================= */
+	/* initialise reset and live! buttons */
+	/* ================================== */
 	init_storage_buttons:function() {
-		$(".button.revert").click(placer.storage_revert);
+		$(".button.reset").click(placer.storage_reset);
 		$(".button.live").click(placer.storage_golive);
 	},
 	/* save current state and load preview */
@@ -441,41 +445,36 @@ return {
 	/* ============================= */
 	init_snippets:function() {
 		$.each( templates, function( key, value ) {
-			$.ajax({
-			url: templates[key].url,
-			success: function(result) {
-				templates[key]["snippet"]=result;
-			},
-			async: false
-			});
+			if (templates[key].url!=undefined) {
+				$.ajax({
+				url: templates[key].url,
+				success: function(result) {
+					templates[key]["snippet"]=result;
+				},
+				async: false
+				});
+			}
 		});
 	},
 	/* fill in working area from json */
 	/* ============================== */
 	fill_working_area:function(json_front) {
 		var working_area = $(".working_area");
-		working_area.empty();
+		working_area
+			.attr("data-layout_id", json_front.layout_id)
+			.empty();
 		/* loop through clusters */
 		$.each( json_front.clusters, function( key, values_cluster ) {
 			
-			working_area.append(templates[values_cluster.type].snippet);
+			working_area.append(templates[0].snippet);
 			var cluster = working_area.find(".cluster:last");
 			cluster.find(".masks").attr("data-mask", values_cluster.mask);
 			
-			/* regular cluster */
-			if ( values_cluster.type=="Cluster" ) {
-				/* loop through regions */
-				$.each( values_cluster.regions, function( key2, values_region ) {
-					cluster.append(templates[values_region.type].snippet);
-					var new_element = cluster.find(".region:last");
-					placer.fill_in_element(new_element,values_region);
-				});
-			}
-			/* autocluster */
-			else if ( values_cluster.type=="Autocluster" ) {
-				cluster.find(".region:gt("+(values_cluster.cluster_size-1)+")").remove();
-				placer.fill_in_element(cluster, values_cluster);
-			}
+			$.each( values_cluster.regions, function( key2, values_region ) {
+				cluster.append(templates[values_region.type_id].snippet);
+				var new_element = cluster.find(".region:last");
+				placer.fill_in_element(new_element,values_region);
+			});
 		});
 	},
 	/* load front json */

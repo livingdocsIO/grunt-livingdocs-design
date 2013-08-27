@@ -419,12 +419,12 @@
 	background: #222;
 }
 
-.button.revert {
+.button.reset {
 	color: #FFF;
 	text-decoration: none;
 }
 
-.button.revert:hover {
+.button.reset:hover {
 	color: #F50F96;
 	background: #222;
 }
