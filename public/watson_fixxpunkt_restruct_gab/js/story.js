@@ -14,7 +14,7 @@ var inserts = (function(){
 		adjust_cinemascope_inserts:function() {
 			if ( $(".insert.cinemascope").length>0 ) {
 				var window_width = $(window).width();
-				if (window_width>1000) {
+				if (window_width>950) {
 					var new_left = $(".wrapper").offset().left + parseInt( $(".story").css("marginLeft") );
 					$(".insert.cinemascope").width(window_width);
 					$(".insert.cinemascope").css("left", -new_left);
