@@ -20,6 +20,15 @@ var templates = {
 	"Autocluster": { "url": "placer_snippet_autocluster.html" }
 };
 
+var region_type_ids = {
+	"story": 1,
+	"poll": 2,
+	"gallery": 3,
+	"html": 4,
+	"flipper": 5,
+	"tag_teaser": 6	
+};
+
 return {
 	/* ========================== */
 	/* === IFRAME POSITIONING === */

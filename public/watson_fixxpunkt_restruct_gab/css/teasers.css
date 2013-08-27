@@ -276,10 +276,6 @@
 /* ================= */
 .teaser.tag_teaser .text { background-color:#222222; background-color:rgba(0,0,0,0.8); }
 
-.teaser.tag_teaser .media_icons .tag {
-	font-size:2.4em;
-}
-
 .teaser.tag_teaser h2 { 
 	color:#ffffff;
 	font-size:4em; /* 40px / 10px => ignores .font_l etc. */
@@ -293,6 +289,21 @@
 .teaser.tag_teaser h2 a:hover, 
 .teaser.tag_teaser h3 a:hover {
 	color:#ffffff;
+}
+
+
+/* shortmessage teasers */
+/* ==================== */
+.teaser.shortmessage h3 span.date {
+	font-weight:bold;
+	display:block;
+	padding-top:10px;
+	padding-bottom:10px;
+	border-top:dotted 2px;
+}
+
+.teaser.shortmessage .text .media_icons .tag {
+	margin-left:0px;
 }
 
 
