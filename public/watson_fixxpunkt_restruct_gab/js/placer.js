@@ -12,27 +12,63 @@ var system_message_timeout;
 /* ================================= */
 var templates = [
 	{ "url": "placer_snippet_cluster.html" }, 
-	{ "url": "placer_snippet_story.html" }, /* type_id = 1 */
-	{ "url": "placer_snippet_special_options.html" }, /* type_id = 2 */
-	{ "url": "placer_snippet_special_options.html" }, /* type_id = 3 */
+	{ 
+		"url": "placer_snippet_story.html",
+		"url_auto": "placer_snippet_special_options_extended.html"
+	}, /* type_id = 1 */
+	{ 
+		"url": "placer_snippet_special_options.html",
+		"url_auto": "placer_snippet_special_options.html"
+		}, /* type_id = 2 */
+	{ 
+		"url": "placer_snippet_special_options.html",
+		"url_auto": "placer_snippet_special_options.html"
+	}, /* type_id = 3 */
 	{ "url": "placer_snippet_special.html" }, /* type_id = 4 */
-	{ "url": "placer_snippet_special_options.html" }, /* type_id = 5 */
-	{ "url": "placer_snippet_special.html" }, /* type_id = 6 */
-	{ "url": "placer_snippet_special_options.html" }, /* type_id = 7 */
-	{ "url": "placer_snippet_special_options.html" }, /* type_id = 8 */
-	{ "url": "placer_snippet_special_options.html" } /* type_id = 9 */
+	{
+		"url": "placer_snippet_special_options.html",
+		"url_auto": "placer_snippet_special_options.html"
+	}, /* type_id = 5 */
+	{ "url_auto": "placer_snippet_special.html" } /* type_id = 6 */
 ];
 
+/* getting type_ids out of region_type_ids.gallery etc. */
+/* ==================================================== */
 var region_type_ids = {
 	"story": 1,
 	"poll": 2,
 	"gallery": 3,
 	"html": 4,
 	"flipper": 5,
-	"tag_teaser": 6,
-	"auto_story": 7,
-	"auto_poll": 8,
-	"auto_gallery": 9	
+	"tag_teaser": 6	
+};
+
+/* strings for element titles */
+/* ========================== */
+var region_type_names = [
+	"-1", "Story", "Poll", "Gallery", "HTML-Element", "Flipper", "Tag Teaser"
+];
+
+/* strings */
+/* ======= */
+var strings = {
+	"title_auto_content": "Wird aus Cluster Tag gefüllt",
+	"message_live": "Das Layout ist live geschaltet",
+	"message_save": "Tempsave erfolgreich",
+	"time": "Vor",
+	"minutes": "Minuten"
+}
+
+/* list of urls we need for ajax-calls and iframes */
+/* =============================================== */
+var ajax_urls = {
+	"load_library": "placer_library_json.html",
+	"load_front": "placer_front_json_input.html",
+	"search_result": "placer_search_result_json.html",
+	"storage_reset": "placer_my_fictional_url.html",
+	"save_front": "placer_my_fictional_url.html",
+	"go_live": "placer_my_fictional_url.html",
+	"iframe_preview": "front_bespielt.html"
 };
 
 return {
@@ -89,31 +125,39 @@ return {
 	/* fill in values into new placed story */
 	/* ==================================== */
 	fill_in_story_values:function( new_element, values ) {
-		new_element.find(".rank").html("#"+values.rank);
-		if (values.rank<=10) new_element.find(".rank").addClass("topten");
-		else if (values.rank<=30) new_element.find(".rank").addClass("topthirty");
-		else if (values.rank<=100) new_element.find(".rank").addClass("toponehundred");
-		new_element.find(".details strong").html(placer.short_string(values.title,35)).after("<br/>Vor "+values.time+" Minuten<br/>"+values.author);
+		/* regular story (with id) */
+		if (values.id!=undefined) {
+			new_element.find(".rank").html("#"+values.rank);
+			if (values.rank<=10) new_element.find(".rank").addClass("topten");
+			else if (values.rank<=30) new_element.find(".rank").addClass("topthirty");
+			else if (values.rank<=100) new_element.find(".rank").addClass("toponehundred");
+			new_element.find(".details strong").html(placer.short_string(values.title,35)).after("<br/>"+strings.time+" "+values.time+" "+strings.minutes+"<br/>"+values.author);
+			/* notes */
+			new_element.find(".note").attr("data-text", values.note);
+			placer.update_note_icons();
+			/* performance bars */
+			var performance_pixels = 80;
+			for (var counter=0; counter<values.performance.length; counter++ ) {
+				var current_val = values.performance[counter];
+				var margin = performance_pixels - (current_val * performance_pixels / 100);
+				new_element.find(".bar").eq(counter).css("marginTop", margin);
+			}
+		}
+		/* auto story (without id) */
+		else {
+			new_element.find(".type").html(region_type_names[values.type_id]+"<br/>"+strings.title_auto_content);
+		}
 		new_element.find("select[name=color_combo]").val(values.color_combo);
 		new_element.find("select[name=font_size]").val(values.font_size);
 		new_element.find("select[name=font_face]").val(values.font_face);
 		new_element.find("input[name=image]").attr("checked", values.image);
 		new_element.find("input[name=lead]").attr("checked", values.lead);
-		/* notes */
-		new_element.find(".note").attr("data-text", values.note);
-		placer.update_note_icons();
-		/* performance bars */
-		var performance_pixels = 80;
-		for (var counter=0; counter<values.performance.length; counter++ ) {
-			var current_val = values.performance[counter];
-			var margin = performance_pixels - (current_val * performance_pixels / 100);
-			new_element.find(".bar").eq(counter).css("marginTop", margin);
-		}
 	},
 	/* fill in values into new placed special_element */
 	/* ============================================== */
 	fill_in_special_element_values:function( new_element, values ) {
-		new_element.find(".type").html(values.type+"<br/>"+placer.short_string(values.title,35));
+		if (values.title==undefined) values.title = strings.title_auto_content;
+		new_element.find(".type").html(region_type_names[values.type_id]+"<br/>"+placer.short_string(values.title,35));
 		new_element.find("select[name=color_combo]").val(values.color_combo);
 		new_element.find("select[name=font_size]").val(values.font_size);
 	},
@@ -141,7 +185,8 @@ return {
 			else if ( ui.draggable.hasClass("element") ) {
 				var values = $.parseJSON( ui.draggable.attr("data-element") );
 				if (values.tag_id!=-1) {
-					$(this).after(templates[values.type_id].snippet);
+					if (values.id!=undefined) $(this).after(templates[values.type_id].snippet);
+					else $(this).after(templates[values.type_id].snippet_auto);
 					var new_element = $(this).next(".region");
 					placer.fill_in_element(new_element,values);
 				}
@@ -169,7 +214,8 @@ return {
 			if ($(this).find(".region").length==0) {
 				var values = $.parseJSON( ui.draggable.attr("data-element") );
 				if (values.tag_id!=-1) {
-					$(this).append(templates[values.type_id].snippet);
+					if (values.id!=undefined) $(this).append(templates[values.type_id].snippet);
+					else $(this).append(templates[values.type_id].snippet_auto);
 					var new_element = $(this).find(".region");
 					placer.fill_in_element(new_element,values);
 					placer.init_draggable_clusters_and_regions();
@@ -271,7 +317,7 @@ return {
 		$.ajax({
 			type: 'POST',
 			dataType: "json",
-			url: "placer_search_result_json.html",
+			url: ajax_urls.search_result,
 			data: {
 				"type_id":$(".tools .search select").val(),
 				"search_term":$(".tools .search input").val()
@@ -280,8 +326,9 @@ return {
 				var result_list = $(".tools .search ul");
 				result_list.empty();
 				$.each( result.search_result, function( key, value ) {
-					var string_length = 35 - value.type.length;
-					result_list.append("<li class='element'><strong>"+value.type+":</strong> "+placer.short_string(value.title,string_length)+"</li>");
+					var type = region_type_names[value.type_id];
+					var string_length = 35 - type.length;
+					result_list.append("<li class='element'><strong>"+type+":</strong> "+placer.short_string(value.title,string_length)+"</li>");
 					result_list.find("li:last").attr("data-element", JSON.stringify(value));
 				});
 				placer.init_draggable_toolelements();
@@ -335,26 +382,26 @@ return {
 	/* ================================== */
 	init_cluster_options:function() {
 		/* tag search */
-		$(".cluster .cluster_options").on("keyup", "input.tagselect", function(){
+		$(document).on("keyup", ".cluster .cluster_options input.tagselect", function(){
 			var id = 12345;
 			/* dynamic tag search here!!!! */
 			$(this).attr("data-tag_id", id);
 		});
 		
-		$(".cluster .cluster_options").on("focus", "input.tagselect", function(){
+		$(document).on("focus", ".cluster .cluster_options input.tagselect", function(){
 			var value = $(this).val();
 			var value_default = $(this).attr("data-default");
 			if ( value == value_default ) $(this).val("");
 		});
 		
-		$(".cluster .cluster_options").on("blur", "input.tagselect", function(){
+		$(document).on("blur", ".cluster .cluster_options input.tagselect", function(){
 			var value = $(this).val();
 			var value_default = $(this).attr("data-default");
 			if (value=="") $(this).val(value_default).attr("data-tag_id", -1);
 			placer.save_and_update_preview();
 		});
 		
-		$(".cluster .cluster_options").on("change", "select[name=color_combo]", function(){
+		$(document).on("change", ".cluster .cluster_options select[name=color_combo]", function(){
 			placer.save_and_update_preview();
 		});
 	},
@@ -415,7 +462,7 @@ return {
 		};
 		$.ajax({
 			type: "POST",
-			url: "placer_my_fictional_url.html",
+			url: ajax_urls.storage_reset,
 			data: json
 		}).done(function() {
 			location.reload();
@@ -425,8 +472,8 @@ return {
 	/* =============================== */
 	return_json_front:function() {
 		/* which values are superfluous for json output? */
-		var delete_from_regions = ["type","title","rank","author","time","performance","edit_link"];
-		var delete_from_clusters = ["type","title"];
+		var delete_from_regions = ["title","rank","author","time","performance","edit_link"];
+		var delete_from_clusters = ["title"];
 		
 		var json_front={
 			"layout_id" : $(".working_area").attr("data-layout_id"),
@@ -445,6 +492,8 @@ return {
 				region_json["color_combo"]=current_region.find("select[name=color_combo]").val();
 				region_json["font_face"]=current_region.find("select[name=font_face]").val();
 				region_json["font_size"]=current_region.find("select[name=font_size]").val();
+				region_json["lead"]=current_region.find("input[name=lead]:checked").val();
+				region_json["image"]=current_region.find("input[name=image]:checked").val();
 				for (var counter_delete=0; counter_delete<delete_from_regions.length; counter_delete++) {
 					delete region_json[delete_from_regions[counter_delete]];
 				}
@@ -468,7 +517,19 @@ return {
 	/* ================ */
 	storage_golive:function() {
 		var json_front = placer.return_json_front();	
-		alert(JSON.stringify(json_front));	
+		$.ajax({
+			type: "POST",
+			url: ajax_urls.go_live,
+			data: json_front
+		}).done(function() {
+			$("iframe.preview").attr("src", ajax_urls.iframe_preview);
+			$(".system_message span").text(strings.message_live)
+			$(".system_message").removeClass("good bad").addClass("warning").show();
+			clearTimeout(system_message_timeout);
+			system_message_timeout = setTimeout(function(){
+				$(".system_message").hide();
+			},1500)
+		});
 	},
 	/* initialise reset and live! buttons */
 	/* ================================== */
@@ -482,12 +543,12 @@ return {
 		var json_front = placer.return_json_front();
 		$.ajax({
 			type: "POST",
-			url: "placer_my_fictional_url.html",
+			url: ajax_urls.save_front,
 			data: json_front
 		}).done(function() {
-			$("iframe.preview").attr("src", "front_bespielt.html");
-			$(".system_message span").text("Saved successfully.")
-			$(".system_message").addClass("good").show();
+			$("iframe.preview").attr("src", ajax_urls.iframe_preview);
+			$(".system_message span").text(strings.message_save)
+			$(".system_message").removeClass("bad warning").addClass("good").show();
 			clearTimeout(system_message_timeout);
 			system_message_timeout = setTimeout(function(){
 				$(".system_message").hide();
@@ -497,17 +558,23 @@ return {
 	/* load html-snippets from files */
 	/* ============================= */
 	init_snippets:function() {
-		$.each( templates, function( key, value ) {
-			if (templates[key].url!=undefined) {
-				$.ajax({
-				url: templates[key].url,
-				success: function(result) {
-					templates[key]["snippet"]=result;
-				},
-				async: false
-				});
-			}
-		});
+		var snippets = [
+			["url", "snippet"],
+			["url_auto", "snippet_auto"]
+		];
+		for (var counter=0; counter<snippets.length; counter++) {
+			$.each( templates, function( key, value ) {
+				if (templates[key][snippets[counter][0]]!=undefined) {
+					$.ajax({
+					url: templates[key][snippets[counter][0]],
+					success: function(result) {
+						templates[key][snippets[counter][1]]=result;
+					},
+					async: false
+					});
+				}
+			});
+		}
 	},
 	/* fill in working area from json */
 	/* ============================== */
@@ -532,7 +599,8 @@ return {
 			cluster.find("select[name=color_combo]").val(values_cluster.color_combo);
 			
 			$.each( values_cluster.regions, function( key2, values_region ) {
-				cluster.append(templates[values_region.type_id].snippet);
+				if (values_region.id!=undefined) cluster.append(templates[values_region.type_id].snippet);
+				else cluster.append(templates[values_region.type_id].snippet_auto);
 				var new_element = cluster.find(".region:last");
 				placer.fill_in_element(new_element,values_region);
 			});
@@ -543,7 +611,7 @@ return {
 	load_layout:function() {
 		$.ajax({
 			dataType: "json",
-			url: "placer_front_json_input.html",
+			url: ajax_urls.load_front,
 			success: function(result) {
 				placer.fill_working_area(result);
 			},
@@ -555,7 +623,7 @@ return {
 	load_library:function() {
 		$.ajax({
 			dataType: "json",
-			url: "placer_library_json.html",
+			url: ajax_urls.load_library,
 			success: function(result) {
 				$.each( result, function( key, value ) {
 				var current_list=$(".tools ul."+key);
@@ -574,10 +642,22 @@ return {
 	/* === VARIOUS === */
 	/* =============== */
 	
+	init_window_and_iframe_bindings:function() {
+		$(window).scroll(placer.start_positioning);
+		$(window).resize(placer.start_positioning);
+		$('iframe.preview').load(function(){
+			$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "4000px");
+			placer.position_meter();
+			placer.position_iframes(0);
+		});
+	},
 	short_string:function(the_string, the_length) {
 		if (the_string.length>the_length-3) the_string = the_string.substr(0,the_length-3)+"...";
 		return the_string;
 	},
+	
+	/* checks whether the working area is empty. if so: puts an empty cluster into place */
+	/* ================================================================================= */
 	check_for_empty_working_area:function() {
 		var num_clusters = $(".working_area .cluster").length;
 		if (!num_clusters) {
@@ -617,14 +697,8 @@ return {
 	/* initialise placer */
 	/* ================= */
 	init:function() {
-		placer.init_snippets ();
-		$(window).scroll(placer.start_positioning);
-		$(window).resize(placer.start_positioning);
-		$('iframe.preview').load(function(){
-			$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "4000px");
-			placer.position_meter();
-			placer.position_iframes(0);
-		});
+		placer.init_snippets (); /* load all html-snippets from external files into variables */
+		placer.init_window_and_iframe_bindings ();
 		placer.load_library (); /* load json and fill toollibrary to the left */
 		placer.load_layout (); /* load json and fill working area */
 		placer.init_draggable_toolelements ();

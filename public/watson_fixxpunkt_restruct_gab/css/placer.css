@@ -187,6 +187,10 @@
 	margin-top:3.3em;
 }
 
+.working_area .region.options_extended .type {
+	margin-top:1em;
+}
+
 .working_area .region .rank {
 	display:inline-block;
 	font-weight:bold;
@@ -346,12 +350,16 @@
 
 .system_message span {
 	background-color:#000000;
-	padding:5px;
+	padding:0.3em;
 	display:inline-block;
 }
 
 .system_message.good span { background-color: #94e028; }
 .system_message.bad span { background-color: #f40f97; }
+.system_message.warning span {
+	background-color: #edba13;
+	font-size:2em;
+}
 
 /* tool stack */
 /* ========== */
