@@ -68,7 +68,8 @@ var ajax_urls = {
 	"storage_reset": "placer_my_fictional_url.html",
 	"save_front": "placer_my_fictional_url.html",
 	"go_live": "placer_my_fictional_url.html",
-	"iframe_preview": "front_bespielt.html"
+	"iframe_preview": "front_bespielt.html",
+	"tag_search": "placer_tag_search_json.html"
 };
 
 return {
@@ -301,14 +302,16 @@ return {
 		
 		/* tag search */
 		$(".tools input.tagselect").keyup(function(){
-			var value = $(this).val();
-			var id = 12345;
-			/* dynamic tag search here!!!! */
+			placer.display_tag_results($(this));
 			var data = $.parseJSON( $(this).parents("li").attr("data-element") );
-			data["title"] = value;
-			data["tag_id"] = id;
+			data["title"] = $(this).val();
+			data["tag_id"] = $(this).attr("data-tag_id");
 			var new_data = JSON.stringify(data);
 			$(this).parents("li").attr("data-element", new_data);
+		});
+		
+		$(".tools input.tagselect").blur(function(){
+			$("ul.tag_search_results").hide();
 		});
 	},
 	/* looks up search results and displays them in a list */
@@ -333,6 +336,34 @@ return {
 				});
 				placer.init_draggable_toolelements();
 				$(".tools .search ul").show();
+			},
+			async: false
+	    });
+	},
+	/* looks up tag results and displays them in a list */
+	/* ================================================ */
+	display_tag_results:function(form_element) {
+		$.ajax({
+			type: 'POST',
+			dataType: "json",
+			url: ajax_urls.tag_search,
+			data: { "search_term":form_element.val() },
+			success: function(result) {
+				var result_list = $("ul.tag_search_results");
+				result_list.empty();
+				$.each( result.Tags, function( key, value ) {
+					var name = value.Tag.name;
+					var id = value.Tag.id;
+					result_list.append("<li>"+placer.short_string(name,20)+"</li>");
+					result_list.find("li:last").attr("data-id", id);
+				});
+				var new_position = form_element.offset();
+				new_position.top += form_element.outerHeight();
+				result_list.find("li").mousedown(function(){
+					form_element.val($(this).text());
+					form_element.attr("data-tag_id", $(this).attr("data-id"));
+				});
+				result_list.css("top", new_position.top+"px").css("left", new_position.left+"px").show();
 			},
 			async: false
 	    });
@@ -383,9 +414,7 @@ return {
 	init_cluster_options:function() {
 		/* tag search */
 		$(document).on("keyup", ".cluster .cluster_options input.tagselect", function(){
-			var id = 12345;
-			/* dynamic tag search here!!!! */
-			$(this).attr("data-tag_id", id);
+			placer.display_tag_results($(this));
 		});
 		
 		$(document).on("focus", ".cluster .cluster_options input.tagselect", function(){
@@ -399,6 +428,7 @@ return {
 			var value_default = $(this).attr("data-default");
 			if (value=="") $(this).val(value_default).attr("data-tag_id", -1);
 			placer.save_and_update_preview();
+			$("ul.tag_search_results").hide();
 		});
 		
 		$(document).on("change", ".cluster .cluster_options select[name=color_combo]", function(){
