@@ -1547,8 +1547,8 @@
 
   Template = (function() {
     function Template(_arg) {
-      var html, identifier, title, version, _ref, _ref1;
-      _ref = _arg != null ? _arg : {}, html = _ref.html, this.namespace = _ref.namespace, this.id = _ref.id, identifier = _ref.identifier, title = _ref.title, version = _ref.version;
+      var html, identifier, styles, title, version, weight, _ref, _ref1;
+      _ref = _arg != null ? _arg : {}, html = _ref.html, this.namespace = _ref.namespace, this.id = _ref.id, identifier = _ref.identifier, title = _ref.title, styles = _ref.styles, weight = _ref.weight, version = _ref.version;
       if (!html) {
         log.error('Template: param html missing');
       }
@@ -1560,6 +1560,8 @@
       this.$template = $(this.pruneHtml(html)).wrap('<div>');
       this.$wrap = this.$template.parent();
       this.title = title || words.humanize(this.id);
+      this.styles = styles || [];
+      this.weight = weight;
       this.editables = void 0;
       this.editableCount = 0;
       this.containers = void 0;
@@ -1707,19 +1709,23 @@
       this.css = config.css;
       this.js = config.js;
       this.fonts = config.fonts;
-      this.templates = {};
+      this.templates = [];
       this.groups = {};
       this.addTemplates(templates);
       this.addGroups(groups);
     }
 
     Design.prototype.add = function(template) {
-      return this.templates[template.id] = new Template({
+      var object;
+      object = new Template({
         namespace: this.namespace,
         id: template.id,
         title: template.title,
-        html: template.html
+        styles: template.styles,
+        html: template.html,
+        weight: this.templates.length + 1
       });
+      return this.templates.push(object);
     };
 
     Design.prototype.addTemplates = function(templates) {
@@ -1733,15 +1739,15 @@
     };
 
     Design.prototype.addGroups = function(collection) {
-      var group, index, template, templates, _ref, _results;
+      var group, template, templates, _i, _len, _ref, _results;
       _results = [];
       for (key in collection) {
         group = collection[key];
         templates = {};
         _ref = group.templates;
-        for (index in _ref) {
-          template = _ref[index];
-          templates[template] = this.templates[template];
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          template = _ref[_i];
+          templates[template] = this.get(template);
         }
         _results.push(this.groups[key] = new Object({
           title: group.title,
@@ -1754,14 +1760,35 @@
     Design.prototype.remove = function(identifier) {
       var _this = this;
       return this.checkNamespace(identifier, function(id) {
-        return delete _this.templates[id];
+        return _this.templates.splice(_this.getIndex(id), 1);
       });
     };
 
     Design.prototype.get = function(identifier) {
       var _this = this;
       return this.checkNamespace(identifier, function(id) {
-        return _this.templates[id];
+        var template;
+        template = void 0;
+        _this.each(function(t, index) {
+          if (t.id === id) {
+            return template = t;
+          }
+        });
+        return template;
+      });
+    };
+
+    Design.prototype.getIndex = function(identifier) {
+      var _this = this;
+      return this.checkNamespace(identifier, function(id) {
+        var index;
+        index = void 0;
+        _this.each(function(t, i) {
+          if (t.id === id) {
+            return index = i;
+          }
+        });
+        return index;
       });
     };
 
@@ -1776,12 +1803,12 @@
     };
 
     Design.prototype.each = function(callback) {
-      var id, template, _ref, _results;
+      var index, template, _i, _len, _ref, _results;
       _ref = this.templates;
       _results = [];
-      for (id in _ref) {
-        template = _ref[id];
-        _results.push(callback(template));
+      for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
+        template = _ref[index];
+        _results.push(callback(template, index));
       }
       return _results;
     };
@@ -2590,71 +2617,71 @@
           design: design
         });
         return doc.ready(function() {
-          var domElementToSnippetName, parseContainers, parseSnippets, setEditables;
-          domElementToSnippetName = function(element) {
-            if (element.tagName) {
-              return $.camelCase(element.tagName.toLowerCase());
-            } else {
-              return null;
-            }
-          };
-          parseContainers = function(parent, data) {
-            var child, children, containers, element, elements, _i, _j, _len, _len1, _results;
-            containers = parent.containers ? Object.keys(parent.containers) : [];
-            if (containers.length === 1 && containers.indexOf('default') !== -1 && !$(data).children('default').length) {
-              children = $(data).children();
-              for (_i = 0, _len = children.length; _i < _len; _i++) {
-                child = children[_i];
-                parseSnippets(parent, 'default', child);
-              }
-            }
-            elements = $(containers.join(','), data);
-            _results = [];
-            for (_j = 0, _len1 = elements.length; _j < _len1; _j++) {
-              element = elements[_j];
-              children = $(element).children();
-              _results.push((function() {
-                var _k, _len2, _results1;
-                _results1 = [];
-                for (_k = 0, _len2 = children.length; _k < _len2; _k++) {
-                  child = children[_k];
-                  _results1.push(parseSnippets(parent, domElementToSnippetName(element), child));
-                }
-                return _results1;
-              })());
-            }
-            return _results;
-          };
-          parseSnippets = function(parentContainer, region, data) {
-            var snippet;
-            snippet = doc.create(domElementToSnippetName(data));
-            parentContainer.append(region, snippet);
-            parseContainers(snippet, data);
-            return setEditables(snippet, data);
-          };
-          setEditables = function(snippet, data) {
-            var child, _results;
-            if (snippet.hasEditables()) {
-              _results = [];
-              for (key in snippet.editables) {
-                snippet.set(key, null);
-                child = $(key + ':first', data).get()[0];
-                if (!child) {
-                  _results.push(snippet.set(key, data.innerHTML));
-                } else {
-                  _results.push(snippet.set(key, child.innerHTML));
-                }
-              }
-              return _results;
-            }
-          };
           return domElements.each(function(index, element) {
             var row;
-            row = doc.add(domElementToSnippetName(element));
-            parseContainers(row, element);
-            return setEditables(row, element);
+            row = doc.add(_this.nodeToSnippetName(element));
+            return _this.setChildren(row, element);
           });
         });
+      },
+      parseContainers: function(snippet, data) {
+        var child, children, containers, element, elements, _i, _j, _len, _len1, _results;
+        containers = snippet.containers ? Object.keys(snippet.containers) : [];
+        if (containers.length === 1 && containers.indexOf('default') !== -1 && !$(data).children('default').length) {
+          children = $(data).children();
+          for (_i = 0, _len = children.length; _i < _len; _i++) {
+            child = children[_i];
+            this.parseSnippets(snippet, 'default', child);
+          }
+        }
+        elements = $(containers.join(','), data);
+        _results = [];
+        for (_j = 0, _len1 = elements.length; _j < _len1; _j++) {
+          element = elements[_j];
+          children = $(element).children();
+          _results.push((function() {
+            var _k, _len2, _results1;
+            _results1 = [];
+            for (_k = 0, _len2 = children.length; _k < _len2; _k++) {
+              child = children[_k];
+              _results1.push(this.parseSnippets(snippet, this.nodeToSnippetName(element), child));
+            }
+            return _results1;
+          }).call(this));
+        }
+        return _results;
+      },
+      parseSnippets: function(parentContainer, region, data) {
+        var snippet, snippetName;
+        snippetName = this.nodeToSnippetName(data);
+        if (doc.document.design.get(snippetName)) {
+          snippet = doc.create(snippetName);
+          parentContainer.append(region, snippet);
+        } else {
+          log.error('The Template named "' + snippetName + '" does not exist.');
+        }
+        return this.setChildren(snippet, data);
+      },
+      setChildren: function(snippet, data) {
+        this.parseContainers(snippet, data);
+        return this.setEditables(snippet, data);
+      },
+      setEditables: function(snippet, data) {
+        var child, _results;
+        _results = [];
+        for (key in snippet.editables) {
+          snippet.set(key, void 0);
+          child = $(key + ':first', data).get()[0];
+          if (!child) {
+            _results.push(snippet.set(key, data.innerHTML));
+          } else {
+            _results.push(snippet.set(key, child.innerHTML));
+          }
+        }
+        return _results;
+      },
+      nodeToSnippetName: function(element) {
+        return $.camelCase(element.localName);
       }
     };
   })();

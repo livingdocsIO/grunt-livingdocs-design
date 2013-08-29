@@ -1515,7 +1515,7 @@ class SnippetTemplateList
 class Template
 
 
-  constructor: ({ html, @namespace, @id, identifier, title, version } = {}) ->
+  constructor: ({ html, @namespace, @id, identifier, title, styles, weight, version } = {}) ->
     if not html
       log.error('Template: param html missing')
 
@@ -1530,6 +1530,8 @@ class Template
     @$template = $( @pruneHtml(html) ).wrap('<div>')
     @$wrap = @$template.parent()
     @title = title || words.humanize( @id )
+    @styles = styles || []
+    @weight = weight
 
     @editables = undefined
     @editableCount = 0
@@ -1666,7 +1668,7 @@ class Design
     @css = config.css
     @js = config.js #todo
     @fonts = config.fonts #todo
-    @templates = {}
+    @templates = []
     @groups = {}
 
     @addTemplates(templates)
@@ -1676,11 +1678,15 @@ class Design
   # pass the template as object
   # e.g add({id: "title", name:"Title", html: "<h1 doc-editable>Title</h1>"})
   add: (template) ->
-    @templates[template.id] = new Template
-      namespace: @namespace
-      id: template.id
-      title: template.title
-      html: template.html
+    object = new Template
+        namespace: @namespace
+        id: template.id
+        title: template.title
+        styles: template.styles
+        html: template.html
+        weight: @templates.length + 1
+
+    @templates.push(object)
 
 
   addTemplates: (templates) ->
@@ -1691,8 +1697,8 @@ class Design
   addGroups: (collection) ->
     for key, group of collection
       templates = {}
-      for index, template of group.templates
-        templates[template] = @templates[template]
+      for template in group.templates
+        templates[template] = @get(template)
 
       @groups[key] = new Object
         title: group.title
@@ -1701,12 +1707,27 @@ class Design
 
   remove: (identifier) ->
     @checkNamespace identifier, (id) =>
-      delete @templates[id]
+      @templates.splice(@getIndex(id), 1)
 
 
   get: (identifier) ->
     @checkNamespace identifier, (id) =>
-      @templates[id]
+      template = undefined
+      @each (t, index) ->
+        if t.id == id
+          template = t
+
+      template
+
+
+  getIndex: (identifier) ->
+    @checkNamespace identifier, (id) =>
+      index = undefined
+      @each (t, i) ->
+        if t.id == id
+          index = i
+
+      index
 
 
   checkNamespace: (identifier, callback) ->
@@ -1719,8 +1740,8 @@ class Design
 
 
   each: (callback) ->
-    for id, template of @templates
-      callback(template)
+    for template, index in @templates
+      callback(template, index)
 
 
   # list available Templates
@@ -2319,7 +2340,6 @@ DragDrop.placeholder = (drag) ->
 class EditableController
 
   constructor: (@page) ->
-
     # configure editableJS
     Editable.init
       log: false
@@ -2395,7 +2415,6 @@ class EditableController
   selectionChanged: (element, selection) ->
     snippetView = dom.findSnippetView(element)
     @selection.fire(snippetView, element, selection)
-
 
 # Document Focus
 # --------------
@@ -2512,59 +2531,59 @@ class InterfaceInjector
     $elem.addClass(docClass.interface)
 
 kickstart = do ->
+
   init: (destination, design) ->
     domElements = $(destination).children().not('script')
     $(destination).html('<div class="doc-section"></div>')
     doc.init(design: design)
     doc.ready =>
-
-      # Convert a dom element into a camelCase snippetName
-      domElementToSnippetName = (element) =>
-        if element.tagName
-          $.camelCase(element.tagName.toLowerCase())
-        else
-          null
-
-
-      parseContainers = (parent, data) =>
-        containers = if parent.containers then Object.keys(parent.containers) else []
-        if containers.length == 1 && containers.indexOf('default') != -1 && !$(data).children('default').length
-          children = $(data).children()
-          for child in children
-            parseSnippets(parent, 'default', child)
-
-        elements = $(containers.join(','), data)
-        for element in elements
-          children = $(element).children()
-          for child in children
-            parseSnippets(parent, domElementToSnippetName(element), child)
-
-
-      parseSnippets = (parentContainer, region, data) =>
-        snippet = doc.create(domElementToSnippetName(data))
-        parentContainer.append(region, snippet)
-        parseContainers(snippet, data)
-        setEditables(snippet, data)
-
-
-      setEditables = (snippet, data) =>
-        if snippet.hasEditables()
-          for key of snippet.editables
-            snippet.set(key, null)
-            child = $(key + ':first', data).get()[0]
-            if !child
-              snippet.set(key, data.innerHTML)
-            else
-              snippet.set(key, child.innerHTML)
-
-
       #add all rootSnippets, process their containers and set values
       domElements.each (index, element) =>
-        row = doc.add(domElementToSnippetName(element))
-        parseContainers(row, element)
-        setEditables(row, element)
+        row = doc.add(@nodeToSnippetName(element))
+        @setChildren(row, element)
+
+  parseContainers: (snippet, data) ->
+    containers = if snippet.containers then Object.keys(snippet.containers) else []
+    if containers.length == 1 && containers.indexOf('default') != -1 && !$(data).children('default').length
+      children = $(data).children()
+      for child in children
+        @parseSnippets(snippet, 'default', child)
+
+    elements = $(containers.join(','), data)
+    for element in elements
+      children = $(element).children()
+      for child in children
+        @parseSnippets(snippet, @nodeToSnippetName(element), child)
 
 
+  parseSnippets: (parentContainer, region, data) ->
+    snippetName = @nodeToSnippetName(data)
+    if doc.document.design.get(snippetName)
+      snippet = doc.create(snippetName)
+      parentContainer.append(region, snippet)
+    else
+      log.error('The Template named "' + snippetName + '" does not exist.')
+    @setChildren(snippet, data)
+
+
+  setChildren: (snippet, data) ->
+    @parseContainers(snippet, data)
+    @setEditables(snippet, data)
+
+
+  setEditables: (snippet, data) ->
+    for key of snippet.editables
+      snippet.set(key, undefined)
+      child = $(key + ':first', data).get()[0]
+      if !child
+        snippet.set(key, data.innerHTML)
+      else
+        snippet.set(key, child.innerHTML)
+
+
+  # Convert a dom element into a camelCase snippetName
+  nodeToSnippetName: (element) ->
+    $.camelCase(element.localName)
 
 # Script Loader
 # -------------
