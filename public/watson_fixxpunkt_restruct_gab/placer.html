@@ -46,14 +46,16 @@
 	</div>
 	
 	<div class="tools">
-		
+
 		<div class="search">
 			<input type="text" class="field" data-default="Elemente suchen" value="Elemente suchen" />
 			<select>
-				<option>Filter</option>
-				<option>Storys</option>
-				<option>Polls</option>
-				<option>Flipper</option>
+				<option value="-1">Filter wählen</option>
+				<option value="1">Story</option>
+				<option value="2">Poll</option>
+				<option value="3">Gallery</option>
+				<option value="4">HTML</option>
+				<option value="5">Flipper</option>
 			</select>
 			<ul></ul>
 		</div>
@@ -75,13 +77,13 @@
 				Tag Teaser<br/>
 				<input class="field tagselect" data-default="Tag eingeben" value="Tag eingeben" />
 			</li>
-			<li class="element" data-element='{"type_id":7,"type":"Autostory","title":"Kein Tag zugeordnet","tag_id":"-2"}'>
+			<li class="element" data-element='{"type_id":7,"type":"Autostory","title":"Wird aus Cluster Tag gefüllt"}'>
 				Autostory
 			</li>
-			<li class="element" data-element='{"type_id":8,"type":"Autopoll","title":"Kein Tag zugeordnet","tag_id":"-2"}'>
+			<li class="element" data-element='{"type_id":8,"type":"Autopoll","title":"Wird aus Cluster Tag gefüllt"}'>
 				Autopoll
 			</li>
-			<li class="element" data-element='{"type_id":9,"type":"Autogallery","title":"Kein Tag zugeordnet","tag_id":"-2"}'>
+			<li class="element" data-element='{"type_id":9,"type":"Autogallery","title":"Wird aus Cluster Tag gefüllt"}'>
 				Autogallery
 			</li>
 		</ul>

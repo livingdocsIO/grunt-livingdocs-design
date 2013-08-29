@@ -78,15 +78,16 @@
 .working_area .cluster:nth-child(3n+2) .handle { background-color:#94e028; }
 .working_area .cluster:nth-child(3n+3) .handle { background-color:#f40f97; }
 
-.working_area .cluster .masks {
+.working_area .cluster .cluster_options {
 	width:120px;
 	position:absolute;
 	right:-138px;
+	font-size:1.4em;
 }
 
-.working_area .cluster .masks .mask {
-	height:40px;
-	width:100px;
+.working_area .cluster .cluster_options .masks .mask {
+	height:30px;
+	width:75px;
 	background-color:#dddddd;
 	border-bottom:4px solid #ffffff;
 	background-size:100%;
@@ -97,32 +98,40 @@
 	transition: all 0.5s ease;
 }
 
-.working_area .cluster .masks .mask:hover { background-color:#222222; }
+.working_area .cluster .cluster_options .masks .mask:hover { background-color:#222222; }
 
-.working_area .cluster .masks .mask_1_1 { background-image:url("../media/img/main/clusters/mask_1_1.png"); }
-.working_area .cluster .masks .mask_2_1 { background-image:url("../media/img/main/clusters/mask_2_1.png"); }
-.working_area .cluster .masks .mask_2_2 { background-image:url("../media/img/main/clusters/mask_2_2.png"); }
-.working_area .cluster .masks .mask_2_3 { background-image:url("../media/img/main/clusters/mask_2_3.png"); }
-.working_area .cluster .masks .mask_3_1 { background-image:url("../media/img/main/clusters/mask_3_1.png"); }
-.working_area .cluster .masks .mask_3_2 { background-image:url("../media/img/main/clusters/mask_3_2.png"); }
-.working_area .cluster .masks .mask_3_3 { background-image:url("../media/img/main/clusters/mask_3_3.png"); }
-.working_area .cluster .masks .mask_3_4 { background-image:url("../media/img/main/clusters/mask_3_4.png"); }
-.working_area .cluster .masks .mask_4_1 { background-image:url("../media/img/main/clusters/mask_4_1.png"); }
-.working_area .cluster .masks .mask_4_2 { background-image:url("../media/img/main/clusters/mask_4_2.png"); }
-.working_area .cluster .masks .mask_4_3 { background-image:url("../media/img/main/clusters/mask_4_3.png"); }
-.working_area .cluster .masks .mask_5_1 { background-image:url("../media/img/main/clusters/mask_5_1.png"); }
-.working_area .cluster .masks .mask_5_2 { background-image:url("../media/img/main/clusters/mask_5_2.png"); }
-.working_area .cluster .masks .mask_5_3 { background-image:url("../media/img/main/clusters/mask_5_3.png"); }
-.working_area .cluster .masks .mask_6_1 { background-image:url("../media/img/main/clusters/mask_6_1.png"); }
+.working_area .cluster .cluster_options .masks .mask_1_1 { background-image:url("../media/img/main/clusters/mask_1_1.png"); }
+.working_area .cluster .cluster_options .masks .mask_2_1 { background-image:url("../media/img/main/clusters/mask_2_1.png"); }
+.working_area .cluster .cluster_options .masks .mask_2_2 { background-image:url("../media/img/main/clusters/mask_2_2.png"); }
+.working_area .cluster .cluster_options .masks .mask_2_3 { background-image:url("../media/img/main/clusters/mask_2_3.png"); }
+.working_area .cluster .cluster_options .masks .mask_3_1 { background-image:url("../media/img/main/clusters/mask_3_1.png"); }
+.working_area .cluster .cluster_options .masks .mask_3_2 { background-image:url("../media/img/main/clusters/mask_3_2.png"); }
+.working_area .cluster .cluster_options .masks .mask_3_3 { background-image:url("../media/img/main/clusters/mask_3_3.png"); }
+.working_area .cluster .cluster_options .masks .mask_3_4 { background-image:url("../media/img/main/clusters/mask_3_4.png"); }
+.working_area .cluster .cluster_options .masks .mask_4_1 { background-image:url("../media/img/main/clusters/mask_4_1.png"); }
+.working_area .cluster .cluster_options .masks .mask_4_2 { background-image:url("../media/img/main/clusters/mask_4_2.png"); }
+.working_area .cluster .cluster_options .masks .mask_4_3 { background-image:url("../media/img/main/clusters/mask_4_3.png"); }
+.working_area .cluster .cluster_options .masks .mask_5_1 { background-image:url("../media/img/main/clusters/mask_5_1.png"); }
+.working_area .cluster .cluster_options .masks .mask_5_2 { background-image:url("../media/img/main/clusters/mask_5_2.png"); }
+.working_area .cluster .cluster_options .masks .mask_5_3 { background-image:url("../media/img/main/clusters/mask_5_3.png"); }
+.working_area .cluster .cluster_options .masks .mask_6_1 { background-image:url("../media/img/main/clusters/mask_6_1.png"); }
 
-.working_area .cluster .masks .mask.highlight {
+.working_area .cluster .cluster_options .masks .mask.highlight {
 	background-color:#0fb4f4;
-	width:120px;
-	height:47px;
+	width:100px;
+	height:40px;
 }
 
-.working_area .cluster:nth-child(3n+2) .masks .mask.highlight { background-color:#94e028; }
-.working_area .cluster:nth-child(3n+3) .masks .mask.highlight { background-color:#f40f97; }
+.working_area .cluster:nth-child(3n+2) .cluster_options .masks .mask.highlight { background-color:#94e028; }
+.working_area .cluster:nth-child(3n+3) .cluster_options .masks .mask.highlight { background-color:#f40f97; }
+
+.working_area .cluster .cluster_options select {
+	width:140px;
+}
+
+.working_area .cluster .cluster_options select option.combo_bd {
+	border-left:20px solid;
+}
 
 .working_area .cluster .cluster_delete {
 	width:20px;
