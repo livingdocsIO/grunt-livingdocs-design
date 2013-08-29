@@ -125,7 +125,7 @@ minifyHtml = (html, options, info) ->
 
 
 # process the config and templates, create design object
-compileDesign = (dest, files, options) ->
+compileDesign = (files, options) ->
   requireResources(options)
 
   # create design object for templates, groups and configuration
@@ -134,7 +134,7 @@ compileDesign = (dest, files, options) ->
   # warn if a design contains no templates
   unless files.length
     grunt.fail.warn('The design "' + options.design + '" has no templates')
-    writeDesign(design, dest)
+    design.save()
 
   # iterate through file array and process the templates, store them in templates.js file
   files.forEach (template) ->
@@ -148,10 +148,6 @@ compileDesign = (dest, files, options) ->
       groupId = templatePath[0]
 
     design.addToGroup(templateName, groupId)
-
-    # store template config in design
-    #if(design.templates[templateName])
-    #  grunt.fail.warn('The template "' + templateName + '" is not unique.')
 
     # load file in jQuery object to read json & html
     data = grunt.file.read(template, encoding: 'utf8')
@@ -210,4 +206,4 @@ module.exports = (grunt) ->
     files.forEach (file, i) ->
       templates[i] = file.src[0]
     
-    compileDesign(dest, templates, options)
+    compileDesign(templates, options)
