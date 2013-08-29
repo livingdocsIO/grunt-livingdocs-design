@@ -21,6 +21,52 @@
 path = require("path")
 cheerio = require("cheerio")
 htmlmin = require("html-minifier")
+grunt = require("grunt")
+
+
+class Design
+  constructor: (design, options) ->
+    @config = grunt.file.readJSON(path.join(design, 'config.json'), encoding: 'utf8')
+    @config.groups = {}
+    @templates = []
+    @options = options
+
+    unless @config.namespace
+      grunt.fail.fatal('The design "' + design + '" contains a config file which has no namespace.')
+
+
+  addGroup: (group) ->
+    unless @config.groups[group]
+      groupConfigFile = path.join(@options.src, @options.templatesDirectory, group, 'config.json')
+      if grunt.file.exists(groupConfigFile)
+        @config.groups[group] = grunt.file.readJSON(groupConfigFile, { encoding: 'utf8' })
+
+      else
+        @config.groups[group] = {title: group}
+
+      @config.groups[group]['templates'] = []
+
+
+  addToGroup: (template, group) ->
+    @addGroup(group)
+    @config.groups[group]['templates'].push(template)
+
+
+  addTemplate: (template) ->
+    @templates.push(template)
+
+
+  # write the config and templates to disk
+  save: ->
+    templateBegin = '(function() { this.design || (this.design = {}); design.' + @config.namespace + ' = (function() { return '
+    templateEnd = ';})();}).call(this);'
+    design =
+      config: @config
+      templates: @templates
+    fileData = templateBegin + JSON.stringify(design, null, 2) + templateEnd
+    grunt.file.write @options.dest + '/design.js', fileData, encoding: 'utf8'
+    grunt.log.writeln('Design "%s" compiled.', @options.dest)
+
 
 
 String::toCamelCase = ->
@@ -29,152 +75,102 @@ String::toCamelCase = ->
     p1.toLowerCase()
 
 
+requireResources = (options) ->
+  # Check existence of all directories and files that are required
+  requiredResources = [
+    name: ''
+    type: 'design'
+  ,
+    name: options.templatesDirectory
+    type: 'directory'
+  ,
+    name: 'config.json'
+    type: 'file'
+  ]
+
+  requiredResources.forEach (resource) ->
+    unless grunt.file.exists(options.src, resource.name)
+      grunt.fail.warn('The ' + resource.type + ' "' + path.join(options.src, resource.name) + '" does not exist.')
+
+
+filenameToTemplatename = (string) ->
+  strings = string.replace('.html', '').toCamelCase().split('/')
+  strings[strings.length - 1]
+
+
+splitPath = (string, design, templatesDirectory) ->
+  parts = string.replace(design + '/' + templatesDirectory + '/', '').split('/')
+  output = []
+  output.push parts[0]
+
+  if parts.length > 2
+    grunt.log.warn('Design "' + design + '", Template "' + filenameToTemplatename(string) + '": Templates can only be only be nested in one directory.')
+
+  else if parts.length > 1
+    output.push parts[parts.length - 1]
+
+  output
+
+
+minifyHtml = (html, options, info) ->
+  if options.minify
+    try
+      htmlmin.minify html, options.minifyOptions
+    catch err
+      grunt.log.writeln('\n>> Design "%s", template "%s": HTML minify error\n %s\n'.yellow, info.design, info.template, err)
+      return '<div class="error minify" style="color: red">Error while minifying: Design "' + info.design + '", Template "' + info.template + '"</div>'
+      
+  else
+    html
+
+
+# process the config and templates, create design object
+compileDesign = (dest, files, options) ->
+  requireResources(options)
+
+  # create design object for templates, groups and configuration
+  design = new Design(options.src, options)
+
+  # warn if a design contains no templates
+  unless files.length
+    grunt.fail.warn('The design "' + options.design + '" has no templates')
+    writeDesign(design, dest)
+
+  # iterate through file array and process the templates, store them in templates.js file
+  files.forEach (template) ->
+
+    #template is designs/watson/templates/insert_side.html
+    templatePath = splitPath(template, options.src, options.templatesDirectory)
+    templateName = filenameToTemplatename(template)
+
+    groupId = 'others'
+    if templatePath.length > 1
+      groupId = templatePath[0]
+
+    design.addToGroup(templateName, groupId)
+
+    # store template config in design
+    #if(design.templates[templateName])
+    #  grunt.fail.warn('The template "' + templateName + '" is not unique.')
+
+    # load file in jQuery object to read json & html
+    data = grunt.file.read(template, encoding: 'utf8')
+    $ = cheerio.load(data)
+    config = $(options.configurationElement).html()
+    $(options.configurationElement).remove()
+
+    # create template object using config
+    templateObject = JSON.parse(config) || {}
+    templateObject.id = templateName
+    templateObject.html = minifyHtml($.html(), options, { design: design.config.namespace, template: templateName })
+
+    design.addTemplate(templateObject)
+
+  design.save()
+
+
+
 module.exports = (grunt) ->
-
-  
-  # does jsdoc work in coffeescript?
-  # @param {string} html
-  # @param {boolean} minify
-  # @param {object} info
-  processHtml = (html, options, info) ->
-    if options.minify
-      try
-        htmlmin.minify html, options.minifyOptions
-      catch err
-        grunt.log.writeln('\n>> Design "%s", template "%s": HTML minify error\n %s\n'.yellow, info.design, info.template, err)
-        return '<div class="error minify" style="color: red">Error while minifying: Design "' + info.design + '", Template "' + info.template + '"</div>'
-        
-    else
-      html
-      
-      
-  # write the config and templates to disk
-  writeDesignConfig = (design, destination) ->
-    templateBegin = '(function() { this.design || (this.design = {}); design.' + design.config.namespace + ' = (function() { return '
-    templateEnd = ';})();}).call(this);'
-    fileData = templateBegin + JSON.stringify(design, null, 2) + templateEnd
-    grunt.file.write destination + '/design.js', fileData,
-      encoding: 'utf8'
-
-    grunt.log.writeln('Design "%s" compiled.', destination)
-  
-  
-  # process the config and templates, create design object
-  compileDesign = (src, dest, files, options) ->
-    designFolder = options.design
-  
-    #
-    # Check existence of all directories and files that are required
-    #
-    requiredResources = [
-      name: ''
-      type: 'design'
-    ,
-      name: options.templatesDirectory
-      type: 'directory'
-    ,
-      name: 'config.json'
-      type: 'file'
-    ]
-    
-    requiredResources.forEach (resource) ->
-      unless grunt.file.exists(src, resource.name)
-        grunt.fail.warn('The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.')
-
-
-    #
-    # create design object for templates, groups and configuration
-    #
-    design =
-      templates: []
-      config: grunt.file.readJSON(path.join(src, 'config.json'),
-        encoding: 'utf8'
-      )
-
-    design.config.groups = {}
-
-    # a design config file must contain a namespace, cancel grunt task
-    unless design.config.namespace
-      grunt.fail.fatal('The design ' + designFolder + ' contains a config file which has no namespace.')
-    
-
-    # warn if a design contains no templates
-    unless files.length
-      grunt.fail.warn('The design "' + designFolder + '" has no templates')
-      writeDesignConfig(design, dest)
-    
-
-    #
-    # iterate through file array and process the templates, store them in templates.js file
-    #
-    compiledTemplates = 0
-    files.forEach (template) ->
-
-      templatePath = template.replace(src + '/' + options.templatesDirectory + '/', '').split('/')
-      templateName = templatePath[templatePath.length - 1].replace('.html', '')
-      templateName = templateName.toCamelCase()
-
-      if(templatePath.length > 2)
-        grunt.fail.warn('Design "' + designFolder + '", Template "' + templatePath.join('/') + '": Templates can only be only be nested in one directory.')
-
-
-
-      addTemplateToGroup = (group, template) ->
-        groupConfigFile = path.join(src, options.templatesDirectory, group, 'config.json')
-
-        # create group if it doesn't exist
-        unless design.config.groups[group]
-          if grunt.file.exists(groupConfigFile)
-            design.config.groups[group] = grunt.file.readJSON(groupConfigFile, { encoding: 'utf8' })
-          else
-            design.config.groups[group] = {title: group}
-        
-        # add template to group if templates array already exists 
-        if design.config.groups[group]['templates']
-          design.config.groups[group]['templates'][design.config.groups[group]['templates'].length] = templateName
-
-        # create template array if it doesn't exist 
-        else
-          design.config.groups[group]['templates'] = [templateName]
-
-
-
-
-      if templatePath.length > 1
-        addTemplateToGroup(templatePath[0], templatePath[templatePath.length - 1])
-      
-      else
-        addTemplateToGroup('others', templatePath[0])
-     
-
-
-      # store template config in design
-      if(design.templates[templateName])
-        grunt.fail.warn('The template "' + templateName + '" is not unique.')
-
-
-      data = grunt.file.read(template, encoding: 'utf8')
-
-      # load file in jQuery object to read json & html
-      $ = cheerio.load(data)
-      
-      # create template object using config
-      newTemplate = JSON.parse($(options.configurationElement).html()) || {}
-      
-      # push template html into template object, remove config and minify the html
-      $(options.configurationElement).remove()
-      newTemplate.id = templateName
-      newTemplate.html = processHtml($.html(), options, { design: design.config.namespace, template: templateName })
-      design.templates.push(newTemplate)
-
-      # Check if everything is compiled, close the templates file and save it;
-      compiledTemplates += 1
-      if files.length == compiledTemplates
-
-        # write design to file
-        writeDesignConfig(design, dest)
-
-
   # grunt task to compile all templates
   grunt.registerMultiTask 'lddesigns', 'Compile templates to livingdocs-engine template', ->
     options = @options()
@@ -201,7 +197,6 @@ module.exports = (grunt) ->
 
       #run task
       grunt.task.run('lddesign:design_' + design)
-      
 
 
   # grunt task to compile specific design. executable only through console?
@@ -215,4 +210,4 @@ module.exports = (grunt) ->
     files.forEach (file, i) ->
       templates[i] = file.src[0]
     
-    compileDesign(src, dest, templates, options)
+    compileDesign(dest, templates, options)
