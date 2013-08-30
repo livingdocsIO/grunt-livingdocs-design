@@ -252,6 +252,7 @@ return {
 		
 		$( ".region" ).droppable({ drop: placer.drop_on_region });
 		$( ".cluster" ).droppable({ drop: placer.drop_on_cluster });
+		
 	},
 	/* initialise options-events in regions */
 	/* ==================================== */
