@@ -283,9 +283,14 @@ return {
 		/* reset all pulldowns (necessary, when reloading the page) */
 		$( ".tools select").find("option:first").attr('selected',true);
 	},
+	
+	/* ====================== */
+	/* === ELEMENT SEARCH === */
+	/* ====================== */
+	
 	/* search fields in toolstack */
 	/* ========================== */
-	init_search_fields:function() {
+	init_element_search:function() {
 		$(".tools input").focus(function(){
 			var value = $(this).val();
 			var value_default = $(this).attr("data-default");
@@ -302,17 +307,6 @@ return {
 		/* element search*/
 		$(".tools .search input").keyup(function(){
 			placer.display_search_results();
-		});
-		
-		/* tag search */
-		$(".tools input.tagselect").keyup(function(){
-			placer.display_tag_results($(this));
-			placer.convert_tag_results_to_data_entry($(this));
-		});
-		
-		$(".tools input.tagselect").blur(function(){
-			placer.convert_tag_results_to_data_entry($(this));
-			$("ul.tag_search_results").hide();
 		});
 	},
 	/* looks up search results and displays them in a list */
@@ -341,6 +335,45 @@ return {
 			async: false
 	    });
 	},
+	
+	/* ================== */
+	/* === TAG SEARCH === */
+	/* ================== */
+	
+	/* initializes tag search */
+	/* ====================== */
+	init_tag_search:function() {
+		/* tag search in tool stack*/
+		$(".tools input.tagselect").keyup(function(){
+			placer.display_tag_results($(this));
+			placer.convert_tag_results_to_data_entry($(this));
+		});
+		
+		$(".tools input.tagselect").blur(function(){
+			placer.convert_tag_results_to_data_entry($(this));
+			$("ul.tag_search_results").hide();
+		});
+		
+		/* tag search in cluster*/
+		$(document).on("keyup", ".cluster .cluster_options input.tagselect", function(){
+			placer.display_tag_results($(this));
+		});
+		
+		$(document).on("focus", ".cluster .cluster_options input.tagselect", function(){
+			var value = $(this).val();
+			var value_default = $(this).attr("data-default");
+			if ( value == value_default ) $(this).val("");
+		});
+		
+		$(document).on("blur", ".cluster .cluster_options input.tagselect", function(){
+			var value = $(this).val();
+			var value_default = $(this).attr("data-default");
+			if (value=="") $(this).val(value_default).attr("data-tag_id", -1);
+			placer.save_and_update_preview();
+			$("ul.tag_search_results").hide();
+		});
+	},
+	
 	/* creates a json for the tag searches parent-li with all values */
 	/* ============================================================= */
 	convert_tag_results_to_data_entry:function(form_element) {
@@ -422,25 +455,6 @@ return {
 	/* initialise further cluster-options */
 	/* ================================== */
 	init_cluster_options:function() {
-		/* tag search */
-		$(document).on("keyup", ".cluster .cluster_options input.tagselect", function(){
-			placer.display_tag_results($(this));
-		});
-		
-		$(document).on("focus", ".cluster .cluster_options input.tagselect", function(){
-			var value = $(this).val();
-			var value_default = $(this).attr("data-default");
-			if ( value == value_default ) $(this).val("");
-		});
-		
-		$(document).on("blur", ".cluster .cluster_options input.tagselect", function(){
-			var value = $(this).val();
-			var value_default = $(this).attr("data-default");
-			if (value=="") $(this).val(value_default).attr("data-tag_id", -1);
-			placer.save_and_update_preview();
-			$("ul.tag_search_results").hide();
-		});
-		
 		$(document).on("change", ".cluster .cluster_options select[name=color_combo]", function(){
 			placer.save_and_update_preview();
 		});
@@ -668,33 +682,9 @@ return {
 	    });
 	},
 	
-	/* =============== */
-	/* === VARIOUS === */
-	/* =============== */
-	show_system_message:function(text, type, time) {
-		$(".system_message span").text(text);
-		$(".system_message").removeClass("bad warning good").addClass(type).show();
-		clearTimeout(system_message_timeout);
-		system_message_timeout = setTimeout(function(){
-			$(".system_message").hide();
-		},time);
-	},
-	init_window_and_iframe_bindings:function() {
-		$(window).scroll(function(){
-			$("ul.tag_search_results").hide();
-			placer.start_positioning();
-		});
-		$(window).resize(placer.start_positioning);
-		$('iframe.preview').load(function(){
-			$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "4000px");
-			placer.position_meter();
-			placer.position_iframes(0);
-		});
-	},
-	short_string:function(the_string, the_length) {
-		if (the_string.length>the_length-3) the_string = the_string.substr(0,the_length-3)+"...";
-		return the_string;
-	},
+	/* ====================== */
+	/* === DELETE BUTTONS === */
+	/* ====================== */
 	
 	/* checks whether the working area is empty. if so: puts an empty cluster into place */
 	/* ================================================================================= */
@@ -705,7 +695,6 @@ return {
 			placer.init_draggable_clusters_and_regions();
 		}
 	},
-	
 	/* initialise delete buttons */
 	/* ========================= */
 	init_delete_buttons:function() {
@@ -734,6 +723,42 @@ return {
 			placer.save_and_update_preview();
 		} );
 	},
+	
+	/* =============== */
+	/* === VARIOUS === */
+	/* =============== */
+	show_system_message:function(text, type, time) {
+		$(".system_message span").text(text);
+		$(".system_message").removeClass("bad warning good").addClass(type).show();
+		clearTimeout(system_message_timeout);
+		system_message_timeout = setTimeout(function(){
+			$(".system_message").hide();
+		},time);
+	},
+	short_string:function(the_string, the_length) {
+		if (the_string.length>the_length-3) the_string = the_string.substr(0,the_length-3)+"...";
+		return the_string;
+	},
+	
+	/* =================== */
+	/* === STARTING UP === */
+	/* =================== */
+	
+	/* basic framework bindings */
+	/* ======================== */
+	init_window_and_iframe_bindings:function() {
+		$(window).scroll(function(){
+			$("ul.tag_search_results").hide();
+			placer.start_positioning();
+		});
+		$(window).resize(placer.start_positioning);
+		$('iframe.preview').load(function(){
+			$(this).contents().find("html, body").find(".wrapper").css("marginBottom", "4000px");
+			placer.position_meter();
+			placer.position_iframes(0);
+		});
+	},
+	
 	/* initialise placer */
 	/* ================= */
 	init:function() {
@@ -743,7 +768,8 @@ return {
 		placer.load_layout (); /* load json and fill working area */
 		placer.init_draggable_toolelements ();
 		placer.init_pulldowns ();
-		placer.init_search_fields ();
+		placer.init_element_search ();
+		placer.init_tag_search ();
 		placer.init_draggable_clusters_and_regions ();
 		placer.init_region_options ();
 		placer.init_cluster_masks ();
