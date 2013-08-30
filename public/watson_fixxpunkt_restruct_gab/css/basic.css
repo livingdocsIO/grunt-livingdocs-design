@@ -54,7 +54,13 @@ strong {
 
 /* form elements */
 /* ============= */
-input, a.button, textarea {
+a.button,
+.wrapper input,
+.wrapper textarea,
+.naviblock input,
+.naviblock textarea,
+.dashboard input,
+.dashboard textarea {
 	font-family:'Gudea', helvetica, arial, sans-serif;
 	font-size:1em;
 	border:0;
@@ -110,14 +116,17 @@ input.radio, input.checkbox {
 	background-color /*\**/: transparent\9 /* IE 8 HACK */
 }	
 
-input.radio:checked, input.checkbox:checked {
+input.radio:checked,
+input.checkbox:checked {
 	background-image:url(../media/img/main/icons/icon_checkbox.png);
 	background-size: 0.75em;
 	background-position: center center;
 	background-repeat: no-repeat;
 }
 
-select {
+.wrapper select,
+.naviblock select,
+.dashboard select {
 	font-family:'Gudea', helvetica, arial, sans-serif;
 	font-size:1em;
 	border:0;
@@ -128,7 +137,9 @@ select {
 	appearance: none;
 }
 
-select option {
+.wrapper select option,
+.naviblock select option,
+.dashboard select option {
 	border-bottom:2px solid #eeeeee;
 	background-color:#ffffff;
 	color:#222222;
