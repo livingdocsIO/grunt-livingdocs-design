@@ -56,7 +56,8 @@ var strings = {
 	"message_live": "Das Layout ist live geschaltet",
 	"message_save": "Tempsave erfolgreich",
 	"time": "Vor",
-	"hours": "Stunden"
+	"hours": "Stunden",
+	"vpm": "VPM"
 }
 
 /* list of urls we need for ajax-calls and iframes */
@@ -138,7 +139,8 @@ return {
 			/* notes */
 			new_element.find(".note").attr("data-text", values.note);
 			placer.update_note_icons();
-			/* performance bars */
+			/* performance */
+			new_element.find(".vpm").text(values.vpm+" "+strings.vpm);
 			var performance_pixels = 80;
 			for (var counter=0; counter<values.performance.length; counter++ ) {
 				var current_val = values.performance[counter];
