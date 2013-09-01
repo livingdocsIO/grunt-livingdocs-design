@@ -18,6 +18,7 @@ exports.write = (file, data, options) ->
 
   fs.writeFileSync(file, data, options)
 
+
 exports.readJson = (file, options) ->
   JSON.parse(fs.readFileSync(file, { encoding: 'utf8' }))
 

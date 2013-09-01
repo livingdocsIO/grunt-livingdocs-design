@@ -77,6 +77,7 @@ class Design
     template.html = @minifyHtml(template.html, template.id)
     @templates.push(template)
 
+
   addTemplateFile: (filePath) ->
     templatePath = @getTemplatePath(filePath, @options.src, @options.templatesDirectory)
     templateName = @filenameToTemplatename(filePath)
@@ -90,6 +91,10 @@ class Design
     $ = cheerio.load(data)
     config = $(@options.configurationElement).html()
     $(@options.configurationElement).remove()
+
+    # check for one root element
+    if $.root().children().length > 1
+      logger.error('The Design "' + @config.namespace + '", Template "' + templateName + '" contains more than one root element')
 
     template = JSON.parse(config) || {}
     template.id = templateName
@@ -138,5 +143,6 @@ class Design
 
     else
       html
+
 
 module.exports = Design
