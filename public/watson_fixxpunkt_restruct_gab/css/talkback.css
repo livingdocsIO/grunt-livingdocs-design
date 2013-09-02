@@ -256,6 +256,29 @@
 	.widget.talkback .new_comment { font-size:2.2857em !important; } /* 16px / 7px */
 	
 	.widget.talkback .new_comment .overview .num_comments { font-size:2em; } /* 32px / 16px */
+	
+	.widget.talkback .additional .imgUpload, .widget.talkback .additional .imgLink {
+		float: none;
+	}
+	
+	.widget.talkback .additional .imgLink {
+		min-height: 30px;
+		line-height: 30px;
+		margin: 0.4em 0;
+	}
+	
+	.widget.talkback .additional .imgLink input {
+		margin: 0;
+		width: 75%;
+		float: right
+	}
+	
+	.widget.talkback .additional input.button {
+		display: block;
+		width: 100%;
+		margin: 0.2em 0;		
+	}
+	
 }
 
 
