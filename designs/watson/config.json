@@ -1,13 +1,16 @@
 {
   "namespace": "watson",
-  "styles": {
-    "name": "Insert",
-    "options": [
-      { "name": "Cinemascope", "class": "cinemascope" },
-      { "name": "Jumbo",       "class": "jumbo" },
-      { "name": "Full",        "class": "full" },
-      { "name": "Right",       "class": "right" },
-      { "name": "Side",        "class": "side" }
-    ]
-  }
+  "styles": [
+    {
+      "name": "Insert",
+      "type": "select",
+      "options": [
+        { "caption": "Cinemascope", "value": "cinemascope" },
+        { "caption": "Jumbo",       "value": "jumbo" },
+        { "caption": "Full",        "value": "full" },
+        { "caption": "Right",       "value": "right" },
+        { "caption": "Side",        "value": "side" }
+      ]
+    }
+  ]
 }
