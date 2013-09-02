@@ -8,9 +8,10 @@
 /* teaser on story */
 .insert .teaser {
 	width:100%;
-	height:40em;
+	height:60em;
 	position:relative;
 	overflow:hidden;
+	font-size:0.8181em; /* 1em / 2.2em * 1.8em => 0.8181em */
 }
 
 .teaser .titlepic {
