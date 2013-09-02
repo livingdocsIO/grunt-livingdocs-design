@@ -216,6 +216,9 @@
 	border: solid #888;
 	border-width: 0px 1px 1px 1px;
 	padding: 0.4em;
+	-moz-border-radius:0 0 0.2em 0.2em;
+	-webkit-border-radius:0 0 0.2em 0.2em;
+	border-radius: 0 0 0.2em 0.2em;
 }
 
 .widget.talkback .additional .inputLink input {
@@ -269,7 +272,7 @@
 	
 	.widget.talkback .additional .imgLink input {
 		margin: 0;
-		width: 75%;
+		width: 60%;
 		float: right
 	}
 	
@@ -277,6 +280,16 @@
 		display: block;
 		width: 100%;
 		margin: 0.2em 0;		
+	}
+	
+	.widget.talkback .additional .inputLink {
+		min-height: 30px;
+		line-height: 30px;
+	}
+	
+	.widget.talkback .additional .inputLink input {
+		float: right;
+		width: 60%;
 	}
 	
 }
