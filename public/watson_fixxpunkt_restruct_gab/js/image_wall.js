@@ -134,7 +134,8 @@ var image_wall = (function(){
 						counter+=2;
 					}
 					/* two landscapes and one portrait in any order */
-					else if (current_landscape+next_landscape+after_next_landscape == 2) {
+					else if ( (current_landscape+next_landscape+after_next_landscape == 2) &&
+						(imageboxes.eq(counter+2).length) ) {
 						if (current_landscape) current_imagebox.addClass("width_40").addClass("height_25");
 						else current_imagebox.addClass("width_20").addClass("height_25");
 						if (next_landscape) next_imagebox.addClass("width_40").addClass("height_25");

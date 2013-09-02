@@ -42,7 +42,6 @@
 	line-height: 1.3em;
     margin-bottom: 10px;
 	font-weight:bold;
-	
 }
 
 /*.story h5 {
@@ -182,12 +181,14 @@ p.source {
 	width:117.5%;
 	left:-11.7%;
 	margin:0px 0% 25px 0%;
+	clear:both;
 }
 
 /* full insert */
 .story .insert.full {
 	width:100%;
 	margin:0px 0 20px 0;
+	clear:both;
 }
 
 /* fifty-fifty insert */
@@ -216,6 +217,7 @@ p.source {
 
 .story .insert.block {
 	display:inline-block;
+	clear:both;
 }
 
 .story .insert.shift {

@@ -230,13 +230,19 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 /* infobox */
 /* ======= */
 .widget.infobox {
-	padding:10px 15px;
+	padding:10px 10px;
 	width:auto;
 }
 
 .widget.infobox img {
 	margin: 0 0 20px 0;
 	width:100%;
+}
+
+.widget.infobox h5 {
+	font-size:2em; /* 20px / 10px */
+	font-weight:bold;
+	margin-bottom:10px;
 }
 
 
@@ -706,6 +712,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	
 	.widget.article_list li .date {
 		font-size:1.8em;
+	}
+	
+	.widget.infobox h5 {
+		font-size:2.4em;
 	}
 	
 	/* imagebar */
