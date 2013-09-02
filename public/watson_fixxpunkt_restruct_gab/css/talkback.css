@@ -157,6 +157,8 @@
 .widget.talkback .timeline .text .reportform textarea.focussed,
 .widget.talkback .new_comment .comment textarea.focussed {
 	height:9em;
+	margin-bottom: 0px;
+	border-radius: 0.2em 0.2em 0 0;
 }
 
 /* additional fields */
@@ -165,7 +167,16 @@
 }
 
 .widget.talkback .additional.expanded {
+	position: relative;
+	z-index: 2;
+	margin-top: -1px;
 	display:block;
+}
+
+.widget.talkback .additional input[type="text"] {
+	border: 1px solid #888;
+	color: #888;
+	font-style: italic;
 }
 
 .widget.talkback .additional input.field {
@@ -177,7 +188,16 @@
 	float:right;
 }
 
-.widget.talkback .additional .imagedrop {
+
+.widget.talkback .additional .imgUpload {
+	float: left;
+}
+
+.widget.talkback .additional .imgLink {
+	float: right;
+}
+
+/*.widget.talkback .additional .imagedrop {
 	font-size:inherit;
 	border:1px dashed #444444;
 	display:inline-block;
@@ -189,10 +209,28 @@
 	background-size:contain;
 	background-repeat:no-repeat;
 	background-position:center center;
+}*/
+
+.widget.talkback .additional .inputLink {
+	background: #EEE;
+	border: solid #888;
+	border-width: 0px 1px 1px 1px;
+	padding: 0.4em;
+}
+
+.widget.talkback .additional .inputLink input {
+	border:none;
+	width: 80%;
+	margin: 0 0 0 0.2em;
 }
 
 .widget.talkback .additional input.button {
 	margin-top:0.2em;
+}
+
+.widget.talkback .additional input.button.preview {
+	margin-top:0.4em;
+	background-color: #444; 
 }
 
 
