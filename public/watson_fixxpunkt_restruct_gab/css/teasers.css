@@ -309,27 +309,31 @@
 }
 
 
-/* topical teaser */
-/* ============== */
-.teaser.topical_teaser .text {	padding:0; }
-
-.teaser.topical_teaser .sponsor {
+/* sponsors */
+/* ======== */
+.teaser .sponsor {
 	position:absolute;
-	bottom:0;
-	right:0;
+	bottom:100%;
+	margin-bottom:4px;
+	right:9px;
 	font-size:1.333em;
 	height:3.525em; /* 47px / 13.333px */
 	padding:0.375em 0.75em; /* 5px / 13.333px */ /* 10px / 13.333px */
-	background-color:#eeeeee;
-	background-color:rgba(255,255,255,0.8);
-	color:#222222;
+	background-color:#222222;
+	background-color:rgba(0,0,0,0.8);
+	color:#ffffff;
 }
 
-.teaser.topical_teaser .sponsor img {
+.teaser .sponsor img {
 	margin-top:0.3em;
 	height:2.2em;
 	float:right;
 }
+
+
+/* topical teaser */
+/* ============== */
+.teaser.topical_teaser .text {	padding:0; }
 
 
 /* collection teasers */
