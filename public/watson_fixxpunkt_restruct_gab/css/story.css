@@ -101,6 +101,12 @@ p.source {
 	float:left;
 }
 
+.story p.lead .author .external {
+	border-bottom:2px solid #aaaaaa;
+	height:1.1em;
+	float:left;
+}
+
 
 .story p, .story ul, .story ol, .story h4.tweentitle {
 	-moz-hyphens: auto;
