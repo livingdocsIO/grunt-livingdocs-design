@@ -2,13 +2,16 @@
 <html>
 	<head>
 
-		<title>Titel der Seite</title>
+		<title>Dashboard</title>
 
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<meta name="keywords" content="" />
 		<meta name="description" content="" />
 		<meta name="robots" content="index,follow" />
 		<link rel="shortcut icon" href="favicon.ico">
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 		<!-- Home screen icon -->
 		<!-- For iPhone 4 with high-resolution Retina display: -->
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="">
@@ -19,7 +22,7 @@
 		
 		<link rel="stylesheet" href="css/reset.css" />
 		<link rel="stylesheet" href="css/basic.css" />	
-		<link rel="stylesheet" href="css/dashboard.css" />$
+		<link rel="stylesheet" href="css/dashboard.css" />
 		
 			
 		
@@ -49,36 +52,48 @@
 					<div class="segment list user">
 						<ul>
 							<li>
-								<img src="media/img/placeholderimg/bild_053.jpg" /> Nathalie Steiner
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_053.jpg" /></span> 
+									<span class="username">Nathalie Steiner</span>
+									34 Achievements 
+								</a>
 							</li>
 						</ul>
 					</div>
 					
 					<!-- Neuigkeiten -->
 					<div class="segment list notification">
+						<a class="section"><span class="number">5</span>Neuigkeiten</a>
 						<ul>
-							<li class="heading"><span class="number">5</span>Neuigkeiten</li>
 							<li>
-								<span class="graph"><img src="media/img/placeholderimg/bild_054.jpg" /></span> 
-								<p class="note">Christoph Meier hat deinen Beitrag kommentiert.
-								Zum Artikel: «Diese Kameras sollte es in jeder Stadt geben»</p>
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+									<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+									Dein Beitrag wurde veröffentlicht
+								</a>
 							</li>
-							<li><span class="graph"><img src="media/img/placeholderimg/bild_055.jpg" width="50" /></span><p class="note">Du hast ein neues Achievement erhalten:<br />
-								Staubsauger-Verkäufer</p>
+							<li>
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_054.jpg" width="50" /></span>Du hast ein neues Achievement erhalten:<br />
+									Staubsauger-Verkäufer</p>
+								</a>
 							</li>
 						</ul>
 					</div>
 					
 					<!-- Kommentare -->
 					<div class="segment list comment">
-						<ul>
-							<li class="heading">Kommentare</li>
-							<li><p class="note">Artikel: „Mit dem Luxus-Liner ins CL-Abenteuer“<br />
-							Wäre ja schön wenn nicht nur Basel immer die Ehre der Schweizer retten…<br />
-							Geschrieben 4. Aug. 2013 </p>
-							</li>
-						</ul>
-						
+						<a class="section">Kommentare</a>
+					</div>
+					
+					<!-- Achievements -->
+					<div class="segment list achievements">
+						<a class="section">Achievements</a>
+					</div>
+					
+					<!-- Statistik -->
+					<div class="segment list statistik">
+						<a class="section">Statistiken</a>
 					</div>
 					
 				</div>
