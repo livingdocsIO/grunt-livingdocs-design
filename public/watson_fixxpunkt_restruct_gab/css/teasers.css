@@ -314,8 +314,8 @@
 .teaser .sponsor {
 	position:absolute;
 	bottom:100%;
-	margin-bottom:4px;
-	right:9px;
+	margin-bottom:6px;
+	right:6px;
 	font-size:1.333em;
 	height:3.525em; /* 47px / 13.333px */
 	padding:0.375em 0.75em; /* 5px / 13.333px */ /* 10px / 13.333px */
@@ -326,7 +326,7 @@
 
 .teaser .sponsor img {
 	margin-top:0.3em;
-	height:2.2em;
+	height:2em;
 	float:right;
 }
 
