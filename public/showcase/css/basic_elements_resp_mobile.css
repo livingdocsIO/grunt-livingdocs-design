@@ -1,0 +1,50 @@
+
+
+
+
+@media screen and (max-width: 600px) {
+	
+	/* quotes */
+	/* ====== */
+	.region.full_story p.quote { font-size:3.5714em !important; } /* 25px / 7px */
+	
+	/* fat_full header image */
+	/* ===================== */
+	.region.full_story .full-width-container.insert.fat_full { min-height:6em; } /* 42px / 7px */
+	
+	.region.full_story .full-width-container.insert.fat_full p.caption {
+		font-size:1.8em !important;
+		max-width:none  !important;
+		padding:5px 15px;
+	}
+	
+	/* badge list */
+	/* ========== */
+	.badges ul {
+		margin-right:0;
+		display:block;
+	}
+	
+	/* sportstable */
+	/* =========== */
+	.sportstable { margin:0 0 10px 0; }
+	
+	/* article list */
+	/* ============ */
+	.region .article_list {
+		font-size:0.75em !important;
+	}
+	
+	.region .article_list li .date {
+		font-size:1.8em;
+	}
+	
+	/* nur zum test */
+	/* ============ */
+	.region.full_story .imagebar img {
+		width:100%;
+		margin: 0 0 2px 0;
+	}
+	
+
+}

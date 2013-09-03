@@ -1,0 +1,37 @@
+
+
+@media screen and (max-width: 1000px) {
+	body {
+		font-size:9px;
+	}
+	
+	.wrapper {
+		width:100%;
+	}
+	
+	.fat_wrapper {
+		width:100.8%;
+	}
+	
+	.region.x_full_tablet { width:100%; }
+	.region.x_half_tablet { width:50%; }
+	
+	/* collection regions */
+	/* ============= */
+	.region.collection_main { border-bottom:0; }
+	.region.collection_context { height:302px; } /* .region.y_half */
+	.region.collection_context .region:nth-child(odd) {
+		border-width:0 4px 4px 0;
+		border-color: #ffffff;
+		border-style:solid;
+	}
+	
+	/* topical teaser */
+	/* ============== */
+	.region.topical_teaser.y_quarter.sponsoring { height:198px; }
+	.region.topical_teaser.sponsoring .media_icons { width:75%; }
+	
+	/* custom hide and display */
+	.hide_on_tablet { display:none !important; }
+	.show_on_tablet { display:block !important;; }
+}

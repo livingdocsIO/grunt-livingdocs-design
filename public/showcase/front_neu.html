@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="de">
+	<head>
+		<!-- upfront ==> -->
+		<script src="js/vendor/underscore.js"></script>
+    	<script src="js/vendor/jquery-1.9.js"></script>
+		<!-- <== -->
+    
+		<title>watson - the web</title>
+		
+		<!-- Mobile viewport optimization -->
+		<meta name="HandheldFriendly" content="True">
+		<meta name="MobileOptimized" content="320">
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="apple-touch-fullscreen" content="yes" />
+		<meta names="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<meta name="keywords" content="" />
+		<meta name="description" content="" />
+		<meta name="robots" content="index,follow" />
+		
+		<link rel="shortcut icon" href="media/img/main/icons/favicon.ico" type="image/x-icon" />
+		<!-- Home screen icon -->
+		<!-- For iPhone 4 with high-resolution Retina display: -->
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="media/img/main/icons/apple_touch_icon_114.png">
+		<!-- For first-generation iPad: -->
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="media/img/main/icons/apple_touch_icon_72.png">
+		<!-- For non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
+		<link rel="apple-touch-icon-precomposed" href="media/img/main/icons/apple_touch_icon_57.png">
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/reset.css" />
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/color_combos.css" />
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/main.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/main_resp_tablet.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/main_resp_mobile.css" />	
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/navi.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/navi_resp_tablet.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/navi_resp_mobile.css" />	
+		<script src="js/navi.js" type="text/javascript"></script>
+		
+		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements_resp_tablet.css" />
+		<link rel="stylesheet" type="text/css" media="all" href="css/basic_elements_resp_mobile.css" />
+		<script src="js/basic_elements.js" type="text/javascript"></script>
+		
+		<link href='https://fonts.googleapis.com/css?family=Lustria' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Gudea:400,700,400italic' rel='stylesheet' type='text/css'>
+		
+	</head>
+	<body>
+	
+	
+	
+	<div class="wrapper"><div class="fat_wrapper">
+		
+		<div class="region x_full_desktop x_full_tablet y_quarter topical_teaser sponsoring" style="background-image:url(media/img/placeholderimg/bild_110.jpg);">
+			<div class="text">
+				<div class="media_icons">
+					<a href="#" class="tag ressort">Tour de France 2013</a>
+					<a href="#" class="tag">Live</a>
+					<a href="#" class="tag">Resultate</a>
+					<a href="#" class="tag">Hintergrund</a>
+				</div>
+				<a class="sponsor" href="http://www.vittel.com" target="_blank">
+					päsentiert von<br/>
+					<img src="media/img/placeholderwerbung/vittel.png" />
+				</a>
+			</div>
+		</div>
+
+		<div class="region linked_teaser x_full_desktop x_full_tablet y_full font_xl" style="background-image:url(media/img/placeholderimg/bild_112.jpg);">
+			<a><img class="titlepic" alt="motivtitel" src="media/img/placeholderimg/positioniertes_bild.png" /></a>
+			<div class="text">
+				<h3><a href="#">Risiken von Tattoos</a></h3>
+				<h2><a href="#">Das Risiko sitzt unter der Haut</a></h2>
+				<p class="lead"><a href="#">Tätowierungen sind Teil der Pop-Kultur und ein Massenphänomen. Dabei ist die Langzeitwirkung der Tinte im Körper kaum verstanden, wie eine Fachkonferenz in Berlin zeigt.</a></p>
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>67</span>
+					</a>
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<!--Ads -->
+		<div class="region x_full_desktop x_full_tablet commercial hide_on_mobile">
+			<img src="media/img/placeholderimg/bild_104.jpg" alt="Wideboard" style="max-width:100%;" />
+		</div>
+		
+		<!--Ads Moblie-->
+		<div class="region commercial hide_on_desktop hide_on_tablet show_on_mobile">
+			<img src="media/img/placeholderimg/bild_108.jpg" alt="5 zu 1" style="max-width:100%;" />
+		</div>
+		
+		<div class="region x_third_desktop x_half_tablet y_full" style="background-image:url(media/img/placeholderimg/bild_120.jpg);">
+			<div class="text">
+				<h3>Kanzlerwahlen</h3>
+				<h2>Steinbrück abgekanzelt</h2>
+				<!--<p class="lead"><span class="author">A. Szenogrady</span> - Bahnpolizei und Zugbegleiter sorgen normalerweise für Sicherheit im öffentlichen Verkehr. Nicht so eine ehemalige SBB-Angestellte. Sie machte sich an der Handtasche einer Passagierin zu schaffen.</p>-->
+				<!--<img class="source_logo" src="media/img/main/logos/logo_aargauer_zeitung_transparent.png" />-->
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>12</span>
+					</a>
+				</div>
+			</div>
+		</div>
+			
+		
+		<div class="region x_two_thirds_desktop x_half_tablet y_full font_l" style="background-image:url(media/img/placeholderimg/bild_087.jpg);">
+			<div class="text">
+				<h3>Lenzburg</h3>
+				<h2>Laster kippt und sorgt für Verkehrschaos</h2>
+				<!--<p class="lead">Dieser Fahrer war beim Verlassen der Autobahn A1 zu schnell unterwegs – sein Lastwagen kippte um und entleerte einen Haufen Altmetall auf die Gegenfahrbahn.</p>-->
+				<div class="media_icons">
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		
+		
+		
+		<div class="region x_two_thirds_desktop x_full_tablet y_full linked_teaser" style="background-image:url(media/img/placeholderimg/bild_70.jpg);">
+			<a class="bubbler color_combo_99 combo_bg combo_fg" href="story_brandon.html">brand<u>on</u><img src="media/img/placeholderimg/bild_076.png" /><span class="arrow combo_bd"></span></a>
+			<a href="story_brandon.html"><img class="titlepic" alt="motivtitel" src="media/img/placeholderimg/positioniertes_bild.png" /></a>
+			<div class="text">
+				<h3><a href="story_brandon.html">brand<u>on</u> Orell Füssli</a></h3>
+				<h2><a href="story_brandon.html">Das Web schützt vor Totalverlust</a></h2>
+				<p class="lead"><a href="story_brandon.html">Im Frühling finden in der Schweiz viele Messen rund um verschiedene Themen von Online Marketing und Business statt (wie aktuell die Swiss Online Marketing Messe).</a></p>
+				<div class="media_icons">
+					<a class="comments" href="story_brandon.html#comments">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>213</span>
+					</a>
+					<a class="video" href="story_brandon.html#video">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<!-- flipper element -->
+		<div class="region flipper x_third_desktop x_half_tablet y_full">
+			
+			<div class="region x_full_desktop x_full_tablet y_full frontface" style="background-image:url(media/img/placeholderimg/bild_085.jpg);">
+				<div class="text">
+					<h3>Mario Götze</h3>
+					<h2>«Ich spiele jetzt beim besten Verein der Welt»</h2>
+					<p class="lead">Sein Wechsel von Dortmund zu Bayern München hat polarisiert. Jetzt spricht Mario Götze zum ersten Mal als Bayern-Spieler. Der Wechsel zum Triple-Sieger sei aus Überzeugung erfolgt.</p>
+				</div>
+			</div>
+			
+			<div class="region x_full_desktop x_full_tablet y_full backface text_only color_combo_1 combo_fg combo_bg">
+				<div class="text">
+					<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+					<p>Dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+					<p><a class="button" href="http://de.eurosport.yahoo.com/" target="_blank">Weiterlesen auf Eurosport</a></p>
+					<p><a href="#">Spannenden Artikel gelesen?<br/>Lassen Sie es uns wissen.</a></p>
+				</div>
+			</div>
+		
+		</div>
+		
+		
+		
+		<div class="region x_third_desktop x_half_tablet y_full">
+			<div class="region y_half font_s" style="background-image:url(media/img/placeholderimg/bild_081.jpg);">
+				<div class="text">
+					<h3>Grosse Geldsorgen</h3>
+					<h2>Sauber hofft auf russische Rubel</h2>
+					<p class="lead">Lieferanten sowie Nico Hülkenberg sollen bei Sauber auf ihre Bezahlung warten. Das weltweit grösste Erdgasunternehmen Gazprom könnte den Schweizer Rennstall vor dem finanziellen Kollaps retten.</p>
+					<div class="media_icons">
+						<a class="comments" href="#">
+							<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+							<span>4</span>
+						</a>
+						<a class="video" href="#">
+							<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+						</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="region y_half flipper">
+				<div class="region frontface y_half">
+					<img src="media/img/placeholderimg/bild_118.png" class="stretch_to_fit" />
+				</div>
+				<div class="region backface y_half">
+					<img src="media/img/placeholderimg/bild_119.png" class="stretch_to_fit" />
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="region linked_teaser x_two_thirds_desktop x_full_tablet y_full font_xl" style="background-image:url(media/img/placeholderimg/bild_121.jpg);">
+			<a><img class="titlepic" alt="motivtitel" src="media/img/placeholderimg/positioniertes_bild.png" /></a>
+			<div class="text">
+				<h3><a>Spektakel im Hallenstadion</a></h3>
+				<h2><a>Lady-o-Gaga</a></h2>
+				<!--<p class="lead"><a><span class="author"><span class="internal">Philipp Rüegg</span></span> – Vor Google und Co. startet die Pebble-Uhr ins Smartwatch-Zeitalter. Sinnvolle Ergänzung fürs Handy oder unnötige Last am Handgelenk?</a></p>-->
+				<a class="badge hot" href="story_hintergrundbericht.html#badges">
+					<img class="stretch_to_fit" src="media/img/main/icons/icon_hotbadge.png" />
+					<span>hot<br/>on the<br/>web</span>
+				</a>
+			</div>
+		</div>
+		
+		
+		
+		<!-- placeholder diashow -->
+		<div class="region linked_teaser x_full_desktop hide_on_tablet hide_on_mobile">
+			<img src="media/img/placeholderimg/bild_078.png" style="width:100%;display:block;" />
+		</div>
+		<!-- placeholder diashow -->
+		<div class="region linked_teaser x_full_tablet hide_on_desktop show_on_tablet hide_on_mobile">
+			<img src="media/img/placeholderimg/bild_079.png" style="width:100%;display:block;" />
+		</div>
+		
+		<!-- placeholder diashow -->
+		<div class="region linked_teaser x_full_tablet hide_on_desktop hide_on_tablet show_on_mobile">
+			<img src="media/img/placeholderimg/bild_079-5.png" style="width:100%;display:block;" />
+		</div>
+		
+		<div class="region x_third_desktop x_half_tablet y_full text_only font_l font_cursive color_combo_20 combo_bg combo_fg poll">
+			<div class="combo_bd arrow right y_upper show_on_desktop hide_on_tablet hide_on_mobile"></div>
+			<div class="combo_bd arrow right y_middle hide_on_desktop show_on_tablet hide_on_mobile"></div>
+			<div class="combo_bd arrow bottom x_middle hide_on_desktop hide_on_tablet show_on_mobile"></div>
+			<div class="text">
+				<div class="answers">
+					<h3>Umfrage</h3>
+					<h2 style="line-height:1.05em;">Wer gewinnt die Tour de France?</h2>
+					<!--p class="lead">Fragen über Fragen, wir wollen es von Ihnen wissen – aber subito!</p -->
+					<form action="">
+						<ul>
+							<li><input type="radio" class="radio" name="poll_1" id="poll_1_1" value="1" /><label for="poll_1_1">Chris Froome</label></li>
+							<li><input type="radio" class="radio" name="poll_1" id="poll_1_2" value="2" /><label for="poll_1_2">Alberto Contador</label></li>
+							<li><input type="radio" class="radio" name="poll_1" id="poll_1_3" value="3" /><label for="poll_1_3">Cadel Evans</label></li>
+							<li><a href="javascript:;" class="button combo_bg_inv combo_fg_inv">vote</a></li>
+						</ul>
+					</form>
+				</div>
+				<div class="result">
+					<p>Wer gewinnt die Tour de France?</p>
+					<ul>
+						<li class="combo_bd_inv"><span class="bubble combo_bg_inv combo_fg_inv"></span><span class="answertext">Chris Froome</span></li>
+						<li class="combo_bd_inv"><span class="bubble combo_bg_inv combo_fg_inv"></span><span class="answertext">Cadel Evans</span></li>
+						<li class="combo_bd_inv"><span class="bubble combo_bg_inv combo_fg_inv"></span><span class="answertext">Alberto Contador</span></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="region x_two_thirds_desktop x_half_tablet y_full" style="background-image:url(media/img/placeholderimg/bild_098.jpg);">
+			<div class="text">
+				<h3>Tour de France</h3>
+				<h2>Peloton und Roquefort</h2>
+				<p class="lead">Sie rollen und rollen und rollen – und es passiert rein gar nichts. Die Tour de France hat begonnen. Und damit auch die Zeit der herrlichen TV-Langeweile.</p>
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>12</span>
+					</a>
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="region x_third_desktop x_full_tablet y_full" style="background-image:url(media/img/placeholderimg/bild_122.jpg);">
+			<div class="text">
+				<h3>Jetzt nachschminken</h3>
+				<h2>Rita Ora verzaubert mit roten Lippen</h2>
+				<p class="lead">Rote Lippen treffen auf ausdrucksstarke Augen: Sängerin Rita Ora zeigt uns, wie ein glamouröses Party-Make-up aussehen muss - und wir zeigen Ihnen, wie Sie den Beauty-Look nachschminken können</p>
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>3</span>
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<!--Ads Moblie-->
+		<div class="region commercial hide_on_desktop hide_on_tablet show_on_mobile">
+			<img src="media/img/placeholderimg/bild_109.jpg" alt="5 zu 1" style="max-width:100%;" />
+		</div>
+
+
+		<div class="region x_third_desktop x_half_tablet y_full non_story_teaser" style="background-image:url(media/img/placeholderimg/bild_096.jpg);">
+			<div class="text">
+				<h3>Schweizer Fussball</h3>
+				<h2>Alles zum Saisonstart</h2>
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>14</span>
+					</a>
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+					<div class="tag ressort">Super League</div>
+				</div>
+			</div>
+		</div>
+		
+				
+		<div class="region x_third_desktop x_half_tablet y_full hide_on_mobile">
+		<div class="region y_half commercial">
+			<img src="media/img/placeholderimg/bild_105.jpg" alt="Rectangle" class="rectangle" />
+		</div>
+		<div class="region y_half font_s" style="background-image:url(media/img/placeholderimg/bild_099.jpg);">
+			<div class="text">
+				<h3>wats<u>on</u> Twitter</h3>
+				<h2>Chrampfer im Glück</h2>
+				<p class="lead">Die Schweizer sind mit ihrer Work-Life-Balance europaweit am zufriedensten. Dies, obschon sie am meisten arbeiten.</p>
+				<a class="badge hot" href="story_hintergrundbericht.html#badges">
+					<img class="stretch_to_fit" src="media/img/main/icons/icon_hotbadge.png" />
+					<span>hot<br/>on the<br/>web</span>
+				</a>
+			</div>
+		</div>
+		</div>
+				
+		<div class="region x_two_thirds_desktop x_half_tablet y_full" style="background-image:url(media/img/placeholderimg/bild_068.jpg);">
+			<a class="bubbler color_combo_99 combo_bg combo_fg" href="#">Presented by<img src="media/img/placeholderimg/bild_069.png" /><span class="arrow combo_bd"></span></a>
+			<div class="text">
+				<h3>Presented by Migros</h3>
+				<h2>Viel Werbung für wenig Geld – 18 Beispiele, wie Guerilla-Marketing einschlägt</h2>
+				<p class="lead">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum.</p>
+				<a class="badge" href="story_hintergrundbericht.html#badges">
+					<img class="stretch_to_fit" src="media/img/main/icons/icon_badge.png" />
+					<span class="stretch_to_fit">Win</span>
+				</a>
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>14</span>
+					</a>
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="region x_third_desktop x_half_tablet y_full non_story_teaser" style="background-image:url(media/img/placeholderimg/bild_095.jpg);">
+			<div class="text">
+				<h3>Raus in die Welt...</h3>
+				<h2>Abenteuer Leben</h2>
+				<div class="media_icons">
+					<div class="tag">Reisen</div>
+				</div>
+			</div>
+		</div>
+				
+		<div class="region x_two_thirds_desktop x_full_tablet y_full font_l collection_main color_combo_20" style="background-image:url(media/img/placeholderimg/bild_103.jpg);">
+			<div class="text">
+				<h3>NSA</h3>
+				<h2 class="combo_bd_inv">Aktenzeichen NSA ungelöst</h2>
+				<p class="lead">...</p>
+			</div>
+		</div>
+        <div class="region x_third_desktop x_full_tablet y_full collection_context color_combo_20">
+			<div class="region y_quarter text_only x_half_tablet combo_bg combo_fg">
+				<div class="arrow left y_middle show_on_desktop hide_on_tablet hide_on_mobile combo_bd"></div>
+				<div class="arrow top x_middle hide_on_desktop show_on_tablet hide_on_mobile combo_bd"></div>
+				<div class="arrow top x_middle hide_on_desktop hide_on_tablet show_on_mobile combo_bd"></div>
+				<div class="text">
+					<h3>Auf der Flucht</h3>
+					<h2>Snowden sagt ja zu Venezuela</h2>
+					<p class="lead">...</p>
+				</div>
+			</div>
+			<div class="region y_quarter text_only x_half_tablet combo_bg combo_fg">
+				<div class="text">
+					<h3>Grosse Ohren</h3>
+					<h2>NSA horcht auch die Schweiz aus</h2>
+					<p class="lead">...</p>
+				</div>
+			</div>
+            <div class="region y_quarter text_only x_half_tablet combo_bg combo_fg">
+				<div class="text">
+					<h3>Meinung</h3>
+					<h2>Obama findet Lauschangriffe «nicht überraschend»</h2>
+					<p class="lead">...</p>
+				</div>
+			</div>
+			<div class="region y_quarter text_only x_half_tablet combo_bg combo_fg">
+				<div class="text">
+					<h3>Statistik</h3>
+					<h2>NSA zapfte 38 Ziele an</h2>
+					<p class="lead">...</p>
+				</div>
+			</div>
+		</div>
+				
+		<div class="region x_full_desktop x_half_tablet y_full font_l" style="background-image:url(media/img/placeholderimg/bild_097.jpg);">
+			<div class="text">
+				<h3>Lex USA</h3>
+				<h2>Die Angst der Banker vor Reisen in die USA</h2>
+				<p class="lead">Banker melden sich derzeit wegen des ungelösten Steuerstreits bei Peter-René Wyder vom Branchenverband. Demnach haben sie auch schon private und geschäftliche Termine in den USA abgesagt.</p>
+				<a class="badge" href="story_hintergrundbericht.html#badges">
+					<img class="stretch_to_fit" src="media/img/main/icons/icon_badge.png" />
+					<span class="stretch_to_fit">Fail</span>
+				</a>
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>213</span>
+					</a>
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="region x_third_desktop x_half_tablet y_full text_only font_xxl color_combo_11 combo_bg combo_fg">
+			<div class="combo_bd arrow right y_middle show_on_desktop hide_on_tablet hide_on_mobile"></div>
+        	<div class="combo_bd arrow bottom x_middle hide_on_desktop show_on_tablet hide_on_mobile"></div>
+        	<div class="combo_bd arrow bottom x_middle hide hide_on_desktop hide_on_tablet show_on_mobile"></div>
+			<div class="text">
+				<h3>Infografik</h3>
+				<h2>Prost Mexiko</h2>
+			</div>
+		</div>
+
+		
+		<div class="region x_two_thirds_desktop x_full_tablet y_full font_l" style="background-image:url(media/img/placeholderimg/bild_100.jpg);">
+			<div class="text">
+				<h3>Happy Hours</h3>
+				<h2>Allllliba! China entdeckt den Tequila</h2>
+				<p class="lead">Wie war das noch: Erst das Salz oder erst die Zitronenscheibe? Geht es nach Mexikos Tequilaherstellern, werden vor dieser Frage bald auch Millionen Chinesen stehen.</p>
+				<a class="badge color_1" href="story_hintergrundbericht.html#badges">
+					<img class="stretch_to_fit" src="media/img/main/icons/icon_badge.png" />
+					<span class="stretch_to_fit">Win</span>
+				</a>
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>112</span>
+					</a>
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="region x_two_thirds_desktop x_half_tablet y_full" style="background-image:url(media/img/placeholderimg/bild_101.jpg);">
+			<div class="text">
+				<h3>J. R. Farrell über die irischen «Troubles»</h3>
+				<h2>Grand-Hotel Abgrund</h2>
+				<p class="lead">Der 1919 ausgebrochene Krieg zwischen irischen Unabhängigkeitskämpfern und der britischen Ordnungsmacht gehört zu den blutigsten Kapiteln in Irlands an Heimsuchungen nicht armer Geschichte. James Gordon Farrell spiegelt die damaligen Ereignisse in seiner mit bitterem Witz entworfenen Geschichte vom Niedergang eines Luxushotels.</p>
+				<img class="source_logo" src="media/img/main/logos/logo_aargauer_zeitung_transparent.png" />
+			</div>
+		</div>
+		
+		<div class="region x_third_desktop x_half_tablet y_full text_only font_l font_cursive color_combo_6 combo_bg combo_fg">
+			<div class="text">
+				<h3>Analyse</h3>
+				<h2>Lehrer&shy;löhne im Bran&shy;chen&shy;ver&shy;gleich</h2>
+				<p class="lead">20 Prozent mehr Lohn für Lehrer: Wie ist diese Forderung einzuschätzen? wats<u>on</u> hat den Verdienst von unterrichtenden Personen über verschiedene Wirtschaftszweige hinweg verglichen.</p>
+			</div>
+		</div>
+		
+		<div class="region x_third_desktop x_half_tablet y_full hide_on_mobile commercial">
+			<img src="media/img/placeholderimg/bild_107.jpg" />
+		</div>
+				
+		<div class="region x_two_thirds_desktop x_half_tablet y_full" style="background-image:url(media/img/placeholderimg/bild_102.jpg);">
+			<div class="text">
+				<h3>Überwachung</h3>
+				<h2>Mit dem U-Boot auf Datenfang</h2>
+				<p class="lead">Der amerikanische und der britische Geheimdienst haben grosse Datenmengen gesammelt. Doch wie geht das überhaupt?</p>
+				<a class="badge" href="story_hintergrundbericht.html#badges">
+					<img class="stretch_to_fit" src="media/img/main/icons/icon_badge.png" />
+					<span class="stretch_to_fit">Fail</span>
+				</a>
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>14</span>
+					</a>
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+		
+			<div class="region x_two_thirds_desktop x_half_tablet y_full" style="background-image:url(media/img/placeholderimg/bild_106.jpg);">
+			<div class="text">
+				<h3>UNESCO-Welterbe</h3>
+				<h2>Die Welt der Wunder wächst weiter</h2>
+				<p class="lead">Der Fuji, der Ätna und die Reisfelder von Honghe Hani haben eins gemeinsam: Sie wurden neu auf die Welterbe-Liste der Unesco aufgenommen. Fast fragt man sich: Warum erst jetzt?</p>
+				
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>66</span>
+					</a>
+					
+					
+				</div>
+			</div>
+		</div>
+		
+
+		<div class="region x_third_desktop x_half_tablet y_full" style="background-image:url(media/img/placeholderimg/bild_083.jpg);">
+			<div class="text">
+				<h3>Autor Yasmina Khadra</h3>
+				<h2>«Arabische Regierungen sind lächerlich»</h2>
+				<p class="lead"><span class="author"><span class="internal">K. Ramezani</span>, Paris</span> – Der algerische Starautor und Ex-Armeeoffizier Yasmina Khadra erklärt, warum die Region nicht zur Ruhe kommt.</p>
+				<img class="source_logo" src="media/img/main/logos/logo_spiegel_online_bw.png" />
+				<div class="media_icons">
+					<a class="comments" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_comments.png" />
+						<span>213</span>
+					</a>
+					<a class="video" href="#">
+						<img class="stretch_to_fit" src="media/img/main/icons/icon_video.png" />
+					</a>
+				</div>
+			</div>
+		</div>
+				
+	
+
+
+
+	</div></div>
+
+	
+	
+	<div class="naviblock">
+		<div class="expandable">
+			<div class="segment">
+				<form class="search">
+					<a class="fav"><img src="media/img/main/icons/icon_fav_active.png" /></a>
+					<input class="field lightback lightfont" type="text" value="suchen" /><input class="button" type="submit" value="go" />
+					<ul class="suggestions">
+						<li><a href="#">Fukushima</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Fundraising</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Furrer</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">Fundamentalismus</a><span class="fav"><img src="media/img/main/icons/icon_fav.png" /></span></li>
+						<li><a href="#">mehr...</a></li>
+					</ul>
+					<ul class="favs">
+						<li><a href="#">Ausland</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Sport</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">FCZ</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">RPG</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Game of Thrones</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">LOL</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Musik</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+						<li><a href="#">Wetter</a><span class="delete"><img src="media/img/main/icons/icon_delete.png" /></span></li>
+					</ul>
+				</form>
+			</div>
+			<ul class="tagcloud">
+				<li class="size_3 ressort"><a href="#">Sport</a></li>
+				<li class="size_4 ressort"><a href="#">Ausland</a></li>
+				<li class="size_3 ressort"><a href="#">Inland</a></li>
+				<li class="size_4 ressort"><a href="#">Musik</a></li>
+				<li class="size_2"><a href="#">Events</a></li>
+				<li class="size_3"><a href="#">Tour de France</a></li>
+				<li><a href="#">FCZ</a></li>
+				<li><a href="#">Kampusch</a></li>
+				<li class="size_1 ressort"><a href="#">Wissen</a></li>
+				<li class="size_4 ressort"><a href="#">Schweiz</a></li>
+				<li><a href="#">Natur</a></li>
+				<li class="size_1"><a href="#">Essen</a></li>
+				<li class="size_2 ressort"><a href="#">Zürich</a></li>
+				<li class="size_4 ressort"><a href="#">TV</a></li>
+				<li class="size_2"><a href="#">Roger Federer</a></li>
+				<li><a href="#">Toggi</a></li>
+				<li class="size_1"><a href="#">Bundesrat</a></li>
+				<li class="ressort"><a href="#">Digital</a></li>
+				<li class="size_3 ressort"><a href="#">Games</a></li>
+				<li class="size_2"><a href="#">LOL</a></li>
+				<li class="size_1"><a href="#">FC Thun</a></li>
+				<li class="ressort"><a href="#">Reisen</a></li>
+				<li class="size_2 ressort"><a href="#">Unterhaltung</a></li>
+				<li class="size_4"><a href="#">WTF</a></li>
+				<li><a href="#">Ueli Maurer</a></li>
+				<li class="size_1"><a href="#">Hochwasser</a></li>
+				<li><a href="#">Dollarkurs</a></li>
+				<li class="size_2 ressort"><a href="#">Wirtschaft</a></li>
+				<li class="size_2"><a href="#">Katie</a></li>
+				<li class="ressort"><a href="#">Infografiken</a></li>
+				<li class="size_3 ressort"><a href="#">Videos</a></li>
+			</ul>
+			<div class="segment">
+				<ul class="alt_links">
+					<li><a href="#">Login</a></li>
+					<li><a href="#">Apps</a></li>
+					<li><a href="#">Impressum</a></li>
+				</ul>
+			</div>
+		</div>
+		<a class="navilink"><img src="media/img/main/icons/icon_navi.png" /></a>
+	</div>
+
+	<div class="logoblock">
+		<a class="logo" href="front.html"><img src="media/img/main/logos/logo_watson.png" /></a>
+	</div>
+	
+	<div class="currentblock">
+		<a href="front.html">Front</a>
+	</div>
+		
+		
+	
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

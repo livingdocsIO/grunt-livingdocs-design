@@ -1,0 +1,17 @@
+
+
+
+
+@media screen and (max-width: 1000px) {
+	.region.full_story .text {
+		margin-left:0;
+		width:100%;
+	}
+	
+	.region.full_story p,
+	.region.full_story h3,
+	.region.full_story .insert.maincol {
+		width:80%;
+	}
+	
+}
