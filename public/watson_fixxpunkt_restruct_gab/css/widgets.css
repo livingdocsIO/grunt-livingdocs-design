@@ -219,7 +219,11 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	height:100%;
 }
 
-
+.insert.cinemascope .widget.map,
+.insert.full .widget.map,
+.insert.jumbo .widget.map {
+	padding-bottom:50%;
+}
 
 
 
@@ -697,6 +701,12 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 		display:block;
 	}
 	
+	/* maps */
+	/* ==== */
+	.widget.map {
+		padding-bottom:100% !important;
+	}
+	
 	/* sportstable */
 	/* =========== */
 	.widget.sportstable { margin:0 0 10px 0; }
@@ -726,13 +736,13 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	}
 	
 	/* imagebar twopics */
-	/* ======== */
+	/* ================ */
 	.widget.imagebar.twopics .imagebox, .widget.imagebar.twopics .imagebox:last-child {
 		width: 100%;
 	}
 
 	/* magazine cover */
-	/* ======== */
+	/* ============== */
 	.widget.cover .covertitle{
 		bottom:4%;
 	}

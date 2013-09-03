@@ -98,13 +98,13 @@ p.source {
 .story p.lead .author .internal {
 	border-bottom:2px solid #f9349e;
 	height:1.1em;
-	float:left;
+	display:inline-block;
 }
 
 .story p.lead .author .external {
 	border-bottom:2px solid #aaaaaa;
 	height:1.1em;
-	float:left;
+	display:inline-block;
 }
 
 
@@ -182,7 +182,8 @@ p.source {
 }
 
 /*jumbo insert – cinemascope insert */
-.story .insert.jumbo, .story .insert.cinemascope {
+.story .insert.jumbo,
+.story .insert.cinemascope {
 	position:relative;
 	width:117.5%;
 	left:-11.7%;
@@ -206,6 +207,7 @@ p.source {
 
 /* side insert */
 .story .insert.side {
+	clear:right;
 	float: right;
 	width:37%;
 	margin:0 0 10px 2%;
@@ -213,6 +215,7 @@ p.source {
 
 /* left side only */
 .story .insert.right {
+	clear:right;
 	margin:0 0 20px 2%;
 	padding:0;
 	width:56%;
