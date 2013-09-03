@@ -285,6 +285,8 @@
 	.widget.talkback .additional .inputLink {
 		min-height: 30px;
 		line-height: 30px;
+		margin: 0;
+		padding: 0;
 	}
 	
 	.widget.talkback .additional .inputLink input {
