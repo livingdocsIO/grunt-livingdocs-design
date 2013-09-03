@@ -157,7 +157,7 @@
 .widget.talkback .timeline .text .reportform textarea.focussed,
 .widget.talkback .new_comment .comment textarea.focussed {
 	height:9em;
-	margin-bottom: 0px;
+	margin:0px;
 	border-radius: 0.2em 0.2em 0 0;
 }
 
@@ -169,7 +169,7 @@
 .widget.talkback .additional.expanded {
 	position: relative;
 	z-index: 2;
-	margin-top: -1px;
+	margin-top: -6px;
 	display:block;
 }
 
@@ -179,14 +179,14 @@
 	font-style: italic;
 }
 
-.widget.talkback .additional input.field {
+/*.widget.talkback .additional input.field {
 	border:1px solid #444444;
 	width:74%;
 	height:1.5em;
 	padding:1%;
 	margin:0;
 	float:right;
-}
+}*/
 
 
 .widget.talkback .additional .imgUpload {
@@ -273,7 +273,7 @@
 	.widget.talkback .additional .imgLink input {
 		margin: 0;
 		width: 60%;
-		float: right
+		float: right;
 	}
 	
 	.widget.talkback .additional input.button {
@@ -285,13 +285,13 @@
 	.widget.talkback .additional .inputLink {
 		min-height: 30px;
 		line-height: 30px;
-		margin: 0;
-		padding: 0;
 	}
 	
 	.widget.talkback .additional .inputLink input {
 		float: right;
 		width: 60%;
+		margin: 0;
+		padding: 0.2em 0;
 	}
 	
 }
