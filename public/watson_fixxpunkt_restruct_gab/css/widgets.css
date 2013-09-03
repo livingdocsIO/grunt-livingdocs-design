@@ -610,10 +610,8 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 
 /* nur zum test */
 /* ============ */
-.widget.social_box {
-	width:321px;
-	float:right;
-	margin:0 2% 20px 20px;
+.widget.social_box img {
+	width:100%;
 }
 
 

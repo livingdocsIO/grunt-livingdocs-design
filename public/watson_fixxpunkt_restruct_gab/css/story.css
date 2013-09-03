@@ -91,10 +91,6 @@ p.source {
 	font-size:2.2em;
 }
 
-.story p.lead .author {
-	text-transform: lowercase;
-}
-
 .story p.lead .author .internal {
 	border-bottom:2px solid #f9349e;
 	height:1.1em;
