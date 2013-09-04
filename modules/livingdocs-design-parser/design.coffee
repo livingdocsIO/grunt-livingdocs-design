@@ -50,10 +50,9 @@ class Design
     unless files.length
       logger.warn('The design "' + @config.namespace + '" has no templates')
 
-    design = @
     # iterate through files array and process the templates
-    files.forEach (template) ->
-      design.addTemplateFile(template)
+    files.forEach (template) =>
+      @addTemplateFile(template)
 
 
   addGroup: (group) ->
@@ -123,8 +122,8 @@ class Design
 
   # write the config and templates to disk
   save: ->
-    templateBegin = '(function() { this.design || (this.design = {}); design.' + @config.namespace + ' = (function() { return '
-    templateEnd = ';})();}).call(this);'
+    templateBegin = "(function() { this.design || (this.design = {}); design.#{ @config.namespace } = (function() { return "
+    templateEnd = ";})();}).call(this);"
     design =
       config: @config
       templates: @templates
