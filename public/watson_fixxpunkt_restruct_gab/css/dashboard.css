@@ -129,6 +129,14 @@
 	font-size: 2em;
 }
 
+.dashboard .segment.list a {
+	color: #444;
+}
+
+.dashboard .segment.list a:hover {
+	color: #222;
+}
+
 .dashboard .segment.list .section {
 	position: relative;
 	display: block;
@@ -220,6 +228,21 @@
 .dashboard .segment.list.user .username {
 	display: block;
 	font-size: 1.4em;
+}
+
+.dashboard .segment.list.user .achievements {
+	font-size: 0.8em;
+	color: #888;
+}
+
+.dashboard .segment.list.user .achievements .waleIcon {
+	margin: 0 5px 0 10px;
+}
+
+.dashboard .segment.list.user .achievements .waleIcon img {
+	height: 16px;
+	width: auto;
+	vertical-align: sub;
 }
 
 
