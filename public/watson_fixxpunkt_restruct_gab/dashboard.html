@@ -24,11 +24,47 @@
 		<link rel="stylesheet" href="css/basic.css" />	
 		<link rel="stylesheet" href="css/dashboard.css" />
 		
+		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+		
+		<script type="text/javascript">
+		
+		
+						function backDash() {
+							$(".back").click(function () {
+								$('.dummy').addClass('hidden')
+								$('#front').removeClass( "hidden" )
+							});
+						}
+						
+						
+						function showNews() {
+							$("#showNews").click(function () {
+								$('.dummy').addClass('hidden')
+								$('#news').removeClass( "hidden" )
+							});
+						}
+		
+		
+		
+		
+			$(document).ready(function() {
+
+				showNews();
+				
+				backDash();
+
+  			});
+			
+		</script>
 			
 		
 		<style type="text/css">
 			body {
 				background: #ccc;
+			}
+			
+			.dummy.hidden {
+				display: none;
 			}
 		</style>
 		
@@ -39,6 +75,11 @@
 	
 			<div class="dashboard">
 				<div class="expandable expanded" style="left: 0px;">
+				
+				
+					<!-- TEMP Div for Click-Dummy -->
+					<div class="dummy front" id="front">
+					<!-- TEMP Div for Click-Dummy -->
 					
 					<!-- Header -->
 					<div class="header">
@@ -63,7 +104,7 @@
 					
 					<!-- Neuigkeiten -->
 					<div class="segment list notification">
-						<a class="section"><span class="number">5</span>Neuigkeiten</a>
+						<a class="section" id="showNews"><span class="number">5</span>Neuigkeiten</a>
 						<ul>
 							<li>
 								<a>
@@ -92,9 +133,116 @@
 					</div>
 					
 					<!-- Statistik -->
-					<div class="segment list statistik">
-						<a class="section">Statistiken</a>
+					<div class="segment list statistics">
+						<h6 class="breaker">Statistiken</h6>
+						
+						<ul>
+							<li class="heading">Artikel</li>
+							<li>Gelesen <span class="statValue">126</span></li>
+							<li>Kommentiert <span class="statValue">23</span></li>
+						</ul>
+						<ul>
+							<li class="heading">Kommentare</li>
+							<li>Geschrieben <span class="statValue">25</span></li>
+							<li>Likes <span class="statValue">63</span></li>
+							<li>Dislikes <span class="statValue">17</span></li>
+						</ul>
+						
 					</div>
+					
+					<!-- TEMP Div for Click-Dummy -->
+					</div>
+					<!-- TEMP Div for Click-Dummy -->
+					
+					
+					<!-- TEMP Div for Click-Dummy -->
+					<div class="dummy news" id="news">
+					<!-- TEMP Div for Click-Dummy -->
+					
+					
+							
+							<!-- Header -->
+					<div class="header">
+						<a href="#" class="back" title="Zurueck"> 
+							<img src="media/img/main/arrows/arrow-dashboard.png" />
+						</a>
+						<h2>Neuigkeiten</h2>
+					</div>
+					
+					<!-- Neuigkeiten -->
+					<div class="segment list full notification">
+						<ul>
+							<li class="marked">
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+									<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+									Dein Beitrag wurde veröffentlicht
+								</a>
+							</li>
+							<li class="marked">
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_054.jpg" width="50" /></span>Du hast ein neues Achievement erhalten:<br />
+									Staubsauger-Verkäufer</p>
+								</a>
+							</li>
+							<li class="marked">
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+									<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+									Dein Beitrag wurde veröffentlicht
+								</a>
+							</li>
+							<li>
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+									<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+									Dein Beitrag wurde veröffentlicht
+								</a>
+							</li>
+							<li>
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+									<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+									Dein Beitrag wurde veröffentlicht
+								</a>
+							</li>
+							<li>
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+									<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+									Dein Beitrag wurde veröffentlicht
+								</a>
+							</li>
+							<li>
+								<a>
+									<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+									<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+									Dein Beitrag wurde veröffentlicht
+								</a>
+							</li>
+							
+							
+						</ul>
+					</div>
+					
+					
+					<!-- TEMP Div for Click-Dummy -->
+					</div>
+					<!-- TEMP Div for Click-Dummy -->
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 					
 				</div>
 			</div>
