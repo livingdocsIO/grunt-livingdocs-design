@@ -11,10 +11,13 @@
 
 
 .dashboard .header {
+	position: fixed;
+	top: 0;
 	width: 100%;
 	height: 60px;
 	background: #0fb4f4;
 	color: #FFF;
+	z-index: 2;
 }
 
 .dashboard .header h2 {
@@ -131,6 +134,8 @@
 
 .dashboard .segment.list.full {
 	padding: 0 0 1em 0;
+	margin: 60px 0 0 0;
+
 }
 
 .dashboard .segment.list a {
@@ -233,6 +238,7 @@
 	background-repeat: no-repeat;
 	background-position: 96% center;
 	background-size: 2.5% 25%;
+	margin: 60px 0 0 0;
 }
 
 .dashboard .segment.list.user li .graph {
@@ -293,6 +299,80 @@
 	margin: 0 15px 0 0;
 }
 
+/* Comments Detail*/
+.dashboard .segment.list.full.comments li {
+	padding: 0;
+}
+
+.dashboard .segment.list.full.comments img {
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
+	border-radius: 0;
+}
+
+.dashboard .segment.list.full.comments li a {
+	display: block;
+    padding: 20px 60px 20px 15px;
+    background-image: url("../media/img/main/arrows/arrow-right-dashboard.png");
+    background-position: 96% center;
+    background-repeat: no-repeat;
+    background-size: 20px 40px;
+}
+ 
+
+.dashboard .segment.list.full.comments .title {
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+.dashboard .segment.list.full.comments .date {
+	font-weight: bold;
+}
+
+
+.dashboard .segment.list.full.comments li ul li {
+	margin: 10px 0 0 0;
+	display: inline-block;
+	border: none;
+}
+
+.dashboard .segment.list.full.comments li ul li.recomment {
+	background: url("../media/img/main/icons/icon_recomment.png");
+	background-position: left top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 1.2em;
+    padding-left: 1.4em;
+    padding-right: 0.5em;
+}
+
+.dashboard .segment.list.full.comments li ul li.likes {
+	background: url("../media/img/main/icons/icon_love_grey.png");
+	background-position: left top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 1.2em;
+    padding-left: 1.4em;
+    padding-right: 0.5em;
+}
+
+.dashboard .segment.list.full.comments li ul li.dislikes {
+	background:url("../media/img/main/icons/icon_hate_grey.png");
+	background-position: left top;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: inline-block;
+    height: 1.2em;
+    padding-left: 1.4em;
+    padding-right: 0.5em;
+}
+
+.dashboard .segment.list.full.achievements .overview {
+	height: 70px;
+}
+
 /* mobile */
 /* ====== */
 @media screen and (max-width: 600px) {	
@@ -302,7 +382,6 @@
 		width: 100%;
 		height: 100%;
 		min-width: 320px;
-		background: red;
 	}
 
 	.dashboard .expandable {

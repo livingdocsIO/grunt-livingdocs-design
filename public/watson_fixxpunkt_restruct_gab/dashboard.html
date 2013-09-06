@@ -43,15 +43,43 @@
 								$('#news').removeClass( "hidden" )
 							});
 						}
+						
+						
+						function showComments() {
+							$("#showComments").click(function () {
+								$('.dummy').addClass('hidden')
+								$('#comments').removeClass( "hidden" )
+							});
+						}
+						
+						function showAchieve() {
+							$("#showAchieve").click(function () {
+								$('.dummy').addClass('hidden')
+								$('#achievements').removeClass( "hidden" )
+							});
+						}
 		
 		
 		
 		
 			$(document).ready(function() {
-
+				
+				function start() {
+					
+				$('.dummy').addClass('hidden')
+				$('#front').removeClass( "hidden" )
+			
+				}
+				start();
+				
+				
 				showNews();
 				
 				backDash();
+				
+				showComments();
+				
+				showAchieve();
 
   			});
 			
@@ -60,12 +88,22 @@
 		
 		<style type="text/css">
 			body {
-				background: #ccc;
+				background: #fff;
 			}
 			
 			.dummy.hidden {
 				display: none;
 			}
+			
+			.dashboard {
+				top: 0;
+				height: auto;
+				left: 0;
+				position: relative;
+				width: 100%;
+				z-index: 100;
+			}
+			
 		</style>
 		
 
@@ -74,7 +112,7 @@
 	<body>
 	
 			<div class="dashboard">
-				<div class="expandable expanded" style="left: 0px;">
+				
 				
 				
 					<!-- TEMP Div for Click-Dummy -->
@@ -124,12 +162,12 @@
 					
 					<!-- Kommentare -->
 					<div class="segment list comment">
-						<a class="section">Kommentare</a>
+						<a id="showComments" class="section">Kommentare</a>
 					</div>
 					
 					<!-- Achievements -->
 					<div class="segment list achievements">
-						<a class="section">Achievements</a>
+						<a class="section" id="showAchieve">Achievements</a>
 					</div>
 					
 					<!-- Statistik -->
@@ -231,6 +269,180 @@
 					<!-- TEMP Div for Click-Dummy -->
 					
 					
+					<!-- TEMP Div for Click-Dummy -->
+					<div class="dummy comments" id="comments">
+					<!-- TEMP Div for Click-Dummy -->
+					
+								<!-- Header -->
+								<div class="header">
+									<a href="#" class="back" title="Zurueck"> 
+										<img src="media/img/main/arrows/arrow-dashboard.png" />
+									</a>
+									<h2>Kommentare</h2>
+								</div>
+
+					
+								<div class="segment list full comments">
+									<ul>
+										<li>
+											<a>
+												<h5 class="title">Die lustigsten Fotos 2013</h5>
+												<p class="date">23. 7. 2013</p>
+												<p class="comment">
+													<img src="media/img/placeholderimg/bild_061.jpg" />
+												</p>
+												<ul>
+													<li class="recomment">0</li>
+													<li class="likes">199</li>
+													<li class="dislikes">35</li>
+												</ul>
+												
+											</a>
+										</li>
+										<li>
+											<a>
+												<h5 class="title">Treibt ein Töff- Hasser in Zürich sein Unwesen?</h5>
+												<p class="date">21. 7. 2013</p>
+												<p class="comment">Ich habe auf meinem Roller eine kleine 
+													Aktion-Kamera montiert ! Der soll das mal 
+													bei mir versuchen......
+												</p>
+												<ul>
+													<li class="recomment">0</li>
+													<li class="likes">199</li>
+													<li class="dislikes">35</li>
+												</ul>
+												
+											</a>
+										</li>
+										<li>
+											<a>
+												<h5 class="title">Treibt ein Töff- Hasser in Zürich sein Unwesen?</h5>
+												<p class="date">21. 7. 2013</p>
+												<p class="comment">Ich habe auf meinem Roller eine kleine 
+													Aktion-Kamera montiert ! Der soll das mal 
+													bei mir versuchen......
+												</p>
+												<ul>
+													<li class="recomment">0</li>
+													<li class="likes">199</li>
+													<li class="dislikes">35</li>
+												</ul>
+												
+											</a>
+										</li>
+										<li>
+											<a>
+												<h5 class="title">Treibt ein Töff- Hasser in Zürich sein Unwesen?</h5>
+												<p class="date">21. 7. 2013</p>
+												<p class="comment">Ich habe auf meinem Roller eine kleine 
+													Aktion-Kamera montiert ! Der soll das mal 
+													bei mir versuchen......
+												</p>
+												<ul>
+													<li class="recomment">0</li>
+													<li class="likes">199</li>
+													<li class="dislikes">35</li>
+												</ul>
+												
+											</a>
+										</li>
+										<li>
+											<a>
+												<h5 class="title">Treibt ein Töff- Hasser in Zürich sein Unwesen?</h5>
+												<p class="date">21. 7. 2013</p>
+												<p class="comment">Ich habe auf meinem Roller eine kleine 
+													Aktion-Kamera montiert ! Der soll das mal 
+													bei mir versuchen......
+												</p>
+												<ul>
+													<li class="recomment">0</li>
+													<li class="likes">199</li>
+													<li class="dislikes">35</li>
+												</ul>
+												
+											</a>
+										</li>
+									</ul>
+								</div>
+
+					
+					
+					
+					
+					
+					<!-- TEMP Div for Click-Dummy -->
+					</div>
+					<!-- TEMP Div for Click-Dummy -->
+					
+					
+					<!-- TEMP Div for Click-Dummy -->
+					<div class="dummy achievements" id="achievements">
+					<!-- TEMP Div for Click-Dummy -->
+					
+								<!-- Header -->
+								<div class="header">
+									<a href="#" class="back" title="Zurueck"> 
+										<img src="media/img/main/arrows/arrow-dashboard.png" />
+									</a>
+									<h2>Achievements</h2>
+								</div>
+
+					
+								<div class="segment list full achievements">
+									
+									<div class="overview">
+										<div class=""
+									</div>
+									
+									<h6 class="breaker">Poll</h6>
+									<ul>
+										<li>
+											<a>
+												<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+												<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+												Dein Beitrag wurde veröffentlicht
+											</a>
+										</li>
+										<li>
+											<a>
+												<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+												<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+												Dein Beitrag wurde veröffentlicht
+											</a>
+										</li>
+										
+									</ul>
+									
+									<h6 class="breaker">Kommentare</h6>
+									<ul>
+										<li>
+											<a>
+												<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+												<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+												Dein Beitrag wurde veröffentlicht
+											</a>
+										</li>
+										<li>
+											<a>
+												<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
+												<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
+												Dein Beitrag wurde veröffentlicht
+											</a>
+										</li>
+										
+									</ul>
+
+								</div>
+
+					
+					
+					
+					
+					
+					<!-- TEMP Div for Click-Dummy -->
+					</div>
+					<!-- TEMP Div for Click-Dummy -->
 					
 					
 					
@@ -244,7 +456,8 @@
 					
 					
 					
-				</div>
+					
+					
 			</div>
 			
 			
