@@ -129,6 +129,18 @@
 	font-size: 2em;
 }
 
+.dashboard .segment.list.full {
+	padding: 0 0 1em 0;
+}
+
+.dashboard .segment.list a {
+	color: #444;
+}
+
+.dashboard .segment.list a:hover {
+	color: #222;
+}
+
 .dashboard .segment.list .section {
 	position: relative;
 	display: block;
@@ -159,14 +171,34 @@
 	font-weight: bold;
 }
 
+.dashboard .segment.list .breaker {
+	display: block;
+	height: 40px;
+	padding: 2% 10px 2% 70px;
+	background-color: #F1F1F1;
+	font-size: 1.4em;
+	line-height: 40px;
+	color: #666;
+}
+
 
 
 .dashboard .segment.list li {
 	position: relative;
-	padding:0 2% 20px 70px;
-	margin: 20px 0 0 0;
+	padding:20px 2% 20px 70px;
+	margin: 0;
 	border-bottom: 1px solid #D1D1D1;
 	line-height: 1.2em;
+}
+
+.dashboard .segment.list li.marked {
+	background: #d7eeb7;
+}
+
+.dashboard .segment.list li.heading {
+	margin-left: -55px;
+	font-size: 1.4em;
+	color: #888;
 }
 
 .dashboard .segment.list li .graph  {
@@ -175,7 +207,7 @@
 	top:0;
 	width: 40px;
 	height: 40px;
-	padding:0 0 0 15px;
+	padding:20px 0 0 15px;
 	margin: 0;
 }
 
@@ -206,7 +238,7 @@
 .dashboard .segment.list.user li .graph {
 	width: 50px;
 	height: 50px;
-	padding:0 0 0 10px;
+	padding:20px 0 0 10px;
 	margin: 0;
 }
 
@@ -220,9 +252,46 @@
 .dashboard .segment.list.user .username {
 	display: block;
 	font-size: 1.4em;
+	margin:0 0 5px 0;
 }
 
+.dashboard .segment.list.user .achievements {
+	font-size: 0.8em;
+	color: #888;
+}
 
+.dashboard .segment.list.user .achievements .waleIcon {
+	margin: 0 0 0 5px;
+}
+
+.dashboard .segment.list.user .achievements .waleIcon img {
+	height: 16px;
+	width: auto;
+	vertical-align: baseline;
+	opacity: 0.6;
+}
+
+.dashboard .segment.list.statistics ul {
+	border-bottom: 1px solid #D1D1D1;
+	padding: 0 0 20px 0;
+}
+
+.dashboard .segment.list.statistics li, .dashboard .segment.list.statistics li.heading {
+	border: none;
+}
+
+.dashboard .segment.list.statistics li {
+	padding: 10px 2% 0px 70px;
+}
+
+.dashboard .segment.list.statistics li.heading {
+	padding: 20px 2% 0 70px; 
+}
+
+.dashboard .segment.list.statistics li .statValue {
+	float: right;
+	margin: 0 15px 0 0;
+}
 
 /* mobile */
 /* ====== */
