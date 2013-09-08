@@ -1,5 +1,5 @@
 "use strict"
-Design = require('../modules/livingdocs-design-parser').design
+Design = require('../modules/livingdocs-design-compiler').design
 
 module.exports = (grunt) ->
   # grunt task to compile all templates
