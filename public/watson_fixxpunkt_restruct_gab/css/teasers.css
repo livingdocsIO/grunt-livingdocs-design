@@ -15,6 +15,11 @@
 	font-size:0.8181em; /* 1em / 2.2em * 1.8em => 0.8181em */
 }
 
+.insert .teaser.shortmessage {
+	height:auto;
+	padding-bottom:0;
+}
+
 .teaser .titlepic {
 	position:absolute;
 	top:0;
@@ -45,6 +50,10 @@
 	-ms-hyphens: auto;
 	-o-hyphens: auto;
 	hyphens: auto;
+}
+
+.insert .teaser.shortmessage .text {
+	position:static;
 }
 
 .teaser .text h2 a,
