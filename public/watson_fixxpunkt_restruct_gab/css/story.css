@@ -315,6 +315,7 @@ p.source {
 		clear:both !important;
 		float:none !important;
 		display:block !important;
+		max-width: none !important;
 	}
 	
 	.story .insert p.caption.inside {
