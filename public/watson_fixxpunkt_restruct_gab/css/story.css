@@ -241,6 +241,7 @@ p.source {
 
 .story .insert.commercial img {
 	width:90%;
+	height:auto;
 	margin:1.5em 0;
 }
 
