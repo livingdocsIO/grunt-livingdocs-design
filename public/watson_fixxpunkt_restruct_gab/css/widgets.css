@@ -464,6 +464,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	display:block; /* just in case our peephole is an <a> */
 }
 
+.insert.commercial .widget.peephole {
+	padding-top:33%;
+}
+
 .widget.panorama {
 	height:40em;
 	position:relative;
