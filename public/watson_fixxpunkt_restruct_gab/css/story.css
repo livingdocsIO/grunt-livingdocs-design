@@ -272,10 +272,6 @@ p.source {
 		width:80%;
 	}
 	
-	.story .insert {
-		clear: right;
-	}
-	
 	.story .insert.jumbo .caption,
 	.story .insert.jumbo .source,
 	.story .insert.cinemascope .caption,
