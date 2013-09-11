@@ -638,6 +638,10 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 		background-attachment:scroll;
 		background-size:cover;
 	}
+	
+	.insert.commercial .widget.peephole {
+		padding-top:56.25%;
+	}
 
 	/* imagebar */
 	/* ============ */
