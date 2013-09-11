@@ -137,7 +137,7 @@ p.source {
 /* reset insert values */
 .story .insert {
 	position: relative;
-	width:60%;
+	max-width:60%;
 	margin:0 0 10px 0;
 	float:none;
 	overflow: hidden;
@@ -181,6 +181,7 @@ p.source {
 .story .insert.jumbo,
 .story .insert.cinemascope {
 	position:relative;
+	max-width:none;
 	width:117.5%;
 	left:-11.7%;
 	margin:0px 0% 25px 0%;
@@ -189,6 +190,7 @@ p.source {
 
 /* full insert */
 .story .insert.full {
+	max-width:none;
 	width:100%;
 	margin:0px 0 20px 0;
 	clear:both;
@@ -196,6 +198,7 @@ p.source {
 
 /* fifty-fifty insert */
 .story .insert.fifty_fifty {
+	max-width:none;
 	width:49.5%;
 	margin:0 0.25% 10px 0.25%;
 	float:left;
@@ -203,6 +206,7 @@ p.source {
 
 /* side insert */
 .story .insert.side {
+	max-width:none;
 	clear:right;
 	float: right;
 	width:37%;
@@ -211,6 +215,7 @@ p.source {
 
 /* left side only */
 .story .insert.right {
+	max-width:none;
 	clear:right;
 	margin:0 0 20px 2%;
 	padding:0;
@@ -236,6 +241,7 @@ p.source {
 
 .story .insert.commercial img {
 	width:90%;
+	height:auto;
 	margin:1.5em 0;
 }
 
@@ -309,6 +315,7 @@ p.source {
 		clear:both !important;
 		float:none !important;
 		display:block !important;
+		max-width: none !important;
 	}
 	
 	.story .insert p.caption.inside {

@@ -188,6 +188,14 @@
 
 
 
+/* Spiegel Online <== usually this combo shouldn't be available to the user */
+.color_combo_98 .combo_bg, .color_combo_98.combo_bg { background-color:#c10000 !important; }
+.color_combo_98 .combo_bg_inv, .color_combo_98.combo_bg_inv { background-color:#ffffff !important; }
+.color_combo_98 .combo_bd, .color_combo_98.combo_bd { border-color: #c10000 !important; }
+.color_combo_98 .combo_bd_inv, .color_combo_98.combo_bd_inv { border-color: #ffffff !important; }
+.color_combo_98 .combo_fg, .color_combo_98.combo_fg { color:#ffffff !important; }
+.color_combo_98 .combo_fg_inv, .color_combo_98.combo_fg_inv { color:#c10000 !important; }
+.color_combo_98 .combo_bg_opa, .color_combo_98.combo_bg_opa {background-color:#c10000 !important; background-color: rgba(193,0,0,0.6) !important;}
 
 /* Plain Old <== usually this combo shouldn't be available to the user */
 .color_combo_99 .combo_bg, .color_combo_99.combo_bg { background-color:#ffffff !important; }
