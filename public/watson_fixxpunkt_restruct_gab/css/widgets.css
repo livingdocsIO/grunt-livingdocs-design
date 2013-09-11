@@ -691,13 +691,19 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 @media screen and (max-width: 600px) {
 	
 	/* image */
-	/* ===================== */
+	/* ===== */
 	.widget.image { min-height:6em; } /* 42px / 7px */
 	
 	.widget.image p.caption {
 		font-size:1.8em !important;
 		max-width:none  !important;
 		padding:5px 15px;
+	}
+	
+	/* infobox */
+	/* ======= */
+	.widget.infobox {
+		padding:5px 5px;
 	}
 	
 	/* badge list */
