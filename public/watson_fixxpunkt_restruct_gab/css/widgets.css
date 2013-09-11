@@ -461,6 +461,7 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 	background-position:center center;
 	background-size:cover;
 	background-repeat:no-repeat;
+	display:block; /* just in case our peephole is an <a> */
 }
 
 .widget.panorama {
@@ -507,7 +508,6 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 .widget.peephole p .combo_fg {
 	position:relative;
 }
-
 
 
 /* magazine cover */
