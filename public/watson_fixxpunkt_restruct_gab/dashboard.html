@@ -58,6 +58,13 @@
 								$('#achievements').removeClass( "hidden" )
 							});
 						}
+						
+						function showUser() {
+							$("#showUser").click(function () {
+								$('.dummy').addClass('hidden')
+								$('#userprofile').removeClass( "hidden" )
+							});
+						}
 		
 		
 		
@@ -80,6 +87,8 @@
 				showComments();
 				
 				showAchieve();
+				
+				showUser();
 
   			});
 			
@@ -131,10 +140,10 @@
 					<div class="segment list user">
 						<ul>
 							<li>
-								<a>
+								<a id="showUser">
 									<span class="graph"><img src="media/img/placeholderimg/bild_053.jpg" /></span> 
 									<span class="username">Nathalie Steiner</span>
-									<span class="achievements">34 Achievements <span class="waleIcon"><img src="media/img/main/dashboard/wale.png" /></span> 140</span>
+									<span class="achievements">34 Achievements <span class="whaleIcon"><img src="media/img/main/dashboard/whale.png" /></span> 140</span>
 								</a>
 							</li>
 						</ul>
@@ -392,24 +401,32 @@
 								<div class="segment list full achievements">
 									
 									<div class="overview">
-										<div class=""
+										<div class="total"><span class="bubble">13</span> Gesammelt</div>
+										<div class="happyWhales">64 <span class="bubble"><img src="media/img/main/dashboard/whitewhale.png" /></span></div>
 									</div>
 									
 									<h6 class="breaker">Poll</h6>
 									<ul>
 										<li>
-											<a>
-												<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
-												<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
-												Dein Beitrag wurde veröffentlicht
-											</a>
+											
+												<span class="graph"><img src="media/img/main/dashboard/achievements/poll-level1.png" /></span> 
+												<h5 class="title">Poll Newman</h5>
+												Am ersten Poll teilnehmen.
+												<p class="status">30.7.2013 <span class="happyWhales">1</span></p>
+											
 										</li>
-										<li>
-											<a>
-												<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
-												<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
-												Dein Beitrag wurde veröffentlicht
-											</a>
+										<li class="unfinished">
+											
+												<span class="graph"></span> 
+												<h5 class="title">Level 2</h5>
+												An 10 Polls teilnehmen.
+												<div class="status">
+												 	<div class="bar">
+													 	<div class="progress" style="width:10px"></div>
+												 	</div>
+												 	<span class="counter">1/10</span>
+												</div>											
+											
 										</li>
 										
 									</ul>
@@ -417,18 +434,27 @@
 									<h6 class="breaker">Kommentare</h6>
 									<ul>
 										<li>
-											<a>
-												<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
-												<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
-												Dein Beitrag wurde veröffentlicht
-											</a>
+											
+												<span class="graph"><img src="media/img/main/dashboard/achievements/com-level1.png" /></span> 
+												<h5 class="title">Averell</h5>
+												Ein Kommentar schreiben.
+												<p class="status">30.7.2013 <span class="happyWhales">1</span></p>
+											
+
 										</li>
-										<li>
-											<a>
-												<span class="graph"><img src="media/img/placeholderimg/bild_060.png" /></span> 
-												<span class="aritcle">«Zürich - Lugano unter zwei Stunden»</span>
-												Dein Beitrag wurde veröffentlicht
-											</a>
+										<li class="unfinished">
+											
+												<span class="graph"></span> 
+												<h5 class="title">Level 2</h5>
+												20 Kommentare schreiben.
+												<div class="status">
+												 	<div class="bar">
+													 	<div class="progress" style="width:5px"></div>
+												 	</div>
+												 	<span class="counter">1/20</span>
+												</div>
+											
+
 										</li>
 										
 									</ul>
@@ -446,12 +472,46 @@
 					
 					
 					
+					<!-- TEMP Div for Click-Dummy -->
+					<div class="dummy userprofile" id="userprofile">
+					<!-- TEMP Div for Click-Dummy -->
+							
+							<!-- Header -->
+								<div class="header">
+									<a href="#" class="back" title="Zurueck"> 
+										<img src="media/img/main/arrows/arrow-dashboard.png" />
+									</a>
+									<h2>Achievements</h2>
+								</div>
+
+					
+								<div class="segment list full userprofile">
+								
+								
+								<h6 class="breaker">Öffentlich (Sichtbar)</h6>
+								
+								<div class="public">
+									
+									<div class="profile name"></div>
+									
+									<div class="profile sex"></div>
+									<div class="profile age"></div>
+									
+									<div class="profile whales"></div>
+									<div class="profile achievements"></div>
+									
+								</div>
+								
+								<h6 class="breaker">Privat (sieht nur Watson)</h6>
+								
+								<div class="privat"></div>
+								
+								</div>
 					
 					
-					
-					
-					
-					
+					<!-- TEMP Div for Click-Dummy -->
+					</div>
+					<!-- TEMP Div for Click-Dummy -->
 					
 					
 					

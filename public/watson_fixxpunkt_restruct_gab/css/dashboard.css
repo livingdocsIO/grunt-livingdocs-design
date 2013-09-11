@@ -266,11 +266,11 @@
 	color: #888;
 }
 
-.dashboard .segment.list.user .achievements .waleIcon {
+.dashboard .segment.list.user .achievements .whaleIcon {
 	margin: 0 0 0 5px;
 }
 
-.dashboard .segment.list.user .achievements .waleIcon img {
+.dashboard .segment.list.user .achievements .whaleIcon img {
 	height: 16px;
 	width: auto;
 	vertical-align: baseline;
@@ -371,7 +371,96 @@
 
 .dashboard .segment.list.full.achievements .overview {
 	height: 70px;
+	line-height: 40px;
 }
+
+.dashboard .segment.list.full.achievements .overview .bubble {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin: 15px 0 0 0;
+	-moz-border-radius:20px;
+	-webkit-border-radius: 20px;
+	border-radius: 20px;
+	text-align: center;
+	background: #81d807;
+	color: #FFF;
+}
+
+
+.dashboard .segment.list.full.achievements .overview .total {
+	float: left;
+	margin: 0 0 0 15px;
+}
+
+.dashboard .segment.list.full.achievements .overview .happyWhales {
+	float: right;
+	margin: 0 15px 0 0;
+}
+
+.dashboard .segment.list.full.achievements .overview .happyWhales .bubble {
+	background-color: #f40f97;
+}
+
+.dashboard .segment.list.full.achievements .overview .happyWhales .bubble img {
+	height: auto;
+	width: 30px;
+}
+
+.dashboard .segment.list.full.achievements h5 {
+	font-weight: bold;
+}
+
+.dashboard .segment.list.full.achievements .status {
+	font-size: 0.8em;
+	font-style: italic;
+	color: #888;
+}
+
+.dashboard .segment.list.full.achievements .status .happyWhales {
+	background-image:url("../media/img/main/dashboard/pinkwhale.png");
+	background-repeat: no-repeat;
+	background-size: 30px;
+	background-position: 10px 2px;
+	padding: 0 0 0 45px;
+	font-style: normal;
+	color: #f40f97;
+}
+
+.dashboard .segment.list.full.achievements .status .bar {
+	display: inline-block;
+	height: 20px;
+	width: 100px;
+	border: 1px solid #444;
+	position: relative;
+
+}
+
+.dashboard .segment.list.full.achievements .status .bar .progress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background:#f40f97;
+	height: 20px;
+	width: 1px;	
+}
+
+.dashboard .segment.list.full.achievements .status .counter {
+	vertical-align: top;
+	padding: 0 0 0 5px;
+}
+
+
+.dashboard .segment.list.full.achievements li.unfinished {
+	color: #888;
+}
+
+
+.dashboard .segment.list.full.achievements li:last-child {
+	border: none;
+}
+
+
 
 /* mobile */
 /* ====== */
