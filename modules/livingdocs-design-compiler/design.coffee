@@ -98,7 +98,7 @@ class Design
     $ = cheerio.load(html)
     template = {}
     template.name = $('html > head > title').text() || @filenameToTemplatename(filename)
-    template.html = $('html > body').html()
+    template.markup = $('html > body').html()
     @kickstarters.push(template)
 
 
