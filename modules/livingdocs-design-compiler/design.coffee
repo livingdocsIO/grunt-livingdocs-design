@@ -38,14 +38,13 @@ class Design
     files.forEach (template) =>
       @addTemplateFile(template)
 
-
     kickstartersPath = options.src + '/kickstarters'
     if file.exists(kickstartersPath)
       kickstarters = file.readdir(options.src + '/kickstarters')
       kickstarters.forEach (kickstart) =>
-        kickstarterPath = kickstartersPath + '/' + kickstart
-        html = @minifyHtml(file.read(kickstarterPath, {encoding: 'utf8'}), kickstarterPath)
-        @addKickstart(kickstarterPath, html)
+        if(kickstart.indexOf '.html' != -1)
+          kickstarterPath = kickstartersPath + '/' + kickstart
+          @addKickstartFile(kickstarterPath)
 
 
   addGroup: (group) ->
@@ -70,13 +69,6 @@ class Design
     @templates.push(template)
 
 
-  addKickstart: (filename, html) ->
-    $ = cheerio.load(html)
-    template = {}
-    template.title = $('html > head > title').text() || @filenameToTemplatename(title)
-    template.html = $('html > body').html()
-    @kickstarters.push(template)
-
   addTemplateFile: (filePath) ->
     templatePath = @getTemplatePath(filePath, @options.src, @options.templatesDirectory)
     templateName = @filenameToTemplatename(filePath)
@@ -100,6 +92,19 @@ class Design
     template.html = $.html()
 
     @addTemplate(template)
+
+
+  addKickstart: (filename, html) ->
+    $ = cheerio.load(html)
+    template = {}
+    template.name = $('html > head > title').text() || @filenameToTemplatename(filename)
+    template.html = $('html > body').html()
+    @kickstarters.push(template)
+
+
+  addKickstartFile: (kickstarterPath) ->
+      html = @minifyHtml(file.read(kickstarterPath, {encoding: 'utf8'}), kickstarterPath)
+      @addKickstart(kickstarterPath, html)
 
 
   getTemplatePath: (string, design, templatesDirectory) ->
