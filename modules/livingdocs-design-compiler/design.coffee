@@ -6,35 +6,19 @@ color = require("color")
 
 file = require('./file')
 logger = require('./logger')
-toCamelCase = require("./string").toCamelCase
-
-
-requireResources = (src, templatesDirectory) ->
-  # Check existence of all directories and files that are required
-  requiredResources = [
-    name: ''
-    type: 'design'
-  ,
-    name: templatesDirectory
-    type: 'directory'
-  ,
-    name: 'config.json'
-    type: 'file'
-  ]
-
-  requiredResources.forEach (resource) ->
-    unless file.exists(path.join(src, resource.name))
-      error('The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.')
+helpers = require('./helpers')
+toCamelCase = require("./helpers").toCamelCase
 
 
 class Design
 
   constructor: (files, options) ->
-    requireResources(options.src, options.templatesDirectory)
+    helpers.requireResources(options.src, options.templatesDirectory)
 
     @config = file.readJson(path.join(options.src, 'config.json'))
     @config.groups = {}
     @templates = []
+    @kickstarters = []
     @options =
       src: options.src,
       dest: options.dest,
@@ -53,6 +37,14 @@ class Design
     # iterate through files array and process the templates
     files.forEach (template) =>
       @addTemplateFile(template)
+
+    kickstartersPath = options.src + '/kickstarters'
+    if file.exists(kickstartersPath)
+      kickstarters = file.readdir(options.src + '/kickstarters')
+      kickstarters.forEach (kickstart) =>
+        if(kickstart.indexOf '.html' != -1)
+          kickstarterPath = kickstartersPath + '/' + kickstart
+          @addKickstartFile(kickstarterPath)
 
 
   addGroup: (group) ->
@@ -102,6 +94,19 @@ class Design
     @addTemplate(template)
 
 
+  addKickstart: (filename, html) ->
+    $ = cheerio.load(html)
+    template = {}
+    template.name = $('html > head > title').text() || @filenameToTemplatename(filename)
+    template.markup = $('html > body').html()
+    @kickstarters.push(template)
+
+
+  addKickstartFile: (kickstarterPath) ->
+      html = @minifyHtml(file.read(kickstarterPath, {encoding: 'utf8'}), kickstarterPath)
+      @addKickstart(kickstarterPath, html)
+
+
   getTemplatePath: (string, design, templatesDirectory) ->
     parts = string.replace(design + '/' + templatesDirectory + '/', '').split('/')
     output = []
@@ -127,6 +132,7 @@ class Design
     design =
       config: @config
       templates: @templates
+      kickstarters: @kickstarters
     fileData = templateBegin + JSON.stringify(design, null, 2) + templateEnd
     file.write @options.dest + '/design.js', fileData
     logger.log('Design "%s" compiled.', @options.dest)
@@ -142,6 +148,7 @@ class Design
 
     else
       html
+
 
 
 module.exports = Design

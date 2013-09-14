@@ -24,3 +24,6 @@ exports.readJson = (file, options) ->
 
 
 exports.exists = fs.existsSync
+
+
+exports.readdir = fs.readdirSync
