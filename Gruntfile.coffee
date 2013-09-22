@@ -48,8 +48,7 @@ grunt.initConfig
           'designs/**/img/**'
           'designs/**/images/**'
           'designs/**/media/**'
-          'designs/**/preview.html'
-          'designs/**/kickstart.html'
+          'designs/**/*.html'
         ]
         dest: '.tmp/'
         # exclude empty directories
