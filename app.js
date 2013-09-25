@@ -30,8 +30,8 @@ app.use(function(req, res, next) {
 app.get('/', listDesigns);
 app.get('/:root', listDesigns);
 app.get('/designs/:design', getDesign, listDesigns);
-app.get('/designs/:design/kickstarters', listKickstarters);
-app.get('/designs/:design/kickstarters/:kickstarter', getKickstarter, listKickstarters);
+app.get('/designs/:design/kickstarters', listKickstarters, listDesigns);
+app.get('/designs/:design/kickstarters/:kickstarter', getKickstarter, listKickstarters, listDesigns);
 app.get('/designs/:design/*', getDesignAssets, getDesign, listDesigns);
 
 
@@ -44,6 +44,7 @@ function listDesigns(req, res, next) {
 		if (design[0] != '.')
 			list = list + '<li><a href="' + designsUrl + '/' + design + '">' + design + '</a></li>'
 	});
+
 	res.send('<html><body><ul>' + list + '</ul></body></html>');
 }
 
@@ -52,10 +53,10 @@ function getDesign(req, res, next) {
 	var previewFile = 'designs/' + req.params.design + '/preview.html';
 	if (fs.existsSync(previewFile)) {
 		res.sendfile('designs/' + req.params.design + '/preview.html');
+		return;
 	}
-	else {
-		next();
-	}
+	
+	next();
 }
 
 
@@ -63,22 +64,28 @@ function getDesignAssets(req, res, next) {
 	var path = req.params[0] ? 'designs/' + req.params.design + '/dist/' + req.params[0] : 'public/index.html';
 	if(fs.existsSync(path)) {
 		res.sendfile(path);
+		return;
 	}
-	else {
-		next();
-	}
+
+	next();
 }
 
 
 function listKickstarters(req, res, next) {
 	var kickstartersDir = path.join(root, 'designs', req.params.design, 'kickstarters');
 	var kickstartersUrl = path.join('/designs', req.params.design, 'kickstarters');
+	if(!fs.existsSync(kickstartersDir)) {
+		next();
+		return;
+	}
+
 	var files = fs.readdirSync(kickstartersDir);
 	var list = "";
 	files.forEach(function(kickstart) {
 		if (kickstart.indexOf('.html') != -1)
 			list = list + '<li><a href="' + kickstartersUrl + '/' + kickstart + '">' + kickstart + '</a></li>'
 	});
+
 	res.send('<html><body><ul>' + list + '</ul></body></html>');
 }
 
@@ -91,10 +98,10 @@ function getKickstarter(req, res, next) {
 	var filePath = path.join('designs', req.params.design, 'kickstarters', kickstarter);
 	if (fs.existsSync(filePath)) {
 		res.sendfile(filePath);
+		return;
 	}
-	else {
-		next();
-	}
+
+	next();
 }
 
 // Start Server
