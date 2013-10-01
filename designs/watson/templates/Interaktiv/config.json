@@ -1,0 +1,14 @@
+{
+  "namespace": "watson",
+  "styles": [
+    {
+      "name": "Insert",
+      "type": "select",
+      "options": [
+        { "caption": "Full",        "value": "full" },
+        { "caption": "Right",       "value": "right" },
+        { "caption": "Side",        "value": "side" }
+      ]
+    }
+  ]
+}
