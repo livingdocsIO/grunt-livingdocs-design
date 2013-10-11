@@ -4,33 +4,48 @@
 }
 </script>
 
-<div class="insert">
-  <h4 class="inserttitle" doc-editable="title" doc-optional>Titel</h4>
+<div class="insert" doc-html="html">
+  <h4 class="inserttitle" doc-editable="title">Titel</h4>
+		<div class="widget poll font_l font_cursive color_combo_20 combo_bg combo_fg">
+	    <div class="text">
+	      <div class="answers">
+	        <h3>Umfrage</h3>
+	        <h2 style="line-height:1.05em;">Wer hat beste Chültürprogramm?</h2>
 
-<div class="widget poll">
-	<div class="text">
-		<div class="answers">
-			<h3>Umfrage</h3>
-			<h2 style="line-height:1.05em;">Wer gewinnt die Tour de France?</h2>
-			<input type="hidden" class="poll_id" name="poll_id" value="18">
-			<ul>
-				<li><input type="radio" class="radio" name="poll_1" id="poll_1_1" value="55"><label for="poll_1_1">Chris Froome</label></li>
-				<li><input type="radio" class="radio" name="poll_1" id="poll_1_2" value="56"><label for="poll_1_2">Alberto Contador</label></li>
-				<li><input type="radio" class="radio" name="poll_1" id="poll_1_3" value="57"><label for="poll_1_3">Cadel Evans</label></li>
-				<li><a href="javascript:;" class="button combo_bg_inv combo_fg_inv">vote</a></li>
-			</ul>
-		</div>
-	<div class="result">
-		<p>Wer gewinnt die Tour de France?</p>
-		<ul>
-			<li class="combo_bd_inv"><span class="bubble combo_bg_inv combo_fg_inv">16%</span><span class="answertext">Chris Froome</span></li>
-			<li class="combo_bd_inv"><span class="bubble combo_bg_inv combo_fg_inv">36%</span><span class="answertext">Cadel Evans</span></li>
-			<li class="combo_bd_inv"><span class="bubble combo_bg_inv combo_fg_inv">48%</span><span class="answertext">Alberto Contador</span></li>
-		</ul>
-	</div>
-	</div>
-</div>
+	        <input type="hidden" class="poll_id" name="poll_id" value="11">
+	        <ul>
+	        	<li>
+	            <input type="radio" class="radio" name="poll_11" id="poll_11_34" value="34"><label for="poll_11_34">Müslüm</label>
+	          </li>
+	          <li>
+	            <input type="radio" class="radio" name="poll_11" id="poll_11_35" value="35"><label for="poll_11_35">Wirchlich Müslüm</label>
+	          </li>
+	          <li>
+	            <input type="radio" class="radio" name="poll_11" id="poll_11_49" value="49"><label for="poll_11_49">Mach mi ned aggessiv! Müslüm!</label>
+	          </li>
+	          <li>
+	          	<a href="javascript:;" class="button combo_bg_inv combo_fg_inv">vote</a>
+	         	</li>
+	        </ul>
+	      </div>
+	      <div class="result">
+	        <p>Wer hat beste Chültürprogramm?</p>
+          <ul>
+            <li class="combo_bd_inv">
+                <span class="bubble combo_bg_inv combo_fg_inv">16%</span><span class="answertext">Müslüm</span>
+            </li>
 
+            <li class="combo_bd_inv">
+                <span class="bubble combo_bg_inv combo_fg_inv">36%</span><span class="answertext">Wirchlich Müslüm</span>
+            </li>
+
+            <li class="combo_bd_inv">
+                <span class="bubble combo_bg_inv combo_fg_inv">48%</span><span class="answertext">Mach mi ned aggessiv! Müslüm!</span>
+            </li>
+          </ul>
+	      </div>
+	    </div>
+	</div>
 
   <p class="caption" doc-editable="legend" doc-optional>Legende</p>
   <p class="source" doc-editable="source" doc-optional>Quelle</p>
