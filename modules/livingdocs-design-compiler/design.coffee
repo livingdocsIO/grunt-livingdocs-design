@@ -42,7 +42,7 @@ class Design
     if file.exists(kickstartersPath)
       kickstarters = file.readdir(options.src + '/kickstarters')
       kickstarters.forEach (kickstart) =>
-        if(kickstart.indexOf '.html' != -1)
+        if kickstart.indexOf '.html' != -1
           kickstarterPath = kickstartersPath + '/' + kickstart
           @addKickstartFile(kickstarterPath)
 
