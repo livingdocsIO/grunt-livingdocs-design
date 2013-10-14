@@ -5,7 +5,7 @@
     <title>
       Jubiläum und Wachstumsexplosion der SuitArt AG
     </title>
-    <link rel="stylesheet" href="/css/livingdocs.css">
+    <link rel="stylesheet" href="/components/livingdocs-engine/css/livingdocs.css">
   
     <script src="http://localhost:35739/livereload.js"></script>
     <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
@@ -86,38 +86,45 @@ table,td,div,p {font-family: Lucida Grande, Lucida Sans, Lucida Sans Unicode, Ar
 
   </body>
 </html>
+<script id="template" type="text/x-livingdocs-engine">
+    <header></header>
+    <row>
+      <logo-right></logo-right>
+      <title></title>
+      <padding-20px></padding-20px>
+      <padding-20px></padding-20px>
+      <text-left-small-right-image-large><image>http://cdn.suitart.com/email/ns_belt.jpg</image></text-left-small-right-image-large>
+      <image-left-small-right-text-large>
+        <image>http://cdn.suitart.com/email/ns_beltbuckle.jpg</image>
+        <title>This is a <i>test</i></title>
+        <content>A kickstart Template</content>
+        <button>Button Test</button>
+      </image-left-small-right-text-large>
 
+      <padding-20px></padding-20px>
+      <spacer-without-padding></spacer-without-padding>
+      <image-full-width>http://cdn.suitart.com/email/suitart-map.png</image-full-width>
+      <spacer-without-padding></spacer-without-padding>
+
+      <padding-20px></padding-20px>
+      <two-images-with-content>
+        <image-left>http://cdn.suitart.com/email/ns_cufflink.jpg</image-left>
+        <content-left>
+          Jedes Kleidungsstück sagt etwas über die Persönlichkeit seines Trägers aus. Manschettenknöpfe von SuitArt sind ein wahres Statement für Qualitäts- und Stilbewusstsein. In der Schweiz, in Zürich entwickelt und in einer der weltweit besten Manufakturen handgefertigt, sind sie Ausdruck von Design und typisch schweizerischer Präzision. Darum sind die SuitArt Manschettenknöpfe aus Schweizer Luxusuhrenstahl gefertigt.
+        </content-left>
+
+        <image-right>http://cdn.suitart.com/email/ns_wallets.jpg</image-right>
+        <content-right>
+          Ihr Portemonnaie ist nicht nur das mobile Aufbewahrungsfach für Ihr Geld. In Ihrem Wallet tragen Sie einige Ihrer wertvollsten Gegenstände: Die Bilder Ihrer Familie, besonders wichtige Dokumente und kleine Erinnerungsstücke von Freunden und Freundinnen, die Sie überall hin begleiten.
+        </content-right>
+      </two-images-with-content>
+      <padding-20px></padding-20px>
+    </row>
+</script>
 
 <script>
   $(document).ready(function() {
-    doc.init({design: design.suitart_newsletter});
-
-    doc.ready(function() {
-
-        doc.add("suitart_newsletter.header");
-        var row = doc.add("suitart_newsletter.row");
-        row.append(doc.create("suitart_newsletter.logoRight"));
-        row.append(doc.create("suitart_newsletter.title"));
-        row.append(doc.create("suitart_newsletter.padding20px"));
-        row.append(doc.create("suitart_newsletter.padding20px"));
-        row.append(doc.create("suitart_newsletter.textLeftSmallRightImageLarge"));
-        row.append(doc.create("suitart_newsletter.imageLeftSmallRightTextLarge"));
-        
-        row.append(doc.create("suitart_newsletter.padding20px"));
-        row.append(doc.create("suitart_newsletter.spacerWithoutPadding"));        
-        row.append(doc.create("suitart_newsletter.imageFullWidth"));
-        row.append(doc.create("suitart_newsletter.spacerWithoutPadding"));        
-        
-        row.append(doc.create("suitart_newsletter.padding20px"));
-        row.append(doc.create("suitart_newsletter.twoImagesWithContent"));
-        row.append(doc.create("suitart_newsletter.padding20px"));
-
-
-        var row2 = doc.add("suitart_newsletter.rowWithoutPadding");
-        row2.append(doc.create("suitart_newsletter.6040LargeImageLeftBlockRight"));
-
-        
-    });
+    doc.kickstart('#template', '.doc-section', design.suitart_newsletter);
 
   });
 </script>
