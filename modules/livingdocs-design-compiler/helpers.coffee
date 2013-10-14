@@ -1,5 +1,6 @@
 path = require('path')
 file = require('./file')
+logger = require('./logger')
 
 exports.requireResources = (src, templatesDirectory) ->
   # Check existence of all directories and files that are required
@@ -16,7 +17,7 @@ exports.requireResources = (src, templatesDirectory) ->
 
   requiredResources.forEach (resource) ->
     unless file.exists(path.join(src, resource.name))
-      error('The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.')
+      logger.error('The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.')
 
 
 exports.toCamelCase = (string) ->
