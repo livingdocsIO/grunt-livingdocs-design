@@ -18,7 +18,7 @@
     <script src="/components/livingdocs-engine/livingdocs_engine.js"></script>
 </head>
 <body>
-
+  <script id="template" type="text/x-livingdocs-template">
     <hero>
       <title>Snippet outside container</title>
       <tagline>Yep, it works</tagline>
@@ -43,6 +43,12 @@
         <text></text>
         <text></text>
     </column>
+  </script>
+
+
+  <script>
+    doc.kickstart('#template', 'body', design.livingmaps);
+  </script>
 
 </body>
 </html>
