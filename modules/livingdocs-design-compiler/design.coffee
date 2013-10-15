@@ -98,7 +98,10 @@ class Design
     $ = cheerio.load(html)
     template = {}
     template.name = $('html > head > title').text() || @filenameToTemplatename(filename)
-    template.markup = $('html > body').html()
+    template.markup = $('script[type="text/x-livingdocs-template"]').html()
+    if !template.markup
+      logger.error("The Kickstart template '#{template.name}' in the Design '#{@config.namespace}' is empty")
+
     @kickstarters.push(template)
 
 
