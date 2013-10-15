@@ -2,18 +2,20 @@
 <head>
   <title>Standard Layout</title>
 
-  <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+  <!-- story design -->
+  <link href="https://fonts.googleapis.com/css?family=Gudea:400,700,400italic" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lustria" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/designs/watson/css/style.css">
+  <script src="/designs/watson/design.js"></script>
+
+  <!-- livingdocs-engine css -->
   <link rel="stylesheet" href="/components/livingdocs-engine/css/livingdocs.css">
 
-  <!-- load design css (and fonts) -->
-  <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
-
-
   <!-- dependencies of livingdocs-engine -->
+  <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
   <script src="/components/livingdocs-engine/vendor/yepnope/yepnope.1.5.3-min.js"></script>
   <script src="/components/livingdocs-engine/vendor/store/store.js"></script>
   <script src="/components/livingdocs-engine/vendor/editableJS/editable.js"></script>
-  <script src="/designs/bootstrap/design.js"></script>
   <script src="/components/livingdocs-engine/livingdocs_engine.js"></script>
 
 </head>
@@ -25,6 +27,7 @@
         TT. Monat JJJJ HH:MM
       </date>
     </date>
+    <skyscraper></skyscraper>
     <uppertitle>
       <title>Oberzeile setzen...</title>
     </uppertitle>
@@ -34,10 +37,15 @@
     <lead>
       <text>Lead schreiben...</text>
     </lead>
+    <author>Autor einfügen...</author>
     <text>
       Hier kommt der Artikel hin...
     </text>
+    <panorama></panorama>
   </script>
 </body>
+  <script>
+    doc.kickstart('body', design.watson);
+  </script>
 
 </html>
