@@ -55,6 +55,13 @@ grunt.initConfig
         filter: (src) ->
           return src.split('/').pop().indexOf('.') != -1
       ]
+    watson:
+      files: [
+        expand: true,
+        cwd: 'designs/watson/dist/',
+        src: ['**'],
+        dest: '../watson-ui/app/vendor/watson-design/'
+      ]
 
     cssDirectories:
       files: [
