@@ -5,7 +5,7 @@
   <title>upfront</title>
   <link rel="shortcut icon" href="/favicon.png">
   <link href="http://fonts.googleapis.com/css?family=Quicksand:400,700" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="/livingdocs-engine/css/livingdocs.css">
+  <link rel="stylesheet" href="/components/livingdocs-engine/css/livingdocs.css">
   <link rel="stylesheet" href="/designs/upfrontIO/css/style.css">
 
   <script src="http://localhost:35739/livereload.js"></script>
@@ -15,8 +15,8 @@
   <script src="/components/livingdocs-engine/vendor/yepnope/yepnope.1.5.3-min.js"></script>
   <script src="/components/livingdocs-engine/vendor/store/store.js"></script>
   <script src="/components/livingdocs-engine/vendor/editableJS/editable.js"></script>
+  <script src="/components/livingdocs-engine/livingdocs_engine.js"></script>
   <script src="/designs/upfrontIO/design.js"></script>
-  <script src="/js/livingdocs-engine/livingdocs_engine.js"></script>
 
 </head>
 <body>
@@ -28,6 +28,21 @@
   </div>
 </div> 
 -->
+  <script id="template" type="text/x-livingdocs-template">
+    <title>
+      <title>Title of the page</title>
+      <label>info</label>
+      <tagline>Tagline bla</tagline>
+    </title>
+    <text></text>
+    <highlighted-text></highlighted-text>
+    <linked-image></linked-image>
+    <footer>fasdfasd</footer>
+    <image-with-caption></image-with-caption>
+    <client-list></client-list>
+    <image></image>
+    <link></link>
+  </script>
 
 
 
@@ -97,17 +112,7 @@
 <script>
 
   $(document).ready(function() {
-
-    $(".upfront-story-title").html(design.upfrontIO.templates.title.html);
-    $(".upfront-story-text").html(design.upfrontIO.templates.text.html);
-    $(".upfront-story-highlight-text").html(design.upfrontIO.templates.highlightedText.html);
-    $(".upfront-story-image").html(design.upfrontIO.templates.linkedImage.html);
-    $(".upfront-footer").html(design.upfrontIO.templates.footer.html);
-    $(".upfront-image-caption").html(design.upfrontIO.templates.imageWithCaption.html);
-    $(".upfront-clients").html(design.upfrontIO.templates.clientList.html);
-    $(".image").html(design.upfrontIO.templates.image.html);
-    $(".upfront-story-link").html(design.upfrontIO.templates.link.html);
-
+    doc.kickstart('#template', '.upfront-footer', design.upfrontIO)
     /*
     var json = doc.stash.get();
     doc.init({design: design.upfrontIO, json: json });
