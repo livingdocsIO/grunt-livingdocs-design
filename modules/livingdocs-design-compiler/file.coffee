@@ -3,7 +3,9 @@ path = require('path')
 root = path.join(__dirname, '../..')
 
 
-exports.read = fs.readFileSync
+exports.read = (file, options) ->
+  options = {} if !options
+  fs.readFileSync(file, { encoding: 'utf8' })
 
 
 exports.write = (file, data, options) ->
@@ -20,7 +22,8 @@ exports.write = (file, data, options) ->
 
 
 exports.readJson = (file, options) ->
-  JSON.parse(fs.readFileSync(file, { encoding: 'utf8' }))
+  options = {} if !options
+  JSON.parse(fs.readFileSync(file, { encoding: options.encoding || 'utf8' }))
 
 
 exports.exists = fs.existsSync
