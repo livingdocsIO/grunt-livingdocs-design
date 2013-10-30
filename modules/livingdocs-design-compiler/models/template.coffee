@@ -24,8 +24,8 @@ class Template
     if $.root().children().length > 1
       logger.error('The Design "' + config.namespace + '", Template "' + templateName + '" contains more than one root element')
 
-    @namespace = config.id || config.templateName
-    @name = templateName
+    @id = config.namespace || config.id || templateName
+    @title = templateName
     @html = $.html()
 
     @addStyles(config.styles) if config.styles
