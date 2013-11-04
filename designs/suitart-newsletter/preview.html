@@ -87,44 +87,58 @@ table,td,div,p {font-family: Lucida Grande, Lucida Sans, Lucida Sans Unicode, Ar
   </body>
 </html>
 <script id="template" type="text/x-livingdocs-template">
-    <header></header>
+    <row-without-background>
+      <paragraph>
+      {{delimiter}}
+      </paragraph>
+    </row-without-background>
+    <header>
+      <button1>0800 800 678</button1>
+      <button2>SuitArt Store finden</button2>
+      <button3>Kontakt</button3>
+      <button4>0800 800 678</button4>
+    </header>
     <row>
-      <logo-right></logo-right>
-      <title></title>
-      <padding-20px></padding-20px>
-      <padding-20px></padding-20px>
-      <text-left-small-right-image-large><image>http://cdn.suitart.com/email/ns_belt.jpg</image></text-left-small-right-image-large>
-      <image-left-small-right-text-large>
-        <image>http://cdn.suitart.com/email/ns_beltbuckle.jpg</image>
-        <title>This is a <i>test</i></title>
-        <content>A kickstart Template</content>
-        <button>Button Test</button>
-      </image-left-small-right-text-large>
+      <logo-right/>
+      <title>Persönliche Anfrage</title>
+      <padding-20px/>
 
-      <padding-20px></padding-20px>
-      <spacer-without-padding></spacer-without-padding>
-      <image-full-width>http://cdn.suitart.com/email/suitart-map.png</image-full-width>
-      <spacer-without-padding></spacer-without-padding>
+      <text-row>
+        <p><b>Guten Tag Vorname Nachname</b></p><br/>
+        <p>Vielen Dank für Ihre Anfrage bei der SuitArt Massschneiderei.</p>
+        <p>Ein Experte wird Ihr Anliegen so rasch wie möglich bearbeiten.</p>
+      </text-row>
 
-      <padding-20px></padding-20px>
-      <two-images-with-content>
-        <image-left>http://cdn.suitart.com/email/ns_cufflink.jpg</image-left>
-        <content-left>
-          Jedes Kleidungsstück sagt etwas über die Persönlichkeit seines Trägers aus. Manschettenknöpfe von SuitArt sind ein wahres Statement für Qualitäts- und Stilbewusstsein. In der Schweiz, in Zürich entwickelt und in einer der weltweit besten Manufakturen handgefertigt, sind sie Ausdruck von Design und typisch schweizerischer Präzision. Darum sind die SuitArt Manschettenknöpfe aus Schweizer Luxusuhrenstahl gefertigt.
-        </content-left>
+      <padding-20px/>
+      <spacer-without-padding/>
+      <image-text-two-third>
+        <image-left>http://email.suitart.com/request/suit1-353x216.jpg</image-left>
+        <t1>SuitArt weiterempfehlen:</t1>
+        <text>Versenden Sie fünf Empfehlungsgutscheine und erhalten Sie pro neu vermittelten Kunden einen Einkaufsgutschein über CHF 100.- </text>
+        <button>Jetzt weiterempfehlen ‣</button>      </image-text-two-third>
+      <spacer-without-padding/>
+      <padding-20px/>
 
-        <image-right>http://cdn.suitart.com/email/ns_wallets.jpg</image-right>
-        <content-right>
-          Ihr Portemonnaie ist nicht nur das mobile Aufbewahrungsfach für Ihr Geld. In Ihrem Wallet tragen Sie einige Ihrer wertvollsten Gegenstände: Die Bilder Ihrer Familie, besonders wichtige Dokumente und kleine Erinnerungsstücke von Freunden und Freundinnen, die Sie überall hin begleiten.
-        </content-right>
-      </two-images-with-content>
+      <text-row>
+          fasdfasd
+      </text-row>
+
       <padding-20px></padding-20px>
     </row>
+
+    <row-without-background>
+      <paragraph>
+        <p>SuitArt AG, Räffelstrasse 25, 8045 Zürich</p>
+        <p>Copyright © 2013 SuitArt AG</p>
+        <p>Sie erhalten diese Mail, da Sie kürzlich in einem SuitArt Geschäft eingekauft haben.<br/>
+Ihre Mailadresse können SIe im SuitArt Kundencenter ändern.</p>
+      </paragraph>
+    </row-without-background>
 </script>
 
 <script>
   $(document).ready(function() {
-    doc.kickstart('#template', '.doc-section', design.suitart_newsletter);
+    doc.kickstart('#template', '.doc-section', design.suitart_newsletter, true);
 
   });
 </script>
