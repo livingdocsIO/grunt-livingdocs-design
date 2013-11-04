@@ -110,6 +110,10 @@
 </html>
 
 <script>
-    doc.kickstart('#template', '.upfront-footer', design.upfrontIO)
+    doc.kickstart({
+      scriptNode: '#template',
+      destination: '.upfront-footer',
+      design: design.upfrontIO
+    });
 </script>
 

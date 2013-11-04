@@ -77,6 +77,10 @@
     </div>
   </body>
   <script>
-    doc.kickstart('#template', '.story', design.watson);
+    doc.kickstart({
+      scriptNode: '#template',
+      destination: '.story',
+      design: design.watson
+    });
   </script>
 </html>

@@ -46,7 +46,11 @@
 
 
   <script>
-    doc.kickstart('#template', 'body', design.bootstrap);
+    doc.kickstart({
+      scriptNode: '#template',
+      destination: 'body',
+      design: design.bootstrap
+    });
   </script>
 
 </body>

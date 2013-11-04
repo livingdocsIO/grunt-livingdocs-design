@@ -138,7 +138,11 @@ Ihre Mailadresse können SIe im SuitArt Kundencenter ändern.</p>
 
 <script>
   $(document).ready(function() {
-    doc.kickstart('#template', '.doc-section', design.suitart_newsletter, true);
+    doc.kickstart({
+      scriptNode: '#template',
+      destination: '.doc-section',
+      design: design.suitart_newsletter
+    });
 
   });
 </script>

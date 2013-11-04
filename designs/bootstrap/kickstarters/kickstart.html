@@ -41,7 +41,7 @@
 
       <text>Sharks in a tornado. Sharknado. Simply stunning.</text>
       <text>Have you ever sucked feet for weed?</text>
-      <text>That pet store's got everything we need. Except for piranhas.</text>
+      <text>That pet store`s got everything we need. Except for piranhas.</text>
       <text></text>
       <text></text>
       <info></info>
@@ -57,7 +57,11 @@
     //doc.init({design: design.bootstrap});
     
     // use a jQuery selector as destination
-    doc.kickstart('#template', 'body', design.bootstrap);
+    doc.kickstart({
+      scriptNode: '#template',
+      destination: 'body',
+      design: design.bootstrap
+    });
 
 
   </script>

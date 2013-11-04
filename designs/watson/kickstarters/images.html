@@ -52,7 +52,11 @@
   </script>
 </body>
   <script>
-    doc.kickstart('#template', 'body', design.watson);
+    doc.kickstart({
+      scriptNode: '#template',
+      destination: 'body',
+      design: design.watson
+    });
   </script>
 
 </html>

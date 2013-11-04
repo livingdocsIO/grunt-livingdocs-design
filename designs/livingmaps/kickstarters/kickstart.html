@@ -47,7 +47,11 @@
 
 
   <script>
-    doc.kickstart('#template', 'body', design.livingmaps);
+    doc.kickstart({
+      scriptNode: '#template',
+      destination: 'body',
+      design: design.livingmaps
+    });
   </script>
 
 </body>
