@@ -1,22 +1,17 @@
-path = require("path")
 cheerio = require("cheerio")
-htmlmin = require("html-minifier")
-
 helpers = require('../helpers')
-file = require('../file')
-logger = require('../logger')
-
-
 
 class Kickstart
 
-  constructor: (templateFile) ->
-    html = helpers.minifyHtml(file.read(templateFile), templateFile)
-    $ = cheerio.load(html)
-    @name = $('html > head > title').text() || helpers.filenameToTemplatename(templateFile)
-    @markup = $('script[type="text/x-livingdocs-template"]').html()
+  constructor: (fileContent, options = {}, eventEmitter) ->
+    $ = cheerio.load(fileContent)
+    @id = helpers.filenameToTemplatename(options.filename) if options.filename
+    @name = $('html > head > title').text() || @id
+    templateString = $('script[type="text/x-livingdocs-template"]').html()
+    @markup = helpers.minifyHtml(templateString, options)
+
     if !@markup
-    	logger.error("The Kickstart template '#{@name}' is empty")
+      eventEmitter.emit 'warn', "The Kickstart template \"#{@name}\" is empty" if eventEmitter
 
 
 module.exports = Kickstart

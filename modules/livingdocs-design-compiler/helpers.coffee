@@ -2,25 +2,6 @@ color = require('color')
 path = require('path')
 htmlmin = require("html-minifier")
 file = require('./file')
-logger = require('./logger')
-
-exports.requireResources = (src, templatesDirectory) ->
-  # Check existence of all directories and files that are required
-  requiredResources = [
-    name: ''
-    type: 'design'
-  ,
-    name: templatesDirectory
-    type: 'directory'
-  ,
-    name: 'config.json'
-    type: 'file'
-  ]
-
-  requiredResources.forEach (resource) ->
-    unless file.exists(path.join(src, resource.name))
-      logger.error('The ' + resource.type + ' "' + path.join(src, resource.name) + '" does not exist.')
-
 
 exports.toCamelCase = toCamelCase = (string) ->
   string.replace /^([A-Z])|[\s-_](\w)/g, (match, p1, p2, offset) ->
@@ -33,12 +14,12 @@ exports.filenameToTemplatename = (string) ->
   strings[strings.length - 1]
 
 
-exports.minifyHtml = (html, templateName, options) ->
+exports.minifyHtml = (html, options, templateName) ->
   if options && options.minify
     try
       htmlmin.minify html, options.minifyOptions
     catch err
-      logger.error('>> Template "%s": HTML minify error\n %s\n'.yellow, templateName, err)
+      console.log(">> Template \"#{templateName}\": HTML minify error\n #{err}\n".yellow)
       return '<div class="error minify" style="color: red">Error while minifying: Template "#{templateName}"</div>'
 
   else

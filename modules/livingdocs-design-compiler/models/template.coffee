@@ -1,41 +1,31 @@
-path = require("path")
 cheerio = require("cheerio")
-htmlmin = require("html-minifier")
-
-helpers = require('../helpers')
-file = require('../file')
-logger = require('../logger')
+helpers = require("../helpers")
 Style = require('./style')
 
 
 
 class Template
-
-  constructor: (templateFile, options) ->
-    templateName = helpers.filenameToTemplatename(templateFile)
-
+  constructor: (data, options, design) ->
     # load file into "jQuery object" to read json & html
-    data = file.read(templateFile)
     $ = cheerio.load(data)
     config = JSON.parse($(options.configurationElement).html()) || {}
     $(options.configurationElement).remove()
-
+    
     # check for one root element
     if $.root().children().length > 1
-      logger.error('The Design "' + config.namespace + '", Template "' + templateName + '" contains more than one root element')
+      err = new Error "The Design \"#{design.config.namespace}\", Template \"#{options.filename}\" contains more than one root element"
+      design.emit 'error', err
 
-    @id = config.namespace || config.id || templateName
-    @title = templateName
-    @html = $.html()
+    @id = config.namespace || config.id || options.filename
+    @name = config.name || config.title || options.filename
+    @html = helpers.minifyHtml($.html(), options)
 
     @addStyles(config.styles) if config.styles
-
 
   addStyles: (styles) ->
     @styles ?= []
     for style in styles
       @styles.push(new Style(style))
-
 
 
 module.exports = Template

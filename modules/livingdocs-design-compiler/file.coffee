@@ -3,12 +3,18 @@ path = require('path')
 root = path.join(__dirname, '../..')
 
 
-exports.read = (file, options) ->
-  options = {} if !options
-  fs.readFileSync(file, { encoding: 'utf8' })
+exports.readSync = (file, options = {}, eventEmitter) ->
+  options.encoding ?= 'utf8'
+  try
+    content = fs.readFileSync(file, options)
+  catch err
+    eventEmitter.emit 'error', err if eventEmitter else throw err
+
+  content
 
 
-exports.write = (file, data, options) ->
+
+exports.write = (file, data, callback) ->
   paths = file.split('/')
   paths.pop()
 
@@ -18,7 +24,7 @@ exports.write = (file, data, options) ->
     unless fs.existsSync(directory)
       fs.mkdirSync(directory)
 
-  fs.writeFileSync(file, data, options)
+  fs.writeFile(file, data, callback)
 
 
 exports.readJson = (file, options) ->
@@ -28,5 +34,16 @@ exports.readJson = (file, options) ->
 
 exports.exists = fs.existsSync
 
+exports.readdir = (directory, eventEmitter) ->
+  try
+    files = fs.readdirSync(directory)
+  catch err
+    if err.errno == 34
+      #file does not exist
+    else
+      eventEmitter.emit 'error', err if eventEmitter else throw err
 
-exports.readdir = fs.readdirSync
+  files || []
+
+exports.isDirectory = (path) ->
+  fs.statSync(path).isDirectory()

@@ -1,16 +1,14 @@
 path = require('path')
 file = require('../file')
-logger = require('../logger')
 Style = require('./style')
 
 class Group
 
-  constructor: (group) ->
-    group = file.readJson(group) if typeof group is "string"
-    
-    @title = group.title
-    @templates = group.templates || []
-    @addStyles(group.styles) if group.styles
+  constructor: (config) ->    
+    @id = config.id
+    @title = config.title || config.id
+    @templates = config.templates || []
+    @addStyles(config.styles) if config.styles
 
 
   addTemplate: (template) ->
