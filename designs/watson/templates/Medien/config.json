@@ -5,6 +5,8 @@
       "name": "Insert",
       "type": "select",
       "options": [
+        { "caption": "Cinemascope", "value": "cinemascope" },
+        { "caption": "Jumbo",       "value": "jumbo" },
         { "caption": "Full",        "value": "full" },
         { "caption": "Right",       "value": "right" },
         { "caption": "Side",        "value": "side" }

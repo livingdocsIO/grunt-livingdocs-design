@@ -62,6 +62,13 @@ grunt.initConfig
         src: ['**'],
         dest: '../watson-ui/app/vendor/watson-design/'
       ]
+    datablog:
+      files: [
+        expand: true,
+        cwd: 'designs/livingmaps/dist/',
+        src: ['**'],
+        dest: '../livingmaps/datablog-ui/app/vendor/livingmaps-design/'
+      ]
 
     cssDirectories:
       files: [

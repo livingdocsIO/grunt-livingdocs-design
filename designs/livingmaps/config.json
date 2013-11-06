@@ -1,5 +1,4 @@
 {
   "namespace": "livingmaps",
-  "version": 1,
-  "css": ["/designs/livingmaps/css/style.css"]
+  "version": 1
 }
