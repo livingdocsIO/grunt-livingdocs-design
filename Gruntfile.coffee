@@ -126,7 +126,6 @@ grunt.initConfig
         port: 3333
         hostname: 'localhost'
         open: true
-        bases: 'public'
         server: path.resolve './server'
 
   concurrent:
@@ -140,9 +139,7 @@ grunt.loadTasks "tasks"
 grunt.loadNpmTasks 'grunt-concurrent'
 grunt.loadNpmTasks 'grunt-express'
 
-grunt.registerTask "default", [
-  "clean:preBuild"
-  "lddesigns:development"
+grunt.registerTask "postCompile", [
   "recess"
   "copy:assets"
   "copy:cssDirectories"
@@ -150,21 +147,22 @@ grunt.registerTask "default", [
   "clean:postBuild"
 ]
 
+grunt.registerTask "default", [
+  "clean:preBuild"
+  "lddesigns:development"
+  "postCompile"
+]
+
 grunt.registerTask "build", [
   "clean:preBuild"
   "lddesigns:build"
-  "recess"
-  "copy:assets"
-  "copy:cssDirectories"
-  "moveToDist"
-  "clean:postBuild"
+  "postCompile"
 ]
 
 grunt.registerTask "server", [
   "default"
   "express"
   "watch"
-  #"express-keepalive"
 ]
 
 grunt.registerTask "dev", ["server"]
