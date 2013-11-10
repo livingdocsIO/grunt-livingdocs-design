@@ -1,11 +1,8 @@
-path = require("path")
-cheerio = require("cheerio")
-color = require("color")
+sys = require('sys')
+events = require('events')
 
 file = require('../file')
-logger = require('../logger')
 helpers = require('../helpers')
-toCamelCase = require("../helpers").toCamelCase
 
 Style = require('./style')
 Group = require('./group')
@@ -15,109 +12,130 @@ Template = require('./template')
 
 class Design
 
-  constructor: (files, options) ->
-    helpers.requireResources(options.src, options.templatesDirectory)
-
-    @config = file.readJson(path.join(options.src, 'config.json'))
-    @config.groups = {}
+  constructor: (options) ->
     @templates = []
     @kickstarters = []
-    @options =
-      src: options.src,
-      dest: options.dest,
-      templatesDirectory: options.templatesDirectory ||  "templates",
-      configurationElement: options.configurationElement || "script[ld-conf]",
-      minify: options.minify || true
-      minifyOptions: options.minifyOptions || {}
+    @config = {}
 
-    unless @config.namespace
-      logger.error('The design "' + options.src + '" contains a config file which has no namespace.')
+    events.EventEmitter.call(@)
 
-    # warn if a design contains no templates
-    unless files.length
-      logger.warn('The design "' + @config.namespace + '" has no templates')
-
-    if @config.styles
-      for style in @config.styles
-        @addStyle(style)
-
-    # iterate through files array and process the templates
-    files.forEach (template) =>
-      @addTemplateFile(template)
-
-    kickstartersPath = options.src + '/kickstarters'
-    if file.exists(kickstartersPath)
-      kickstarters = file.readdir(options.src + '/kickstarters')
-      @addKickstarters(kickstartersPath, kickstarters)
+  sys.inherits(Design, events.EventEmitter)
 
 
-  addGroup: (group) ->
-    unless @config.groups[group]
-      groupConfigFile = path.join(@options.src, @options.templatesDirectory, group, 'config.json')
-      if file.exists(groupConfigFile)
-        @config.groups[group] = new Group(groupConfigFile)
+  initConfig: (config = {}) ->
+    unless config?.namespace
+      @emit 'error', new Error "You specified a configuration without a namespace."
 
+    @config =
+      version: config.version || 1
+      namespace: config.namespace
+      css: config.css
+      js: config.js
+      groups: config.groups || {}
+      styles: []
+
+
+    if config.styles
+      for style in config.styles
+        @addStyle(new Style(style))
+
+
+  initConfigFile: (filePath, designName) ->
+    try
+      config = file.readJson(filePath)
+    catch err
+      if err.errno == 34
+        @emit 'warn', "The design \"#{designName}\" has no configuration file."
       else
-        @config.groups[group] = new Group({title: group})
+        @emit 'err', err
 
-    @config.groups[group]
+    @initConfig(config)
 
 
   addStyle: (style) ->
-    @config.styles.push(new Style(style))
+    @config.styles.push(style)
 
 
   addTemplateToGroup: (template, group) ->
-    @addGroup(group).addTemplate(template)
+    group = @config.groups[group]
+    group.addTemplate(template.id || template) if group
 
 
-  addTemplate: (template) ->
-    template.html = helpers.minifyHtml(template.html, template.id, @options)
+  addTemplate: (template, options) ->
+    template.html = helpers.minifyHtml(template.html, options, template.id)
     @templates.push(template)
 
 
-  addTemplateFile: (filePath) ->
-    templatePath = @getTemplatePath(filePath, @options.src, @options.templatesDirectory)
-    templateName = helpers.filenameToTemplatename(filePath)
+  addTemplateFile: (filePath, options) ->
+    templateFile = file.readSync(filePath, {}, @)
+    options.filename = helpers.filenameToTemplatename(filePath)
+    template = new Template(templateFile, options, @)
 
+    @addTemplate(template, options)
+
+    # Add template to group
+    templatePath = filePath.split("#{options.src}/#{options.templatesDirectory}/")[1].split('/')
     if templatePath.length > 1 then groupId = templatePath[0]
-    @addTemplateToGroup(templateName, groupId || 'others')
-
-    @addTemplate(new Template(filePath, @options))
+    @addTemplateToGroup(template, groupId || 'others')
 
 
-  addKickstarters: (basePath, fileNames) ->
-    for kickstart in fileNames
-      if kickstart.indexOf('.html') != -1
-        @addKickstart(new Kickstart(basePath + '/' + kickstart))
+  addGroup: (group = {}) ->
+    if !group.id
+      @emit 'error', "Each group requires an id. The group \"#{group.title}\" has none."
+      return
+
+    @config.groups[group.id] = group
 
 
-  addKickstart: (template) ->
-    @kickstarters.push(template)
+  addGroupFile: (filePath) ->
+    try
+      config = file.readJson(filePath + '/config.json')
+    catch err
+      if err.errno == 34
+        @emit 'debug', "The template group \"#{helpers.filenameToTemplatename(filePath)}\" in the design \"#{@config.namespace}\" has no config.json file. We advice you to use one."
+      else
+        @emit 'error', err
+
+    config = {} if !config
+    config.id = filePath.split('/').pop()
+    @addGroup(new Group(config))
 
 
-  getTemplatePath: (string, design, templatesDirectory) ->
-    parts = string.replace(design + '/' + templatesDirectory + '/', '').split('/')
-    if parts.length > 2 then warn('Design "' + design + '", Template "' + helpers.filenameToTemplatename(string) + '": Templates can only be only be nested in one directory.')
-
-    output = []
-    output.push parts[0]
-    output.push parts[parts.length - 1] if parts.length > 1
-
-    output
+  addKickstart: (kickstart) ->
+    @kickstarters.push(kickstart)
 
 
-  # write the config and templates to disk
-  save: ->
-    templateBegin = "(function() { this.design || (this.design = {}); design.#{ @config.namespace } = (function() { return "
-    templateEnd = ";})();}).call(this);"
+  addKickstartFile: (filePath, options) ->
+    try
+      fileContent = file.readSync(filePath)
+    catch err
+      @emit 'warn', err
+    options.filename = helpers.filenameToTemplatename(filePath)
+    @addKickstart(new Kickstart(fileContent, options, @))
+
+
+  toJson: ->
     design =
       config: @config
       templates: @templates
       kickstarters: @kickstarters
-    fileData = templateBegin + JSON.stringify(design, null, 2) + templateEnd
-    file.write @options.dest + '/design.js', fileData
-    logger.log('Design "%s" compiled.', @options.dest)
+
+
+  toJs: (minifiyJSON) ->
+    templateBegin = "(function() { this.design || (this.design = {}); design.#{ @config.namespace } = (function() { return "
+    templateEnd = ";})();}).call(this);"
+    minify = if minifiyJSON then 0 else 2
+    fileData = templateBegin + JSON.stringify(@toJson(), null, minify) + templateEnd
+
+
+  # write the config and templates to disk
+  save: (dest, minify)->
+    file.write dest, @toJs(minify), (err) =>
+      if err
+        @emit 'end', err
+
+      else
+        @emit 'end'
 
 
 module.exports = Design

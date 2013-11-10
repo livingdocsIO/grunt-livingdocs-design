@@ -1,5 +1,3 @@
-logger = require('../logger')
-
 class Style
 
   constructor: (styles) -> 
@@ -9,8 +7,7 @@ class Style
     @value = styles.value
     @options = styles.options
 
-    if !@name
-      logger.error('You specified a "style" object without name or id')
+    console.error("You specified a \"style\" object without name or id") if !@name
 
 
 module.exports = Style
