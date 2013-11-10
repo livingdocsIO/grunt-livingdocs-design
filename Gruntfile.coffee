@@ -1,6 +1,7 @@
 
-grunt = require 'grunt'
-path = require 'path'
+grunt = require('grunt')
+path = require('path')
+
 # load all grunt tasks
 require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
 
@@ -119,18 +120,14 @@ grunt.initConfig
         port: 3333
         hostname: 'localhost'
         open: true
-        server: path.resolve './server'
+        server: './server'
 
   concurrent:
     tasks: ['express']
 
 
-
 # load livingdocs task lddesigns
-grunt.loadTasks "tasks"
-
-grunt.loadNpmTasks 'grunt-concurrent'
-grunt.loadNpmTasks 'grunt-express'
+grunt.loadTasks("tasks")
 
 grunt.registerTask "postCompile", [
   "recess"
