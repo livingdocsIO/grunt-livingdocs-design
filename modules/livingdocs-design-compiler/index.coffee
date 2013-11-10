@@ -4,8 +4,8 @@ helpers = require './helpers'
 exports.model = Design = require './models/design'
 
 # options
-#   src, directory of design
-#   dest, destination of design.js file
+#   src, absolute directory of design
+#   dest, absolute directory of destination design.js file
 #   templatesDirectory, default: "templates",
 #   configurationElement, default: "script[ld-conf]"
 #   minify, default: true
@@ -16,16 +16,13 @@ exports.model = Design = require './models/design'
 #     removeCDATASectionsFromCDATA: true
 
 exports.compile = (options) ->
-    #log.error 'The Design directory #{dir} does not exist' unless fs.exists dir
-
     design = new Design(options)
 
     # Add design configuration file (with global settings)
-    design.initConfigFile(path.join(options.src, 'config.json'), options.src)
+    configFilePath = path.join(options.src, 'config.json')
+    design.initConfigFile(configFilePath, options.src)
 
-    #
     # Find all groups and templates
-    #
     templateGroups = []
     templateFiles = []
     templatesPath = path.join(options.src, options.templatesDirectory)
