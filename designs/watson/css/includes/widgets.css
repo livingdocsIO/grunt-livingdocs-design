@@ -1096,6 +1096,120 @@ p.statement.neutral { border-left:0.2em solid #00c2f7; }
 }
 
 
+.widget.image_wall {
+    visibility:hidden;
+}
+
+.widget.image_wall .imagebox {
+    float:left;
+    padding-bottom:50%;
+    height:0;
+    overflow:hidden;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    border:2px solid #ffffff;
+}
+
+.widget.image_wall .imagebox.width_20 { width:20%; }
+.widget.image_wall .imagebox.width_25 { width:25%; }
+.widget.image_wall .imagebox.width_33 { width:33.333333%; }
+.widget.image_wall .imagebox.width_40 { width:40%; }
+.widget.image_wall .imagebox.width_50 { width:50%; }
+.widget.image_wall .imagebox.width_66 { width:66.666666%; }
+.widget.image_wall .imagebox.width_75 { width:75%; }
+.widget.image_wall .imagebox.width_100 { width:100%; }
+
+.widget.image_wall .imagebox.height_25 { padding-bottom:25%; }
+
+.widget.image_wall .imagebox img {
+    width:100%;
+    cursor:pointer;
+    position:relative;
+    -moz-transition:-moz-transform 0.5s ease;
+    -webkit-transition: -webkit-transform 0.5s ease;
+    -o-transformtransition: -o-transformtransform 0.5s ease;
+    transition: transform 0.5s ease;
+}
+
+.widget.image_wall .imagebox img:hover {
+    -moz-transform:scale(1.05,1.05);
+    -webkit-transform:scale(1.05,1.05);
+    -o-transform:scale(1.05,1.05);
+    transform:scale(1.05,1.05);
+}
+
+.widget.image_wall .zoom {
+    display:none;
+    clear:both;
+    float:none;
+    background-color:#222222;
+    color:#ffffff;
+    font-size:1.8em;
+    width:100%;
+    overflow:hidden;
+    text-align:center;
+    border-top:1.4em solid #ffffff;
+    border-bottom:1.4em solid #ffffff;
+    padding-bottom:1em;
+    position:relative;
+    overflow:visible;
+}
+
+.widget.image_wall .zoom img {
+    margin:2%;
+}
+
+.widget.image_wall .zoom img.landscape {
+    width:96%;
+}
+
+.widget.image_wall .zoom .caption {
+    text-align:left;
+    padding:0 2%;
+}
+
+.widget.image_wall .zoom .arrow {
+    position:absolute;
+    z-index:1;
+    width:0;
+    height:0;
+    border:1.2em solid #222222;
+    margin-left:-0.6em;
+    top:-2em;
+    border-top-color: transparent !important;
+    border-left-color: transparent !important;
+    border-right-color: transparent !important;
+    display:none;
+}
+
+
+
+
+
+/* tablet */
+/* ====== */
+@media screen and (max-width: 1000px) {
+    .widget.image_wall .imagebox img {
+        -moz-transition: none;
+        -webkit-transition: none;
+        -o-transformtransition: none;
+        transition: none;
+    }
+
+    .widget.image_wall .imagebox img:hover {
+        -moz-transform:none;
+        -webkit-transform:none;
+        -o-transform:none;
+        transform:none;
+    }
+}
+
+
+
+
+
+
+
 
 
 
