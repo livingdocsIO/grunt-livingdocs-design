@@ -1,145 +1,154 @@
-.placeholder {
+.bordered () {
   box-sizing: border-box;
   border: 1px dashed #999;
   color: #0fb4f4;
+}
 
-  .panorama-ad {
-    min-height: 100px;
+.widget-html() {
+  min-height: 200px;
+  background-position: 50% 30%;
+  background-repeat: no-repeat;
+
+  &:before {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align:center;
+    font-size: 40px;
+    opacity: 0.4;
+  }
+}
+
+.widget-background-image() {
+  min-height: 300px;
+  background-position: 50% 30%;
+  background-repeat: no-repeat;
+
+  &:before {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align:center;
+    font-size: 40px;
+    opacity: 0.4;
+  }
+}
+
+.widget-ad() {
+  background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_ads.svg);
+  background-position: 50% 30%;
+  background-repeat: no-repeat;
+
+  &:before {
+    font-size: 40px;
+    opacity: 0.4;
+    content: 'Werbung';
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+  }
+}
+
+
+div[watson-ui-placeholder="panorama"] {
+  .bordered();
+
+  .widget {
+    min-height: 300px;
     background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_ads.svg);
-    background-position: 50% 30%;
-    background-repeat: no-repeat;
+    .widget-ad();
+  }
+}
 
-    &:before {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align:center;
-      font-size: 40px;
-      opacity: 0.4;
-      content: 'Werbung';
-    }
+div[watson-ui-placeholder="skyscraper"] {
+  .bordered();
+
+  .widget {
+    min-width: 360px;
+    min-height: 600px;
+    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_ads.svg);
+    .widget-ad();
+  }
+}
+
+div[watson-ui-placeholder="video"] {
+  .widget {
+    .bordered();
   }
 
-  .skyscraper-ad {
-    min-height: 400px;
-    max-height: 600px;
-    max-width: 300px;
-
-    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_ads.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-
-    &:before {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align:center;
-      font-size: 40px;
-      opacity: 0.4;
-      content: 'Werbung';
-    }
-  }
-
-  .video {
+  .widget .placeholder {
+    .widget-html();
     background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_video.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-
     &:before {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align:center;
-      font-size: 40px;
-      opacity: 0.4;
       content: 'Video';
     }
   }
+}
 
-  .tweet {
-    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_twitter.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 200px;
-
-    &:before {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align:center;
-      font-size: 40px;
-      opacity: 0.4;
-      content: 'Tweet';
-    }
+div[watson-ui-placeholder="tweet"] {
+  .widget {
+    .bordered();
   }
 
-  .poll {
-    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_poll.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-
+  .widget .placeholder {
+    .widget-html();
+    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_twitter.svg);
     &:before {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align:center;
-      font-size: 40px;
-      opacity: 0.4;
+      content: 'Twitter';
+    }
+  }
+}
+
+div[watson-ui-placeholder="poll"] {
+  .widget {
+    .bordered();
+  }
+
+  .widget .placeholder {
+    .widget-html();
+    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_poll.svg);
+    &:before {
       content: 'Poll';
     }
   }
+}
 
-  .form {
+div[watson-ui-placeholder="form"] {
+  .bordered();
+
+  .placeholder {
+    .widget-html();
     background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_poll.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    // TODO: Remove height as this will be defined within the widgets.css file.
-    min-height: 200px;
-
     &:before {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align:center;
-      font-size: 40px;
-      opacity: 0.4;
       content: 'Formular';
     }
   }
+}
 
-  .image-wall {
-    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_poll.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    // TODO: Remove height as this will be defined within the widgets.css file.
-    min-height: 200px;
+div[watson-ui-placeholder="image-wall"] {
+  .bordered();
 
+  .placeholder {
+    .widget-html();
+    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_html.svg);
     &:before {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align:center;
-      font-size: 40px;
-      opacity: 0.4;
       content: 'Image Wall';
     }
   }
+}
 
-  .html-element {
-    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_html.svg);
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 200px;
-
-    &:before {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      text-align:center;
-      font-size: 40px;
-      opacity: 0.4;
-      content: 'Html Element';
-    }
+div[watson-ui-placeholder="html"] {
+  .widget {
+    .bordered();
   }
 
+  .widget .placeholder {
+    .widget-html();
+    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_html.svg);
+    &:before {
+      content: 'HTML';
+    }
+  }
 }
