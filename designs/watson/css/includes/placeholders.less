@@ -62,12 +62,34 @@ div[watson-ui-placeholder="panorama"] {
   }
 }
 
+div[watson-ui-placeholder="monster"] {
+  .bordered();
+
+  .widget {
+    width: 486px;
+    height: 400px;
+    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_ads.svg);
+    .widget-ad();
+  }
+}
+
+div[watson-ui-placeholder="rectangle"] {
+  .bordered();
+
+  .widget {
+    width: 300px;
+    height: 250px;
+    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_ads.svg);
+    .widget-ad();
+  }
+}
+
 div[watson-ui-placeholder="skyscraper"] {
   .bordered();
 
   .widget {
-    min-width: 360px;
-    min-height: 600px;
+    min-width: 300px;
+    height: 600px;
     background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_ads.svg);
     .widget-ad();
   }
@@ -76,9 +98,13 @@ div[watson-ui-placeholder="skyscraper"] {
 /* tablet */
 /* ====== */
 @media screen and (max-width: 1000px) {
-  div[watson-ui-placeholder="skyscraper"], div[watson-ui-placeholder="panorama"] {
+  div[watson-ui-placeholder="skyscraper"],
+  div[watson-ui-placeholder="monster"],
+  div[watson-ui-placeholder="rectangle"],
+  div[watson-ui-placeholder="panorama"] {
     .widget {
-      min-height: 128px;
+      width: 100%;
+      max-height: 128px;
     }
   }
 }
