@@ -89,6 +89,24 @@
     }
   }
 
+  .form {
+    background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_poll.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    // TODO: Remove height as this will be defined within the widgets.css file.
+    min-height: 200px;
+
+    &:before {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      text-align:center;
+      font-size: 40px;
+      opacity: 0.4;
+      content: 'Formular';
+    }
+  }
+
   .html-element {
     background-image: url(https://s3-eu-west-1.amazonaws.com/watson-media/images/snippet-placeholder/pre_html.svg);
     background-position: center;
