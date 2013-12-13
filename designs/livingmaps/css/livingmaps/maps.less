@@ -8,6 +8,7 @@ path {
 li.key {
     font-size: .75em;
     width: 10%;
+    min-width: 70px;
     padding-left: 0;
     padding-right: 0;
 }
@@ -25,4 +26,22 @@ li.key {
     padding-left: 5px;
     padding-right: 5px;
   }
+}
+
+.hide-legend .list-inline {
+  display: none;
+}
+
+/* Repsonsive Maps */
+@media (max-width: 500px) {
+
+  // .list-inline > li.key {
+  //   display: block;
+  // }
+
+  li.key {
+    width: 40%;
+    padding: 4px 2px 4px 2px;
+  }
+
 }
