@@ -118,16 +118,6 @@ grunt.registerTask "default", [
   "clean:postBuild"
 ]
 
-grunt.registerTask "default", [
-  "clean:preBuild"
-  "lddesigns"
-  "recess"
-  "copy:assets"
-  "copy:cssDirectories"
-  "moveToDist"
-  "clean:postBuild"
-]
-
 grunt.registerTask "server", [
   "default"
   "watch"
