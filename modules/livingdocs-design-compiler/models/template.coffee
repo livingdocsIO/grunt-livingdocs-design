@@ -17,7 +17,7 @@ class Template
       design.emit 'error', err
 
     @id = config.namespace || config.id || options.filename
-    @name = config.name || config.title || options.filename
+    @title = config.name || config.title || options.filename
     @html = helpers.minifyHtml($.html(), options)
 
     @addStyles(config.styles) if config.styles
