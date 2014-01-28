@@ -1,10 +1,11 @@
+
 grunt = require('grunt')
+path = require('path')
 
 # load all grunt tasks
 require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
 
 grunt.initConfig
-
   recess:
     development:
       options:
@@ -21,6 +22,23 @@ grunt.initConfig
 
   lddesigns:
     development:
+      options:
+        # templates do not work unminified. Is there a bug in livingdocs-engine?
+        minify: true
+        minifyOptions:
+          collapseWhitespace: true
+          removeComments: true
+          removeCommentsFromCDATA: true
+          removeCDATASectionsFromCDATA: true
+        templatesDirectory: 'templates'
+        configurationElement: 'script[type=ld-conf]'
+      files: [
+        expand: true
+        cwd: './'
+        src: ['designs/*']
+        dest: '.tmp/'
+      ]
+    build:
       options:
         # templates do not work unminified. Is there a bug in livingdocs-engine?
         minify: true
@@ -88,7 +106,7 @@ grunt.initConfig
       tasks: ['default']
       options:
         nospawn: true
-        livereload: 35739
+        livereload: 35769
 
   moveToDist:
     designs:
@@ -103,14 +121,22 @@ grunt.initConfig
     preBuild: ['designs/*/dist', '.tmp/']
     postBuild: ['.tmp/']
 
+  express:
+    dev:
+      options:
+        port: 3333
+        hostname: 'localhost'
+        open: true
+        server: './server'
+
+  concurrent:
+    tasks: ['express']
+
 
 # load livingdocs task lddesigns
-grunt.loadTasks "tasks"
+grunt.loadTasks("tasks")
 
-
-grunt.registerTask "default", [
-  "clean:preBuild"
-  "lddesigns"
+grunt.registerTask "postCompile", [
   "recess"
   "copy:assets"
   "copy:cssDirectories"
@@ -118,7 +144,23 @@ grunt.registerTask "default", [
   "clean:postBuild"
 ]
 
+grunt.registerTask "default", [
+  "clean:preBuild"
+  "lddesigns:development"
+  "postCompile"
+]
+
+grunt.registerTask "build", [
+  "clean:preBuild"
+  "lddesigns:build"
+  "postCompile"
+]
+
 grunt.registerTask "server", [
   "default"
+  "express"
   "watch"
 ]
+
+grunt.registerTask "dev", ["server"]
+
