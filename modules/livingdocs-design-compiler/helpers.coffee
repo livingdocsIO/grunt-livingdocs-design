@@ -1,6 +1,7 @@
 color = require('color')
 path = require('path')
 htmlmin = require("html-minifier")
+pd = require("pretty-data").pd
 file = require('./file')
 
 exports.toCamelCase = toCamelCase = (string) ->
@@ -24,3 +25,11 @@ exports.minifyHtml = (html, options, templateName) ->
 
   else
     html
+
+
+exports.minifyXml = (str, options) ->
+  try
+    pd.xmlmin str, options
+  catch err
+    console.log(">> Template \"#{templateName}\": HTML minify error\n #{err}\n".yellow)
+    return '<div class="error minify" style="color: red">Error while minifying: Template "#{templateName}"</div>'
