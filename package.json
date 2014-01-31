@@ -14,7 +14,7 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-contrib-watch": "~0.4.4",
     "grunt-contrib-clean": "~0.4.1",
-    "grunt-express": "~1.2.1"
+    "grunt-express": "~1.2.1",
     "matchdep": "~0.1.1",
     "pretty-data": "~0.40.0"
   }
