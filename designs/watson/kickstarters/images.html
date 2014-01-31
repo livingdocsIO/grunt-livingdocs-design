@@ -21,29 +21,33 @@
 </head>
 
 <body>
-  <script id="template" type="text/x-livingdocs-template">
-    <image-element></image-element>
-    <uppertitle>
-      <title></title>
-    </uppertitle>
-    <title></title>
-    <lead></lead>
-    <skyscraper></skyscraper>
-    <author></author>
-    <image-element></image-element>
-    <image-element></image-element>
-    <image-element></image-element>
-    <image-element></image-element>
-    <image-element></image-element>
-    <image-element></image-element>
-    <image-element></image-element>
-    <panorama></panorama>
-  </script>
+  <div class="wrapper">
+    <div class="story">
+      <script id="template" type="text/x-livingdocs-template">
+        <image-element></image-element>
+        <uppertitle>
+          <title></title>
+        </uppertitle>
+        <title></title>
+        <lead></lead>
+        <skyscraper></skyscraper>
+        <author></author>
+        <image-element></image-element>
+        <image-element></image-element>
+        <image-element></image-element>
+        <image-element></image-element>
+        <image-element></image-element>
+        <image-element></image-element>
+        <image-element></image-element>
+        <panorama></panorama>
+      </script>
+    </div>
+  </div>
 </body>
   <script>
     doc.kickstart({
       scriptNode: '#template',
-      destination: 'body',
+      destination: '.story',
       design: design.watson
     });
   </script>

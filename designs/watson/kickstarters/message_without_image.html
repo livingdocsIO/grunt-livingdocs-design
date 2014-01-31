@@ -21,20 +21,24 @@
 </head>
 
 <body>
-  <script id="template" type="text/x-livingdocs-template">
-    <uppertitle>
-      <title></title>
-    </uppertitle>
-    <title></title>
-    <skyscraper></skyscraper>
-    <text></text>
-    <panorama></panorama>
-  </script>
+  <div class="wrapper">
+    <div class="story">
+      <script id="template" type="text/x-livingdocs-template">
+        <uppertitle>
+          <title></title>
+        </uppertitle>
+        <title></title>
+        <skyscraper></skyscraper>
+        <text></text>
+        <panorama></panorama>
+      </script>
+    </div>
+  </div>
 </body>
   <script>
     doc.kickstart({
       scriptNode: '#template',
-      destination: 'body',
+      destination: '.story',
       design: design.watson
     });
   </script>
