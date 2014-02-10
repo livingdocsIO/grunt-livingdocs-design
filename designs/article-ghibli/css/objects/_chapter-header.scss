@@ -1,0 +1,21 @@
+/*------------------------------------*\
+    $CHAPTER HEADER
+\*------------------------------------*/
+.chapter-header {
+  text-align: center;
+}
+  .chapter-header__title {
+    margin-bottom:2.5*$base-spacing-unit;
+    margin-bottom:(2.5*$base-spacing-unit / $base-font-size)*1rem;
+  }
+  .chapter-header__number {
+    width: 70px;
+    height: 100px;
+    padding-top: 40px;
+    display: inline-block;
+
+    font-family: $font-fam--lft-etica;
+    background: image-url('totoro.svg') center top no-repeat;
+
+    @include font-size(37px, false);
+  }

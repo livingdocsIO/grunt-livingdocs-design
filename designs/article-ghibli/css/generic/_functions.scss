@@ -1,0 +1,21 @@
+/*------------------------------------*\
+    $FUNCTIONS
+\*------------------------------------*/
+/**
+ *  Tint and Shade are different from lighten() and darken() functions that are built into sass.
+ *  
+ *  Tint is a mix of color with white.
+ *  Shade is a mix of color with black.
+ *  Both take a color and a percent argument.
+ *
+    `background: tint(red, 40%);`
+    `background: shade(blue, 60%);`
+ *
+ */
+@function tint($color, $percent){
+  @return mix(white, $color, $percent);
+}
+
+@function shade($color, $percent){
+  @return mix(black, $color, $percent);
+}

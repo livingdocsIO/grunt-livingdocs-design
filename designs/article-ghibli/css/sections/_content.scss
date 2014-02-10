@@ -1,0 +1,7 @@
+/*------------------------------------*\
+    $HEADER
+\*------------------------------------*/
+.page__content {
+  @extend %breathe--top;
+  @extend %breathe--bottom;
+}

@@ -1,0 +1,9 @@
+/*------------------------------------*\
+    $HEADER
+\*------------------------------------*/
+.page__header {
+  height: 100%;
+  background: image-url('ghibli-studio-header.jpg') center bottom no-repeat;
+
+  @include vendor(background-size, cover);
+}

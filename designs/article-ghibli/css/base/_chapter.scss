@@ -1,0 +1,11 @@
+/*------------------------------------*\
+    $CHAPTER
+\*------------------------------------*/
+.chapter {
+  margin-bottom:8*$base-spacing-unit;
+  margin-bottom:(8*$base-spacing-unit / $base-font-size)*1rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

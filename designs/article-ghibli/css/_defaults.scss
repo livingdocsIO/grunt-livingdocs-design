@@ -1,0 +1,132 @@
+/*------------------------------------*\
+    $BORDER-BOX
+\*------------------------------------*/
+/**
+ * Do you want all elements to adopt `box-sizing:border-box;` as per
+ * paulirish.com/2012/box-sizing-border-box-ftw ?
+ */
+$global-border-box: true;
+
+
+
+/*------------------------------------*\
+    $BASE
+\*------------------------------------*/
+/**
+ * Base stuff
+ */
+$base-font-size:    18px;
+$base-line-height:  30px;
+
+/**
+ * Base font-family.
+ */
+$base-font-family:  "abril-text", serif;
+
+
+
+/*------------------------------------*\
+    $FONT-FAMILIES
+\*------------------------------------*/
+$font-fam--eskapade:    "eskapade", serif;
+$font-fam--lft-etica:   "lft-etica", sans-serif;
+
+
+
+
+/*------------------------------------*\
+    $FONT-SIZES
+\*------------------------------------*/
+/**
+ * Font-sizes (in pixels). Refer to relevant sections for their implementations.
+ */
+$giga-size:         120px;
+$mega-size:         110px;
+
+$h1-size:            92px; // .alpha
+$h2-size:            20px; // .beta
+$h3-size:            18px; // .gamma
+$h4-size:            20px; // .delta
+$h5-size:            16px; // .epsilon
+$h6-size:            14px; // .zeta
+
+$milli-size:         12px; // .smallprint, .milli
+$micro-size:          9px; // .micro
+
+
+
+/*------------------------------------*\
+    $QUOTES
+\*------------------------------------*/
+/**
+ * English quote marks?
+ */
+$english-quotes:    false;
+
+/**
+ * If you want English quotes then please do not edit these; they’re only here
+ * because Sass needs them.
+ */
+$open-quote:    null;
+$close-quote:   null;
+
+/**
+ * If you need non-English quotes, please alter the following values accordingly:
+ */
+@if $english-quotes != true{
+  $open-quote:    \00AB;
+  $close-quote:   \00BB;
+}
+
+
+
+/*------------------------------------*\
+    $BRAND
+\*------------------------------------*/
+/**
+ * How big would you like round corners to be by default?
+ */
+$brand-round:        3px;
+
+
+
+/*------------------------------------*\
+    $FRAMEWORK
+\*------------------------------------*/
+/**
+ * Assign our `$base-line-height` to a new spacing var for more transparency.
+ */
+$base-spacing-unit: $base-line-height;
+$half-spacing-unit: $base-spacing-unit / 2;
+$line-height-ratio: $base-line-height / $base-font-size;
+
+
+
+/*------------------------------------*\
+    $RESPONSIVE
+\*------------------------------------*/
+/**
+ * Tell upfront.css when breakpoints start.
+ */
+$lap-start:          481px;
+$desk-start:        1024px;
+$desk-wide-start:   1200px;
+
+
+
+/*------------------------------------*\
+    $Colors
+\*------------------------------------*/
+/**
+ * Some funky colors
+ */
+$text:                #262626;
+$text--light:         tint($text, 40%);
+
+$background:          #fff;
+$background--dark:    #262626;
+$background--black:   #000;
+
+$border--light:       tint($text, 75%);
+
+$upfront-blue:  #3B738F;

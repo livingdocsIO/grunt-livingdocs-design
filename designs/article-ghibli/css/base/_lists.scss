@@ -1,0 +1,20 @@
+/*------------------------------------*\
+    $LISTS
+\*------------------------------------*/
+/**
+ * Remove vertical spacing from nested lists.
+ */
+li {
+  > ul,
+  > ol {
+    margin-bottom:0;
+  }
+}
+
+
+/**
+ * Remove default styles
+ */
+.list--no-styles {
+  list-style: none;
+}
