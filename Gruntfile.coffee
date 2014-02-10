@@ -20,6 +20,16 @@ grunt.initConfig
           return src.split('/').pop()[0] != '_' && (src.indexOf('.css') != -1 || src.indexOf('.less') != -1)
       ]
 
+  sass:
+    dist:
+      files: [
+        expand: true
+        cwd: './'
+        src:['designs/*/css/*.scss']
+        dest: '.tmp/'
+        ext: '.css'
+      ]
+
   lddesigns:
     development:
       options:
@@ -97,7 +107,7 @@ grunt.initConfig
         # exclude empty directories
         # to copy css doesn't matter. we exclude only .less files and empty directories
         filter: (src) ->
-          return src.indexOf('.less') == -1 && src.split('/').pop().indexOf('.') != -1
+          return src.indexOf('.less') == -1 && src.indexOf('.scss') == -1 && src.split('/').pop().indexOf('.') != -1
       ]
 
   watch:
@@ -138,6 +148,7 @@ grunt.loadTasks("tasks")
 
 grunt.registerTask "postCompile", [
   "recess"
+  "sass"
   "copy:assets"
   "copy:cssDirectories"
   "moveToDist"
