@@ -15,7 +15,7 @@
     display: inline-block;
 
     font-family: $font-fam--lft-etica;
-    background: image-url('totoro.svg') center top no-repeat;
+    background: url('images/totoro.svg') center top no-repeat;
 
     @include font-size(37px, false);
   }
