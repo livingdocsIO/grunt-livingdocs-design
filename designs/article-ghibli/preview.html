@@ -1,0 +1,57 @@
+<html>
+<head>
+    <title>Emmet Documentation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="http://fonts.googleapis.com/css?family=Handlee" rel="stylesheet">
+    <link rel="stylesheet" href="/components/livingdocs-engine/css/livingdocs.css">
+
+    <!-- load design css (and fonts) -->
+    <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
+
+
+    <script src="/components/livingdocs-engine/livingdocs_engine.js"></script>
+
+    <!-- dependencies of livingdocs-engine -->
+    <script src="/components/livingdocs-engine/vendor/yepnope/yepnope.1.5.3-min.js"></script>
+    <script src="/components/livingdocs-engine/vendor/store/store.js"></script>
+    <script src="/components/livingdocs-engine/vendor/editableJS/editable.js"></script>
+    <script src="/designs/bootstrap/design.js"></script>
+</head>
+<body>
+
+  <!-- document template with content to easily preview and test a design -->
+  <script id="template" type="text/x-livingdocs-template">
+    <main-and-sidebar>
+      <main>
+        <hero>
+          <title></title>
+          <tagline></tagline>
+        </hero>
+      </main>
+      <sidebar>
+        <title></title>
+        <text></text>
+        <text></text> 
+      </sidebar>
+    </main-and-sidebar>
+
+    <info></info>
+    <button></button>
+  </script>
+
+
+
+  <script>
+    doc.kickstart({
+      scriptNode: '#template',
+      destination: 'body',
+      design: design.bootstrap
+    });
+  </script>
+
+</body>
+</html>
