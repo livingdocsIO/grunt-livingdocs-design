@@ -10,8 +10,12 @@
     <link rel="stylesheet" href="/components/livingdocs-engine/css/livingdocs.css">
 
     <!-- load design css (and fonts) -->
+    <link rel="stylesheet" href="/designs/article-ghibli/css/upfront.css">
     <script src="/components/livingdocs-engine/vendor/jquery-1.9.1.min.js"></script>
 
+    <!-- Typekit -->
+    <script type="text/javascript" src="//use.typekit.net/fnu1nba.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 
     <script src="/components/livingdocs-engine/livingdocs_engine.js"></script>
 
@@ -19,37 +23,32 @@
     <script src="/components/livingdocs-engine/vendor/yepnope/yepnope.1.5.3-min.js"></script>
     <script src="/components/livingdocs-engine/vendor/store/store.js"></script>
     <script src="/components/livingdocs-engine/vendor/editableJS/editable.js"></script>
-    <script src="/designs/bootstrap/design.js"></script>
+    <script src="/designs/article-ghibli/design.js"></script>
 </head>
 <body>
 
+
+<div class="wrapper">
+
   <!-- document template with content to easily preview and test a design -->
   <script id="template" type="text/x-livingdocs-template">
-    <main-and-sidebar>
-      <main>
-        <hero>
-          <title></title>
-          <tagline></tagline>
-        </hero>
-      </main>
-      <sidebar>
-        <title></title>
-        <text></text>
-        <text></text> 
-      </sidebar>
-    </main-and-sidebar>
-
-    <info></info>
-    <button></button>
+    <chapter-header>
+      <number>33</number>
+      <title>History</title>
+    </chapter-header>
+    <p>lorem</p>
+    <media-box></media-box>
   </script>
+
+</div>
 
 
 
   <script>
     doc.kickstart({
       scriptNode: '#template',
-      destination: 'body',
-      design: design.bootstrap
+      destination: '.wrapper',
+      design: design.ghibli
     });
   </script>
 
