@@ -3,3 +3,4 @@ designs/*/dist
 .DS_Store
 .tmp/
 .idea/*
+.sass-cache
