@@ -1,12 +1,19 @@
 /*------------------------------------*\
     $WRAPPERS
 \*------------------------------------*/
-.wrapper {
-  max-width: 690px;
+.funky-wrapper {
+  height: 100%;
+  max-width: 1100px;   
   margin-left: auto;
   margin-right: auto;
+  padding-top: 37px;
   padding-left: $base-spacing-unit;
   padding-right: $base-spacing-unit;
+}
+
+
+.wrapper {
+  max-width: 690px;
 }
 .wrapper--wide {
   max-width: 820px;

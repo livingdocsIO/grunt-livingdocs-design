@@ -6,7 +6,7 @@
 //
 .media-box {
   img {
-    margin-bottom: $half-spacing-unit;
+    display: block;
   }
 }
   .media-box-content {
@@ -17,7 +17,8 @@
   .media-box__caption {
     color: $text--light;
     font-family: $font-fam--lft-etica;
-
+    
+    padding-top: $half-spacing-unit;
     padding-bottom: $half-spacing-unit;
     border-bottom: 1px solid $border--light;
 
@@ -35,10 +36,6 @@
   margin-right: auto;
   text-align: center;
 
-  img {
-    display: block;
-    margin-bottom: 0;
-  }
 
   .media-box__caption {
     text-align: left;
@@ -47,13 +44,6 @@
     padding-right: $half-spacing-unit;
 
     background-color: rgba(255,255,255,.80);
-    
-    // border-bottom: none;
-
-    // left: 0;
-    // bottom: 0;
-    // right: 0;
-    // position: absolute;
   }
 }
 
@@ -64,16 +54,10 @@
   margin-top: $half-spacing-unit;
   margin-left: $base-spacing-unit;
 }
-.media-box--pull-right {
-  margin-right: -5*$base-spacing-unit;
-}
 
 .media-box--left {
   float: left;
 
   margin-top: $half-spacing-unit;
   margin-right: $base-spacing-unit;
-}
-.media-box--pull-left {
-  margin-left: -5*$base-spacing-unit;
 }

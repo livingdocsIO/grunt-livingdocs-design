@@ -27,17 +27,37 @@
 </head>
 <body>
 
+<div class="page__meta-info">
+  <div class="brand-bar">
+    <img src="/designs/article-ghibli/css/images/upfront-logo-small.svg" alt="" class="brand-bar__logo logo--small">
+    <p class="brand-bar__title">Ghibli Studio</p>
+  </div>
+</div>
 
-<div class="wrapper">
+<div class="funky-wrapper">
 
   <!-- document template with content to easily preview and test a design -->
   <script id="template" type="text/x-livingdocs-template">
-    <chapter-header>
-      <number>33</number>
-      <title>History</title>
-    </chapter-header>
-    <p>lorem</p>
+    <cover>
+      <title>Studio Ghibli</title>
+      <subtitle>A world of magical imagination in service of realsim</subtitle>
+      <author>From Wikipedia, the funky free encyclopdia</author>
+    </cover>
+
+    <lead>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo, aut reiciendis delectus sint veritatis quia pariatur odio nobis hic consequuntur quis modi recusandae eligendi quasi corporis quisquam voluptate fuga suscipit.</lead>
+
+    <chapter-header></chapter-header>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, dolores, rerum alias optio sequi molestiae consequatur dolorem cumque molestias pariatur quos cum nisi deserunt recusandae dolor in laudantium placeat voluptatibus.</p>
+
     <media-box></media-box>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, dolores, rerum alias optio sequi molestiae consequatur dolorem cumque molestias pariatur quos cum nisi deserunt recusandae dolor in laudantium placeat voluptatibus.</p>
+    
+    <quote></quote>
+
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, quam, harum similique libero fuga repellendus necessitatibus dolores non tempora atque accusamus tenetur magni est tempore suscipit laudantium amet. Sequi, consequatur.</p>
+
   </script>
 
 </div>
@@ -47,7 +67,7 @@
   <script>
     doc.kickstart({
       scriptNode: '#template',
-      destination: '.wrapper',
+      destination: '.funky-wrapper',
       design: design.ghibli
     });
   </script>

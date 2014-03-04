@@ -14,31 +14,6 @@
  * Big up @boblet: html5doctor.com/blockquote-q-cite
  */
 
-/**
- * Inline quotes.
- */
-q {
-  quotes:"\2018" "\2019" "#{$open-quote}" "#{$close-quote}";
-
-  &:before {
-    content: "\2018";
-    content: open-quote;
-  }
-  &:after {
-    content: "\2019";
-    content: close-quote;
-  }
-
-  q:before {
-      content: "\201C";
-      content: open-quote;
-  }
-  q:after {
-    content:" \201D";
-    content: close-quote;
-  }
-}
-
 blockquote {
   quotes:"#{$open-quote}" "#{$close-quote}";
 
@@ -75,23 +50,29 @@ blockquote {
    </blockquote>
  *
  */
-// blockquote{
-//   /**
-//    * .4em is roughly equal to the width of the opening “ that we wish to hang.
-//    */
-//   text-indent:-0.41em;
+blockquote {
+  line-height: 1.7;
 
-//   p:last-of-type{
-//       margin-bottom:0;
-//   }
-// }
+  padding-top: $base-spacing-unit - 2px;
+  padding-bottom: $base-spacing-unit - 2px;
 
-// .source{
-//   display: block;
-//   text-indent: 0;
-//   font-weight: normal;
+  @include font-size(23px, false);
+  
+  p {
+    font-style: italic;
+  }
+  
+  p:last-of-type {
+    margin-bottom: 0;
+  }
+}
 
-//   &:before{
-//       content:"\2014";
-//   }
-// }
+.source{
+  display: block;
+  text-indent: 0;
+  font-weight: normal;
+
+  &:before{
+    content:"\2014";
+  }
+}

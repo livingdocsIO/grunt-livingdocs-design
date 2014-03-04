@@ -121,12 +121,12 @@ $desk-wide-start:   1200px;
  * Some funky colors
  */
 $text:                #262626;
-$text--light:         tint($text, 40%);
+$text--light:         lighten($text, 40%);
 
 $background:          #fff;
 $background--dark:    #262626;
 $background--black:   #000;
 
-$border--light:       tint($text, 75%);
+$border--light:       lighten($text, 75%);
 
 $upfront-blue:  #3B738F;
