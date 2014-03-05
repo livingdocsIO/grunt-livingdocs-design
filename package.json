@@ -17,7 +17,7 @@
     "grunt-express": "~1.2.1",
     "matchdep": "~0.1.1",
     "pretty-data": "~0.40.0",
-    "grunt-sass": "~0.10.0",
-    "grunt-autoprefixer": "~0.6.5"
+    "grunt-autoprefixer": "~0.6.5",
+    "grunt-contrib-sass": "~0.7.2"
   }
 }
