@@ -1,0 +1,20 @@
+/*------------------------------------*\
+    $BREAK
+\*------------------------------------*/
+/**
+ * `hr` elements only take up a few pixels, so we need to give them special
+ * treatment regarding vertical rhythm.
+ */
+hr {
+  width: 14%;
+
+  border: 0;
+  border-top: 1px solid $text--light;
+
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4*$base-spacing-unit - 1px;
+  margin-top: ((4*$base-spacing-unit - 1px) / $base-font-size)*1rem;
+  margin-bottom: 4*$base-spacing-unit - 1px;
+  margin-bottom: ((4*$base-spacing-unit - 1px) / $base-font-size)*1rem;
+}

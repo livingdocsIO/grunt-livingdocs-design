@@ -24,7 +24,6 @@
  */
 @import "base/main";
 @import "base/headings";
-@import "base/paragraph";
 @import "base/chapter";
 @import "base/smallprint";
 @import "base/quotes";
@@ -45,7 +44,10 @@
 @import "objects/media-box";
 @import "objects/brand-bar";
 @import "objects/head-section";
+@import "objects/break";
 @import "objects/spacing";
+@import "objects/lead";
+
 
 /**
  * Site sections

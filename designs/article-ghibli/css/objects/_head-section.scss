@@ -37,31 +37,3 @@
 /*------------------------------------*\
     $MODIFIERS
 \*------------------------------------*/
-.head-section--deco {
-  .head-section__title {
-    padding-top: 2 * $base-spacing-unit;
-
-    &:before {
-      content: "";
-
-      height: 2px;
-      width: 550px;
-      margin-left: -275px;
-      background-color: #fff;
-      
-      left: 50%;
-      top: $base-spacing-unit;
-      position: absolute;
-    }
-  }
-}
-
-  .head-section--deco__ghibli {
-    display: inline-block;
-  }
-  .head-section--deco__totoro {
-    top: 154px;
-    left: -334px;
-    position: relative;
-    display: inline-block;
-  }

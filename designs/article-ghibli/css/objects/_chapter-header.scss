@@ -9,13 +9,17 @@
     margin-bottom:(2.5*$base-spacing-unit / $base-font-size)*1rem;
   }
   .chapter-header__number {
-    width: 70px;
-    height: 100px;
-    padding-top: 40px;
+    color: white;
+    background-color: $text;
+
+    width: 2em;
+    height: 2em;
+    line-height: 2em;
     display: inline-block;
 
+
     font-family: $font-fam--lft-etica;
-    background: url('images/totoro.svg') center top no-repeat;
 
     @include font-size(37px, false);
+    @include vendor(border-radius, 100%);
   }
