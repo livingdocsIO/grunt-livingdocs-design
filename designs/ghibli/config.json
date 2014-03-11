@@ -1,4 +1,5 @@
 {
   "namespace": "ghibli",
-  "version": 1
+  "version": 1,
+  "paragraph": "p"
 }
