@@ -8,6 +8,10 @@
   img {
     display: block;
   }
+  .doc-image-empty {
+    min-width: 200px;
+    min-height: 200px;
+  }
 }
   .media-box-content {
     display: inline-block;
@@ -17,7 +21,7 @@
   .media-box__caption {
     color: $text--light;
     font-family: $font-fam--lft-etica;
-    
+
     padding-top: $half-spacing-unit;
     padding-bottom: $half-spacing-unit;
     border-bottom: 1px solid $border--light;
@@ -27,7 +31,7 @@
 
     strong {
       color: $text;
-    }    
+    }
   }
 
 
