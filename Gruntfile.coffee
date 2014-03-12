@@ -97,6 +97,13 @@ grunt.initConfig
         src: ['**'],
         dest: '../livingmaps/datablog-ui/app/vendor/livingmaps-design/'
       ]
+    livingdocs:
+      files: [
+        expand: true,
+        cwd: 'designs/ghibli/dist/',
+        src: ['**'],
+        dest: '../livingdocs-editor/app/designs/ghibli/'
+      ]
 
     cssDirectories:
       files: [
