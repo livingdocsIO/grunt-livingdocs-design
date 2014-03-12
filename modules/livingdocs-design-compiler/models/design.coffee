@@ -29,6 +29,7 @@ class Design
     @config =
       version: config.version || 1
       namespace: config.namespace
+      paragraph: config.paragraph
       css: config.css
       js: config.js
       groups: config.groups || {}
