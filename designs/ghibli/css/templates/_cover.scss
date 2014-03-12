@@ -1,25 +1,36 @@
 /*------------------------------------*\
+    $HEADER
+\*------------------------------------*/
+.page__header {
+  // padding-bottom: 56%;
+  margin-left: -$base-spacing-unit;
+  margin-right: -$base-spacing-unit;
+  margin-bottom: 3 * $base-spacing-unit;
+  background: url('images/ghibli-studio-header.jpg') center bottom no-repeat;
+  background-size: cover;
+}
+
+/*------------------------------------*\
     $HEAD SECTION
 \*------------------------------------*/
 .head-section {
   color: #fff;
   text-align: center;
   font-family: $font-fam--eskapade;
-  
+
   width: 100%;
-  bottom: 15%;
-  position: absolute;
+  padding: 5%;
 }
 
   .head-section__title {
     line-height: 1;
     position: relative;
     margin-bottom: $half-spacing-unit / 2;
-    @include font-size($mega-size, false);   
+    @include font-size($mega-size, false);
   }
-  
+
   .head-section__sub-title {
-    @include font-size(31px, false);   
+    @include font-size(31px, false);
   }
 
   .head-section__author {

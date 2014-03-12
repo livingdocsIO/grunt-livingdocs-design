@@ -16,7 +16,8 @@
 @import "generic/reset";
 @import "generic/clearfix";
 @import "generic/shared";
-@import "generic/preload-images";
+@import "generic/spacing";
+@import "generic/wrappers";
 
 
 /**
@@ -24,7 +25,6 @@
  */
 @import "base/main";
 @import "base/headings";
-@import "base/chapter";
 @import "base/smallprint";
 @import "base/quotes";
 @import "base/images";
@@ -35,26 +35,13 @@
 /**
  * Objects and abstractions
  */
-@import "objects/wrappers";
-@import "objects/logo";
-@import "objects/dropcap";
-@import "objects/chapter-header";
-@import "objects/flexbox";
-@import "objects/flexembed";
-@import "objects/media-box";
-@import "objects/brand-bar";
-@import "objects/head-section";
-@import "objects/break";
-@import "objects/spacing";
-@import "objects/lead";
-
-
-/**
- * Site sections
- */
-@import "sections/header";
-@import "sections/content";
-@import "sections/footer";
+@import "templates/logo";
+@import "templates/chapter-header";
+@import "templates/flexembed";
+@import "templates/media-box";
+@import "templates/cover";
+@import "templates/break";
+@import "templates/lead";
 
 
 /**

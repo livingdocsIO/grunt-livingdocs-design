@@ -1,0 +1,77 @@
+/*------------------------------------*\
+    $SPACING
+\*------------------------------------*/
+.exhale-auto--sides {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.take-room--more {
+  max-width: 820px;
+}
+
+.take-room--default {
+  max-width: 660px;
+}
+
+
+/**
+ * (silent)Classes for adding padding to sections
+ */
+%breathe--ends {
+  padding-top: 4.5*$base-spacing-unit;
+  padding-top: (4.5*$base-spacing-unit/$base-font-size)*1rem;
+  padding-bottom: 4.5*$base-spacing-unit;
+  padding-bottom: (4.5*$base-spacing-unit/$base-font-size)*1rem;
+}
+
+%breathe--top {
+  padding-top: 4.5*$base-spacing-unit;
+  padding-top: (4.5*$base-spacing-unit/$base-font-size)*1rem;
+}
+%breathe--bottom {
+  padding-bottom: 4.5*$base-spacing-unit;
+  padding-bottom: (4.5*$base-spacing-unit/$base-font-size)*1rem;
+}
+
+%breathe-half--top {
+  padding-top: 1.5*$base-spacing-unit;
+  padding-top: (1.5*$base-spacing-unit/$base-font-size)*1rem;
+}
+%breathe-half--bottom {
+  padding-bottom: 1.5*$base-spacing-unit;
+  padding-bottom: (1.5*$base-spacing-unit/$base-font-size)*1rem;
+}
+
+%breathe-quarter--top {
+  padding-top: .75*$base-spacing-unit;
+  padding-top: (.75*$base-spacing-unit/$base-font-size)*1rem;
+}
+%breathe-quarter--bottom {
+  padding-bottom: .75*$base-spacing-unit;
+  padding-bottom: (.75*$base-spacing-unit/$base-font-size)*1rem;
+}
+
+
+/**
+ * (silent)Classes for adding margin to sections
+ */
+%exhale--top {
+  margin-top: 3*$base-spacing-unit;
+  margin-top: (3*$base-spacing-unit/$base-font-size)*1rem;
+}
+%exhale--bottom {
+  margin-bottom: 3*$base-spacing-unit;
+  margin-bottom: (3*$base-spacing-unit/$base-font-size)*1rem;
+}
+
+%exhale-half--top {
+  margin-top: 1.5*$base-spacing-unit;
+  margin-top: (1.5*$base-spacing-unit/$base-font-size)*1rem;
+}
+%exhale-half--bottom {
+  margin-bottom: 1.5*$base-spacing-unit;
+  margin-bottom: (1.5*$base-spacing-unit/$base-font-size)*1rem;
+}
+
