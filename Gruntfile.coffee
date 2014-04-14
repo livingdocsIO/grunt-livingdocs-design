@@ -104,7 +104,13 @@ grunt.initConfig
         src: ['**'],
         dest: '../livingdocs-editor/app/designs/ghibli/'
       ]
-
+    timeline:
+      files: [
+        expand: true,
+        cwd: 'designs/timeline/dist/',
+        src: ['**'],
+        dest: '../livingdocs-editor/app/designs/timeline/'
+      ]
     cssDirectories:
       files: [
         expand: true

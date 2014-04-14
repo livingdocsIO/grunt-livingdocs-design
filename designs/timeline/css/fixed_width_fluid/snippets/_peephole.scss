@@ -1,0 +1,17 @@
+.peephole {
+  @extend .full-width;
+  @extend .full-height;
+  
+  @include image-container;
+  
+  // Modificators
+  &.small {
+    @extend .not-full-width;
+    clear: both;
+    height: rhythm(14);
+  }
+  
+  &.half-height {
+    @extend .half-height;
+  }
+}

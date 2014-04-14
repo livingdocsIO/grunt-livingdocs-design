@@ -1,0 +1,29 @@
+// Size Modifieres
+.full-width {
+  margin-left: 50%;
+  .container {
+    margin-left: -50vw;
+    width: 100vw;
+  }
+}
+
+.not-full-width {
+  margin-left: auto;
+  .container {
+    margin-left: auto;
+    width: auto;
+  }
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.half-height {
+  height: 50vh;
+}  
+
+.centered {
+  text-align: center;
+}
+

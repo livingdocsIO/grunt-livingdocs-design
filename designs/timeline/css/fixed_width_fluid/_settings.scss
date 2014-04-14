@@ -1,0 +1,22 @@
+// Define vertical rhythm
+$base-font-size: 20px;
+$base-line-height: 28px; /* 20px x 1.4 line-height */
+
+// Characters per line
+$text-width: 54ch;
+
+// Fonts
+$font-sans-serif: "Helvetica Neue", Helvetica, sans-serif;
+$font-serif: Georgia, Times, serif;
+$font-color: lighten(black, 20%);
+
+//Colors
+$upfront-color: #559ec1;
+$light-black-color: lighten(black, 10%);
+
+// Grid (Susy)
+// See here for options: http://susydocs.oddbird.net/en/latest/settings/
+$columns: 6;
+$susy: (
+  columns: $columns,
+);  

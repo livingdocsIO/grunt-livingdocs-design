@@ -1,0 +1,93 @@
+figure {  
+  img {
+    width: 100%;
+  }
+  @include trailer(1);
+  
+  &.right {
+    @include breakpoint($medium-screen) {
+      @include span(3 at 4);      
+      margin-left: gutter();
+    }
+  }
+
+  &.left {
+    @include breakpoint($medium-screen) {
+      @include span(3);      
+    }
+    @include breakpoint($large-screen) {
+      @include span(2);      
+    }
+  }
+  
+  @at-root .background {
+    background: image-url('mountains.jpg') center center;
+    background-size: cover;
+    min-height: rhythm(14);
+  }
+  
+  figcaption {
+    font-family: $font-sans-serif;
+    @include leader(1/4);
+    @include adjust-font-size-to(0.8rem, 0.8);
+  }
+  
+  .middle-text {
+    display: table;
+  
+    > figcaption {
+      display: table-cell;
+      vertical-align: middle;
+      
+      &.inverted {
+        color: white;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      }
+    }
+  }
+  
+  // Modifiers: Caption
+  &.caption-dark {    
+    figcaption {
+      background: $light-black-color;
+      color: white;
+      display: block;
+      @include rhythm(0, 1/2, 1/2, 0);
+      @include pad(rhythm(1/2));
+    }
+  }
+  
+  &.caption-inside {
+    @extend .caption-dark;
+    position: relative;
+    
+    figcaption {
+      background: rgba(0,0,0,0.5);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+    }
+    
+  }
+  
+  &.caption-inside-fade {
+    @extend .caption-inside;
+    
+    figcaption {
+      @include padding-leader(2);
+      background: -moz-linear-gradient(top,  rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%); /* FF3.6+ */
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.75))); /* Chrome,Safari4+ */
+      background: -webkit-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* Chrome10+,Safari5.1+ */
+      background: -o-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* Opera 11.10+ */
+      background: -ms-linear-gradient(top,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* IE10+ */
+      background: linear-gradient(to bottom,  rgba(0,0,0,0) 0%,rgba(0,0,0,0.75) 100%); /* W3C */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#bf000000',GradientType=0 ); /* IE6-9 */      
+    }
+  }
+  
+  &.full-size {
+    @extend .full-width;
+    @include image-container;
+  }
+}

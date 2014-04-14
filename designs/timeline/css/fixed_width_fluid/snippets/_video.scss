@@ -1,0 +1,14 @@
+.video {
+//  @extend .full-width;
+  
+  .video-container {
+    @include breakpoint($large-screen) {
+      @include squish(1);    
+    }
+    @include rhythm(1);    
+  }
+  
+  
+  // Modificators
+
+}
