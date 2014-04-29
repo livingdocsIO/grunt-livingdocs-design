@@ -3,7 +3,7 @@ grunt = require('grunt')
 path = require('path')
 
 # load all grunt tasks
-require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
+require('load-grunt-tasks')(grunt)
 
 grunt.initConfig
   recess:

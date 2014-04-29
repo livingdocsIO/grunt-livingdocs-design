@@ -3,18 +3,7 @@ path = require('path')
 root = path.join(__dirname, '../')
 app = module.exports = express()
 
-app.use express.bodyParser()
-app.use app.router
 app.use express.static(path.join(root, '/public'))
-
-
-# Errorhandler
-app.use (err, req, res, next) ->
-	console.log(err.stack)
-	res.send(500, err.message)
-
-app.use (req, res, next) ->
-	res.send(404, 'Page or file not found')
 
 
 # Routes
@@ -26,3 +15,13 @@ app
   .get('/designs/:design/kickstarters', ctrl.listKickstarters, ctrl.listDesigns)
   .get('/designs/:design/kickstarters/:kickstarter', ctrl.getKickstarter, ctrl.listKickstarters, ctrl.listDesigns)
   .get('/designs/:design/*', ctrl.getDesignAssets, ctrl.getDesign, ctrl.listDesigns)
+
+
+# Errorhandler
+app.use (err, req, res, next) ->
+        console.log(err.stack)
+        res.send(500, err.message)
+
+app.use (req, res, next) ->
+        res.send(404, 'Page or file not found')
+
