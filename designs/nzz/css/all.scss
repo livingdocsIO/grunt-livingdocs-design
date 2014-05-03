@@ -1,5 +1,23 @@
+// Header overrides
 #articleBodyText {
   header, figcaption {
     font-family: Arial, sans-serif;
   }
+}
+
+#main.grid {
+  margin-top: 2em;
+  width: 664px;
+}
+
+// Timeline overrides
+article {
+  .timeline {
+    margin-bottom: 0;
+    margin-top: 0;
+    
+    .timeline-period {
+      margin-bottom: 0;
+    } 
+  }    
 }
