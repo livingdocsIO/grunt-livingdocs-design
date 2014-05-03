@@ -2,5 +2,7 @@
   "namespace": "nzz",
   "paragraph": "p",
   "version": 1,
-  "css": ["/css/all.css"]
+  "css": [
+    "css/all.css"
+  ]
 }

@@ -111,6 +111,13 @@ grunt.initConfig
         src: ['**'],
         dest: '../livingdocs-editor/app/designs/timeline/'
       ]
+    nzz:
+      files: [
+        expand: true,
+        cwd: 'designs/nzz/dist/',
+        src: ['**'],
+        dest: '../livingdocs-editor/app/designs/nzz/'
+      ]
     cssDirectories:
       files: [
         expand: true
