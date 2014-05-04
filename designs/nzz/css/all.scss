@@ -1,3 +1,5 @@
+@import 'originals/nzz';
+
 // Header overrides
 #articleBodyText {
   header, figcaption {
@@ -15,9 +17,9 @@ article {
   .timeline {
     margin-bottom: 0;
     margin-top: 0;
-    
+
     .timeline-period {
       margin-bottom: 0;
-    } 
-  }    
+    }
+  }
 }
