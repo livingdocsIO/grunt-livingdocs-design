@@ -1,0 +1,18 @@
+figure.hero {
+  margin-left: 50%;
+  .container {
+    margin-left: -50vw;
+    width: 100vw;
+  }
+
+  .image-container {
+    background-size: cover;
+    background-position: center center;
+  }
+  
+  p {
+    @if $debug {
+      background-image: image-url('mountains.jpg');      
+    }
+  }
+}

@@ -1,14 +1,25 @@
 @import 'originals/nzz';
+@import 'originals/icons';
+
+$debug: true;
+
+@import 'snippets/hero';
+@import 'snippets/visualization';
 
 // Header overrides
-#articleBodyText {
+article#articleBodyText {
+  overflow: visible;
+  
   header, figcaption {
     font-family: Arial, sans-serif;
+  }
+  .zoom figcaption span {
+    display: inline;
+    float: none;
   }
 }
 
 #main.grid {
-  margin-top: 2em;
   width: 664px;
 }
 
@@ -20,6 +31,23 @@ article {
 
     .timeline-period {
       margin-bottom: 0;
+      
+      .timeline-event {
+        float: none;
+      }
     }
   }
+}
+
+.doc-image-empty {
+  min-height: 300px;
+  width: 100%;
+}
+
+.full-height {
+  height: 100vh;
+}
+
+.half-height {
+  height: 50vh;
 }

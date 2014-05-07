@@ -3,7 +3,6 @@
   "paragraph": "p",
   "version": 1,
   "css": [
-    "/css/all.css",
-    "http://www.nzz.ch/version-2.34.1/css/599c6f5.css"
+    "/css/all.css"
   ]
 }
