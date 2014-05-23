@@ -6,6 +6,8 @@ $debug: true;
 @import 'snippets/hero';
 @import 'snippets/visualization';
 
+@import 'editing-fixes';
+
 // Header overrides
 article#articleBodyText {
   overflow: visible;
@@ -34,6 +36,9 @@ article {
       
       .timeline-event {
         float: none;
+        .timelime-event-body a {
+          color: #0092cc;          
+        }
       }
     }
   }
