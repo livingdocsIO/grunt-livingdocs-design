@@ -34,7 +34,7 @@ grunt.initConfig
     development:
       options:
         # templates do not work unminified. Is there a bug in livingdocs-engine?
-        minify: true
+        minify: false
         minifyOptions:
           collapseWhitespace: true
           removeComments: true
