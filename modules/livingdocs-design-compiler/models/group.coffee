@@ -7,6 +7,7 @@ class Group
   constructor: (config) ->    
     @id = config.id
     @title = config.title || config.id
+    @weight = weight if weight = parseInt(config.weight)
     @templates = config.templates || []
     @addStyles(config.styles) if config.styles
 

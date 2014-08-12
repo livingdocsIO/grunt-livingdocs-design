@@ -116,10 +116,9 @@ class Design
 
 
   toJson: ->
-    design =
-      config: @config
-      templates: @templates
-      kickstarters: @kickstarters
+    config: @config
+    templates: @templates
+    kickstarters: @kickstarters
 
 
   toJs: (minifiyJSON) ->

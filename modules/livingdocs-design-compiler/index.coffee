@@ -26,8 +26,7 @@ exports.compile = (options) ->
     templateGroups = []
     templateFiles = []
     templatesPath = path.join(options.src, options.templatesDirectory)
-    resources = file.readdir(templatesPath, design)
-    for resource in resources
+    for resource in file.readdir(templatesPath, design)
       resourcePath = path.join(templatesPath, resource)
 
       # add root templates
