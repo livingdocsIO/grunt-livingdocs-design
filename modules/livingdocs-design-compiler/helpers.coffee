@@ -16,15 +16,17 @@ exports.filenameToTemplatename = (string) ->
 
 
 exports.minifyHtml = (html, options, templateName) ->
-  if options && options.minify
+  if options?.minify
     try
-      htmlmin.minify html, options.minifyOptions
+      htmlmin.minify(html, options.minifyOptions)
     catch err
       console.log(">> Template \"#{templateName}\": HTML minify error\n #{err}\n".yellow)
       return '<div class="error minify" style="color: red">Error while minifying: Template "#{templateName}"</div>'
 
   else
     html
+    # .replace(/\s+/g, ' ')
+    .trim()
 
 
 exports.minifyXml = (str, options) ->
