@@ -30,10 +30,8 @@ class Design extends EventEmitter
       groups: config.groups || {}
       styles: []
 
-
-    if config.styles
-      for style in config.styles
-        @addStyle(new Style(style))
+    for style in config.styles || []
+      @addStyle(new Style(style))
 
 
   initConfigFile: (filePath, designName) ->
@@ -68,9 +66,8 @@ class Design extends EventEmitter
     options.filename = helpers.filenameToTemplatename(filePath)
     template = new Template(templateFile, options, this)
 
+    # Add template & add to group
     @addTemplate(template, options)
-
-    # Add template to group
     templatePath = filePath.split("#{options.src}/#{options.templatesDirectory}/")[1].split('/')
     if templatePath.length > 1 then groupId = templatePath[0]
     @addTemplateToGroup(template, groupId || 'others')
@@ -107,8 +104,8 @@ class Design extends EventEmitter
 
 
   toJs: (minify) ->
-    templateBegin = "(function() { this.design || (this.design = {}); design.#{ @config.namespace } = (function() { return "
-    templateEnd = ";})();}).call(this);"
+    templateBegin = "(function () { var designJSON = "
+    templateEnd = "; if(typeof module !== 'undefined' && module.exports) {return module.exports = designJSON;} else { this.design = this.design || {}; this.design.#{@config.namespace} = designJSON;} }).call(this);"
     fileData = templateBegin + @toJson(minify) + templateEnd
 
 
