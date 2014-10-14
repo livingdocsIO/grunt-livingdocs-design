@@ -19,7 +19,7 @@ class Template
     @id = config.namespace || config.id || options.filename
     @weight = weight if weight = parseInt(config.weight)
     @title = config.name || config.title || options.filename
-    @html = helpers.minifyHtml($.html(), options)
+    @html = helpers.minifyHtml($.html(), options, @id, design)
     @addStyles(config.styles) if config.styles
 
 

@@ -59,14 +59,14 @@ class Design extends EventEmitter
 
 
   addTemplate: (template, options) ->
-    template.html = helpers.minifyHtml(template.html, options, template.id)
+    template.html = helpers.minifyHtml(template.html, options, template.id, this)
     @templates.push(template)
 
 
   addTemplateFile: (filePath, options) ->
-    templateFile = file.readSync(filePath, {}, @)
+    templateFile = file.readSync(filePath, {}, this)
     options.filename = helpers.filenameToTemplatename(filePath)
-    template = new Template(templateFile, options, @)
+    template = new Template(templateFile, options, this)
 
     @addTemplate(template, options)
 

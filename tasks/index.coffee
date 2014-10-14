@@ -28,6 +28,7 @@ module.exports = (grunt) ->
 
     done = @async()
     options = @options()
+    error = null
 
     # Initialize design
     design = Design.compile(options)
@@ -38,12 +39,11 @@ module.exports = (grunt) ->
       grunt.fail.warn(warning)
 
     .on 'error', (err) ->
-      grunt.log.error(err)
-      done(false)
+      error = err
 
-    .on 'end', (err)->
-      if err
-        grunt.log.error(err)
+    .on 'end', ->
+      if error
+        grunt.log.error(error)
         done(false)
       else
         grunt.log.write("Design '#{options.design}' compiled...")
