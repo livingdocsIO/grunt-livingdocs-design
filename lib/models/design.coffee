@@ -1,5 +1,4 @@
-sys = require('sys')
-events = require('events')
+EventEmitter = require('events').EventEmitter
 
 file = require('../file')
 helpers = require('../helpers')
@@ -9,20 +8,18 @@ Group = require('./group')
 Template = require('./template')
 
 
-class Design
+class Design extends EventEmitter
 
   constructor: (options) ->
     @templates = []
     @config = {}
-
-    events.EventEmitter.call(this)
-
-  sys.inherits(Design, events.EventEmitter)
+    super()
 
 
   initConfig: (config = {}) ->
     unless config?.namespace
-      @emit 'error', new Error "You specified a configuration without a namespace."
+      @emit('error', new Error "You specified a configuration without a namespace.")
+      return @emit('end')
 
     @config =
       version: config.version || 1
@@ -44,9 +41,10 @@ class Design
       config = file.readJson(filePath)
     catch err
       if err.errno == 34
-        @emit 'warn', "The design \"#{designName}\" has no configuration file."
+        @emit('warn', "The design \"#{designName}\" has no configuration file.")
       else
-        @emit 'err', err
+        @emit('error', err)
+        return @emit('end')
 
     @initConfig(config)
 
@@ -80,8 +78,8 @@ class Design
 
   addGroup: (group = {}) ->
     if !group.id
-      @emit 'error', "Each group requires an id. The group \"#{group.title}\" has none."
-      return
+      @emit('error', "Each group requires an id. The group \"#{group.title}\" has none.")
+      return @emit('end')
 
     @config.groups[group.id] = group
 
@@ -91,9 +89,10 @@ class Design
       config = file.readJson(filePath + '/config.json')
     catch err
       if err.errno == 34
-        @emit 'debug', "The template group \"#{helpers.filenameToTemplatename(filePath)}\" in the design \"#{@config.namespace}\" has no config.json file. We advice you to use one."
+        @emit('debug', "The template group \"#{helpers.filenameToTemplatename(filePath)}\" in the design \"#{@config.namespace}\" has no config.json file. We advice you to use one.")
       else
-        @emit 'error', err
+        @emit('error', err)
+        return @emit('end')
 
     config = {} if !config
     config.id = filePath.split('/').pop()
@@ -122,7 +121,10 @@ class Design
     json_dest = dest.replace(/\.js/, '.json')
 
     file.write javascript_dest, javascript, (err) =>
-      return @emit('end', err) if err
+      if err
+        @emit('error', err)
+        return @emit('end')
+
       file.write json_dest, json, (err) =>
         @emit('end', err)
 
