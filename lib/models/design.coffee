@@ -100,27 +100,31 @@ class Design
     @addGroup(new Group(config))
 
 
+  toJson: (minify) ->
+    data =
+      config: @config
+      templates: @templates
+    JSON.stringify(data, null, minify||0)
 
-  toJson: ->
-    config: @config
-    templates: @templates
 
-
-  toJs: (minifiyJSON) ->
+  toJs: (minify) ->
     templateBegin = "(function() { this.design || (this.design = {}); design.#{ @config.namespace } = (function() { return "
     templateEnd = ";})();}).call(this);"
-    minify = if minifiyJSON then 0 else 2
-    fileData = templateBegin + JSON.stringify(@toJson(), null, minify) + templateEnd
+    fileData = templateBegin + @toJson(minify) + templateEnd
 
 
   # write the config and templates to disk
   save: (dest, minify)->
-    file.write dest, @toJs(minify), (err) =>
-      if err
-        @emit 'end', err
+    minify = if minify then 0 else 2
+    javascript = @toJs(minify)
+    javascript_dest = dest
+    json = @toJson(minify)
+    json_dest = dest.replace(/\.js/, '.json')
 
-      else
-        @emit 'end'
+    file.write javascript_dest, javascript, (err) =>
+      return @emit('end', err) if err
+      file.write json_dest, json, (err) =>
+        @emit('end', err)
 
 
 module.exports = Design
