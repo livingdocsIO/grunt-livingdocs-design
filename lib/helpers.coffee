@@ -1,7 +1,4 @@
-color = require('color')
 path = require('path')
-htmlmin = require("html-minifier")
-pd = require("pretty-data").pd
 file = require('./file')
 
 exports.toCamelCase = toCamelCase = (string) ->
@@ -29,6 +26,4 @@ exports.minifyHtml = (html, options, templateName, ee) ->
       return '<div class="error minify" style="color: red">Error while minifying: Template "#{templateName}"</div>'
 
   else
-    html
-    # .replace(/\s+/g, ' ')
-    .trim()
+    html.trim()
