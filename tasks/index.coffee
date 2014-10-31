@@ -4,30 +4,15 @@ helpers = require('../lib/helpers')
 Design = require('../lib')
 
 module.exports = (grunt) ->
-  # grunt task to compile all templates
-  grunt.registerMultiTask 'lddesigns', 'Compile templates to livingdocs-engine template', ->
-
-    for design in @files
-
-      option = _.clone(@options())
-      option.src = design.src[0]
-      option.dest = design.dest
-      option.design = option.src.split('/').pop()
-
-      # create task to process the design
-      taskName = 'lddesign.design_' + option.design
-      grunt.config(taskName + '.options', option)
-      grunt.log.write("Design \"#{option.design}\" prepared for processing...")
-      grunt.log.ok()
-
-      grunt.task.run(taskName.replace('.', ':'))
-
-
   # grunt task to compile specific design. executable only through console?
   grunt.registerMultiTask 'lddesign', 'Compile a single design', ->
 
+    design = @files[0]
     done = @async()
     options = @options()
+    options.src = design.src[0]
+    options.dest = design.dest
+
     error = null
 
     # Initialize design
@@ -46,6 +31,6 @@ module.exports = (grunt) ->
         grunt.log.error(error)
         done(false)
       else
-        grunt.log.write("Design '#{options.design}' compiled...")
+        grunt.log.write("Design compiled...")
         grunt.log.ok()
         done()

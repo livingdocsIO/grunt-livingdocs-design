@@ -28,26 +28,18 @@ exports.compile = (options) ->
     templatesPath = path.join(options.src, options.templatesDirectory)
     for resource in file.readdir(templatesPath, design)
       resourcePath = path.join(templatesPath, resource)
-
       # add root templates
       templateFiles.push resourcePath
-
       # add group if it's a directory
       if file.isDirectory(resourcePath)
-        templateGroups.push(resourcePath)
-
-        # add templates of a group
         templates = file.readdir(resourcePath, design)
         for template in templates
           templatePath = path.join(resourcePath, template)
           templateFiles.push templatePath
 
     unless templateFiles.length
-      design.emit 'warn', "The design \"#{options.design}\" has no templates"
+      design.emit 'warn', "The design has no templates"
 
-    # Add groups to design
-    for group in templateGroups
-      design.addGroupFile(group)
 
     # Add templates to design
     for template in templateFiles
