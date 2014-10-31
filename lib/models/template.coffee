@@ -1,6 +1,5 @@
 cheerio = require("cheerio")
 helpers = require("../helpers")
-Style = require('./style')
 
 
 
@@ -17,16 +16,9 @@ class Template
       design.emit 'error', err
 
     @id = config.namespace || config.id || options.filename
-    @weight = weight if weight = parseInt(config.weight)
     @title = config.name || config.title || options.filename
     @html = helpers.minifyHtml($.html(), options, @id, design)
-    @addStyles(config.styles) if config.styles
-
-
-  addStyles: (styles) ->
-    @styles ?= []
-    for style in styles
-      @styles.push(new Style(style))
+    @styles = config.styles if config.styles
 
 
 module.exports = Template
