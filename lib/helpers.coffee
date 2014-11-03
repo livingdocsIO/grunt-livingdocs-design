@@ -15,7 +15,7 @@ exports.filenameToTemplatename = (string) ->
 exports.minifyHtml = (html, options, templateName, ee) ->
   if options?.minify
     try
-      htmlmin.minify(html, options.minifyOptions)
+      htmlmin.minify(html, options.minify)
     catch err
       warning = ">> Template \"#{templateName}\": HTML minify error\n #{err}\n"
       if ee

@@ -7,41 +7,43 @@ Template = require('./template')
 
 class Design extends EventEmitter
 
-  constructor: (options) ->
-    @templates = []
+  constructor: (@options) ->
+    @components = []
     @config = {}
-    super()
+    super
 
 
-  initConfigFile: (filePath, designName) ->
-    try
-      @config = file.readJson(filePath)
-    catch err
-      if err.errno == 34
-        @emit('warn', "The design \"#{designName}\" has no configuration file.")
-      else
-        @emit('error', err)
+  initConfig: (@config={}) ->
+    for prop in ['name', 'version']
+      unless @config[prop]
+        @emit('error', new Error "You specified design configuration without a '#{prop}'.")
         return @emit('end')
 
 
-  addTemplate: (template, options) ->
-    template.html = helpers.minifyHtml(template.html, options, template.id, this)
-    @templates.push(template)
+  initConfigFile: (filePath, callback) ->
+    file.readJson filePath, (err, config) =>
+      if err
+        if err.errno == 34 then err = new Error("The design has no configuration file.")
+        @emit('error', err)
+        @emit('end')
+      else
+        @initConfig(config)
+
+
+  addTemplate: (templateName, templateString, options) ->
+    template = new Template(templateName, templateString, options, this)
+    @components.push(template)
 
 
   addTemplateFile: (filePath, options) ->
-    templateFile = file.readSync(filePath, {}, this)
-    options.filename = helpers.filenameToTemplatename(filePath)
-    template = new Template(templateFile, options, this)
-
-    # Add template & add to group
-    @addTemplate(template, options)
-    templatePath = filePath.split("#{options.src}/#{options.templatesDirectory}/")[1].split('/')
+    templateString = file.readSync(filePath, {}, this)
+    templateName = helpers.filenameToTemplatename(filePath)
+    @addTemplate(templateName, templateString, options)
 
 
   toJson: (minify) ->
     data = @config
-    data.components = @templates
+    data.components = @components
     JSON.stringify(data, null, minify||0)
 
 

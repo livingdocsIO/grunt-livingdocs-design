@@ -27,9 +27,19 @@ exports.write = (file, data, callback) ->
   fs.writeFile(file, data, callback)
 
 
-exports.readJson = (file, options) ->
-  options = {} unless options
-  JSON.parse(fs.readFileSync(file, { encoding: options.encoding || 'utf8' }))
+exports.readJson = (file, options, callback) ->
+  if arguments.length == 2
+    callback = options
+    options = {}
+
+  fs.readFile file, { encoding: options.encoding || 'utf8' }, (err, content) ->
+    return callback(err) if err
+    try
+      content = JSON.parse(content)
+    catch err
+      return callback(err) if err
+
+    callback(null, content)
 
 
 exports.exists = fs.existsSync

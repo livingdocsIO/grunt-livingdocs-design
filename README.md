@@ -1,7 +1,7 @@
 grunt-livingdocs-design
 =======================
 
-This project contains the official designs processor for the project Livingdocs found under the following url: [https://github.com/upfrontIO/livingdocs](https://github.com/upfrontIO/livingdocs)
+This project contains the official designs processor for the project Livingdocs found under the following url: [https://github.com/upfrontIO/livingdocs-engine](https://github.com/upfrontIO/livingdocs-engine)
 It defines a grunt task for easily creating a design template.
 
 ## Technical Setup
@@ -20,14 +20,13 @@ grunt.initConfig
   lddesigns:
     development:
       options:
-        minify: true
-        minifyOptions:
+        templatesDirectory: 'components'
+        configurationElement: 'script[type=ld-conf]'
+        minify:
           collapseWhitespace: true
           removeComments: true
           removeCommentsFromCDATA: true
           removeCDATASectionsFromCDATA: true
-        templatesDirectory: 'components'
-        configurationElement: 'script[type=ld-conf]'
       files: [
         expand: true
         cwd: './'

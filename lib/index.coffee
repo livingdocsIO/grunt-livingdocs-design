@@ -1,4 +1,6 @@
 path = require('path')
+Glob = require('glob').Glob
+
 file = require('./file')
 helpers = require './helpers'
 exports.model = Design = require('./models/design')
@@ -8,8 +10,7 @@ exports.model = Design = require('./models/design')
 #   dest, absolute directory of destination design.js file
 #   templatesDirectory, default: "templates",
 #   configurationElement, default: "script[ld-conf]"
-#   minify, default: true
-#   minifyOptions:
+#   minify:
 #     collapseWhitespace: true
 #     removeComments: true
 #     removeCommentsFromCDATA: true
@@ -22,30 +23,19 @@ exports.compile = (options) ->
     configFilePath = path.join(options.src, 'config.json')
     design.initConfigFile(configFilePath, options.src)
 
-    # Find all groups and templates
-    templateGroups = []
-    templateFiles = []
     templatesPath = path.join(options.src, options.templatesDirectory)
-    for resource in file.readdir(templatesPath, design)
-      resourcePath = path.join(templatesPath, resource)
-      # add root templates
-      templateFiles.push resourcePath
-      # add group if it's a directory
-      if file.isDirectory(resourcePath)
-        templates = file.readdir(resourcePath, design)
-        for template in templates
-          templatePath = path.join(resourcePath, template)
-          templateFiles.push templatePath
+    new Glob '**/*.html', cwd: templatesPath, (err, files) ->
+      if err
+        design.emit('error', err)
+        design.emit('end')
 
-    unless templateFiles.length
-      design.emit 'warn', "The design has no templates"
+      else if files?.length
+        design.addTemplateFiles files, (err) ->
+          return design.emit('error', err) if err
+          design.save(options.dest + '/design.js', options.minify)
 
-
-    # Add templates to design
-    for template in templateFiles
-      if /\.html$/.test(template)
-        design.addTemplateFile(template, options)
-
-    design.save(options.dest + '/design.js', options.minify)
+      else
+        design.emit 'warn', "The design \"#{options.design}\" has no templates"
+        design.emit('end')
 
     design

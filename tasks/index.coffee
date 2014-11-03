@@ -4,7 +4,7 @@ helpers = require('../lib/helpers')
 Design = require('../lib')
 
 module.exports = (grunt) ->
-  # grunt task to compile specific design. executable only through console?
+  # grunt task to compile a specific design
   grunt.registerMultiTask 'lddesign', 'Compile a single design', ->
 
     design = @files[0]
