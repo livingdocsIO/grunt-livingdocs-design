@@ -1,4 +1,5 @@
 path = require('path')
+async = require('async')
 Glob = require('glob').Glob
 
 file = require('./file')
@@ -21,21 +22,30 @@ exports.compile = (options) ->
 
     # Add design configuration file (with global settings)
     configFilePath = path.join(options.src, 'config.json')
-    design.initConfigFile(configFilePath, options.src)
-
-    templatesPath = path.join(options.src, options.templatesDirectory)
-    new Glob '**/*.html', cwd: templatesPath, (err, files) ->
+    design.initConfigFile configFilePath, (err) ->
       if err
         design.emit('error', err)
         design.emit('end')
 
-      else if files?.length
-        design.addTemplateFiles files, (err) ->
-          return design.emit('error', err) if err
-          design.save(options.dest + '/design.js', options.minify)
-
       else
-        design.emit 'warn', "The design \"#{options.design}\" has no templates"
-        design.emit('end')
+        templatesPath = path.join(options.src, options.templatesDirectory)
+        new Glob '**/*.html', cwd: templatesPath, (err, files) ->
+          if err
+            design.emit('error', err)
+            design.emit('end')
+
+          else if files?.length
+            async.each files, (filepath, done) ->
+              design.addTemplateFile(path.join(templatesPath, filepath), done)
+            , (err) =>
+              if err
+                design.emit('error', err)
+                design.emit('end')
+              else
+                design.save(options.dest + '/design.js', options.minify)
+
+          else
+            design.emit('warn', "The design '#{options.design}' has no templates")
+            design.emit('end')
 
     design

@@ -2,7 +2,6 @@ cheerio = require("cheerio")
 helpers = require("../helpers")
 
 
-
 class Template
   constructor: (templateName, templateString, options, design) ->
     # load file into "jQuery object" to read json & html
@@ -12,11 +11,11 @@ class Template
 
     # check for one root element
     if $.root().children().length > 1
-      err = new Error "The Design \"#{design.config.name}\", Template \"#{templateName}\" contains more than one root element"
-      design.emit 'error', err
+      err = new Error("The Design '#{design.config.name}', Template '#{templateName}' contains more than one root element")
+      design.emit('warn', err)
 
-    @id = config.namespace || config.id || templateName
-    @title = config.name || config.title || templateName
+    @name = config.name || config.namespace || config.id || templateName
+    @label = config.label || config.title || config.name || templateName
     @html = helpers.minifyHtml($.html(), options, @id, design)
 
 

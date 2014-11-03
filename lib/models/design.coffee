@@ -13,32 +13,40 @@ class Design extends EventEmitter
     super
 
 
-  initConfig: (@config={}) ->
+  initConfig: (@config={}, callback) ->
+    @emit('debug', 'initialize config file')
+
     for prop in ['name', 'version']
       unless @config[prop]
-        @emit('error', new Error "You specified design configuration without a '#{prop}'.")
-        return @emit('end')
+        return callback(new Error "Your configuration does not contain a '#{prop}'.")
+    callback()
 
 
   initConfigFile: (filePath, callback) ->
+    @emit('debug', 'read config file')
+
     file.readJson filePath, (err, config) =>
       if err
         if err.errno == 34 then err = new Error("The design has no configuration file.")
-        @emit('error', err)
-        @emit('end')
+        callback(err)
       else
-        @initConfig(config)
+        @initConfig(config, callback)
 
 
-  addTemplate: (templateName, templateString, options) ->
-    template = new Template(templateName, templateString, options, this)
+  addTemplate: (templateName, templateString) ->
+    @emit('debug', "add template '#{templateName}'")
+
+    template = new Template(templateName, templateString, @options, this)
     @components.push(template)
 
 
-  addTemplateFile: (filePath, options) ->
-    templateString = file.readSync(filePath, {}, this)
+  addTemplateFile: (filePath, callback) ->
     templateName = helpers.filenameToTemplatename(filePath)
-    @addTemplate(templateName, templateString, options)
+    @emit('debug', "read template '#{templateName}'")
+    file.readFile filePath, encoding:'utf8', (err, templateString) =>
+      return callback(err) if err
+      @addTemplate(templateName, templateString)
+      callback()
 
 
   toJson: (minify) ->
@@ -49,7 +57,7 @@ class Design extends EventEmitter
 
   toJs: (minify) ->
     templateBegin = "(function () { var designJSON = "
-    templateEnd = "; if(typeof module !== 'undefined' && module.exports) {return module.exports = designJSON;} else { this.design = this.design || {}; this.design.#{@config.design.name} = designJSON;} }).call(this);"
+    templateEnd = "; if(typeof module !== 'undefined' && module.exports) {return module.exports = designJSON;} else { this.design = this.design || {}; this.design.#{@config.name} = designJSON;} }).call(this);"
     fileData = templateBegin + @toJson(minify) + templateEnd
 
 
@@ -67,7 +75,8 @@ class Design extends EventEmitter
         return @emit('end')
 
       file.write json_dest, json, (err) =>
-        @emit('end', err)
+        @emit('error', err) if err
+        @emit('end')
 
 
 module.exports = Design

@@ -34,3 +34,6 @@ module.exports = (grunt) ->
         grunt.log.write("Design compiled...")
         grunt.log.ok()
         done()
+
+process.on 'uncaughtException', (err) ->
+  console.log(err)
