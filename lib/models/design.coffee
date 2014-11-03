@@ -47,7 +47,7 @@ class Design extends EventEmitter
 
   toJs: (minify) ->
     templateBegin = "(function () { var designJSON = "
-    templateEnd = "; if(typeof module !== 'undefined' && module.exports) {return module.exports = designJSON;} else { this.design = this.design || {}; this.design.#{@config.namespace} = designJSON;} }).call(this);"
+    templateEnd = "; if(typeof module !== 'undefined' && module.exports) {return module.exports = designJSON;} else { this.design = this.design || {}; this.design.#{@config.design.name} = designJSON;} }).call(this);"
     fileData = templateBegin + @toJson(minify) + templateEnd
 
 
