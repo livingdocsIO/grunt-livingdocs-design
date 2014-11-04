@@ -1,15 +1,13 @@
 fs = require('fs')
 path = require('path')
-root = path.join(__dirname, '../../..')
-
 
 exports.write = (file, data, callback) ->
   paths = file.split('/')
   paths.pop()
 
-  directory = root
+  directory = '.'
   for i, dir of paths
-    directory = directory + '/' + dir
+    directory += '/'+dir
     unless fs.existsSync(directory)
       fs.mkdirSync(directory)
 
