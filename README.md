@@ -17,7 +17,7 @@ It defines a grunt task for easily creating a design template.
 ```coffee
 grunt.initConfig
 
-  lddesigns:
+  lddesign:
     development:
       options:
         templatesDirectory: 'components'
