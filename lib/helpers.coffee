@@ -1,4 +1,5 @@
 path = require('path')
+htmlmin = require('html-minifier')
 file = require('./file')
 
 exports.toCamelCase = toCamelCase = (string) ->
