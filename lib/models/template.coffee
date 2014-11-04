@@ -11,8 +11,8 @@ class Template
     @label ?= @name
 
 
-  parse: (templateName, templateString, options, design) ->
-    @design.debug("parse the template #{templateName}")
+  @parse: (templateName, templateString, options, design) ->
+    design.debug("parse the template #{templateName}")
 
     $ = cheerio.load(templateString)
     config = JSON.parse($(options.configurationElement).html()) || {}

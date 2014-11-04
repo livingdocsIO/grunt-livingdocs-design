@@ -36,7 +36,7 @@ class Design extends EventEmitter
   addTemplate: (templateName, templateString) ->
     @debug("add template '#{templateName}'")
 
-    template = new Template(templateName, templateString, @options, this)
+    template = Template.parse(templateName, templateString, @options, this)
     @components.push(template)
 
 
