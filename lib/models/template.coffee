@@ -12,7 +12,7 @@ class Template
 
 
   @parse: (templateName, templateString, options, design) ->
-    design.debug("parse the template #{templateName}")
+    design.debug("parse template '#{templateName}'")
 
     $ = cheerio.load(templateString)
     config = JSON.parse($(options.configurationElement).html()) || {}
@@ -24,6 +24,7 @@ class Template
       design.warn(err)
 
     html = helpers.minifyHtml($.html(), options, @name, design)
+    design.debug("parsed template '#{templateName}'")
     new Template(templateName, html, config)
 
 
