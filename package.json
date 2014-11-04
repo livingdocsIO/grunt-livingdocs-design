@@ -16,7 +16,6 @@
     "cheerio": "^0.17.0",
     "coffee-script": "^1.7.1",
     "glob": "^4.0.6",
-    "html-minifier": "^0.6.9",
-    "lodash": "^2.4.1"
+    "html-minifier": "^0.6.9"
   }
 }

@@ -1,4 +1,3 @@
-_ = require('lodash')
 file = require('../lib/file')
 helpers = require('../lib/helpers')
 Design = require('../lib')
@@ -34,6 +33,3 @@ module.exports = (grunt) ->
         grunt.log.write("Design compiled...")
         grunt.log.ok()
         done()
-
-process.on 'uncaughtException', (err) ->
-  console.log(err)
