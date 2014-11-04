@@ -14,7 +14,7 @@ class Design extends EventEmitter
 
 
   initConfig: (@config={}, callback) ->
-    @emit('debug', 'initialize config file')
+    @debug('initialize config file')
 
     for prop in ['name', 'version']
       unless @config[prop]
@@ -23,7 +23,7 @@ class Design extends EventEmitter
 
 
   initConfigFile: (filePath, callback) ->
-    @emit('debug', 'read config file')
+    @debug('read config file')
 
     file.readJson filePath, (err, config) =>
       if err
@@ -34,7 +34,7 @@ class Design extends EventEmitter
 
 
   addTemplate: (templateName, templateString) ->
-    @emit('debug', "add template '#{templateName}'")
+    @debug("add template '#{templateName}'")
 
     template = new Template(templateName, templateString, @options, this)
     @components.push(template)
@@ -42,7 +42,7 @@ class Design extends EventEmitter
 
   addTemplateFile: (filePath, callback) ->
     templateName = helpers.filenameToTemplatename(filePath)
-    @emit('debug', "read template '#{templateName}'")
+    @debug("read template '#{templateName}'")
     file.readFile filePath, encoding:'utf8', (err, templateString) =>
       return callback(err) if err
       @addTemplate(templateName, templateString)
@@ -62,21 +62,35 @@ class Design extends EventEmitter
 
 
   # write the config and templates to disk
-  save: (dest, minify)->
+  save: (dest, minify) ->
+    @debug('save design files')
+
     minify = if minify then 0 else 2
     javascript = @toJs(minify)
     javascript_dest = dest
     json = @toJson(minify)
     json_dest = dest.replace(/\.js/, '.json')
 
+    @debug('save design.js file')
     file.write javascript_dest, javascript, (err) =>
       if err
         @emit('error', err)
         return @emit('end')
 
+      @debug('saved design.js file')
+      @debug('save design.json file')
       file.write json_dest, json, (err) =>
         @emit('error', err) if err
+        @debug('saved design.json file') unless err
         @emit('end')
+
+
+  debug: (string) ->
+    @emit('debug', string)
+
+
+  warn: (err) ->
+    @emit('warn', err)
 
 
 module.exports = Design
