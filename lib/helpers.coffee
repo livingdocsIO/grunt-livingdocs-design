@@ -2,14 +2,9 @@ path = require('path')
 htmlmin = require('html-minifier')
 file = require('./file')
 
-exports.toCamelCase = toCamelCase = (string) ->
-  string.replace /^([A-Z])|[\s-_](\w)/g, (match, p1, p2, offset) ->
-    return p2.toUpperCase() if p2
-    p1.toLowerCase()
-
 
 exports.filenameToTemplatename = (string) ->
-  strings = toCamelCase(string).replace('.html', '').split('/')
+  strings = string.replace(/\.[a-z]{2,4}$/, '').split('/')
   strings[strings.length - 1]
 
 
