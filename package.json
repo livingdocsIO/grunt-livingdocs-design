@@ -12,7 +12,7 @@
     "url": "git://github.com/upfrontIO/grunt-livingdocs-design.git"
   },
   "dependencies": {
-    "livingdocs-design-manager": "^1.0.0"
+    "livingdocs-design-manager": "^1.1.0"
   },
   "devDependencies": {
     "coffee-script": "^1.8.0",

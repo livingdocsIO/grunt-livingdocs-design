@@ -11,7 +11,7 @@ module.exports = function(grunt) {
 
     var error = null;
     // Initialize design
-    Design.compile(options)
+    Design.build(options)
     .on('debug', function(debug) { grunt.log.debug(debug); })
     .on('warn', function(warning) { grunt.fail.warn(warning); })
     .on('error', function(err) { error = err; })
