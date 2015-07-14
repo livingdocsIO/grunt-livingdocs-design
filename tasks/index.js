@@ -1,4 +1,4 @@
-var Design = require('livingdocs-design-manager');
+var Design = require('livingdocs-manager');
 
 module.exports = function(grunt) {
   // grunt task to compile a specific design
