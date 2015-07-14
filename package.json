@@ -1,6 +1,6 @@
 {
   "name": "grunt-livingdocs-design",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "license": "LGPL3",
   "description": "Grunt plugin for compiling Livingdocs designs",
   "homepage": "https://github.com/upfrontIO/grunt-livingdocs-design",
