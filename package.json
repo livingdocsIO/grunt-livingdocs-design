@@ -3,14 +3,14 @@
   "version": "0.3.2",
   "license": "LGPL3",
   "description": "Grunt plugin for compiling Livingdocs designs",
-  "homepage": "https://github.com/upfrontIO/grunt-livingdocs-design",
+  "homepage": "https://github.com/livingdocsIO/grunt-livingdocs-design",
   "author": {
     "name": "Marc Bachmann",
-    "email": "marc@upfront.io"
+    "email": "marc@livingdocs.io"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/upfrontIO/grunt-livingdocs-design.git"
+    "url": "git://github.com/livingdocsIO/grunt-livingdocs-design.git"
   },
   "scripts": {
     "test": "standard ./tasks/index.js"
