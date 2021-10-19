@@ -13,7 +13,7 @@
     "url": "git://github.com/livingdocsIO/grunt-livingdocs-design.git"
   },
   "scripts": {
-    "test": "standard ./tasks/index.js"
+    "test": "echo No tests configured"
   },
   "dependencies": {
     "livingdocs-manager": "^5.0.0"
