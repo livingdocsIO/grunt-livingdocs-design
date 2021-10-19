@@ -1,0 +1,30 @@
+---
+type: docker
+kind: pipeline
+name: default
+
+clone:
+  depth: 50
+
+steps:
+- name: eslint
+  image: marcbachmann/eslint:7.14.0
+  environment:
+    GH_TOKEN:
+      from_secret: gh_token
+
+- name: release
+  image: livingdocs/semantic-release:v1.0.0
+  environment:
+    GH_TOKEN:
+      from_secret: gh_token
+    NPM_TOKEN:
+      from_secret: npm_token
+
+trigger:
+  event: [push]
+---
+kind: signature
+hmac: 8f40f3aaeff23cf4d77ef7ece691076592f8ee04bcb96ae83d8f3c1d6537fd0a
+
+...
