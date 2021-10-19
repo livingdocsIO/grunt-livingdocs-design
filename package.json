@@ -1,6 +1,6 @@
 {
   "name": "grunt-livingdocs-design",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "license": "LGPL3",
   "description": "Grunt plugin for compiling Livingdocs designs",
   "homepage": "https://github.com/livingdocsIO/grunt-livingdocs-design",
@@ -16,7 +16,7 @@
     "test": "standard ./tasks/index.js"
   },
   "dependencies": {
-    "livingdocs-manager": "^2.2.0"
+    "livingdocs-manager": "^5.0.0"
   },
   "devDependencies": {
     "standard": "^4.5.4"
