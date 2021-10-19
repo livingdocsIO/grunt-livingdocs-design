@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "standard": "^4.5.4"
+  },
+  "release": {
+    "extends": "@livingdocs/semantic-release-presets/npm-github-verify"
   }
 }
